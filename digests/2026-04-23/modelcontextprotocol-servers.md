@@ -2,11 +2,34 @@
 
 > Reference MCP server implementations; canonical examples for the protocol.
 
-**Window:** 2026-04-22T08:51:15.545Z → 2026-04-23T08:51:15.545Z  
+**Window:** 2026-04-22T23:59:59.000Z → 2026-04-23T23:59:59.000Z  
 **Default branch:** `main`  
 **Source:** [github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)
 
-> _v0.1: deterministic template, no LLM summary yet (see `docs/ROADMAP.md`)._
+## Daily summary
+
+> _LLM-generated. May contain errors — click through before acting._
+
+The day's most actionable item is a new **filesystem server reliability bug** (#4026): writes hang when launched via `npx -y @modelcontextprotocol/server-filesystem` in Claude Desktop on macOS/Node 22, while reads succeed; the reporter says a pinned global install is more reliable. Worth triaging since `npx -y` is the configuration most users copy from the README.
+
+Activity is otherwise dominated by a wave of **filesystem server enhancement PRs**, all still open:
+
+- #4025 adds `head`/`tail` to `read_multiple_files`, mirroring the existing single-file behavior.
+- #4024 introduces a new `compare_files` tool returning a unified diff between two paths.
+- #4023 adds a `maxDepth` parameter to `directory_tree` to avoid blowing context on large monorepos / `node_modules`.
+- #4017 adds an optional `depth` parameter to `list_directory`, motivated by LM Studio's gpt-oss-120b model already calling the tool with `depth` and being rejected by the schema.
+
+If maintainers want a coherent review batch, these four overlap in surface area and should probably be considered together (e.g., naming/clamping conventions for `depth`/`maxDepth`).
+
+Other notable PRs:
+
+- #4020 fixes `scripts/release.py` `has_changes()` to also detect lockfile-only diffs (`uv.lock`, `package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`), addressing #3870 where `pyproject.toml` versions (e.g. `src/git/` at 0.6.2) were skipped during CalVer bumps.
+- #4021 adds a missing `.describe()` on the `resourceType` arg of the everything server's `get-resource-reference` tool (fixes #3985).
+- #4022 removes the stale GitLab server reference from the README following its archival (closes #3347).
+
+Several third-party server submissions landed despite the repo no longer accepting README additions and directing authors to the MCP Server Registry: REG-Vault (#4027), M2MCent on Base L2 (#4019), BusinessHotels.com (#3999), and a stub PR #4018 ("Pr change") with no description — all likely to be closed with a registry pointer.
+
+No releases or direct commits to `main` in the window.
 
 ## Releases
 
@@ -20,6 +43,7 @@ _None in window._
 
 ## Open PRs (new or updated)
 
+- [#4027](https://github.com/modelcontextprotocol/servers/pull/4027) **Add REG-Vault (retro-gaming metadata + MCP)** — _by @rtissera, updated 2026-04-23T09:50:21Z_
 - [#4025](https://github.com/modelcontextprotocol/servers/pull/4025) **feat(filesystem): add head/tail support to read_multiple_files** — _by @factspark23-hash, updated 2026-04-23T06:54:34Z_
 - [#4024](https://github.com/modelcontextprotocol/servers/pull/4024) **feat(filesystem): add compare_files tool for file diff comparison** — _by @factspark23-hash, updated 2026-04-23T06:54:14Z_
 - [#4023](https://github.com/modelcontextprotocol/servers/pull/4023) **feat(filesystem): add maxDepth parameter to directory_tree** — _by @factspark23-hash, updated 2026-04-23T06:54:03Z_
@@ -30,23 +54,11 @@ _None in window._
 - [#4020](https://github.com/modelcontextprotocol/servers/pull/4020) **fix(release): include lockfile changes in has_changes()** — _by @Will-hxw, updated 2026-04-23T04:03:02Z_
 - [#4019](https://github.com/modelcontextprotocol/servers/pull/4019) **Add M2MCent to community tools** — _by @Evozim, updated 2026-04-23T03:25:36Z_
 - [#4018](https://github.com/modelcontextprotocol/servers/pull/4018) **Pr change** — _by @nikolayb, updated 2026-04-23T03:09:15Z_
-- [#4016](https://github.com/modelcontextprotocol/servers/pull/4016) **fix(filesystem): normalize paths to NFC for Unicode consistency** — _by @Will-hxw, updated 2026-04-22T23:08:23Z_
-- [#4015](https://github.com/modelcontextprotocol/servers/pull/4015) **Add AgentCard to Resources — open A2A identity standard with MCP server** — _by @kwailapt, updated 2026-04-22T21:05:25Z_
-- [#3959](https://github.com/modelcontextprotocol/servers/pull/3959) **feat(memory): add lightweight read modes for scalability** — _by @surapuramakhil, updated 2026-04-22T20:22:48Z_
-- [#4014](https://github.com/modelcontextprotocol/servers/pull/4014) **fix(filesystem): only apply MCP roots when no CLI directories are provided** — _by @Will-hxw, updated 2026-04-22T19:22:59Z_
-- [#4013](https://github.com/modelcontextprotocol/servers/pull/4013) **fix(everything): add key parameter to get-env tool to prevent secret leakage** — _by @Will-hxw, updated 2026-04-22T19:19:49Z_
-- [#4012](https://github.com/modelcontextprotocol/servers/pull/4012) **docs(everything): add allowed values description to resourceType in get-resource-reference** — _by @Will-hxw, updated 2026-04-22T19:19:45Z_
-- [#4011](https://github.com/modelcontextprotocol/servers/pull/4011) **fix(everything): require key parameter for get-env tool to prevent env leakage** — _by @Will-hxw, updated 2026-04-22T19:19:42Z_
-- [#4007](https://github.com/modelcontextprotocol/servers/pull/4007) **feat: add Swiss Truth MCP to community servers** — _by @swisstruthorg, updated 2026-04-22T18:23:31Z_
-- [#4010](https://github.com/modelcontextprotocol/servers/pull/4010) **docs: Add one-click 'Add to Kiro' install badge for filesystem server** — _by @Jay2113, updated 2026-04-22T17:36:15Z_
-- [#4009](https://github.com/modelcontextprotocol/servers/pull/4009) **docs(everything): warn that get-env may expose secrets** — _by @beejak, updated 2026-04-22T14:47:20Z_
-- [#3816](https://github.com/modelcontextprotocol/servers/pull/3816) **fix(everything): use relatedTask option to enable elicitation over HTTP (#3228)** — _by @galagaevdc, updated 2026-04-22T12:36:37Z_
 
 
 ## Notable Issues
 
 - [#4026](https://github.com/modelcontextprotocol/servers/issues/4026) **Filesystem MCP writes hang when launched via `npx -y`; reliability improves with pinned global install** _[bug]_ — _by @pmabray_
-- [#4008](https://github.com/modelcontextprotocol/servers/issues/4008) **bug in continue of idea** _[bug]_ — _by @tommyonsn_
 
 
 ## Commits on `main`
@@ -55,4 +67,4 @@ _None in window._
 
 
 ---
-_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.1 deterministic template._
+_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (LLM summary + deterministic detail)._

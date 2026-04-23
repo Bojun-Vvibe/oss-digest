@@ -20,6 +20,7 @@ import {
   sanitiseIssue, sanitisePull, sanitiseRelease, sanitiseCommit,
   renderRepoDigest, renderIndex, renderErrorsFile, repoFlat,
 } from "./lib/render.mjs";
+import { summarise, detectLlmCli } from "./lib/summarise.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const ROOT = resolvePath(dirname(__filename), "..");
@@ -27,14 +28,16 @@ const ROOT = resolvePath(dirname(__filename), "..");
 // ---------- arg parsing ----------
 
 function parseArgs(argv) {
-  const args = { dry: false, repo: null, date: null };
+  const args = { dry: false, repo: null, date: null, llm: false };
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--dry") args.dry = true;
+    else if (a === "--llm") args.llm = true;
+    else if (a === "--no-llm") args.llm = false;
     else if (a === "--repo") args.repo = argv[++i];
     else if (a === "--date") args.date = argv[++i];
     else if (a === "--help" || a === "-h") {
-      console.log(`Usage: run-digest.mjs [--dry] [--repo OWNER/REPO] [--date YYYY-MM-DD]`);
+      console.log(`Usage: run-digest.mjs [--dry] [--llm] [--repo OWNER/REPO] [--date YYYY-MM-DD]`);
       process.exit(0);
     } else {
       console.error(`Unknown arg: ${a}`);
@@ -97,6 +100,17 @@ async function processTarget(target, win, opts) {
     commits: commitsRaw.map(sanitiseCommit),
   };
 
+  // ---- v0.2 hook: optional LLM summary ----
+  let summary = "";
+  if (opts.llm) {
+    try {
+      summary = await summarise(sanitised, { cli: opts.llmCli });
+    } catch (err) {
+      console.error(`  ! ${full_name}: summarise threw: ${err.message}`);
+      summary = "";
+    }
+  }
+
   const digestMd = renderRepoDigest({
     repo: full_name,
     date: win.dateLabel,
@@ -105,6 +119,7 @@ async function processTarget(target, win, opts) {
     raw: sanitised,
     why,
     defaultBranch: branch,
+    summary,
   });
 
   if (!opts.dry) {
@@ -124,6 +139,7 @@ async function processTarget(target, win, opts) {
     repo: full_name,
     repoFlat: repoFlat(full_name),
     ok: true,
+    summarised: !!(summary && summary.trim()),
     stats: {
       releases: sanitised.releases.length,
       mergedPulls,
@@ -153,11 +169,21 @@ async function main() {
     }
   }
 
+  // ---- LLM detection ----
+  let llmCli = null;
+  if (args.llm) {
+    llmCli = await detectLlmCli();
+    if (!llmCli) {
+      console.log(`  llm        : requested but no claude/codex on PATH — falling back to deterministic only`);
+    }
+  }
+
   // ---- Plan ----
   console.log(`oss-digest run`);
   console.log(`  date label : ${win.dateLabel}`);
   console.log(`  window     : ${win.sinceIso} → ${win.untilIso}`);
   console.log(`  targets    : ${targets.length}`);
+  console.log(`  llm        : ${args.llm ? (llmCli || "off (no CLI)") : "off"}`);
   console.log(`  dry-run    : ${args.dry}`);
   for (const t of targets) {
     console.log(`    - ${t.full_name}  (branch ${t.default_branch || "main"}, focus: ${t.focus.join(", ")})`);
@@ -171,7 +197,8 @@ async function main() {
   }
 
   // ---- Run ----
-  const results = await Promise.allSettled(targets.map((t) => processTarget(t, win, { dry: false })));
+  const runOpts = { dry: false, llm: args.llm && !!llmCli, llmCli };
+  const results = await Promise.allSettled(targets.map((t) => processTarget(t, win, runOpts)));
 
   const entries = [];
   const errors = [];
@@ -205,7 +232,8 @@ async function main() {
   }
 
   const okCount = entries.filter((e) => e.ok).length;
-  console.log(`\nDone. ${okCount}/${targets.length} targets succeeded. Output: digests/${win.dateLabel}/`);
+  const summarisedCount = entries.filter((e) => e.summarised).length;
+  console.log(`\nDone. ${okCount}/${targets.length} targets succeeded. ${summarisedCount} LLM summaries. Output: digests/${win.dateLabel}/`);
   if (errors.length > 0) {
     console.log(`${errors.length} target(s) failed — see digests/${win.dateLabel}/_errors.md`);
   }
