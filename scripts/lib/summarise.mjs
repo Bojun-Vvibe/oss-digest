@@ -160,8 +160,52 @@ export async function summariseWeekly(week, aggregatedJson, opts = {}) {
   const repos = Object.keys(aggregatedJson || {});
   if (repos.length === 0) return "";
 
+  // Trim per-repo to keep the prompt under the model's reasonable budget.
+  // A full week of 8 high-velocity repos can exceed 1MB of raw JSON, which
+  // both inflates cost and risks tripping stdin / context limits.
+  const TRIM = opts.trim ?? {
+    pulls: 40, issues: 30, releases: 20, commits: 40,
+  };
+  const trimmed = {};
+  for (const [repo, raw] of Object.entries(aggregatedJson)) {
+    const merged = (raw.pulls || []).filter((p) => p.merged_at);
+    const open = (raw.pulls || []).filter((p) => !p.merged_at);
+    // Keep most recent merged + most recent open, capped at TRIM.pulls total
+    const halfM = Math.min(merged.length, Math.ceil(TRIM.pulls / 2));
+    const halfO = Math.min(open.length, TRIM.pulls - halfM);
+    const pulls = [...merged.slice(0, halfM), ...open.slice(0, halfO)];
+    trimmed[repo] = {
+      repo,
+      counts: {
+        pulls_total: raw.pulls?.length || 0,
+        pulls_merged: merged.length,
+        pulls_open: open.length,
+        issues_total: raw.issues?.length || 0,
+        releases_total: raw.releases?.length || 0,
+        commits_total: raw.commits?.length || 0,
+      },
+      releases: (raw.releases || []).slice(0, TRIM.releases).map((r) => ({
+        tag_name: r.tag_name, name: r.name, html_url: r.html_url,
+        prerelease: r.prerelease, draft: r.draft,
+        published_at: r.published_at, body: (r.body || "").slice(0, 300),
+      })),
+      pulls: pulls.map((p) => ({
+        number: p.number, title: p.title, user: p.user, html_url: p.html_url,
+        merged_at: p.merged_at, state: p.state, labels: p.labels,
+      })),
+      issues: (raw.issues || []).slice(0, TRIM.issues).map((i) => ({
+        number: i.number, title: i.title, user: i.user, html_url: i.html_url,
+        state: i.state, labels: i.labels,
+      })),
+      commits: (raw.commits || []).slice(0, TRIM.commits).map((c) => ({
+        short_sha: c.short_sha, html_url: c.html_url, user: c.user,
+        message: (c.message || "").split("\n")[0],
+      })),
+    };
+  }
+
   const prompt = WEEKLY_PROMPT(week, repos);
-  const payload = JSON.stringify({ week, repos: aggregatedJson });
-  const out = await runLlm(cli, prompt, payload, opts.timeoutMs ?? 180000);
+  const payload = JSON.stringify({ week, repos: trimmed });
+  const out = await runLlm(cli, prompt, payload, opts.timeoutMs ?? 240000);
   return out;
 }
