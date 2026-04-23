@@ -1,0 +1,65 @@
+# charmbracelet/crush — 2026-04-01
+
+> Charm's terminal AI coding agent; design-forward TUI patterns worth tracking.
+
+**Window:** 2026-03-31T23:59:59.000Z → 2026-04-01T23:59:59.000Z  
+**Default branch:** `main`  
+**Source:** [github.com/charmbracelet/crush](https://github.com/charmbracelet/crush)
+
+## Daily summary
+
+> _LLM-generated. May contain errors — click through before acting._
+
+The day's headline is a refactor that lands on `main`: [#2542](https://github.com/charmbracelet/crush/pull/2542) centralizes the user config path lookup behind a single `home.Config()` helper (merged by andreynering, commit [206aecf](https://github.com/charmbracelet/crush/commit/206aecfbfdc9adcb854f38d1addeb7db959032cd)). It's a small but cross-cutting change worth skimming if you touch config loading — and it triggered two follow-up lint fixups ([c88c941](https://github.com/charmbracelet/crush/commit/c88c941015369d18f5704251806662bbeb0c1c53), [ed71633](https://github.com/charmbracelet/crush/commit/ed716339ab8354be265c6bb2ddaf7e6b38e81806)) to get CI green again.
+
+Also merged: [#2314](https://github.com/charmbracelet/crush/pull/2314) makes the `ls` tool respect git's `core.excludesfile` config, fixing #1550. This changes which files agents see during directory listings, so anyone relying on global gitignore behavior should notice an improvement.
+
+On the in-flight side, two new PRs are worth watching:
+
+- [#2544](https://github.com/charmbracelet/crush/pull/2544) (MrRolie, open) adds an **Alibaba Cloud Coding Plan** provider exposing 8 models (Qwen3.5 Plus, Kimi K2.5, GLM-5, MiniMax-M2.5, etc.) with `sk-` API key validation. The CLA was signed today ([782d4dc](https://github.com/charmbracelet/crush/commit/782d4dc0039da058ddefe44a785a068c2509913a)), so this looks on track. Note the model names — some claims (e.g., "Qwen3.5", "GLM-5") are unusual and reviewers will likely scrutinize them.
+- [#2543](https://github.com/charmbracelet/crush/pull/2543) (owldev127, open) targets a real exit-time bug (#2523) where Crush leaves raw terminal control characters visible on some xterm-256color terminals after a fast Ctrl+C. The fix narrows the terminal capability probe path for non-Apple local terminals.
+
+One closure without merge: [#2081](https://github.com/charmbracelet/crush/pull/2081) (OpenAI Codex ChatGPT OAuth provider) saw activity but remains closed-not-merged from February — relevant context if you're tracking ChatGPT-backend auth support.
+
+Background work continues on the `server-client-2` branch (aymanbagabas merged main in via [f3fe760](https://github.com/charmbracelet/crush/commit/f3fe760043a5ff3d648b5157a07d626c2f41df17) and updated UI tests in [2182fc4](https://github.com/charmbracelet/crush/commit/2182fc469cdccc517550233d00101bcc7918678d)), but nothing user-visible landed today. No releases or new issues.
+
+## Releases
+
+_None in window._
+
+
+## Merged PRs
+
+- [#2542](https://github.com/charmbracelet/crush/pull/2542) **refactor: centralize user config path in a single func `home.Config()`** — _by @andreynering, merged 2026-04-01T17:46:56Z_
+- [#2314](https://github.com/charmbracelet/crush/pull/2314) **fix(ls): respect git's `core.excludesfile` config if set** — _by @mavaa, merged 2026-03-31T20:04:15Z_
+
+
+## Open PRs (new or updated)
+
+- [#2544](https://github.com/charmbracelet/crush/pull/2544) **feat(provider): Add Alibaba Coding Plan Support** — _by @MrRolie, updated 2026-04-01T20:32:26Z_
+- [#2543](https://github.com/charmbracelet/crush/pull/2543) **Fix: avoid unsupported terminal capability probe** — _by @owldev127, updated 2026-04-01T05:08:15Z_
+
+
+## Closed PRs (not merged)
+
+- [#2081](https://github.com/charmbracelet/crush/pull/2081) **feat: add OpenAI Codex OAuth provider** — _by @khalilgharbaoui, closed 2026-02-06T12:48:56Z_
+
+
+## Notable Issues
+
+_None in window._
+
+
+## Commits on `main`
+
+- [`ed71633`](https://github.com/charmbracelet/crush/commit/ed716339ab8354be265c6bb2ddaf7e6b38e81806) ci(lint): fix yet another lint issue — _@andreynering_
+- [`c88c941`](https://github.com/charmbracelet/crush/commit/c88c941015369d18f5704251806662bbeb0c1c53) ci: make lint green — _@andreynering_
+- [`2182fc4`](https://github.com/charmbracelet/crush/commit/2182fc469cdccc517550233d00101bcc7918678d) fix: update UI tests to use test workspace — _@aymanbagabas_
+- [`f3fe760`](https://github.com/charmbracelet/crush/commit/f3fe760043a5ff3d648b5157a07d626c2f41df17) Merge branch 'main' into server-client-2 — _@aymanbagabas_
+- [`de04fc2`](https://github.com/charmbracelet/crush/commit/de04fc21cf1202bf4a26b5d6c80f58dd49835fd9) chore: auto-update files — _@charmcli_
+- [`206aecf`](https://github.com/charmbracelet/crush/commit/206aecfbfdc9adcb854f38d1addeb7db959032cd) refactor: centralize user config path in a single func `home.Config()` (#2542) — _@andreynering_
+- [`782d4dc`](https://github.com/charmbracelet/crush/commit/782d4dc0039da058ddefe44a785a068c2509913a) chore(legal): @MrRolie has signed the CLA — _@charmcli_
+
+
+---
+_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (LLM summary + deterministic detail)._
