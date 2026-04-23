@@ -1,0 +1,62 @@
+# Aider-AI/aider — 2026-03-17
+
+> Pioneer terminal pair-programmer; slow but high-signal when it moves.
+
+**Window:** 2026-03-16T23:59:59.000Z → 2026-03-17T23:59:59.000Z  
+**Default branch:** `main`  
+**Source:** [github.com/Aider-AI/aider](https://github.com/Aider-AI/aider)
+
+## Daily summary
+
+> _LLM-generated. May contain errors — click through before acting._
+
+The headline today is a crash fix for litellm exception handling: PR [#4832](https://github.com/Aider-AI/aider/pull/4832) added the missing `PermissionDeniedError` to aider's `EXCEPTIONS` list, resolving a `ValueError` raised in `LiteLLMExceptions.__init__()` whenever litellm exposed an `*Error` class aider didn't know about. The PR itself shows as closed-not-merged, but Paul landed the fix directly via a series of commits ([38716cc](https://github.com/Aider-AI/aider/commit/38716cc5a2621499c50454aa77ee379aa2b0c590), [8955c4e](https://github.com/Aider-AI/aider/commit/8955c4e9eabbf244ac4aad8f26ea2dab82f3ec6f), [0ec5f35](https://github.com/Aider-AI/aider/commit/0ec5f355d76c67574a9f530f7a86f68830f4ad93), [07c526f](https://github.com/Aider-AI/aider/commit/07c526f4ece5fad049a3cce6432bccfec5aaeef8), [c335682](https://github.com/Aider-AI/aider/commit/c3356825ddee3ded3f5e7561319f7feebb24bcdd), [413149e](https://github.com/Aider-AI/aider/commit/413149e9c848f0e22ef21ff02996e6b0b99432f0)) that add the ExInfo entry, the import, and accompanying tests using proper httpx response objects. This is the same class of bug previously tracked as #4829 and is worth pulling if you've seen aider crash on startup against recent litellm versions.
+
+Model coverage also expanded: [fabdce1](https://github.com/Aider-AI/aider/commit/fabdce1a035a3fc6851247de94bec7f5f2f84006) adds `gpt-5.3-codex` variants, followed by [c41ef3b](https://github.com/Aider-AI/aider/commit/c41ef3b85b071290448cc4c2c4ea6b59d46d6efb) which introduces `gpt-5.3` and `gpt-5.4` model entries. Both were co-authored via aider itself running on gpt-5.2/5.3-codex. No release was cut today, so users wanting these models will need to track main.
+
+On the inbound side, [#4936](https://github.com/Aider-AI/aider/pull/4936) opens a notable new direction: an ACP (Agent Communication Protocol) support adapter ported from NousResearch's MIT-licensed Hermes-Agent project. The author (KeithCu) reports it works against their own plugin and has copied over Hermes-Agent's test suite, but the PR is fresh and unreviewed — worth a look if interoperability with external agent frameworks is on your radar.
+
+No new issues were filed and no releases were published in the window. Net: a small but meaningful stability fix, incremental model plumbing, and one speculative integration PR to watch.
+
+## Releases
+
+_None in window._
+
+
+## Merged PRs
+
+_None in window._
+
+
+## Open PRs (new or updated)
+
+- [#4936](https://github.com/Aider-AI/aider/pull/4936) **Add ACP (Agent Communication Protocol) support adapter** — _by @KeithCu, updated 2026-03-17T00:41:24Z_
+
+
+## Closed PRs (not merged)
+
+- [#4832](https://github.com/Aider-AI/aider/pull/4832) **fix: add missing PermissionDeniedError to litellm exceptions list** — _by @paipeline, closed 2026-03-17T00:59:19Z_
+
+
+## Notable Issues
+
+_None in window._
+
+
+## Commits on `main`
+
+- [`bdb4d9f`](https://github.com/Aider-AI/aider/commit/bdb4d9ff8ef88c3015a9845119bff37f49c93d7b) copy — _@paul-gauthier_
+- [`3c2a8bd`](https://github.com/Aider-AI/aider/commit/3c2a8bdafc54e644fb1ee3166a59ef825b322686) copy — _@paul-gauthier_
+- [`c41ef3b`](https://github.com/Aider-AI/aider/commit/c41ef3b85b071290448cc4c2c4ea6b59d46d6efb) feat: Add gpt-5.3 and gpt-5.4 model variants — _@paul-gauthier_
+- [`fabdce1`](https://github.com/Aider-AI/aider/commit/fabdce1a035a3fc6851247de94bec7f5f2f84006) feat: add gpt-5.3-codex model variants — _@paul-gauthier_
+- [`5b038fd`](https://github.com/Aider-AI/aider/commit/5b038fd76a8a9d50e4b55302553f7c563ac2dc54) copy — _@paul-gauthier_
+- [`413149e`](https://github.com/Aider-AI/aider/commit/413149e9c848f0e22ef21ff02996e6b0b99432f0) fix: Remove unused import in test_exceptions.py — _@paul-gauthier_
+- [`c335682`](https://github.com/Aider-AI/aider/commit/c3356825ddee3ded3f5e7561319f7feebb24bcdd) test: Fix PermissionDeniedError test with httpx objects — _@paul-gauthier_
+- [`8955c4e`](https://github.com/Aider-AI/aider/commit/8955c4e9eabbf244ac4aad8f26ea2dab82f3ec6f) fix: Add missing import for PermissionDeniedError — _@paul-gauthier_
+- [`07c526f`](https://github.com/Aider-AI/aider/commit/07c526f4ece5fad049a3cce6432bccfec5aaeef8) test: Add response arg to PermissionDeniedError in test — _@paul-gauthier_
+- [`0ec5f35`](https://github.com/Aider-AI/aider/commit/0ec5f355d76c67574a9f530f7a86f68830f4ad93) test: Add test for PermissionDeniedError EXInfo — _@paul-gauthier_
+- [`38716cc`](https://github.com/Aider-AI/aider/commit/38716cc5a2621499c50454aa77ee379aa2b0c590) feat: Add ExInfo for PermissionDeniedError — _@paul-gauthier_
+
+
+---
+_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (LLM summary + deterministic detail)._
