@@ -1,0 +1,64 @@
+# cline/cline — 2026-04-02
+
+> VS Code-native autonomous coding agent; another adjacent ecosystem signal.
+
+**Window:** 2026-04-01T23:59:59.000Z → 2026-04-02T23:59:59.000Z  
+**Default branch:** `main`  
+**Source:** [github.com/cline/cline](https://github.com/cline/cline)
+
+## Daily summary
+
+> _LLM-generated. May contain errors — click through before acting._
+
+The headline today is a **CLI update flow simplification** that ships in **v2.13.0**: `cline update` (and the new root-level `cline --update`) now updates both `cline` and `kanban` in one minimal, non-prompting step, replacing the previous mixed-messaging dual flow ([#10099](https://github.com/cline/cline/pull/10099), version bump in commit [7a91a9b](https://github.com/cline/cline/commit/7a91a9be2ef7f11b24ad845276658f4bcad965f8)). If you maintain install scripts or docs around CLI updates, read this one.
+
+The other user-visible merge is a **chat UI improvement for `read_file`** ([#10090](https://github.com/cline/cline/pull/10090)): the chat now shows the actual line range pulled into context rather than just the file path, and keeps grouped tool summaries accurate across manual approvals and repeated reads of the same file. Useful for anyone debugging context-window usage.
+
+On the CLI/TUI side, contributor `johnwschoi` is active:
+- [#10091](https://github.com/cline/cline/pull/10091) (open) adds Option/Ctrl+Backspace word-delete and fixes Option+Arrow word navigation across iTerm2, VSCode terminal, and other emulators by handling the different modifier-key encodings (notably iTerm2 conflating `\x7f` for Backspace and Option+Backspace).
+- [#10075](https://github.com/cline/cline/pull/10075) (closed as draft) attempted to fix trailing paste chunks leaking past the `[Pasted text #1 +N lines]` placeholder in `cline --tui`; root cause identified as the 100-char `PASTE_COLLAPSE_THRESHOLD` missing the small final chunk. Worth tracking for a follow-up.
+
+Security/deps housekeeping: an Aikido autofix PR bundling upgrades to node-forge, @xmldom/xmldom, path-to-regexp and brace-expansion (signature forgery, DoS, CA-bypass, XML injection) was closed unmerged ([#10093](https://github.com/cline/cline/pull/10093)), as were a dependabot bump for path-to-regexp 8.3.0→8.4.1 ([#10058](https://github.com/cline/cline/pull/10058)), an ajv/esbuild group bump ([#10072](https://github.com/cline/cline/pull/10072)), and an older axios CVE fix in evals ([#9232](https://github.com/cline/cline/pull/9232)) — likely superseded elsewhere, but worth confirming the CVEs are resolved by other means.
+
+No releases tagged, no new issues, and stale PR [#9720](https://github.com/cline/cline/pull/9720) (add `gpt-5.4` to OpenAI native model list) saw activity but remains open.
+
+## Releases
+
+_None in window._
+
+
+## Merged PRs
+
+- [#10090](https://github.com/cline/cline/pull/10090) **Show read_file line ranges in chat UI** — _by @robinnewhouse, merged 2026-04-02T18:26:14Z_
+- [#10099](https://github.com/cline/cline/pull/10099) **feat(cli): simplify unified update flow for cline and kanban** — _by @saoudrizwan, merged 2026-04-02T03:08:19Z_
+
+
+## Open PRs (new or updated)
+
+- [#10091](https://github.com/cline/cline/pull/10091) **fix: add Option+Backspace word delete and cross-terminal keyboard support to CLI** — _by @johnwschoi, updated 2026-04-02T21:11:02Z_
+- [#9720](https://github.com/cline/cline/pull/9720) **feat(api): add gpt-5.4 to OpenAI native model list** — _by @itsWavs, updated 2026-04-02T15:15:42Z_
+
+
+## Closed PRs (not merged)
+
+- [#10093](https://github.com/cline/cline/pull/10093) **[Aikido] Fix 8 security issues in node-forge, @xmldom/xmldom, path-to-regexp and 1 more** — _by @aikido-autofix[bot], closed 2026-04-02T22:47:10Z_
+- [#10075](https://github.com/cline/cline/pull/10075) **fix: capture trailing paste chunks in CLI TUI input** — _by @johnwschoi, closed 2026-04-02T21:03:56Z_
+- [#10072](https://github.com/cline/cline/pull/10072) **chore(deps): bump the npm_and_yarn group across 2 directories with 2 updates** — _by @dependabot[bot], closed 2026-04-02T05:01:49Z_
+- [#10058](https://github.com/cline/cline/pull/10058) **chore(deps): bump path-to-regexp from 8.3.0 to 8.4.1** — _by @dependabot[bot], closed 2026-04-02T04:59:20Z_
+- [#9232](https://github.com/cline/cline/pull/9232) **[Aikido] Fix security issue in axios via minor version upgrade from 1.12.2 to 1.13.5 in evals** — _by @aikido-autofix[bot], closed 2026-04-02T01:04:04Z_
+
+
+## Notable Issues
+
+_None in window._
+
+
+## Commits on `main`
+
+- [`e52a052`](https://github.com/cline/cline/commit/e52a052c811fae7ba50618fa1372e02e61f51e1b) Show read_file line ranges in chat UI (#10090) — _@robinnewhouse_
+- [`7a91a9b`](https://github.com/cline/cline/commit/7a91a9be2ef7f11b24ad845276658f4bcad965f8) Bump version from 2.12.0 to 2.13.0 — _@saoudrizwan_
+- [`93a494d`](https://github.com/cline/cline/commit/93a494d0095548dbd2255652555efd67e1f29776) feat(cli): simplify unified update flow for cline and kanban (#10099) — _@saoudrizwan_
+
+
+---
+_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (LLM summary + deterministic detail)._
