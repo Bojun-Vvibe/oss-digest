@@ -1,0 +1,79 @@
+# charmbracelet/crush — 2026-04-17
+
+> Charm's terminal AI coding agent; design-forward TUI patterns worth tracking.
+
+**Window:** 2026-04-16T23:59:59.000Z → 2026-04-17T23:59:59.000Z  
+**Default branch:** `main`  
+**Source:** [github.com/charmbracelet/crush](https://github.com/charmbracelet/crush)
+
+## Daily summary
+
+> _LLM-generated. May contain errors — click through before acting._
+
+## v0.60.0 ships with Hyper provider switch to OpenAI-compatible endpoint
+
+The headline today is the [v0.60.0](https://github.com/charmbracelet/crush/releases/tag/v0.60.0) release, cut by `andreynering`. Its sole changelog entry is `feat(hyper): use openai-compatible endpoint for hyper` (#2640, commit `ea86101`) — a notable provider-integration change for anyone using Hyper, since it switches the transport rather than just tweaking config defaults.
+
+Two follow-up commits landed after the tag and will roll into the next release:
+
+- `feat: enable progress bar on iterm2` (#2641) — surfaces task progress via iTerm2's native progress indicator.
+- `fix(oauth): fix copy to clipboard on terminals that don't support osc52` (#2642) — restores OAuth-flow clipboard copy on Apple Terminal and other non-OSC52 emulators. Worth a look if you've seen broken auth UX on macOS's default terminal.
+
+A CLA-signing chore (`3af50fd`) for new contributor `@pi128` also landed, hinting at incoming external contributions.
+
+No PRs were opened or merged in the window beyond the four commits above, and there were no new issues filed today — activity was on triage of older reports:
+
+- #2628 ("What does the LSP's side status?") was **closed** with clarification that letters like `E`/`W` from `pylsp` are colored red/yellow as severity indicators.
+- #909 ("Tool not found: assistant.view with ollama and gpt-oss") and #462 ("OpenRouter providers selection") were both **closed** — long-standing provider/tool-routing bugs cleared from the backlog.
+- #2623 (Ollama Qwen models failing in thinking mode with `"does not support thinking"` after upgrading 0.47 → 0.57) remains **open** and is the most actionable bug report for Ollama users; a regression suspect worth watching.
+- #2282 (retry/recovery strategy on network/provider errors mid-task) saw renewed discussion but no resolution — still an open design question around token-cost-aware retries.
+
+If you read one thing: skim PR #2640 to understand the new Hyper transport before upgrading.
+
+## Releases
+
+- **[v0.60.0](https://github.com/charmbracelet/crush/releases/tag/v0.60.0)** — v0.60.0 _by @github-actions[bot] at 2026-04-17T16:55:33Z_
+  > 👀
+  > 
+  > ## Changelog
+  > ### New!
+  > * ea86101bf6c61ee05ca3e887ea65d2f5ff9e68d7: feat(hyper): use openai-compatible endpoint for hyper (#2640) (@andreynering)
+  > 
+  > ---
+  > 
+  > <details>
+  > <summary>Verifying the artifacts</summary>
+  > 
+  > First, download the [`checksums.txt` file](https://github.com/charmbracelet/crush/releases/download/v0.60.0/checksums.txt) and the [`checksums.txt.sigstore.json` file](https://github.com/charmbracelet/crush/releases/download/v0.60.0/checksums.txt.sigstore.json) files, for example, with `wget…
+
+
+## Merged PRs
+
+_None in window._
+
+
+## Open PRs (new or updated)
+
+_None in window._
+
+
+## Notable Issues
+
+- [#2282](https://github.com/charmbracelet/crush/issues/2282) **Repeat/retry strategy** — _by @mitfik_
+- [#2628](https://github.com/charmbracelet/crush/issues/2628) **For Help: What does the LSPs's side status?** _[area: lsp]_ — _by @Zim-Inn_ _(closed 2026-04-17T10:57:51Z)_
+- [#2623](https://github.com/charmbracelet/crush/issues/2623) **Thinking not supported with ollama qwen models** _[provider: ollama, provider: qwen]_ — _by @lborcard_
+- [#909](https://github.com/charmbracelet/crush/issues/909) **[bug] ERROR Tool not found: assistant.view with ollama and gpt-oss** _[provider: openai chatgpt, provider: ollama, area: tools]_ — _by @paco-valdez_ _(closed 2026-04-17T05:19:04Z)_
+- [#462](https://github.com/charmbracelet/crush/issues/462) **OpenRouter providers selection** _[provider: openrouter, Migrated]_ — _by @michaelbubnov_ _(closed 2026-04-17T05:19:04Z)_
+
+
+## Commits on `main`
+
+- [`3af50fd`](https://github.com/charmbracelet/crush/commit/3af50fd869687976c61a00a93b27e670b9d76c03) chore(legal): @pi128 has signed the CLA — _@charmcli_
+- [`e74253e`](https://github.com/charmbracelet/crush/commit/e74253ea4f3a9986c1332f48fd51def6798e2c65) fix(oauth): fix copy to clipboard on terminals that don't support osc52 (#2642) — _@andreynering_
+- [`2f32c9b`](https://github.com/charmbracelet/crush/commit/2f32c9bc5e8c839b517d0272ad4e423a5af96cbd) feat: enable progress bar on iterm2 (#2641) — _@andreynering_
+- [`f1a931d`](https://github.com/charmbracelet/crush/commit/f1a931dc9547975ef58fbb90e43890fce863c668) v0.60.0 — _@andreynering_
+- [`ea86101`](https://github.com/charmbracelet/crush/commit/ea86101bf6c61ee05ca3e887ea65d2f5ff9e68d7) feat(hyper): use openai-compatible endpoint for hyper (#2640) — _@andreynering_
+
+
+---
+_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (LLM summary + deterministic detail)._
