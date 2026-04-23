@@ -2,7 +2,15 @@
 
 > Daily AI-generated digests of fast-moving public OSS repos in the AI-native dev tooling ecosystem. Read 8 repos in 5 minutes.
 
-`oss-digest` watches a curated set of public GitHub repositories — terminal coding agents, the Model Context Protocol ecosystem, and LLM gateways — and emits one short markdown digest per repo per day, plus a daily index. The goal is to stay current on the AI-native developer tooling space without scrolling 8 separate "Releases" tabs every morning.
+`oss-digest` watches a curated set of public GitHub repositories — terminal coding agents, the Model Context Protocol ecosystem, and LLM gateways — and emits one short markdown digest per repo per day, plus a daily index and a weekly cross-repo trend write-up. The goal is to stay current on the AI-native developer tooling space without scrolling 8 separate "Releases" tabs every morning.
+
+## Reading order
+
+If you only have 5 minutes, read in this order:
+
+1. **Latest weekly digest** — [`digests/_weekly/`](./digests/_weekly/) — cross-repo trends synthesized by an LLM.
+2. **Today's daily INDEX** — [`digests/<latest>/INDEX.md`](./digests/) — one-line stats per repo + table.
+3. **Per-repo dailies** — only click into the ones the index flags as interesting.
 
 ## How it works
 
@@ -29,6 +37,8 @@
 ```
 
 We do **not** clone any tracked repo. Everything is fetched via `gh api` against the GitHub REST API.
+
+As of **v0.2** the daily digest can also call a local LLM (`claude` or `codex`) to write a 200–400-word summary that goes above the deterministic activity tables. A weekly cross-repo trend write-up (~600 words) lands under [`digests/_weekly/`](./digests/_weekly/).
 
 ## Tracked repositories
 
@@ -73,17 +83,54 @@ Subscribing to 8 separate release feeds gives you noise. This gives you signal.
 # dry run: print the plan, write nothing
 npm run digest:dry
 
-# real run for today's window
+# real run for today's window (deterministic template only)
 npm run digest
+
+# v0.2: include the LLM summary section (uses local `claude` or `codex` CLI)
+node scripts/run-digest.mjs --llm
 
 # scoped runs
 node scripts/run-digest.mjs --repo anomalyco/opencode
 node scripts/run-digest.mjs --date 2026-04-23
+node scripts/run-digest.mjs --llm --repo anomalyco/opencode --date 2026-04-23
+```
+
+### Backfill historical digests
+
+`scripts/backfill.mjs` regenerates digests for an arbitrary date range. It is
+**resume-safe** (skips any date whose `INDEX.md` already exists), throttled
+(max 5 concurrent repos), and bounded (stops at 4500 `gh api` calls per
+process). It commits one commit per day (`digest: YYYY-MM-DD (N repos)`) and
+pushes every N commits.
+
+```bash
+# 30-day backfill with LLM summaries, push every 10 commits
+node scripts/backfill.mjs --start 2026-03-25 --end 2026-04-23
+
+# without LLM, without committing (just write files)
+node scripts/backfill.mjs --start 2026-03-25 --end 2026-04-23 --no-llm --no-commit
+
+# adjust push cadence
+node scripts/backfill.mjs --start 2026-03-25 --end 2026-04-23 --push-every 5
+```
+
+### Weekly cross-repo digest
+
+`scripts/weekly.mjs` aggregates one ISO week across all targets and asks the
+LLM for a ~600-word "what happened in AI coding agent OSS this week" summary
+with inline PR/release/issue citations. Output goes to
+`digests/_weekly/<YYYY-Www>.md` and is committed as
+`weekly: <YYYY-Www> cross-repo trends`.
+
+```bash
+node scripts/weekly.mjs --week 2026-W17
+node scripts/weekly.mjs --week 2026-W17 --no-llm --no-commit
 ```
 
 Requires:
 - Node >= 20
 - [`gh`](https://cli.github.com/) authenticated (`gh auth status` should be green)
+- Optional: `claude` or `codex` on `PATH` for LLM summaries (gracefully degrades to deterministic template if absent)
 
 ## Disclaimer
 
