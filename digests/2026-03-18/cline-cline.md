@@ -1,0 +1,69 @@
+# cline/cline — 2026-03-18
+
+> VS Code-native autonomous coding agent; another adjacent ecosystem signal.
+
+**Window:** 2026-03-17T23:59:59.000Z → 2026-03-18T23:59:59.000Z  
+**Default branch:** `main`  
+**Source:** [github.com/cline/cline](https://github.com/cline/cline)
+
+## Daily summary
+
+> _LLM-generated. May contain errors — click through before acting._
+
+The headline change is a new per-task file read deduplication cache (#9836) that prevents models from repeatedly re-reading unchanged files, reducing wasted API tokens and context-window consumption — worth a close look if you care about token efficiency or task-state behavior.
+
+User-facing polish also landed: the unauthenticated Cline provider error is replaced with a friendlier "Whoops looks like you're logged out – click below to sign in" prompt (#9632), and the `ClineRulesToggleModal` (Rules/Workflows/Hooks/Skills tabs) gets padding fixes so the "Skills" tab stops clipping in narrow sidebars (#9870).
+
+On the CLI side, #9867 fixes flaky Enter-key handling on Windows/CI by introducing a shared `isEnterKey()` helper that normalizes Ink's inconsistent surfacing of `\r`/`\n` versus `key.return`, unblocking the `SkillsPanelContent` test.
+
+Notable open PRs worth reviewing:
+
+- #9866 fixes the `cline auth` setup wizard for `openai-compatible` providers, which previously skipped base-URL collection entirely (making the provider unusable) and offered no way to set custom headers (refs #9847).
+- #9861 splits Gemini assistant messages so signed (`thoughtSignature`) and unsigned parts no longer coexist in a single `Content`, avoiding 400 errors when thinking mode mixes plain text with tool calls.
+- #9873 fixes Claude Sonnet 4.5 thinking blocks rendering on a single line by adding `whitespace-pre-wrap` to the `ThinkingRow.tsx` span (fixes #7876).
+- #9860 corrects MCP Zod schemas to use the two-argument `z.record(keyType, valueType)` form for env vars, HTTP headers, and server config maps.
+
+Housekeeping: the Aikido auto-fix PR #9840 (claiming to resolve 19 CVEs incl. simple-git RCE, Hono static-serve auth bypass, and fast-xml-parser XSS) was closed unmerged, as was the long-running provider model-ID storage refactor #5056 — maintainers may want to confirm the security fixes are being addressed via another path. No releases or new issues in the window.
+
+## Releases
+
+_None in window._
+
+
+## Merged PRs
+
+- [#9632](https://github.com/cline/cline/pull/9632) **Replace Error Message When Not Logged In to Cline** — _by @shey-cline, merged 2026-03-18T23:01:06Z_
+- [#9870](https://github.com/cline/cline/pull/9870) **fix(ui): align ClineRulesToggleModal padding with ServersToggleModal** — _by @jessy-cline, merged 2026-03-18T21:13:39Z_
+- [#9867](https://github.com/cline/cline/pull/9867) **Fix flaky CLI Enter-key handling across Windows/test environments** — _by @candieduniverse, merged 2026-03-18T19:20:25Z_
+- [#9836](https://github.com/cline/cline/pull/9836) **feat: add file read deduplication cache to prevent repeated reads** — _by @mathis1337, merged 2026-03-18T17:38:24Z_
+
+
+## Open PRs (new or updated)
+
+- [#9873](https://github.com/cline/cline/pull/9873) **fix: Claude Sonnet 4.5 Thinking is on a single line** — _by @JiwaniZakir, updated 2026-03-18T22:56:00Z_
+- [#9866](https://github.com/cline/cline/pull/9866) **fix(cli): add base URL and custom headers to openai-compatible setup wizard** — _by @ClineXDiego, updated 2026-03-18T20:53:24Z_
+- [#9861](https://github.com/cline/cline/pull/9861) **fix(gemini): split mixed signed/unsigned thoughtSignature parts to prevent 400 error** — _by @weijiafu14, updated 2026-03-18T06:52:57Z_
+- [#9860](https://github.com/cline/cline/pull/9860) **Fix Zod schema definitions for record types** — _by @mitsu888, updated 2026-03-18T03:15:21Z_
+
+
+## Closed PRs (not merged)
+
+- [#9840](https://github.com/cline/cline/pull/9840) **[Aikido] Fix 19 security issues in simple-git, hono, @aws-sdk/xml-builder and 6 more** — _by @aikido-autofix[bot], closed 2026-03-18T23:37:50Z_
+- [#5056](https://github.com/cline/cline/pull/5056) **Refactor - Specific provider model ID storage** — _by @celestial-vault, closed 2026-03-18T18:55:44Z_
+
+
+## Notable Issues
+
+_None in window._
+
+
+## Commits on `main`
+
+- [`c88d323`](https://github.com/cline/cline/commit/c88d3238cfac5617f26e8d1e3aa87fa0c81cc014) Replace Error Message When Not Logged In to Cline (#9632) — _@shey-cline_
+- [`852ca23`](https://github.com/cline/cline/commit/852ca2348ff40111ed253e728eb07486786f5966) fix(ui): align ClineRulesToggleModal padding with ServersToggleModal (#9870) — _@jessy-cline_
+- [`7091ccf`](https://github.com/cline/cline/commit/7091ccf2c74247217359639869433878be438c9c) Fix flaky CLI Enter-key handling across Windows/test environments (#9867) — _@candieduniverse_
+- [`ad6c33a`](https://github.com/cline/cline/commit/ad6c33ac5b8cb95dd0566e567d24d519cb763b75) feat: add file read deduplication cache to prevent repeated reads (#9836) — _@mathis1337_
+
+
+---
+_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (LLM summary + deterministic detail)._
