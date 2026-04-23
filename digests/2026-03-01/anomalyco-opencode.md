@@ -1,0 +1,70 @@
+# anomalyco/opencode — 2026-03-01
+
+> Terminal-native AI coding agent we use daily; high-velocity OSS.
+
+**Window:** 2026-02-28T23:59:59.000Z → 2026-03-01T23:59:59.000Z  
+**Default branch:** `dev`  
+**Source:** [github.com/anomalyco/opencode](https://github.com/anomalyco/opencode)
+
+## Daily summary
+
+> _LLM-generated. May contain errors — click through before acting._
+
+The headline today is a performance overhaul of session switching: `c0483af` (#15474) introduces windowed rendering and a staged timeline, which should noticeably reduce latency when jumping between sessions in the TUI. If you only read one change, read this one.
+
+The other notable thread is the start of multi-workspace support in core. `cec16df` (#15409) adds a new `WorkspaceContext`, and `3ee1653` (#15410) follows up by attaching `workspace_id` to the `session` table. Both land from jlongster back-to-back and look like the foundation for scoping sessions per workspace — worth tracking if you care about the data model.
+
+On the UX side, neriousy ships a compact UI mode in `b15fb21` (#15578), and thdxr improves the task tool display with subagent keybind hints and spinner animations in `90270c6` (#15607). Together they meaningfully change what the TUI looks like during agent work.
+
+Reliability fixes worth noting:
+- `c4c0b23` (#15516) kills orphaned MCP child processes and exposes `OPENCODE_PID` on shutdown — relevant if you've been seeing MCP zombies.
+- `6b7e6bd` (#15407) replaces raw HTML error responses with human-readable messages.
+- `438610a` (#15496) surfaces proper usage-limit errors instead of generic failures.
+- `c8866e6` (#15583) makes the provider icon's resolved id reactive.
+
+Smaller items: `ae0f69e` documents deprecated Zen models (useful if you're pinning model ids), `f5eade1` (#15491) polishes Turkish translations, and `4d968eb` (#15464) adds opencode-vibeguard to the ecosystem docs. The remaining commits (`d1938a4`, `38704ac`, `b88e8e0`, `fcd733e`) are bot-generated `chore: generate` artifacts and can be skipped.
+
+No PRs, issues, or releases were opened or cut in the window — today is purely a commit-stream day on `dev`.
+
+## Releases
+
+_None in window._
+
+
+## Merged PRs
+
+_None in window._
+
+
+## Open PRs (new or updated)
+
+_None in window._
+
+
+## Notable Issues
+
+_None in window._
+
+
+## Commits on `dev`
+
+- [`d1938a4`](https://github.com/anomalyco/opencode/commit/d1938a472d58dedf27ca4afc4973a709ce5424f3) chore: generate — _@opencode-agent[bot]_
+- [`c0483af`](https://github.com/anomalyco/opencode/commit/c0483affa68032734076bdc9e0d73657eb01d6f0) perf(session): faster session switching via windowed rendering and staged timeline (#15474) — _@kitlangton_
+- [`ae0f69e`](https://github.com/anomalyco/opencode/commit/ae0f69e1faa960aa2ab8f6f380b59a9fb9ab1bee) doc: add zen deprecated models — _@fwang_
+- [`90270c6`](https://github.com/anomalyco/opencode/commit/90270c615d47c3c6b47c3ef0f551e9e57664f2c4) feat(tui): improve task tool display with subagent keybind hints and spinner animations (#15607) — _@thdxr_
+- [`6b7e6bd`](https://github.com/anomalyco/opencode/commit/6b7e6bde4d88b97ca99525f1bc40c33e48ba97b4) fix(opencode): show human-readable message for HTML error responses (#15407) — _@rianvdm_
+- [`b15fb21`](https://github.com/anomalyco/opencode/commit/b15fb211917de83b39d9ec3a1d66ae4353d1e6e0) feat(app): add compact ui (#15578) — _@neriousy_
+- [`c8866e6`](https://github.com/anomalyco/opencode/commit/c8866e60ba0b626962d7aaf81379cd96ec6c857a) fix(app): make provider icon resolved id reactive (#15583) — _@neriousy_
+- [`f5eade1`](https://github.com/anomalyco/opencode/commit/f5eade1d2b95562c7fb58e3041e662a8b2b611b6) fix(i18n): polish turkish translations (#15491) — _@vaur94_
+- [`438610a`](https://github.com/anomalyco/opencode/commit/438610aa647116e40815c0720eb472791259c13d) fix(app): show proper usage limit errors (#15496) — _@neriousy_
+- [`c4c0b23`](https://github.com/anomalyco/opencode/commit/c4c0b23bff52878014007e53de7657a59df95915) fix: kill orphaned MCP child processes and expose OPENCODE_PID on shu… (#15516) — _@ryanwyler_
+- [`38704ac`](https://github.com/anomalyco/opencode/commit/38704acacddad821d157d9a2c093e3751e016f53) chore: generate — _@opencode-agent[bot]_
+- [`4d968eb`](https://github.com/anomalyco/opencode/commit/4d968ebd64de6c0da76765b2cdc76cfc2dcc3ed4) docs(ecosystem): add opencode-vibeguard (#15464) — _@inkdust2021_
+- [`b88e8e0`](https://github.com/anomalyco/opencode/commit/b88e8e0e0b9d672d63e6cf1dfd4c377dbd59a67f) chore: generate — _@opencode-agent[bot]_
+- [`3ee1653`](https://github.com/anomalyco/opencode/commit/3ee1653f40360fc0a221251f7241425cc7c58d28) feat(core): add workspace_id to `session` table (#15410) — _@jlongster_
+- [`fcd733e`](https://github.com/anomalyco/opencode/commit/fcd733e3d6a0a2960c50adac947fc140f1934e9d) chore: generate — _@opencode-agent[bot]_
+- [`cec16df`](https://github.com/anomalyco/opencode/commit/cec16dfe953a67cce9c0b6e597d323fb78600c57) feat(core): add WorkspaceContext (#15409) — _@jlongster_
+
+
+---
+_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (LLM summary + deterministic detail)._
