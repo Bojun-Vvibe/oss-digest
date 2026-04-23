@@ -1,0 +1,15 @@
+{
+  "name": "oss-digest",
+  "version": "0.1.0",
+  "description": "Daily AI-generated digests of fast-moving public OSS repos in the AI-native dev tooling ecosystem.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "digest": "node scripts/run-digest.mjs",
+    "digest:dry": "node scripts/run-digest.mjs --dry"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "generated_at": "2026-04-23",
+  "targets": [
+    {
+      "full_name": "anomalyco/opencode",
+      "focus": ["prs", "releases", "issues"],
+      "default_branch": "dev",
+      "why": "Terminal-native AI coding agent we use daily; high-velocity OSS."
+    },
+    {
+      "full_name": "BerriAI/litellm",
+      "focus": ["releases", "prs"],
+      "default_branch": "litellm_internal_staging",
+      "why": "LLM gateway / proxy that powers most of our local agent stack."
+    },
+    {
+      "full_name": "modelcontextprotocol/servers",
+      "focus": ["prs", "issues"],
+      "default_branch": "main",
+      "why": "Reference MCP server implementations; canonical examples for the protocol."
+    },
+    {
+      "full_name": "openai/codex",
+      "focus": ["releases", "prs"],
+      "default_branch": "main",
+      "why": "OpenAI's terminal coding agent; a direct point of comparison for opencode."
+    },
+    {
+      "full_name": "OpenHands/OpenHands",
+      "focus": ["prs", "releases"],
+      "default_branch": "main",
+      "why": "Autonomous software engineering agent; bellwether for agentic dev tooling."
+    },
+    {
+      "full_name": "cline/cline",
+      "focus": ["releases", "prs"],
+      "default_branch": "main",
+      "why": "VS Code-native autonomous coding agent; another adjacent ecosystem signal."
+    },
+    {
+      "full_name": "Aider-AI/aider",
+      "focus": ["prs", "releases"],
+      "default_branch": "main",
+      "why": "Pioneer terminal pair-programmer; slow but high-signal when it moves."
+    },
+    {
+      "full_name": "charmbracelet/crush",
+      "focus": ["releases", "prs"],
+      "default_branch": "main",
+      "why": "Charm's terminal AI coding agent; design-forward TUI patterns worth tracking."
+    }
+  ]
+}
