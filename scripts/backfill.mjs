@@ -261,7 +261,8 @@ function git(args) {
 }
 
 function commitDay(dateLabel, repoCount) {
-  git(["add", `digests/${dateLabel}`, "cache/" + dateLabel]);
+  // cache/ is gitignored; only stage digests/.
+  git(["add", `digests/${dateLabel}`]);
   // Allow the commit only if there's something staged
   const status = git(["status", "--porcelain"]);
   if (!status.trim()) return false;
