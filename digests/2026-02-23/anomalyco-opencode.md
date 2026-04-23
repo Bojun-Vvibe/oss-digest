@@ -1,0 +1,63 @@
+# anomalyco/opencode — 2026-02-23
+
+> Terminal-native AI coding agent we use daily; high-velocity OSS.
+
+**Window:** 2026-02-22T23:59:59.000Z → 2026-02-23T23:59:59.000Z  
+**Default branch:** `dev`  
+**Source:** [github.com/anomalyco/opencode](https://github.com/anomalyco/opencode)
+
+## Daily summary
+
+> _LLM-generated. May contain errors — click through before acting._
+
+The day's headline is a concentrated **Windows hardening push**: path canonicalization and Win32 path support landed via #13671, followed by permission-boundary path normalization (#14738), a fix for `scripts/turbo` commands not running on Windows (#14829), and a flaky e2e fix around IPv6 quirks (#14833). To keep these from regressing, Windows was added to the unit-test matrix in CI (#14836). If you only read one thing, start with #13671 — it's the foundational change the others build on.
+
+A parallel **"zen" workstream** from fwang is taking shape across four commits: tracking and displaying session in usage (5712cff, 5596775), displaying BYOK cost (284251a), and a WIP "zen lite" (a5a70fa) accompanied by an agent-generated `chore: generate` (d3ecc5a). No PR yet, so worth watching the `dev` branch directly if you care about billing/usage UX.
+
+CI/infra also got attention beyond Windows: a flaky typecheck was fixed (#14828) and workflow automation was updated (#14809). On the app side, two successive commits target a "duplicate markdown" bug (3b5b21a, 8f2d8dd) — the back-to-back landings suggest the first didn't fully resolve it, so reviewers may want to verify. A small but user-visible polish fix corrects an inverted chevron in the todo list (#14628). Notably, adamdotdevin reverted an earlier "fix(app): terminal issues" commit (9f4fc5b) — if you were tracking terminal behavior, that fix is no longer in tree.
+
+No releases, no merged PRs via the PR feed, no new issues, and no new open PRs were recorded in the window; all activity came through direct commits to `dev`. Net signal: stabilization day focused on Windows + CI, with zen billing features quietly progressing and one app-side revert worth noting.
+
+## Releases
+
+_None in window._
+
+
+## Merged PRs
+
+_None in window._
+
+
+## Open PRs (new or updated)
+
+_None in window._
+
+
+## Notable Issues
+
+_None in window._
+
+
+## Commits on `dev`
+
+- [`0269f39`](https://github.com/anomalyco/opencode/commit/0269f39a178ad02b88196efe131dcba87849ee4d) ci: add Windows to unit test matrix (#14836) — _@Hona_
+- [`0a91196`](https://github.com/anomalyco/opencode/commit/0a9119691909dec1fa63ddb14f71e12e937215a6) fix(win32): e2e sometimes fails because windows is weird and sometimes ipv6 (#14833) — _@Hona_
+- [`284251a`](https://github.com/anomalyco/opencode/commit/284251ad6615dd37d4f2c0c9b14e0a989dbf3f1e) zen: display BYOK cost — _@fwang_
+- [`34495a7`](https://github.com/anomalyco/opencode/commit/34495a70d5069355bbad95c95625818afa677eb1) fix(win32): scripts/turbo commands would not run (#14829) — _@Hona_
+- [`ad5f081`](https://github.com/anomalyco/opencode/commit/ad5f0816a33d323f2a7e6a6228136fa6a6c4b056) fix(cicd): flakey typecheck (#14828) — _@Hona_
+- [`24c6391`](https://github.com/anomalyco/opencode/commit/24c63914bf9ff46c3869f35e3cef026aa9f33b61) fix: update workflows for better automation (#14809) — _@R44VC0RP_
+- [`8f2d8dd`](https://github.com/anomalyco/opencode/commit/8f2d8dd47a45a4b3972ac8badc09cc280f84b838) fix(app): duplicate markdown — _@adamdotdevin_
+- [`3b5b21a`](https://github.com/anomalyco/opencode/commit/3b5b21a91e2a8f084ee8ed85aca81246880a9384) fix(app): duplicate markdown — _@adamdotdevin_
+- [`8e96447`](https://github.com/anomalyco/opencode/commit/8e96447960637c2371fb94ca7ce7b456048a0de6) fix(app): correct inverted chevron direction in todo list (#14628) — _@kevinWangSheng_
+- [`9f4fc5b`](https://github.com/anomalyco/opencode/commit/9f4fc5b72aaa0a4cd44f8ef9c399e801f3015692) Revert "fix(app): terminal issues" — _@adamdotdevin_
+- [`d3ecc5a`](https://github.com/anomalyco/opencode/commit/d3ecc5a0d911051d0131b3293dccabd3c2de6e66) chore: generate — _@opencode-agent[bot]_
+- [`a5a70fa`](https://github.com/anomalyco/opencode/commit/a5a70fa05bd62060f433cf26e0885a19b0e1a72e) wip: zen lite — _@fwang_
+- [`5596775`](https://github.com/anomalyco/opencode/commit/5596775c35fbf92b7e83729deed4ec8e286ab3ab) zen: display session in usage — _@fwang_
+- [`5712cff`](https://github.com/anomalyco/opencode/commit/5712cff5c453a185ac75a160f76ca06135d6ab2d) zen: track session in usage — _@fwang_
+- [`ee754c4`](https://github.com/anomalyco/opencode/commit/ee754c46f992dd4024e56e93246421246d16d13f) fix(win32): normalize paths at permission boundaries (#14738) — _@Hona_
+- [`0042a07`](https://github.com/anomalyco/opencode/commit/0042a07052ec0db777b2ea8bff46101466f0a942) fix: Windows path support and canonicalization (#13671) — _@edemaine_
+- [`ab75ef8`](https://github.com/anomalyco/opencode/commit/ab75ef8140d9a298326dd40b787eec5641ee68ed) chore: update nix node_modules hashes — _@opencode-agent[bot]_
+
+
+---
+_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (LLM summary + deterministic detail)._
