@@ -20,6 +20,11 @@ _None in window._
 
 ## Open PRs (new or updated)
 
+- [#3999](https://github.com/modelcontextprotocol/servers/pull/3999) **feat: add BusinessHotels.com Agentic Booking server** — _by @businesshotelsdeveloper-dot, updated 2026-04-23T20:37:19Z_
+- [#4016](https://github.com/modelcontextprotocol/servers/pull/4016) **fix(filesystem): normalize paths to NFC for Unicode consistency** — _by @Will-hxw, updated 2026-04-23T20:03:32Z_
+- [#4014](https://github.com/modelcontextprotocol/servers/pull/4014) **fix(filesystem): only apply MCP roots when no CLI directories are provided** — _by @Will-hxw, updated 2026-04-23T20:02:52Z_
+- [#4013](https://github.com/modelcontextprotocol/servers/pull/4013) **fix(everything): add key parameter to get-env tool to prevent secret leakage** — _by @Will-hxw, updated 2026-04-23T19:18:20Z_
+- [#4028](https://github.com/modelcontextprotocol/servers/pull/4028) **RFC: Kaelis Memory Extension for Shared Persistent Memory** — _by @Alex-conder, updated 2026-04-23T19:16:52Z_
 - [#4022](https://github.com/modelcontextprotocol/servers/pull/4022) **docs(readme): remove outdated GitLab server reference** — _by @Will-hxw, updated 2026-04-23T18:48:34Z_
 - [#3948](https://github.com/modelcontextprotocol/servers/pull/3948) **fix(filesystem): tolerate Windows realpath ENOENT** — _by @krot4u, updated 2026-04-23T15:48:05Z_
 - [#4027](https://github.com/modelcontextprotocol/servers/pull/4027) **Add REG-Vault (retro-gaming metadata + MCP)** — _by @rtissera, updated 2026-04-23T09:50:21Z_
@@ -28,7 +33,6 @@ _None in window._
 - [#4023](https://github.com/modelcontextprotocol/servers/pull/4023) **feat(filesystem): add maxDepth parameter to directory_tree** — _by @factspark23-hash, updated 2026-04-23T06:54:03Z_
 - [#4021](https://github.com/modelcontextprotocol/servers/pull/4021) **fix(everything): add description to get-resource-reference resourceType** — _by @Will-hxw, updated 2026-04-23T04:42:04Z_
 - [#4017](https://github.com/modelcontextprotocol/servers/pull/4017) **fix(filesystem): add optional depth parameter to list_directory** — _by @Will-hxw, updated 2026-04-23T04:40:42Z_
-- [#3999](https://github.com/modelcontextprotocol/servers/pull/3999) **feat: add BusinessHotels.com Agentic Booking server** — _by @businesshotelsdeveloper-dot, updated 2026-04-23T04:09:33Z_
 - [#4020](https://github.com/modelcontextprotocol/servers/pull/4020) **fix(release): include lockfile changes in has_changes()** — _by @Will-hxw, updated 2026-04-23T04:03:02Z_
 - [#4019](https://github.com/modelcontextprotocol/servers/pull/4019) **Add M2MCent to community tools** — _by @Evozim, updated 2026-04-23T03:25:36Z_
 - [#4018](https://github.com/modelcontextprotocol/servers/pull/4018) **Pr change** — _by @nikolayb, updated 2026-04-23T03:09:15Z_
@@ -36,6 +40,8 @@ _None in window._
 
 ## Notable Issues
 
+- [#4031](https://github.com/modelcontextprotocol/servers/issues/4031) **"Invalid prompt: your prompt was flagged as potentially violating our usage policy" after GPT-5.5 uses Sequential Thinking** — _by @metalbladex4_
+- [#4029](https://github.com/modelcontextprotocol/servers/issues/4029) **filesystem: read_media_file returns invalid 'blob' content type, violating MCP spec** — _by @blackwell-systems_
 - [#4026](https://github.com/modelcontextprotocol/servers/issues/4026) **Filesystem MCP writes hang when launched via `npx -y`; reliability improves with pinned global install** _[bug]_ — _by @pmabray_
 
 

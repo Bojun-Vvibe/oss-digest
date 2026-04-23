@@ -30,6 +30,7 @@
 
 ## Open PRs (new or updated)
 
+- [#2692](https://github.com/charmbracelet/crush/pull/2692) _(draft)_ **chore(styles): overhaul style definitions** — _by @meowgorithm, updated 2026-04-23T21:44:56Z_
 - [#2691](https://github.com/charmbracelet/crush/pull/2691) **fix(db): cap SQLite pool to one writer to prevent NOTADB corruption** — _by @SAY-5, updated 2026-04-23T18:39:10Z_
 - [#2690](https://github.com/charmbracelet/crush/pull/2690) **fix(db): prevent SQLITE_NOTADB corruption under concurrent sub-agents** — _by @taoeffect, updated 2026-04-23T17:59:17Z_
 - [#2598](https://github.com/charmbracelet/crush/pull/2598) _(draft)_ **feat: PreToolUse hook** — _by @meowgorithm, updated 2026-04-23T14:15:37Z_
@@ -40,9 +41,9 @@
 ## Notable Issues
 
 - [#2682](https://github.com/charmbracelet/crush/issues/2682) **Prevent SQLite corruption (`SQLITE_NOTADB`/code 26) under concurrent sub-agents** — _by @taoeffect_
+- [#2689](https://github.com/charmbracelet/crush/issues/2689) **GitHub Copilot: GPT-4.1 does not work (needs to use Responses API)** _[provider: openai chatgpt, provider: github copilot]_ — _by @victornoel_
 - [#2677](https://github.com/charmbracelet/crush/issues/2677) **Custom System Prompt** — _by @BlackScorp_
 - [#2676](https://github.com/charmbracelet/crush/issues/2676) **LM Studio somehow connects only to localhost:1234** — _by @BlackScorp_
-- [#2689](https://github.com/charmbracelet/crush/issues/2689) **Copilot is missing Opus 4.6 and GPT-4.1 does not work** _[provider: openai chatgpt, provider: github copilot]_ — _by @victornoel_
 - [#2683](https://github.com/charmbracelet/crush/issues/2683) **Sidebar lists the same skill twice when project and user skill directories resolve to the same files (symlink)** — _by @maxispossible_
 - [#2670](https://github.com/charmbracelet/crush/issues/2670) **Relax golang dependency?** — _by @dbeecham_ _(closed 2026-04-23T13:38:04Z)_
 - [#2684](https://github.com/charmbracelet/crush/issues/2684) **Env vars do not expand with MCP args** _[area: mcp]_ — _by @Jelloeater_

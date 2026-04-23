@@ -23,9 +23,10 @@ _None in window._
 
 ## Open PRs (new or updated)
 
+- [#9792](https://github.com/cline/cline/pull/9792) **feat(providers): add gpt-5.4, gpt-5.4-pro, gpt-5.3-codex to openai-native** — _by @ClineXDiego, updated 2026-04-23T21:09:13Z_
+- [#10350](https://github.com/cline/cline/pull/10350) **docs: add SDK documentation** — _by @saoudrizwan, updated 2026-04-23T20:37:01Z_
 - [#10377](https://github.com/cline/cline/pull/10377) **fix: expose Plan/Act mode as an accessible radio group** — _by @toby-bridges, updated 2026-04-23T17:48:44Z_
 - [#10376](https://github.com/cline/cline/pull/10376) **fix: prevent path traversal in ClineIgnoreController.validateAccess** — _by @JasonOA888, updated 2026-04-23T17:48:08Z_
-- [#10350](https://github.com/cline/cline/pull/10350) **docs: add SDK documentation** — _by @saoudrizwan, updated 2026-04-23T08:21:17Z_
 - [#10319](https://github.com/cline/cline/pull/10319) **fix: Model metadata fails to update when change model (#10248)** — _by @water-in-stone, updated 2026-04-23T07:51:42Z_
 - [#10369](https://github.com/cline/cline/pull/10369) **fix(ollama): strip data URI prefix from images for Ollama API compati…** — _by @alkul93123, updated 2026-04-23T07:29:25Z_
 - [#10367](https://github.com/cline/cline/pull/10367) **chore(deps): bump uuid from 11.1.0 to 14.0.0** — _by @dependabot[bot], updated 2026-04-23T03:41:22Z_
@@ -45,6 +46,8 @@ _None in window._
 
 ## Notable Issues
 
+- [#10379](https://github.com/cline/cline/issues/10379) **[Windows Specific] Cline: Resume task button is shown when user closes and reopens completed task when hooks are enabled** _[QA, VS Code, JetBrains, Bug]_ — _by @RajatNagoria_
+- [#10378](https://github.com/cline/cline/issues/10378) **Windows cmd Chinese output is garbled in Cline terminal/chat logs even with `chcp 65001`** — _by @lin2code_
 - [#10375](https://github.com/cline/cline/issues/10375) **Context window percentage display incorrectly caps at 32.8k** _[VS Code]_ — _by @Crashdoom_
 - [#10373](https://github.com/cline/cline/issues/10373) **Plugin no carga en PhpStorm (error Java) + Solicitud de soporte CLI** _[JetBrains]_ — _by @jonathanNttData_
 - [#4388](https://github.com/cline/cline/issues/4388) **Fix Checkpoint System Issues** _[P1, VS Code, Bot Responded]_ — _by @celestial-vault_
