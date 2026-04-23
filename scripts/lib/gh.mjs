@@ -8,6 +8,14 @@
 
 import { spawn } from "node:child_process";
 
+// ---------- API call counter (process-wide) ----------
+// Tracked so backfill / weekly drivers can stop before tripping the 5000/hr
+// REST rate limit. Anyone can read/reset via the exports below.
+
+let _apiCallCount = 0;
+export function getApiCallCount() { return _apiCallCount; }
+export function resetApiCallCount() { _apiCallCount = 0; }
+
 /**
  * Run `gh api <path>` and return parsed JSON.
  *
@@ -17,6 +25,7 @@ import { spawn } from "node:child_process";
  * @returns {Promise<any>}
  */
 export async function ghApi(path, opts = {}) {
+  _apiCallCount += 1;
   const args = ["api", "-H", "Accept: application/vnd.github+json"];
   if (opts.paginate) args.push("--paginate");
   args.push(path);
@@ -102,4 +111,62 @@ export async function fetchCommits(fullName, branch, sinceIso, untilIso) {
   const path = `/repos/${fullName}/commits?${params.toString()}`;
   const data = await ghApi(path);
   return Array.isArray(data) ? data : [];
+}
+
+// ---------- bounded variants (used by backfill / weekly) ----------
+//
+// The pulls / issues / releases endpoints don't all natively accept `until`.
+// For historical windows we just fetch and filter client-side using updated_at
+// (PRs/issues) or published_at (releases). Pagination is bounded — for any
+// single 24h window the volume is well under one page for the repos we track.
+
+/** Issues updated strictly within [sinceIso, untilIso]. Excludes PRs. */
+export async function fetchIssuesBounded(fullName, sinceIso, untilIso) {
+  const path = `/repos/${fullName}/issues?since=${encodeURIComponent(sinceIso)}&state=all&per_page=100&sort=updated&direction=desc`;
+  const data = await ghApi(path);
+  const since = new Date(sinceIso).getTime();
+  const until = new Date(untilIso).getTime();
+  return (Array.isArray(data) ? data : []).filter((i) => {
+    if (i.pull_request) return false;
+    const t = new Date(i.updated_at).getTime();
+    return t >= since && t <= until;
+  });
+}
+
+/** PRs updated strictly within [sinceIso, untilIso]. */
+export async function fetchPullsBounded(fullName, sinceIso, untilIso) {
+  // The pulls endpoint sorts by updated desc; we walk pages until older than `since`.
+  const since = new Date(sinceIso).getTime();
+  const until = new Date(untilIso).getTime();
+  const out = [];
+  for (let page = 1; page <= 5; page++) {
+    const path = `/repos/${fullName}/pulls?state=all&per_page=100&sort=updated&direction=desc&page=${page}`;
+    const data = await ghApi(path);
+    const arr = Array.isArray(data) ? data : [];
+    if (arr.length === 0) break;
+    let sawOlder = false;
+    for (const p of arr) {
+      const t = new Date(p.updated_at).getTime();
+      if (t < since) { sawOlder = true; continue; }
+      if (t > until) continue; // future of window
+      out.push(p);
+    }
+    if (sawOlder) break; // we've walked past the window
+    if (arr.length < 100) break;
+  }
+  return out;
+}
+
+/** Releases published strictly within [sinceIso, untilIso]. */
+export async function fetchReleasesBounded(fullName, sinceIso, untilIso) {
+  const path = `/repos/${fullName}/releases?per_page=30`;
+  const data = await ghApi(path);
+  const since = new Date(sinceIso).getTime();
+  const until = new Date(untilIso).getTime();
+  return (Array.isArray(data) ? data : []).filter((r) => {
+    const ts = r.published_at || r.created_at;
+    if (!ts) return false;
+    const t = new Date(ts).getTime();
+    return t >= since && t <= until;
+  });
 }
