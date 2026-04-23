@@ -6,21 +6,7 @@
 **Default branch:** `main`  
 **Source:** [github.com/cline/cline](https://github.com/cline/cline)
 
-## Daily summary
-
-> _LLM-generated. May contain errors — click through before acting._
-
-The headline today is a security pin: **#10365** lands `protobufjs` at 7.5.5 across all workspaces to remediate **CVE-2026-41242**, a critical arbitrary code execution vuln. `protobufjs` is a transitive dep (via `@grpc/proto-loader`) and was previously resolving to 7.5.4 / 7.5.2; the pin is enforced via npm `overrides`. Worth pulling immediately if you're on a recent Cline build.
-
-Also merged: **#10343** adds periodic memory logging to `cline-core` (a lightweight memory monitor for observability — useful background for anyone debugging long-session leaks), and **#10363** strips the demo gif from the README to reduce page weight.
-
-On the docs/SDK front, **#10350** (open) is significant: Saoud is publishing 27 Mintlify pages documenting the upcoming **Cline SDK** (`@clinebot/core`, `@clinebot/agents`, `@clinebot/llms`, `@clinebot/shared`) under a new top-level "SDK" tab. This is the first public surface area for the modular TypeScript framework that powers the CLI, VS Code extension, and JetBrains plugin — read this if you're tracking Cline's platform direction.
-
-Two notable bug fixes are in flight. **#10369** strips the `data:image/...;base64,` prefix before sending images to Ollama, fixing vision models (`qwen3-vl`, `llava`) that silently ignored images — directly addresses **#10368**. **#10319** fixes stale model pricing metadata when switching models via the "Recommended" or "NEW" chips in Settings (issue #10248), where users were seeing "Free" for paid models.
-
-New issues worth triaging: **#10370** reports Cline corrupting YAML files by truncating `metadata:` to `meta` during edits (3.80.0, VS Code) — looks like a serious diff/replace regression. **#10330** documents repeated empty-stream failures on AWS Bedrock that hit the 6-mistake limit, and **#10352** notes that duplicate `@file` references in a prompt freeze Cline.
-
-Housekeeping: dependabot opened bulk bumps for `uuid` 11→14 (#10367, #10364) and another npm_and_yarn group bump (#10366); the prior batch (#10305, #10299, #10300) was closed in favor of #10365's targeted pin. No releases shipped today.
+> _Deterministic template only — no LLM summary for this run._
 
 ## Releases
 
@@ -29,6 +15,7 @@ _None in window._
 
 ## Merged PRs
 
+- [#10374](https://github.com/cline/cline/pull/10374) **Do not show hardcoded new items** — _by @BarreiroT, merged 2026-04-23T18:52:03Z_
 - [#10343](https://github.com/cline/cline/pull/10343) **feat(memory-observability): add periodic memory logging to cline-core** — _by @mkondratek, merged 2026-04-23T04:34:52Z_
 - [#10365](https://github.com/cline/cline/pull/10365) **fix: pin protobufjs to 7.5.5 to address CVE-2026-41242** — _by @TheRealSpencer, merged 2026-04-23T03:22:32Z_
 - [#10363](https://github.com/cline/cline/pull/10363) **docs: remove demo video from README** — _by @saoudrizwan, merged 2026-04-23T01:46:17Z_
@@ -36,6 +23,8 @@ _None in window._
 
 ## Open PRs (new or updated)
 
+- [#10377](https://github.com/cline/cline/pull/10377) **fix: expose Plan/Act mode as an accessible radio group** — _by @toby-bridges, updated 2026-04-23T17:48:44Z_
+- [#10376](https://github.com/cline/cline/pull/10376) **fix: prevent path traversal in ClineIgnoreController.validateAccess** — _by @JasonOA888, updated 2026-04-23T17:48:08Z_
 - [#10350](https://github.com/cline/cline/pull/10350) **docs: add SDK documentation** — _by @saoudrizwan, updated 2026-04-23T08:21:17Z_
 - [#10319](https://github.com/cline/cline/pull/10319) **fix: Model metadata fails to update when change model (#10248)** — _by @water-in-stone, updated 2026-04-23T07:51:42Z_
 - [#10369](https://github.com/cline/cline/pull/10369) **fix(ollama): strip data URI prefix from images for Ollama API compati…** — _by @alkul93123, updated 2026-04-23T07:29:25Z_
@@ -56,6 +45,13 @@ _None in window._
 
 ## Notable Issues
 
+- [#10375](https://github.com/cline/cline/issues/10375) **Context window percentage display incorrectly caps at 32.8k** _[VS Code]_ — _by @Crashdoom_
+- [#10373](https://github.com/cline/cline/issues/10373) **Plugin no carga en PhpStorm (error Java) + Solicitud de soporte CLI** _[JetBrains]_ — _by @jonathanNttData_
+- [#4388](https://github.com/cline/cline/issues/4388) **Fix Checkpoint System Issues** _[P1, VS Code, Bot Responded]_ — _by @celestial-vault_
+- [#10372](https://github.com/cline/cline/issues/10372) **Missing Terminal setting on the left configuration side** _[VS Code]_ — _by @realyinchen_
+- [#4932](https://github.com/cline/cline/issues/4932) **[Accessibility] Screen reader users can't determine if they are in plan or act mode** _[Help Wanted, Good First Issue, Bot Responded]_ — _by @mforzano_
+- [#10371](https://github.com/cline/cline/issues/10371) **{"message":"Codex API error: Invalid 'input[67].id': 'v_3oaa-GI4TUz7IP--TI0A8'. Expected an ID that begins with 'rs'.","modelId":"gpt-5.3-codex","providerId":"openai-codex"}** _[VS Code]_ — _by @FoSGamers_
+- [#8273](https://github.com/cline/cline/issues/8273) **Cline sometimes deletes whole .git folder** _[P2, Investigation Needed, Needs User Input, VS Code, Bot Responded]_ — _by @ZizheRuan_
 - [#7753](https://github.com/cline/cline/issues/7753) **Cline Core fails to start on Android Studio Otter (2025.2.1) – “Healthcheck timed out”** _[JetBrains, Bot Responded]_ — _by @amanjha7096_ _(closed 2026-04-23T10:25:21Z)_
 - [#10208](https://github.com/cline/cline/issues/10208) **Stuck thinking for ever.** _[VS Code]_ — _by @Susanoo1337_
 - [#10370](https://github.com/cline/cline/issues/10370) **Cline removes "data:" on lines that contain "metadata:" on YAML files** _[VS Code]_ — _by @mperlinesfortes_
@@ -71,10 +67,11 @@ _None in window._
 
 ## Commits on `main`
 
+- [`852c65b`](https://github.com/cline/cline/commit/852c65b70c44f6d9e2c00b6154c3091da7da5a42) Do not show hardcoded new items (#10374) — _@BarreiroT_
 - [`70f0e8d`](https://github.com/cline/cline/commit/70f0e8d548329f72e4c70378c377847d1f5ce2ed) feat(memory-observability): add periodic memory logging to cline-core (#10343) — _@mkondratek_
 - [`5accd88`](https://github.com/cline/cline/commit/5accd88d731c2574660429fdc2fa8751b42d4add) fix: pin protobufjs to 7.5.5 to address CVE-2026-41242 (#10365) — _@TheRealSpencer_
 - [`5b29be6`](https://github.com/cline/cline/commit/5b29be63b890b1b83d671c08d8e64b9b3e6c0931) docs: remove demo video from README (#10363) — _@saoudrizwan_
 
 
 ---
-_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (LLM summary + deterministic detail)._
+_Generated by [oss-digest](https://github.com/Bojun-Vvibe/oss-digest) · v0.2 (deterministic template; no LLM for this run)._
