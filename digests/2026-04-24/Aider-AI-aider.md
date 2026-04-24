@@ -2,7 +2,7 @@
 
 > Pioneer terminal pair-programmer; slow but high-signal when it moves.
 
-**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z  
+**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
 **Default branch:** `main`  
 **Source:** [github.com/Aider-AI/aider](https://github.com/Aider-AI/aider)
 

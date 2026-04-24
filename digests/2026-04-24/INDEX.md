@@ -1,28 +1,28 @@
 # Daily digest — 2026-04-24
 
-**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z
+**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z
 
 Tracking 8 repos.
 
 | Repo | Releases | Merged PRs | New open PRs | Issues | Commits |
 | ---- | -------- | ---------- | ------------ | ------ | ------- |
-| [anomalyco/opencode](./anomalyco-opencode.md) | 2 | 21 | 59 | 75 | 34 |
-| [BerriAI/litellm](./BerriAI-litellm.md) | 2 | 22 | 56 | 24 | 48 |
-| [modelcontextprotocol/servers](./modelcontextprotocol-servers.md) | 0 | 0 | 19 | 5 | 0 |
-| [openai/codex](./openai-codex.md) | 3 | 34 | 62 | 69 | 52 |
-| [OpenHands/OpenHands](./OpenHands-OpenHands.md) | 0 | 9 | 28 | 11 | 9 |
-| [cline/cline](./cline-cline.md) | 0 | 1 | 11 | 19 | 1 |
+| [anomalyco/opencode](./anomalyco-opencode.md) | 1 | 19 | 54 | 69 | 38 |
+| [BerriAI/litellm](./BerriAI-litellm.md) | 3 | 22 | 58 | 28 | 50 |
+| [modelcontextprotocol/servers](./modelcontextprotocol-servers.md) | 0 | 0 | 18 | 5 | 0 |
+| [openai/codex](./openai-codex.md) | 3 | 33 | 60 | 71 | 47 |
+| [OpenHands/OpenHands](./OpenHands-OpenHands.md) | 0 | 9 | 28 | 12 | 9 |
+| [cline/cline](./cline-cline.md) | 0 | 1 | 13 | 16 | 1 |
 | [Aider-AI/aider](./Aider-AI-aider.md) | 0 | 0 | 0 | 0 | 8 |
 | [charmbracelet/crush](./charmbracelet-crush.md) | 1 | 1 | 8 | 7 | 4 |
 
 ## One-line summary per repo
 
-- [**anomalyco/opencode**](./anomalyco-opencode.md) — 21 PRs merged, 2 releases (v1.14.22), 59 new open PRs, 75 issues touched, 34 commits.
-- [**BerriAI/litellm**](./BerriAI-litellm.md) — 22 PRs merged, 2 releases (v1.83.12-nightly), 56 new open PRs, 24 issues touched, 48 commits.
-- [**modelcontextprotocol/servers**](./modelcontextprotocol-servers.md) — 0 PRs merged, 19 new open PRs, 5 issues touched.
-- [**openai/codex**](./openai-codex.md) — 34 PRs merged, 3 releases (rust-v0.124.0), 62 new open PRs, 69 issues touched, 52 commits.
-- [**OpenHands/OpenHands**](./OpenHands-OpenHands.md) — 9 PRs merged, 28 new open PRs, 11 issues touched, 9 commits.
-- [**cline/cline**](./cline-cline.md) — 1 PR merged, 11 new open PRs, 19 issues touched, 1 commit.
+- [**anomalyco/opencode**](./anomalyco-opencode.md) — 19 PRs merged, 1 release (v1.14.22), 54 new open PRs, 69 issues touched, 38 commits.
+- [**BerriAI/litellm**](./BerriAI-litellm.md) — 22 PRs merged, 3 releases (v1.83.13-nightly), 58 new open PRs, 28 issues touched, 50 commits.
+- [**modelcontextprotocol/servers**](./modelcontextprotocol-servers.md) — 0 PRs merged, 18 new open PRs, 5 issues touched.
+- [**openai/codex**](./openai-codex.md) — 33 PRs merged, 3 releases (rust-v0.125.0-alpha.1), 60 new open PRs, 71 issues touched, 47 commits.
+- [**OpenHands/OpenHands**](./OpenHands-OpenHands.md) — 9 PRs merged, 28 new open PRs, 12 issues touched, 9 commits.
+- [**cline/cline**](./cline-cline.md) — 1 PR merged, 13 new open PRs, 16 issues touched, 1 commit.
 - [**Aider-AI/aider**](./Aider-AI-aider.md) — 0 PRs merged, 8 commits.
 - [**charmbracelet/crush**](./charmbracelet-crush.md) — 1 PR merged, 1 release (nightly), 8 new open PRs, 7 issues touched, 4 commits.
 

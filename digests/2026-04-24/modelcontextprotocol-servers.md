@@ -2,7 +2,7 @@
 
 > Reference MCP server implementations; canonical examples for the protocol.
 
-**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z  
+**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
 **Default branch:** `main`  
 **Source:** [github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)
 
@@ -20,6 +20,8 @@ _None in window._
 
 ## Open PRs (new or updated)
 
+- [#3970](https://github.com/modelcontextprotocol/servers/pull/3970) **fix(filesystem): preserve CLI directories when MCP roots are available** — _by @Christian-Sidak, updated 2026-04-24T05:35:25Z_
+- [#3969](https://github.com/modelcontextprotocol/servers/pull/3969) **Fix release script skipping version bump for lockfile-only changes** — _by @Christian-Sidak, updated 2026-04-24T05:35:25Z_
 - [#4004](https://github.com/modelcontextprotocol/servers/pull/4004) **fix(filesystem): add description fields to tool input schemas (closes #3984)** — _by @Jim1874, updated 2026-04-24T02:39:52Z_
 - [#4003](https://github.com/modelcontextprotocol/servers/pull/4003) **fix(filesystem): fix move_file outputSchema to return array (closes #3093)** — _by @Jim1874, updated 2026-04-24T02:37:09Z_
 - [#3921](https://github.com/modelcontextprotocol/servers/pull/3921) **Fix isPathWithinAllowedDirectories for UNC paths on Windows** — _by @Christian-Sidak, updated 2026-04-24T02:00:32Z_
@@ -36,9 +38,6 @@ _None in window._
 - [#4027](https://github.com/modelcontextprotocol/servers/pull/4027) **Add REG-Vault (retro-gaming metadata + MCP)** — _by @rtissera, updated 2026-04-23T09:50:21Z_
 - [#4025](https://github.com/modelcontextprotocol/servers/pull/4025) **feat(filesystem): add head/tail support to read_multiple_files** — _by @factspark23-hash, updated 2026-04-23T06:54:34Z_
 - [#4024](https://github.com/modelcontextprotocol/servers/pull/4024) **feat(filesystem): add compare_files tool for file diff comparison** — _by @factspark23-hash, updated 2026-04-23T06:54:14Z_
-- [#4023](https://github.com/modelcontextprotocol/servers/pull/4023) **feat(filesystem): add maxDepth parameter to directory_tree** — _by @factspark23-hash, updated 2026-04-23T06:54:03Z_
-- [#4021](https://github.com/modelcontextprotocol/servers/pull/4021) **fix(everything): add description to get-resource-reference resourceType** — _by @Will-hxw, updated 2026-04-23T04:42:04Z_
-- [#4017](https://github.com/modelcontextprotocol/servers/pull/4017) **fix(filesystem): add optional depth parameter to list_directory** — _by @Will-hxw, updated 2026-04-23T04:40:42Z_
 
 
 ## Notable Issues

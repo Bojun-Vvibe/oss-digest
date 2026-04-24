@@ -2,7 +2,7 @@
 
 > LLM gateway / proxy that powers most of our local agent stack.
 
-**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z  
+**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
 **Default branch:** `litellm_internal_staging`  
 **Source:** [github.com/BerriAI/litellm](https://github.com/BerriAI/litellm)
 
@@ -10,6 +10,18 @@
 
 ## Releases
 
+- **[v1.83.13-nightly](https://github.com/BerriAI/litellm/releases/tag/v1.83.13-nightly)** — v1.83.13-nightly _by @github-actions[bot] at 2026-04-24T05:47:31Z_
+  > ## Verify Docker Image Signature
+  > 
+  > All LiteLLM Docker images are signed with [cosign](https://docs.sigstore.dev/cosign/overview/). Every release is signed with the same key introduced in [commit `0112e53`](https://github.com/BerriAI/litellm/commit/0112e53046018d726492c814b3644b7d376029d0).
+  > 
+  > **Verify using the pinned commit hash (recommended):**
+  > 
+  > A commit hash is cryptographically immutable, so this is the strongest way to ensure you are using the original signing key:
+  > 
+  > ```bash
+  > cosign verify \
+  >   -…
 - **[v1.83.12-nightly](https://github.com/BerriAI/litellm/releases/tag/v1.83.12-nightly)** — v1.83.12-nightly _by @github-actions[bot] at 2026-04-23T23:29:45Z_
   > ## Verify Docker Image Signature
   > 
@@ -38,6 +50,9 @@
 
 ## Merged PRs
 
+- [#26068](https://github.com/BerriAI/litellm/pull/26068) **feat(ocr): add Reducto parse OCR support** — _by @marutilai, merged 2026-04-24T05:16:45Z_
+- [#26367](https://github.com/BerriAI/litellm/pull/26367) **Split MCP routes into inference vs management (unblock Admin UI on DISABLE_LLM_API_ENDPOINTS nodes)** — _by @ryan-crabbe-berri, merged 2026-04-24T05:05:49Z_
+- [#25855](https://github.com/BerriAI/litellm/pull/25855) **fix(bedrock): preserve cache_control TTL on tools for Claude 4.5+** — _by @shubham-arora-clear, merged 2026-04-24T04:54:27Z_
 - [#26381](https://github.com/BerriAI/litellm/pull/26381) **merge main** — _by @Sameerlite, merged 2026-04-24T03:52:28Z_
 - [#26379](https://github.com/BerriAI/litellm/pull/26379) **merge main** — _by @Sameerlite, merged 2026-04-24T03:38:46Z_
 - [#26356](https://github.com/BerriAI/litellm/pull/26356) **[Infra] Remove CCI/GHA test duplication and semantically shard proxy DB tests** — _by @yuneng-berri, merged 2026-04-24T01:17:56Z_
@@ -57,13 +72,23 @@
 - [#26345](https://github.com/BerriAI/litellm/pull/26345) **feat: add gpt-5.5 to model cost map** — _by @mateo-berri, merged 2026-04-23T21:05:23Z_
 - [#26336](https://github.com/BerriAI/litellm/pull/26336) **[IInfra] Merge dev branch** — _by @yuneng-berri, merged 2026-04-23T19:02:48Z_
 - [#23971](https://github.com/BerriAI/litellm/pull/23971) **fix(bedrock): preserve output_config.effort for Claude 4.6 on Invoke API** — _by @KevinZhao, merged 2026-04-23T18:41:03Z_
-- [#26293](https://github.com/BerriAI/litellm/pull/26293) **[Fix] Image edit endpoints: enforce multipart-only file inputs** — _by @yuneng-berri, merged 2026-04-23T16:42:04Z_
-- [#26286](https://github.com/BerriAI/litellm/pull/26286) **[Infra] CCI: cache, cleanup, anchors, install-path parity, Python 3.12, Ruby/Node pins** — _by @yuneng-berri, merged 2026-04-23T16:39:06Z_
-- [#26300](https://github.com/BerriAI/litellm/pull/26300) **Litellm oss staging 04 22 2026** — _by @krrish-berri-2, merged 2026-04-23T13:23:58Z_
 
 
 ## Open PRs (new or updated)
 
+- [#26394](https://github.com/BerriAI/litellm/pull/26394) **docs(guardrails): add during_call mode to Model Armor guardrail docs** — _by @wadhah101, updated 2026-04-24T06:51:07Z_
+- [#26393](https://github.com/BerriAI/litellm/pull/26393) **feat: bedrock guardrail input roles filter** — _by @orolega, updated 2026-04-24T06:36:35Z_
+- [#26391](https://github.com/BerriAI/litellm/pull/26391) **feat(pricing): gemini-embedding-2 GA cost map, blog, and test** — _by @Sameerlite, updated 2026-04-24T06:30:21Z_
+- [#26390](https://github.com/BerriAI/litellm/pull/26390) **[Fix] Guardrail param handling in list and submission endpoints** — _by @yuneng-berri, updated 2026-04-24T06:16:31Z_
+- [#26388](https://github.com/BerriAI/litellm/pull/26388) **fix: bedrock guardrail sse streaming exception** — _by @orolega, updated 2026-04-24T05:58:24Z_
+- [#26218](https://github.com/BerriAI/litellm/pull/26218) **feat(proxy): add /v1/memory CRUD endpoints** — _by @krrish-berri-2, updated 2026-04-24T05:58:04Z_
+- [#26216](https://github.com/BerriAI/litellm/pull/26216) **Litellm oss staging 04 21 2026** — _by @krrish-berri-2, updated 2026-04-24T05:29:09Z_
+- [#24986](https://github.com/BerriAI/litellm/pull/24986) **fix(mcp): preserve non-MCP tools in semantic filter** — _by @klhq, updated 2026-04-24T05:21:32Z_
+- [#26362](https://github.com/BerriAI/litellm/pull/26362) **[Fix] Tests - Proxy: Isolate master_key/prisma_client module globals between tests** — _by @yuneng-berri, updated 2026-04-24T05:11:26Z_
+- [#26383](https://github.com/BerriAI/litellm/pull/26383) **fix: prevent Azure output_config leakage** — _by @kime541200, updated 2026-04-24T04:58:20Z_
+- [#26386](https://github.com/BerriAI/litellm/pull/26386) **litellm oss branch** — _by @krrish-berri-2, updated 2026-04-24T05:03:26Z_
+- [#26385](https://github.com/BerriAI/litellm/pull/26385) **fix: remove duplicate MAX_SIZE_PER_ITEM_IN_MEMORY_CACHE_IN_KB definition** — _by @Jah-yee, updated 2026-04-24T04:56:42Z_
+- [#23586](https://github.com/BerriAI/litellm/pull/23586) **fix: convert datetime to ISO string for PostgreSQL timestamp compatibility** — _by @Jah-yee, updated 2026-04-24T04:47:07Z_
 - [#25202](https://github.com/BerriAI/litellm/pull/25202) **fix(bedrock): trigger websearch_interception agentic loop for /chat/completions** — _by @nishchay-veer, updated 2026-04-24T04:23:21Z_
 - [#26382](https://github.com/BerriAI/litellm/pull/26382) **Move 'Store Prompts in Spend Logs' toggle to Admin Settings** — _by @ryan-crabbe-berri, updated 2026-04-24T04:06:44Z_
 - [#26331](https://github.com/BerriAI/litellm/pull/26331) **feat(openai): add gpt-image-2 to model prices** — _by @Kcstring, updated 2026-04-24T03:59:05Z_
@@ -78,10 +103,8 @@
 - [#26360](https://github.com/BerriAI/litellm/pull/26360) **feat(guardrails): LLM-as-a-Judge guardrail** — _by @ishaan-berri, updated 2026-04-24T03:09:37Z_
 - [#26377](https://github.com/BerriAI/litellm/pull/26377) **fix(team_endpoints): auto-add SSO team members to org on move (proxy admin only)** — _by @ishaan-berri, updated 2026-04-24T03:05:58Z_
 - [#26202](https://github.com/BerriAI/litellm/pull/26202) **[WIP] Litellm token verification query opt** — _by @harish-berri, updated 2026-04-24T01:50:49Z_
-- [#26362](https://github.com/BerriAI/litellm/pull/26362) **[Fix] Tests - Proxy: Isolate master_key/prisma_client module globals between tests** — _by @yuneng-berri, updated 2026-04-24T01:21:39Z_
 - [#26279](https://github.com/BerriAI/litellm/pull/26279) **fix(auth): centralize common_checks to close authorization bypass** — _by @stuxf, updated 2026-04-24T01:06:27Z_
 - [#26374](https://github.com/BerriAI/litellm/pull/26374) _(draft)_ **[WIP] fix(mcp): do not prefix tool names when listing via scoped /mcp/{server_name} endpoint for stdio servers (#22670)** — _by @mateo-berri, updated 2026-04-24T00:47:14Z_
-- [#26367](https://github.com/BerriAI/litellm/pull/26367) **Split MCP routes into inference vs management (unblock Admin UI on DISABLE_LLM_API_ENDPOINTS nodes)** — _by @ryan-crabbe-berri, updated 2026-04-24T00:44:32Z_
 - [#25534](https://github.com/BerriAI/litellm/pull/25534) **chore(deps): bump pypdf from 6.9.2 to 6.10.0** — _by @dependabot[bot], updated 2026-04-24T00:42:19Z_
 - [#26365](https://github.com/BerriAI/litellm/pull/26365) **chore(deps): bump vulnerable dependencies** — _by @stuxf, updated 2026-04-24T00:41:12Z_
 - [#26373](https://github.com/BerriAI/litellm/pull/26373) _(draft)_ **[WIP] fix(azure): propagate llm_provider- response headers on Responses API (#15232)** — _by @mateo-berri, updated 2026-04-24T00:37:57Z_
@@ -100,7 +123,6 @@
 - [#26361](https://github.com/BerriAI/litellm/pull/26361) **feat: add azure/gpt-5.5 to model cost map (mirror openai gpt-5.5 pricing)** — _by @mateo-berri, updated 2026-04-23T22:35:53Z_
 - [#25964](https://github.com/BerriAI/litellm/pull/25964) **fix: degrade gracefully when RedisSemanticCache init fails instead of crashing proxy** — _by @VANDRANKI, updated 2026-04-23T21:49:52Z_
 - [#26354](https://github.com/BerriAI/litellm/pull/26354) **fix: remove duplicate typing import and apply three bug fixes** — _by @Jah-yee, updated 2026-04-23T21:44:57Z_
-- [#26350](https://github.com/BerriAI/litellm/pull/26350) **fix: three bugs in litellm/constants.py** — _by @Jah-yee, updated 2026-04-23T21:28:16Z_
 - [#26341](https://github.com/BerriAI/litellm/pull/26341) **docs: add NoPII compatible-endpoint provider page** — _by @evdevlead, updated 2026-04-23T20:29:14Z_
 - [#26262](https://github.com/BerriAI/litellm/pull/26262) **fix(proxy): invoke post-call guardrails on pass-through endpoint responses (#20270)** — _by @tuhinspatra, updated 2026-04-23T20:12:56Z_
 - [#26263](https://github.com/BerriAI/litellm/pull/26263) **Fix: Key/Team router_settings routing_strategy not applied on requests** — _by @hiimluck3r, updated 2026-04-23T19:50:50Z_
@@ -108,22 +130,19 @@
 - [#25520](https://github.com/BerriAI/litellm/pull/25520) **fix(together_ai): support reasoning_effort for gpt-oss models** — _by @jeanibarz, updated 2026-04-23T19:33:52Z_
 - [#25454](https://github.com/BerriAI/litellm/pull/25454) **fix(router): use correct metadata key in run_async_fallback for Responses API** — _by @jeanibarz, updated 2026-04-23T19:32:14Z_
 - [#26344](https://github.com/BerriAI/litellm/pull/26344) **fix(azure_ai): map max_completion_tokens to max_tokens for Model Inference endpoint** — _by @jeanibarz, updated 2026-04-23T19:23:26Z_
-- [#25923](https://github.com/BerriAI/litellm/pull/25923) **feat(chatgpt, github_[redacted]): OAuth sign-in + token refresh in proxy UI** — _by @jmcook, updated 2026-04-23T19:07:38Z_
+- [#25923](https://github.com/BerriAI/litellm/pull/25923) **feat(chatgpt, github_[redacted-product]): OAuth sign-in + token refresh in proxy UI** — _by @jmcook, updated 2026-04-23T19:07:38Z_
 - [#26278](https://github.com/BerriAI/litellm/pull/26278) **[Fix] Extend request body param controls to cover cloud provider identity fields** — _by @yuneng-berri, updated 2026-04-23T19:02:50Z_
 - [#26340](https://github.com/BerriAI/litellm/pull/26340) **fix(key_management): enforce upperbound_key_generate_params on /key/regenerate** — _by @michelligabriele, updated 2026-04-23T18:57:09Z_
-- [#26216](https://github.com/BerriAI/litellm/pull/26216) **Litellm oss staging 04 21 2026** — _by @krrish-berri-2, updated 2026-04-23T18:54:20Z_
 - [#25353](https://github.com/BerriAI/litellm/pull/25353) **Add LTX Video API support** — _by @matt-greathouse, updated 2026-04-23T18:26:22Z_
-- [#26068](https://github.com/BerriAI/litellm/pull/26068) **feat(ocr): add Reducto parse OCR support** — _by @marutilai, updated 2026-04-23T18:20:42Z_
-- [#26218](https://github.com/BerriAI/litellm/pull/26218) **feat(proxy): add /v1/memory CRUD endpoints** — _by @krrish-berri-2, updated 2026-04-23T18:19:37Z_
-- [#26285](https://github.com/BerriAI/litellm/pull/26285) **fix(anthropic): preserve reasoning content and add think-tag regression coverage** — _by @malafronte, updated 2026-04-23T17:57:14Z_
-- [#26128](https://github.com/BerriAI/litellm/pull/26128) **Add Openrouter Gemini 3 Image Entries** — _by @matt-greathouse, updated 2026-04-23T17:46:15Z_
-- [#24986](https://github.com/BerriAI/litellm/pull/24986) **fix(mcp): preserve non-MCP tools in semantic filter** — _by @klhq, updated 2026-04-23T17:42:16Z_
-- [#26129](https://github.com/BerriAI/litellm/pull/26129) **Add Openrouter Gemma 4 Entries** — _by @matt-greathouse, updated 2026-04-23T14:05:36Z_
-- [#26329](https://github.com/BerriAI/litellm/pull/26329) **fix(proxy): avoid blocking event loop by killing engine instead of disconnecting** — _by @dschulmeist, updated 2026-04-23T13:50:31Z_
 
 
 ## Closed PRs (not merged)
 
+- [#26206](https://github.com/BerriAI/litellm/pull/26206) **chore: internal aggregate research (closed)** — _by @EaCognitive, closed 2026-04-22T23:20:59Z_
+- [#26089](https://github.com/BerriAI/litellm/pull/26089) **fix(proxy): paginate reset_budget_windows scans** — _by @jibanez-staticduo, closed 2026-04-24T05:03:19Z_
+- [#26085](https://github.com/BerriAI/litellm/pull/26085) **fix(proxy): avoid invalid Prisma JsonFilter in reset_budget_windows** — _by @jibanez-staticduo, closed 2026-04-24T05:03:07Z_
+- [#26384](https://github.com/BerriAI/litellm/pull/26384) **fix: three bugs in litellm/constants.py** — _by @Jah-yee, closed 2026-04-24T04:45:09Z_
+- [#26350](https://github.com/BerriAI/litellm/pull/26350) **fix: three bugs in litellm/constants.py** — _by @Jah-yee, closed 2026-04-24T04:44:19Z_
 - [#5068](https://github.com/BerriAI/litellm/pull/5068) **fix: PII output parsing for multiple entities of same type** — _by @kaiwend, closed 2025-07-30T00:04:06Z_
 - [#26368](https://github.com/BerriAI/litellm/pull/26368) **fix(team_endpoints): auto-add SSO team members to org on move (proxy admin only)** — _by @ishaan-berri, closed 2026-04-24T01:34:49Z_
 - [#25123](https://github.com/BerriAI/litellm/pull/25123) **security: move Gemini API keys from URL to header (v1.81.3 backport)** — _by @stuxf, closed 2026-04-24T00:59:49Z_
@@ -139,17 +158,15 @@
 - [#26347](https://github.com/BerriAI/litellm/pull/26347) **fix: three bugs in litellm/constants.py** — _by @Jah-yee, closed 2026-04-23T21:22:02Z_
 - [#26352](https://github.com/BerriAI/litellm/pull/26352) **feat: add Telnyx as OpenAI-compatible provider** — _by @gbattistel, closed 2026-04-23T21:32:07Z_
 - [#26123](https://github.com/BerriAI/litellm/pull/26123) **fix: merge server_side_tool_invocations by id in stream_chunk_builder** — _by @nileshpatil6, closed 2026-04-20T19:26:20Z_
-- [#26337](https://github.com/BerriAI/litellm/pull/26337) **docs: add NoPII compatible-endpoint provider page** — _by @evdevlead, closed 2026-04-23T18:08:54Z_
-- [#17293](https://github.com/BerriAI/litellm/pull/17293) **fix: wildcard model expansion (openai)** — _by @changchiyou, closed 2026-04-23T17:16:49Z_
-- [#26215](https://github.com/BerriAI/litellm/pull/26215) **fix(proxy): single-instance _ProxyDBLogger + guard Noma v2 payload build against concurrent mutation** — _by @bse-ai, closed 2026-04-23T16:58:48Z_
-- [#25787](https://github.com/BerriAI/litellm/pull/25787) **fix(streaming): replace per-chunk asyncio.to_thread with queue-based wrapper for Bedrock sync streams** — _by @bse-ai, closed 2026-04-23T16:58:27Z_
-- [#25786](https://github.com/BerriAI/litellm/pull/25786) **fix(noma-v2): use safe_deep_copy to fix post_call/during_call 500 crash** — _by @bse-ai, closed 2026-04-23T16:58:00Z_
-- [#26314](https://github.com/BerriAI/litellm/pull/26314) **[Fix] Image edit: reject string values for file parameters** — _by @yuneng-berri, closed 2026-04-23T16:41:56Z_
-- [#26332](https://github.com/BerriAI/litellm/pull/26332) **fix(responses): hardcode "response" object literal in Chat Completions bridge** — _by @truffle-dev, closed 2026-04-23T15:04:38Z_
 
 
 ## Notable Issues
 
+- [#26396](https://github.com/BerriAI/litellm/issues/26396) **[Bug]: verbose_logger level not set when LITELLM_LOG=INFO, causing INFO logs to be suppressed** _[bug]_ — _by @yuansheng-wzw_
+- [#26395](https://github.com/BerriAI/litellm/issues/26395) **[Bug]: DeepSeek V4 Pro (deepseek-v4-pro) fails in multi-turn conversations - reasoning_content stripped from assistant messages** _[llm translation]_ — _by @anjun_
+- [#26392](https://github.com/BerriAI/litellm/issues/26392) **[Feature]:  Add experimental_guardrail_input_roles to BedrockGuardrail to filter messages by role before INPUT validation** _[enhancement, proxy, llm translation]_ — _by @orolega_
+- [#26389](https://github.com/BerriAI/litellm/issues/26389) **[Bug]: WebSearch Interception follow-up request ignores custom `api_base` / `api_key`, causing 401 and deployment cooldown cascade** _[bug, proxy, llm translation]_ — _by @jesset_
+- [#26387](https://github.com/BerriAI/litellm/issues/26387) **[Bug]: BedrockGuardrail streaming hook drops HTTPException after HTTP 200, producing broken SSE stream** _[bug, proxy, llm translation]_ — _by @orolega_
 - [#25191](https://github.com/BerriAI/litellm/issues/25191) **[Bug]: websearch_interception agentic loop not triggered for Bedrock via /chat/completions** _[bug]_ — _by @dtometzki_
 - [#26378](https://github.com/BerriAI/litellm/issues/26378) **[Bug]: Team member rpm limit is not enforced** _[bug, proxy]_ — _by @LeeTeng2001_
 - [#19174](https://github.com/BerriAI/litellm/issues/19174) **[Bug]: Embedding busted on 1.80.11** _[bug, proxy]_ — _by @frenzybiscuit_ _(closed 2026-01-30T11:31:58Z)_
@@ -173,14 +190,15 @@
 - [#19637](https://github.com/BerriAI/litellm/issues/19637) **[Bug]: Content filter guardrails not working.** _[bug, stale]_ — _by @shivamrawat1_
 - [#19641](https://github.com/BerriAI/litellm/issues/19641) **[Bug]: Content categories not visible in the UI after creation** _[bug, stale]_ — _by @shivamrawat1_
 - [#19651](https://github.com/BerriAI/litellm/issues/19651) **[Bug]: Custom SSO Handler does not get called anymore** _[bug, stale, ui-dashboard]_ — _by @metalshanked_
-- [#25926](https://github.com/BerriAI/litellm/issues/25926) **Vertex AI multi-region endpoints (us/eu) not supported — wrong base URL constructed** _[llm translation]_ — _by @elvis-cai_ _(closed 2026-04-23T22:58:04Z)_
 
 
 ## Commits on `litellm_internal_staging`
 
+- [`0992bf2`](https://github.com/BerriAI/litellm/commit/0992bf22715cb6aaee8f10b8c8a03bf2f5c4cd17) Merge pull request #26367 from BerriAI/litellm_/split-mcp-routes-management-vs-inference — _@ryan-crabbe-berri_
 - [`8e652d1`](https://github.com/BerriAI/litellm/commit/8e652d129d6a3536359212e4f0c41319638234ad) Merge pull request #26356 from BerriAI/litellm_cci_gha_dedup_and_shard — _@shin-berri_
 - [`654b688`](https://github.com/BerriAI/litellm/commit/654b688c8f6cdeac2020308fd2fa3f669def7e5b) Merge pull request #25746 from BerriAI/litellm_vector-store-team-byok-model-none — _@yuneng-berri_
 - [`e982fe8`](https://github.com/BerriAI/litellm/commit/e982fe85e93056d9b4597b236c36c715581d9b68) Merge branch 'litellm_internal_staging' into litellm_vector-store-team-byok-model-none — _@shivamrawat1_
+- [`35eef7d`](https://github.com/BerriAI/litellm/commit/35eef7d92ca244cfa9329d8083da36d9c108945f) chore: apply black formatting to _types.py management_routes block — _@ryan-crabbe-berri_
 - [`812044a`](https://github.com/BerriAI/litellm/commit/812044a80505f3eb1d8f5d3a5fa8f14efa1276cc) rerun tests — _@shivamrawat1_
 - [`b217ad4`](https://github.com/BerriAI/litellm/commit/b217ad44d315cfa046569addac5bf729011f0a98) rerun tests — _@shivamrawat1_
 - [`1f6ce45`](https://github.com/BerriAI/litellm/commit/1f6ce457028f067f237e467dff2fc916ff55278b) Merge pull request #26370 from BerriAI/litellm_version_bump — _@yuneng-berri_
@@ -189,6 +207,7 @@
 - [`fbaedc3`](https://github.com/BerriAI/litellm/commit/fbaedc36dcdd72fca9ac2379f53fa015d394b000) revert TeamInfo budget reset display changes — _@ryan-crabbe-berri_
 - [`ffaeff5`](https://github.com/BerriAI/litellm/commit/ffaeff54cd8ad8eaf54c797a5af1c456707e6861) add uv — _@yuneng-berri_
 - [`29e30d9`](https://github.com/BerriAI/litellm/commit/29e30d9ddbfbc276b11e23965f9836ecfb7917d0) bump: version 1.83.12 → 1.83.13 — _@yuneng-berri_
+- [`4d2acaf`](https://github.com/BerriAI/litellm/commit/4d2acafa43cdb94d07c01fbb1d61b11a076f9dd1) Split MCP routes into inference vs management categories — _@ryan-crabbe-berri_
 - [`ea626d9`](https://github.com/BerriAI/litellm/commit/ea626d9fb86c01c3a4aa80fbec810f3d54ed9a9d) Merge remote-tracking branch 'origin/litellm_internal_staging' into litellm_team_member_total_spend_frontend — _@ryan-crabbe-berri_
 - [`87e120d`](https://github.com/BerriAI/litellm/commit/87e120d9589ce3697fefd7520e3e893716a21173) Merge pull request #26346 from BerriAI/litellm_reset_budget_is_not_null — _@yuneng-berri_
 - [`66bf890`](https://github.com/BerriAI/litellm/commit/66bf890226e56d14549c43757833b5fd808f28bf) [Infra] Stop attaching push-only postgres workflows to a GHA environment — _@yuneng-berri_
@@ -225,7 +244,6 @@
 - [`2e3a4bb`](https://github.com/BerriAI/litellm/commit/2e3a4bb27a27f875f303b8b66abd26dfad86c155) Fix black — _@Sameerlite_
 - [`e3440ba`](https://github.com/BerriAI/litellm/commit/e3440baa0c8bc15b7f79e469e654f4d17b476a1e) Merge pull request #25767 from vinhphamhuu-ct/main — _@Sameerlite_
 - [`1385d46`](https://github.com/BerriAI/litellm/commit/1385d46e9974a7ac59843421682268bacde06918) FIx mypy issues — _@Sameerlite_
-- [`03a0224`](https://github.com/BerriAI/litellm/commit/03a022436b70d611e6f70abe6e405c5e3f46fbbd) [Infra] CCI: run RVM install from its own checkout dir — _@yuneng-berri_
 
 
 ---

@@ -2,7 +2,7 @@
 
 > VS Code-native autonomous coding agent; another adjacent ecosystem signal.
 
-**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z  
+**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
 **Default branch:** `main`  
 **Source:** [github.com/cline/cline](https://github.com/cline/cline)
 
@@ -20,6 +20,8 @@ _None in window._
 
 ## Open PRs (new or updated)
 
+- [#10385](https://github.com/cline/cline/pull/10385) **fix(claude-code): handle CLI v2.1+ result chunks and error_max_turns** — _by @DanMarshall909, updated 2026-04-24T06:10:21Z_
+- [#10386](https://github.com/cline/cline/pull/10386) **fix: preserve multiline thinking blocks** — _by @toby-bridges, updated 2026-04-24T05:42:05Z_
 - [#10376](https://github.com/cline/cline/pull/10376) **fix: prevent path traversal in ClineIgnoreController.validateAccess** — _by @JasonOA888, updated 2026-04-24T04:17:29Z_
 - [#10384](https://github.com/cline/cline/pull/10384) **fix: cap retry-after delay to prevent silent multi-hour hangs** — _by @NgoQuocViet2001, updated 2026-04-24T04:09:38Z_
 - [#10383](https://github.com/cline/cline/pull/10383) **Use env for github inputs in the publish workflow** — _by @BarreiroT, updated 2026-04-24T02:15:01Z_
@@ -58,9 +60,6 @@ _None in window._
 - [#10370](https://github.com/cline/cline/issues/10370) **Cline removes "data:" on lines that contain "metadata:" on YAML files** _[VS Code]_ — _by @mperlinesfortes_
 - [#9522](https://github.com/cline/cline/issues/9522) **OpenRouter Provider gives me a Error 401** _[CLI]_ — _by @HEIN390_ _(closed 2026-02-26T22:15:10Z)_
 - [#10368](https://github.com/cline/cline/issues/10368) **Bug: Ollama vision models fail to process images due to incorrect Base64 format** _[VS Code]_ — _by @alkul93123_
-- [#10330](https://github.com/cline/cline/issues/10330) **Model stream repeatedly ends without producing output when using AWS Bedrock — hits consecutive mistake limit** _[VS Code]_ — _by @shubhamgowdaa_
-- [#10135](https://github.com/cline/cline/issues/10135) **Claude Code API Provider: Command failed with exit code 1 for all sonnet models** _[JetBrains]_ — _by @emrul_
-- [#10035](https://github.com/cline/cline/issues/10035) **Save/Reject buttons become disabled on second file during multi-file edit approval** _[JetBrains, P3]_ — _by @AlexeySa_
 
 
 ## Commits on `main`
