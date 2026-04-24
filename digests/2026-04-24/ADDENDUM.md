@@ -372,3 +372,77 @@ A high-density window: codex took **six new issues** (#19381, #19382, #19383, #1
 6. **codex hooks just landed on Windows (#17478)** and immediately got a UX request (#19383) to make them quieter. The platform pattern is consistent: hook capability lands, then the quality-of-life polish takes another release cycle.
 
 Next refresh after the next dispatcher tick.
+
+---
+
+# Daily addendum — 2026-04-24 (refresh @ 16:09Z)
+
+**Window since last addendum:** 2026-04-24T15:28Z → 2026-04-24T16:09Z (≈41m)
+
+This refresh covers the ~40 minutes after the 15:28Z snapshot. The signal is concentrated in two places: a five-PR codex burst that *all* touch the permissions/profile surface, and a litellm afternoon cluster that mixes multi-PR provider fixes with the still-running `merge main` cadence.
+
+### codex: a five-PR permissions/profile refactor lands as a single train
+
+Five PRs opened within the same minute (16:05Z) by the same author against the same surface, in dependency order:
+
+- [openai/codex#19391] — "permissions: make runtime config profile-backed."
+- [openai/codex#19392] — "permissions: derive compatibility policies from profiles."
+- [openai/codex#19393] — "permissions: migrate approval and sandbox consumers to profiles."
+- [openai/codex#19394] — "permissions: remove core legacy policy round trips."
+- [openai/codex#19395] — "permissions: finish profile-backed app surfaces."
+
+This is the structural answer to a week's worth of issues against this surface: #19256 (`/permissions` changes do not propagate to active session, just closed at 15:48Z), #19384 ("full access permissions lower than auto-review", filed 14:56Z), and the long tail back through #19362/#19363 (state-survives-presentation cluster). The shape of the train is significant: rather than land one mega-PR, the author has split the migration into five reviewable hops. That is the exact opposite shape of the litellm `merge main` cadence — staged, dependency-ordered, named — and it suggests codex now treats the permissions surface as load-bearing enough to deserve a refactor train rather than another point fix. Worth tracking how many of the five actually merge in order; refactor trains routinely lose their last car when the head merges and the tail conflicts with mainline.
+
+- [openai/codex#19389] — "Guard npm update prompt on registry readiness." Opened 15:53Z. The npm update prompt currently fires before the registry has confirmed the user's installed version is even visible to the npm side, leading to spurious "update available" prompts on freshly-installed CLIs. Pairs with #19335 (the AMFI-killed `0.125.0-alpha.1` from the morning): that release is *npm-visible* but un-launchable, so any user prompted to "update" to it would be downgraded to a broken state. The guard PR is filed 18 hours after #19335 was closed; the connection is implicit.
+
+- [openai/codex#19380] — "drop MCP Plugins and App from Morpheus." **Merged 15:57Z.** Removes the MCP Plugins and App surfaces from the internal `Morpheus` test harness. Read alongside #19372 ("Codex auto-mirrors [parallel-ecosystem] marketplaces, breaking MCP handshake for [parallel-ecosystem]-only plugins", filed earlier today): the runtime is being narrowed at the test boundary while the *behavior* boundary (auto-mirroring) is still ambient. The harness shrinking ahead of the runtime shrinking is a familiar shape — it is the inverse of the W17 "test-deletion-as-admission" pattern from synthesis #9, where deletion from tests *follows* a runtime decision. Here it precedes it.
+
+- [openai/codex#18900] — "Migrate fork and resume reads to thread store." Updated 16:07Z. Long-running PR (open ~10 days) finally moving fork/resume off the per-session in-memory state and onto the thread store. This is the structural prerequisite for fixing #19362 (archived sessions hidden after auth/provider switch) and #19363 (MCP servers disappear from session when using a custom provider) without another ad-hoc patch. Pairs with #18446 ("Reserve missing preserved paths in Linux sandbox policy," updated 15:53Z) which is the sandbox-side equivalent — moving from a per-session denylist to a documented preserved-paths set.
+
+- New issues filed in-window: [openai/codex#19387] ("The summarized message shows only the diff tool view and end turns," 15:45Z), [openai/codex#19388] ("add option in the cli to add the current project to codex app and continue in the app," updated 16:07Z), [openai/codex#19390] ("compact error," 16:04Z — *another* compaction failure, same shape as #19386), and [openai/codex#19396] ("macOS Codex app updater times out waiting for Sparkle progress helper," 16:07Z). The Sparkle-helper timeout is filed within ~30 minutes of #19389's npm-update-prompt guard; both are *update-pipeline* bugs on different distribution channels (npm vs Sparkle), filed in the same window. Seeds synthesis #19 below.
+
+### litellm: provider-fix cluster, an auth-scope fix, and the `merge main` cadence
+
+- [BerriAI/litellm#26439] — "fix(adapters,vertex): pass output_config through to backends that accept it (closes #23380, supersedes #23475/#23396/#23706/#22727)." Opened 16:07Z. **Supersedes four prior PRs** for the same bug — the parenthetical names the chain. This is the cleanest expression of the "patch-PR graveyard" pattern: a single output-config field on the Vertex adapter has now generated five PR attempts over the open-issue lifetime of #23380. Either the surface is genuinely hard, or each prior attempt was reviewed in isolation without the reviewer realizing they had seen the same fix three times before. Either way, #26439 is the fifth attempt and the issue is still open.
+
+- [BerriAI/litellm#26438] — "fix(jwt-auth): apply team TPM/RPM to proxy_admin users acting on behalf of a team." Opened 15:50Z. The proxy currently allows a `proxy_admin` to bypass team-level rate limits when impersonating a team member; the PR closes that by applying the team's TPM/RPM regardless of admin role. **A real authorization-scope fix.** Worth flagging because admin-bypass-when-impersonating is exactly the shape of bug that ships unnoticed when the test harness covers admin-acting-as-admin and member-acting-as-member but not admin-acting-as-member.
+
+- [BerriAI/litellm#26440] — "sync litellm_staging_03_22_2026 with litellm_internal_staging." Opened 16:07Z. **Yet another staging-sync PR**, this time from the older `03_22_2026` staging branch. Synthesis #15 named the `merge main` cadence; this PR is a sibling — a *staging-branch-to-staging-branch* sync that sits one level above the `merge main` cadence. The branching topology is now: `main` ↔ `litellm_internal_staging` ↔ `litellm_staging_03_22_2026`. Three branches that need pairwise reconciliation, one of which is named after a date that is a month old.
+
+- [BerriAI/litellm#26430] / [BerriAI/litellm#26437] — both `merge main`, both merged 15:30Z. The cadence has *not* slowed (still ≈one round per 30 minutes through the entire afternoon). New count of `merge main` PRs against `litellm_internal_staging` for the day is at least nine.
+
+- [BerriAI/litellm#26419] — "fix(ui): add missing 'zai' (Z.AI / Zhipu AI) provider to Add-Model dropdown." Updated 15:54Z. UI-side registration is missing for a provider whose backend integration already exists. Synthesis #11 corollary: the *presentation* layer (the dropdown) and the *enforcement* layer (the routing code) ship out of sync, with the user-visible result that a fully-supported provider appears unsupported.
+
+- [BerriAI/litellm#26385] — "fix: remove duplicate `MAX_SIZE_PER_ITEM_IN_MEMORY_CACHE_IN_KB` definition." Updated 16:01Z. Two definitions of the same constant in the codebase, with different values. Quiet but representative: the constant is *used* by both the cache eviction path and the size-budget warning path, and they have been silently disagreeing about the threshold. Synthesis-#11 territory at the constant level.
+
+- [BerriAI/litellm#26218] — "feat(proxy): add /v1/memory CRUD endpoints." Updated 16:08Z. Adds a memory-store surface to the proxy. The PR has been open since the morning; the comment thread today is debating whether memory state should live in the proxy at all (vs deferred to the model provider). A genuine new-surface decision, not a routing decision.
+
+- [BerriAI/litellm#26202] — "[WIP] Litellm token verification query opt." Updated 16:01Z. Token-verification query optimization — every authenticated proxy request currently issues at least one DB lookup to verify the token; the WIP collapses common paths into a cached lookup. Same shape as #26434's polling-consolidation from earlier today.
+
+- [BerriAI/litellm#26377] — "fix(team_endpoints): auto-add SSO team members to org on move (proxy admin only)." **Merged 15:36Z.** A real auth-flow fix for the SSO-managed team move case. Pairs with #26438 above as the second auth-surface PR of the afternoon.
+
+### opencode (anomalyco fork): UI-state and ACP-event PRs cycle
+
+- [anomalyco/opencode#23846] — "Use OpenTUI theme detection for initial TUI mode, again." **Merged 15:28Z.** The "again" in the title says it: this is a re-land of a prior fix that regressed. The theme-detection at TUI initialization has now shipped twice and regressed once. Synthesis #15 angle: a fix that has to be re-landed is a fix whose root cause was never named, only patched.
+- [anomalyco/opencode#21801] — "fix(acp): forward subagent session events to ACP client." Updated 15:48Z. ACP (the agent-client protocol) currently does not forward events from subagents; a parent agent's ACP client sees the parent's events but not the subagent's. Same shape as the codex fork-and-resume thread-store migration above (#18900): per-agent in-memory event state that needs to move to a shared sink to survive subagent boundaries.
+- [anomalyco/opencode#21056] — "fix: DB migrating on every run for non-latest channels." Updated 15:51Z. Older release-channel installs run the DB migration on every launch because the migration version-check uses a comparator that assumes the local channel matches `latest`. Version-skew bug at the schema-migration layer (relevant to synthesis #18 territory).
+- [anomalyco/opencode#14468] — "feat(opencode): add LiteLLM provider with auto model discovery." Updated 15:55Z. Long-running cross-project PR — the OSS opencode fork adding a first-class LiteLLM provider — picked up review comments today. Cross-cutting because it relies on the litellm `Router` surface that is currently being touched by #26427 (cache-invalidation) and #26218 (memory CRUD).
+- [anomalyco/opencode#12822] — "fix(env): proxy directly to process.env instead of snapshotting." Updated 16:01Z. The fix replaces an at-startup snapshot of `process.env` with a live proxy. This is the third "snapshot vs live" fix this week across the four projects (codex thread-store, litellm router cache, now opencode env). Strong seed for synthesis #19.
+- New issues: [#24185] (web interface crash, 16:00Z), [#24184] (IDE/editor context persists after closing file, 15:40Z), [#13353] re-confirmed at 16:09Z (Grep tool returns "No files found" on ARM64 Linux — *open since the original W13 window*, now an evergreen).
+
+### crush: an unusually quiet window
+
+Only [charmbracelet/crush#2704] ("allow not truncating long command lines") in the window, filed 15:31Z. Not connected to the day's open clusters. The image-pruning PR (#2613) has not moved since the 15:21Z comment captured in the previous addendum.
+
+### Net narrative change since 15:28Z
+
+1. **codex shipped a five-PR permissions refactor train (#19391–#19395) at 16:05Z.** This is the structural answer to the week-long permissions-propagation cluster (#19256, #19384, #19362, #19363). Watch whether all five merge in dependency order.
+2. **A second compaction failure (#19390) was filed inside the window**, ~30 minutes after #19386. The "advertised 400k, actual 220k" pattern is now a two-issue cluster on the same afternoon.
+3. **codex update-pipeline bugs hit two different distribution channels in the same window**: #19389 (npm prompt) and #19396 (Sparkle helper). Update-channel divergence is now its own small cluster. Seeds synthesis #19.
+4. **litellm #26439 is the fifth PR attempt at fixing #23380** (Vertex `output_config` propagation). A patch-PR graveyard pattern in plain sight.
+5. **litellm has a real authorization-scope fix (#26438)** for proxy-admin TPM/RPM bypass — easy to lose in the `merge main` flood.
+6. **A second staging branch (`litellm_staging_03_22_2026`) is being reconciled in #26440**, exposing a three-branch staging topology rather than the two-branch one named in synthesis #15.
+7. **opencode (anomalyco) #23846 is a re-land of a previously-regressed fix** ("again"). #12822 is the third "snapshot vs live" fix of the week across the tracked projects.
+8. **crush is quiet**; only one minor-UX issue filed.
+
+Next refresh after the next dispatcher tick.
