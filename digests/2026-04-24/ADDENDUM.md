@@ -618,3 +618,60 @@ Three structural moves in this window. First, **codex 0.125.0 GA shipped at 18:0
 8. **codex GPT-5.5 docs-skill catalog (#19407) merged** — one of three catalogs from synthesis #24 closed; the runtime catalog and desktop picker catalog are still open.
 
 Next refresh after the next dispatcher tick.
+
+---
+
+## Refresh @ 18:55Z — window 18:35Z → 18:55Z (≈20 min)
+
+The previous refresh closed at 18:42Z noting "next refresh after the next dispatcher tick." This is that tick. The 20-minute window is short but unusually dense: **seven new codex issues filed, the codex permissions train picked up a seventh PR, and a quietly significant litellm admin-restrictions PR appeared**. Aggregate summary first, exhibits below.
+
+### codex: post-GA install/launch carnage on the 0.125.0 line
+
+The pattern from the earlier window — *"the launch surface is the most-failing surface today"* (see 17:55Z narrative item #3) — extended through this window with fresh exhibits, but the failure shape has shifted: it is no longer "the binary refuses to start" but **"the install/updater/desktop UI reports success while the underlying surface is broken."** Five of the seven new issues fit that shape.
+
+- **[openai/codex#19419]** (18:46Z, issue) — *"Linux x64 optional tarball 404 — 0.125.0 install leaves CLI broken (`Missing optional dependency @openai/codex-linux-x64`)."* The npm install completes with exit 0; the optional native binary tarball returns 404; the CLI is then unrunnable. Install succeeded by every observable signal except *the only one that matters*. Anchor exhibit for synthesis #27 below.
+- **[openai/codex#19421]** (18:53Z, issue) — *"Updater reports success after install script fails with curl 403."* The updater pipeline catches the 403 from the download CDN, logs it, then exits 0 anyway and shows "Updated to 0.125.0 ✓" in the UI. The on-disk binary is still the previous version. Same shape as #19419 on a different surface.
+- **[openai/codex#19423]** (18:55Z, issue) — *"Codex Desktop IAB cannot inspect external pages because app-server fails to start on Windows."* Desktop window opens, IAB tab is reachable, the *backing* app-server crashed on launch. The user-visible UI is the success signal; the failure is one process boundary away.
+- **[openai/codex#19420]** (18:58Z, issue) — *"`codex-auto-review` doesn't exist in the API."* A documented/published surface name does not resolve at the runtime. Same family as synthesis #14 (published-spec-lies-registry-drift) but on the *tool name* surface, not the model name surface.
+- **[openai/codex#19417]** (18:45Z, issue, refreshed) — *"Showing 'You're out of Codex messages' either I have credits."* The presentation says zero, the backing balance is positive. Carried forward from the 17:55Z window; updated in this window with another reproduction.
+- **[openai/codex#19422]** (18:53Z, PR) — *"Clarify bundled OpenAI Docs upgrade guide wording."* Docs cleanup paired with #19407 (which merged earlier); harmless on its own but it indicates the docs-skill catalog from synthesis #24 is still being polished post-merge.
+- **[openai/codex#19418]** (18:37Z, PR) — *"Minor grammar cleanup in codex-rs README."* Drive-by; no failure signal.
+
+The **permissions refactor train** picked up new activity at 18:55Z: PRs **#19391, #19392, #19393, #19394, #19395, #19414** all show the same `updatedAt` of 18:55Z — almost certainly a force-push rebase of the train onto a new main after #19416 (Bedrock apply_patch) merged at 18:45Z. **Still zero merges.** The train has now been rebased without landing through *two* dispatcher windows, and is up to *six* PRs (the seventh, #19410 "Remove js_repl feature", touches the same surface but is filed independently).
+
+### crush: a second SQLite-writer PR appears next to #2690
+
+- **[charmbracelet/crush#2691]** (18:39Z PR) — *"fix(db): cap SQLite pool to one writer to prevent NOTADB corruption."* This is **a second, independent fix for the same bug as #2690**, filed inside 30 minutes of the first. #2690 serializes writes at the application layer; #2691 caps the connection pool to one writer at the driver layer. Two PRs, two different remediation strategies, same defect — classic "the patch surface attracts contributors faster than the maintainer can review" pattern from synthesis #20 (patch-pr-graveyard). Worth tracking which approach lands.
+- **[charmbracelet/crush#2703]** (14:27Z, MERGED) — *"fix(hyper): re-authorization flow not triggering on certain conditions."* The auth re-trigger wasn't firing when the previous token was expired-but-not-yet-evicted from cache; user sees a logged-in UI but every backend call 401s. Same observed-success-vs-actual-failure shape as the codex install bugs above. Feeds **synthesis #27**.
+- **[charmbracelet/crush#2699]** (10:26Z, OPEN PR) — *"fix(lsp): enforce workspace boundary for workspace edits."* Previously, LSP-driven edits could escape the project workspace root. Tightening the trust boundary on a previously-implicit privilege. Feeds **synthesis #28**.
+- **[charmbracelet/crush#2702]** (17:20Z, OPEN PR) — *"feat: super yollo."* Likely a yolo/autonomy mode toggle; the title is too informal to read further without diff inspection.
+
+### litellm: an org-admin scope-tightening PR + a Redis cache fix
+
+- **[BerriAI/litellm#26442]** (17:23Z, OPEN PR) — *"feat: restrict org admins from creating keys, teams, models via UI settings."* Org admins were previously implicitly trusted to create any of these via the admin UI; this PR introduces UI-side restrictions. **Notable architectural admission**: the underlying API surface still allows it; only the UI is being scoped down. That makes this a UI-as-policy-layer change — a known-fragile pattern, but also the *same week* that opencode (#24179, session-scoped permission bridge) and crush (#2699, LSP workspace boundary) are also tightening previously-implicit privileges. Anchor for **synthesis #28**.
+- **[BerriAI/litellm#26441]** (17:29Z, OPEN PR) — *"fix(redis): cache GCP IAM token to prevent async event loop blocking."* Each Vertex/GCP call was synchronously refetching the IAM token through Redis, blocking the asyncio loop. Performance fix, but also a "*the call returned successfully, while in fact starving every other request*" observed-success-vs-real-failure pattern.
+- **[BerriAI/litellm#26438]** (17:06Z, OPEN PR) — *"fix(jwt-auth): apply team TPM/RPM + attribution for admins using x-litellm-team-id."* Header-driven team attribution for admin requests — admins were bypassing per-team rate limits because the team header wasn't being honored on admin paths. Sibling of #26442: in both, *admins were getting more privilege than the policy intended*, and both fixes are landing in the same window. Feeds **synthesis #28**.
+- **[BerriAI/litellm#26439]** (16:12Z, OPEN PR) — *"fix(adapters,vertex): pass `output_config` through to backends that accept it (closes #23380, supersedes #23475/#23396/#23706/#22727)."* This single PR explicitly **supersedes four prior PRs** for the same fix (#23475, #23396, #23706, #22727). That's a textbook patch-pr-graveyard exhibit (synthesis #20) — five different contributors, one bug, one PR finally re-landing the same change. Cite this on next graveyard refresh.
+
+### opencode (anomalyco fork): permission-bridge + bedrock allowlist
+
+- **[anomalyco/opencode#24179]** (15:12Z, OPEN PR) — *"feat: expose a session-scoped permission bridge for external providers."* External providers were inheriting the session's full permission scope; this introduces a bridge that scopes their access per-session. Same family as litellm #26442 and crush #2699. **Synthesis #28 anchor.**
+- **[anomalyco/opencode#24194]** (17:51Z, CLOSED) — *"restrict amazon-bedrock provider to curated model allowlist."* Closed without merge. Title alone signals an attempted privilege tightening on the Bedrock provider; closure suggests the fix shape was wrong, not that the underlying need was wrong. Worth checking the close comment in the next pass.
+- **[anomalyco/opencode#24174]** (15:12Z, OPEN PR) — *"feat(core): add background subagent support."* New multi-actor surface added to opencode. **Worth flagging for synthesis #26 (concurrent-write contracts)** — opencode's session store has not, to public knowledge, been audited for the multi-writer contract crush is currently breaking at #2690/#2691. This is the kind of feature that *seeds* a future SQLITE_NOTADB equivalent.
+- **[anomalyco/opencode#24172]** (14:41Z, MERGED) — *"fix: use existingModel as fallback for interleaved field."* When the interleaved-tool-calls field is absent on a model response, fall back to the existing model's value. Quiet observed-success-vs-actual-failure: the response parsed cleanly, just with a wrong default.
+
+### ollama: a model-metadata catalog PR with a closed twin
+
+- **[ollama/ollama#15795]** (14:19Z, OPEN PR) — *"launch: add codex model metadata catalog."* And **[ollama/ollama#15779]** (14:19Z, **CLOSED**) — same title, closed at the same minute the new one updated. Filed-then-replaced pattern. Independent of synthesis #24 (model capability catalog drift) only because ollama was not previously in the synthesis #24 cluster — **adding ollama to that cluster on next refresh is now warranted**.
+
+### Net narrative change since 18:35Z
+
+1. **The codex 0.125.0 launch failure mode has mutated** — earlier in the day it was "binary refuses to start" (3 OSes); this window it is "install/updater/UI reports success while the underlying surface is broken" (#19419, #19421, #19423, #19420, #19417, plus crush #2703 and opencode #24172). New cross-repo synthesis #27 below.
+2. **A tightening-of-previously-implicit-privileges cluster appeared** spanning litellm (#26442, #26438), crush (#2699), and opencode (#24179, #24194). Four projects, same week, same architectural admission. New cross-repo synthesis #28 below.
+3. **The codex permissions train is now 6+1 PRs** (#19391–#19395, #19414, plus the related #19410) and rebased twice today without landing. The train length is now itself a release-risk signal.
+4. **crush #2690 picked up a sibling fix #2691** within 30 minutes — two independent remediations of the same SQLite-corruption bug. Patch-graveyard formation in real-time.
+5. **litellm #26439 explicitly supersedes 4 prior PRs** for the same `output_config` plumbing — strong patch-pr-graveyard exhibit; refresh synthesis #20 next pass.
+6. **opencode is shipping background subagent support (#24174)** without (visibly) auditing its session store for the multi-writer contract crush is currently failing on. Pre-emptive flag for the next synthesis #26 refresh.
+7. **ollama joins the model-metadata-catalog cluster** via #15795 / closed #15779. Refresh synthesis #24 to add ollama on next pass.
+
+Next refresh after the next dispatcher tick.
