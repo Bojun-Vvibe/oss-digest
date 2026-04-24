@@ -724,3 +724,54 @@ Ollama stayed quiet 18:55Z → 19:10Z. The #15795 / closed-#15779 catalog-PR pai
 6. **anomalyco/opencode #23844** confirms that the *current TUI workspace* is load-bearing default state for question routing — a 6-line fix with synthesis #30 implications well beyond its diff size.
 
 Two new cross-repo syntheses below: **#29 (error-message-vs-actionable-error)** and **#30 (default-flag-flip-as-breaking-change)**. Next refresh after the next dispatcher tick.
+
+---
+
+## Refresh 19:10Z → 19:36Z
+
+> _LLM-generated addendum. Real PR/issue numbers; click through before quoting._
+
+### codex: a quiet thread-notification merge + four TUI/restoration PRs refreshing
+
+- **[openai/codex#19093]** (19:31Z, **MERGED**) — *"Omit fork turns from thread started notifications."* On the surface this is a notification-noise fix; structurally it is a **session-resume semantics change**: the thread-started notification stream now hides fork turns from any consumer that was building a turn-by-turn timeline reconstruction. Subscribers that *count* thread-started events to drive UI state will silently undercount after this merge. Anchor exhibit for synthesis #31 below (session-resume / context-restoration semantics divergence).
+- **[openai/codex#18575]** (19:24Z, OPEN PR, refreshed) — *"fix(tui): reflow backlog on terminal resize."* Reflows the persisted scrollback when the terminal is resized. The fix is correct, but it is also a **state-restoration boundary**: the backlog had previously *not* reflowed, so any caller that scraped TUI output by row offset was relying on the static layout. Synthesis #31 exhibit (TUI-side restoration drift).
+- **[openai/codex#18576]** (19:18Z, OPEN PR, refreshed) — *"feat(tui): render markdown tables responsively."* Sibling of #18575: changes the persisted-render contract for tables. Same restoration-drift family.
+- **[openai/codex#18372]** (19:12Z, OPEN PR, refreshed) — *"Show action required in terminal title."* Mutates terminal title state on action-required transitions. Looks innocuous; it is also load-bearing state that survives a TUI reattach and was previously not set. Synthesis #31 sibling.
+- **[openai/codex#18431]** (19:17Z, OPEN PR, refreshed) — *"app-server: add macOS device key provider."* Adds a platform-specific key provider behind the existing trait. Worth tracking for synthesis #28 next pass; not a #31/#32 anchor.
+- **[openai/codex#19414]** and **[openai/codex#19424]** rebased again (19:28Z / 19:33Z) — the permissions train + the schema-defaults strip are *still* both open after three rebases each today. The train length / rebase frequency signal from prior windows continues unchanged.
+
+### litellm: a guardrail-pass-through merge + a reasoning-family param-drop PR
+
+- **[BerriAI/litellm#26262]** (19:15Z, **MERGED**) — *"fix(proxy): invoke post-call guardrails on pass-through endpoint responses (#20270)."* The pre-existing privilege-by-exclusion bug from synthesis #22 lands a fix. **Synthesis #32 exhibit** because the *recovery path* for guardrail validation on pass-through responses was missing entirely — there was no failure-recovery surface; pass-through responses simply skipped validation.
+- **[BerriAI/litellm#26445]** (19:21Z, OPEN PR) — *"fix(anthropic): drop temperature from reasoning-family supported params."* Removes `temperature` from the `supported_openai_params` list for Anthropic reasoning-family models because the upstream API rejects it. **The fix is the *removal* of a previously-claimed parameter** — i.e. the supported-params catalog was lying. Anchor exhibit for synthesis #32 (structured-output / tool-args validation failure recovery): when the *advertised* tool-arg surface is wider than the *accepted* one, callers' validation either passes locally and fails upstream, or callers strip args defensively and lose useful behavior.
+- **[BerriAI/litellm#26419]** (19:13Z, OPEN PR) — *"fix(ui): add missing 'zai' (Z.AI / Zhipu AI) provider to Add-Model dropdown."* The provider was supported in the routing layer but not in the UI dropdown — UI-side validation surface was narrower than runtime. Synthesis #32 sibling (the UI's allow-list was the *de facto* validation gate for some users).
+- **[BerriAI/litellm#26386]** (19:20Z, OPEN PR, refreshed) — *"litellm oss branch."* Long-running branch-sync PR; no narrative weight this window.
+- **[BerriAI/litellm#24374]** (19:29Z, OPEN PR, refreshed) — *"Litellm staging 03 22 2026."* Same — long-running staging branch PR.
+
+### anomalyco/opencode (the fork): two restoration / replay PRs refreshed; a fresh DeepSeek V4 reasoning-content fix appears
+
+- **[anomalyco/opencode#24200]** (19:35Z, OPEN PR) — *"fix: preserve empty reasoning_content for DeepSeek V4 in non-streaming and streaming paths."* The DeepSeek V4 provider was *dropping* empty `reasoning_content` blocks on both paths; the fix preserves the block as an explicit empty string so downstream replay code does not see "no reasoning emitted" when the model in fact emitted an empty reasoning marker. **The bug was a stream-vs-non-stream parity violation that only manifested at session-resume / replay time**, when the absence of the empty block was reinterpreted as "this turn had no reasoning at all." Anchor exhibit for synthesis #31.
+- **[anomalyco/opencode#21056]** (19:33Z, OPEN PR, refreshed) — *"fix: DB migrating on every run for non-latest channels."* The per-launch DB migration replays for any channel that is not the latest — i.e. *resume-time* schema state is being recomputed instead of cached, on a path the project clearly intended to be one-shot. Synthesis #31 exhibit (resume-time schema replay as silent N×cost regression on non-latest channels).
+- **[anomalyco/opencode#23844]** (19:14Z, OPEN PR, refreshed) — workspace-routing fix from prior window, still open.
+- **[anomalyco/opencode#21722]** (19:15Z, OPEN PR, refreshed) — *"feat: improve ux and design."* Long-open UX PR.
+- **[anomalyco/opencode#18767]** (19:36Z, OPEN PR, refreshed) — *"feat(app): Mobile Touch Optimization."*
+- **[anomalyco/opencode#13854]** (19:36Z, OPEN PR, refreshed) — *"fix(tui): stop streaming markdown/code after message completes."* Direct sibling of codex #18575/#18576 (TUI restoration boundary drift) — the streaming markdown renderer continues *after* the message-complete signal, leaving the UI in an inconsistent state on the next render pass. Synthesis #31 exhibit on a *third* repo's TUI surface.
+
+### OpenHands: a runtime-removal PR refreshed
+
+- **[OpenHands/OpenHands#14117]** (19:25Z, OPEN PR, refreshed) — *"Removed V0 runtime."* Removes the V0 runtime class entirely. Notable for synthesis #32: removing a runtime is removing the validation/recovery surface that *was* the V0 contract. Any caller pinned to V0 has no recovery path post-merge. (Does not anchor #32 alone but is a sibling exhibit.)
+
+### crush, Aider, ollama, modelcontextprotocol/servers: quiet
+
+No PR activity 19:10Z → 19:36Z in those repos.
+
+### Net narrative change since 19:10Z
+
+1. **A session-resume / context-restoration cluster crystallized** spanning codex (#19093 merged, #18575, #18576, #18372), anomalyco/opencode (#24200, #21056, #13854). Seven exhibits, three repos, all on the *same* shape: behavior that was correct at first-run is incorrect (or silently different) after a resume, reattach, or replay. New cross-repo synthesis #31 below.
+2. **A structured-output / tool-args validation-recovery cluster also crystallized** spanning litellm (#26262 merged, #26445, #26419), codex (#19424, #19013), and OpenHands (#14117). Six exhibits, three repos, all on the same shape: the *advertised* validation surface diverges from the *accepted* one, and there is no recovery path that surfaces the divergence to the caller. New cross-repo synthesis #32 below.
+3. **codex #19093 merging** is the first member of synthesis #31's exhibit set to *land*, which means session-resume timeline reconstruction in any consumer of codex thread-started notifications is changing on the next release with no migration window.
+4. **litellm #26262 merging** closes the synthesis #22 (privilege-by-exclusion) gap on pass-through endpoints — but the merge itself becomes a **synthesis #32** exhibit because the missing-recovery-path framing is what actually shipped.
+5. **The codex permissions train (#19414) and schema-strip PR (#19424) rebased a 4th time** in the day without landing. Train + auxiliary now total 8 PRs, all open, with a cumulative rebase count crossing 12 today. Shipping risk continues to compound.
+6. **anomalyco/opencode is now the cross-cutting fork** for both #31 and #32 clusters — three of seven #31 exhibits and one #32 sibling come from the fork, suggesting the fork's higher merge cadence is exposing restoration/validation drift faster than upstream.
+
+Two new cross-repo syntheses below: **#31 (session-resume / context-restoration semantics divergence)** and **#32 (structured-output / tool-args validation failure recovery)**. Next refresh after the next dispatcher tick.
