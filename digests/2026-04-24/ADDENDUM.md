@@ -509,3 +509,57 @@ Only [charmbracelet/crush#2704] from the previous window updated (16:32Z, "allow
 8. **The codex permissions refactor train (#19391–#19395) is still all OPEN** an hour after filing; no merges in dependency order yet.
 
 Next refresh after the next dispatcher tick.
+
+---
+
+# Daily addendum — 2026-04-24 (refresh @ 17:55Z)
+
+**Window since last addendum:** 2026-04-24T17:08Z → 2026-04-24T17:55Z (≈47m)
+
+This refresh covers the 47 minutes after the 17:08Z snapshot. Three things move: the codex gpt-5.5/compaction cluster picks up two more issues that explicitly *name the catalog mismatch* (#19409) and *generalize to admin-disable bypass* (#19411); the anomalyco/opencode DeepSeek surface gets a third and fourth ticket including a 400-error-on-multi-turn reproducer (#24190); and litellm gets a third reasoning-shape bug (#26413, `"think": false` ignored) that ties the litellm afternoon to the same DeepSeek/reasoning_content cluster opencode is hitting.
+
+### codex: the gpt-5.5 cluster grows two structural reframings
+
+The previous addendum had a six-issue-in-one-hour cluster (#19386, #19390, #19397, #19400, #19401, #19405) plus a presentation bug (#19404). This window adds two more — but both of these *reframe* the cluster rather than just adding another exhibit.
+
+- [openai/codex#19409] (17:32Z) — *"GPT-5.5 context catalog mismatch makes 400K/1M setup unsafe and can bypass auto-compaction."* Direct structural reframing of #19386. Where #19386 says "compaction fails at ~220k despite advertised 400k," #19409 names the underlying mechanism: the *context catalog* (the data structure the runtime consults to decide when to compact) is out of sync with what the model actually accepts. Worse, the mismatch *can bypass* auto-compaction entirely on the 1M setup, meaning a session that should have triggered compaction silently does not. So the cluster is no longer "compaction is broken on gpt-5.5" — it is "the catalog the runtime trusts to make the compaction decision is wrong." The fix surface is a different file.
+- [openai/codex#19411] (17:49Z) — *"Fast mode shows up even if admin disabled it."* Looks unrelated to compaction at first glance, but it is the same shape as #19384 (full-access ranked below auto-review): the UI surfaces a capability that an admin has *explicitly* disabled. So the codex permissions surface now has two "admin-disable does not propagate to the UI" bugs in 24 hours, which is exactly the gap the #19391–#19395 refactor train is supposed to close. If the train lands first, these two issues should close as a side effect; if either of these issues lands first as a point fix, the train acquires a merge conflict.
+- [openai/codex#19408] (17:28Z) — *"Oops, an error has occurred."* An unhelpfully-titled crash report; the body (would need fetching to confirm) names a specific stack. Worth tracking only as a count item — adds to the day's open-issue volume on codex but does not seed a pattern by itself.
+- [openai/codex#19407] (18:00Z, edge of window) — *"Update bundled OpenAI Docs skill for GPT-5.5."* Doc-skill update for the same model that #19386/#19400/#19401/#19409 are crashing on at runtime. Same pattern as #19404 (desktop picker hides the model): the *out-of-band* surfaces around gpt-5.5 (docs, picker) are being updated independently of the runtime, which is half of why the catalog mismatch in #19409 exists in the first place. Multiple representations of "what gpt-5.5 supports" being maintained separately.
+- [openai/codex#19410] (17:45Z) — *"Remove js_repl feature."* Capability *narrowing* PR — the JS REPL tool is being removed. Stands apart from the gpt-5.5 cluster but worth flagging because it is the rare PR this week that *shrinks* the tool surface rather than growing it.
+- [openai/codex#19406] (17:36Z) — *"feat(tui): add private slash commands."* **Closed** without merging. Quick-close, presumably superseded or rejected; no obvious sibling.
+- [openai/codex#19334] — *"Fallback login callback port when default is busy."* **Closed** 17:50Z. Fallback-port handling for OAuth callback when the default port is in use; a small reliability fix on the auth surface, closed as part of in-window cleanup.
+- [openai/codex#19283] — *"check PID of named pipe consumer."* **Merged** 17:41Z. The PID-check on the named-pipe consumer that has been queued for review — same shape as #19401 (loop never terminates because the convergence signal is broken) at the IPC layer. Now landed.
+
+### anomalyco/opencode: DeepSeek surface is now a four-ticket cluster
+
+The previous addendum had two DeepSeek tickets (#24188 reasoning_content drop, #24189 cache-usage telemetry missing). This window adds two more — and one of them carries a concrete reproducer.
+
+- [anomalyco/opencode#24190] (17:42Z) — *"[DeepSeek V4] reasoning_content not round-tripped — 400 error on multi-turn tool calls."* This is the *reproducer* version of #24188. Where #24188 says "the API requires `reasoning_content` to be echoed back," #24190 demonstrates that without that echo the *next* turn returns 400 specifically when the prior turn included a tool call. So the DeepSeek bug is not just a quality regression — it is a hard failure on the multi-turn-with-tools path. Cluster severity revised upward.
+- [anomalyco/opencode#24191] (17:25Z) — *"opentui: fatal: A Proxy's 'target' should be an Object."* Another opentui crash, distinct from #24187 (`null is not an object` evaluating `all.filter`, closed in the previous window). Two opentui crashes in the same day with different root causes — opentui has the *third*-most issues this week behind the codex permissions and litellm auth surfaces, and the failures are heterogeneous (not a single root cause).
+- [anomalyco/opencode#24192] (17:25Z) — *"[Bug] Keyboard shortcuts don't work when Chinese IME is active."* IME composition state is consumed before the shortcut handler sees the key event. Sibling of last week's keyboard-mapping issues but with a clean repro path (any CJK IME).
+
+### litellm: a third reasoning-shape bug ties to the cross-vendor reasoning cluster
+
+- [BerriAI/litellm#26413] (17:54Z) — *"[Bug]: `\"think\": false` is ignored; reasoning_content and thinking_blocks still returned."* The user explicitly disables thinking mode (`"think": false` in the request), and the runtime *still* returns `reasoning_content` and `thinking_blocks` in the response. So this is the *inverse* of the anomalyco/opencode #24188/#24190 bugs: there, opencode is *dropping* `reasoning_content` when it should pass it; here, litellm is *emitting* `reasoning_content` when it should suppress it. The reasoning-shape contract is broken in both directions on the same day across two projects.
+- [BerriAI/litellm#26444] (17:24Z) — *"[Bug]: get_supported_openai_params still reports 'temperature' as supported for Anthropic Claude Opus 4.7 — Anthropic rejects temperature on this model."* Catalog mismatch: the litellm support-params lookup says Claude Opus 4.7 supports `temperature`, the actual Anthropic API rejects it. **Same shape as codex #19409** (catalog says one thing, runtime accepts another). Two catalog-drift bugs against new-model rollouts on the same day.
+- [BerriAI/litellm#26443] (17:14Z) — *"[Bug]: JSON-configured providers (e.g. Scaleway) not in openai_compatible_providers — non-standard params bypass extra_body wrapping."* Providers added via JSON config (rather than as code-level entries) are absent from the `openai_compatible_providers` list, so the parameter-wrapping code that should funnel non-standard params through `extra_body` skips them entirely. The non-standard params end up in the top-level request and get rejected upstream. Direct registration-vs-runtime drift; close cousin of synthesis #14 (published-spec-lies / registry drift).
+- [BerriAI/litellm#26432] — **Merged** 17:57Z. Yet another `merge main` PR — adds to the running `merge main` graveyard count.
+
+### crush: still quiet, but a new issue worth noting
+
+- [charmbracelet/crush#2702] (17:20Z) — *"feat: super yollo."* Joke-titled PR; body would need to be fetched to know whether it is a real change or noise. Flagged for next refresh.
+- [charmbracelet/crush#2705] (17:34Z, issue) — *"crush run doesn't print LLM response to stdout."* `crush run` (the non-interactive subcommand) is not writing the model response to stdout, breaking the basic "pipe to a script" workflow. The *most user-facing* possible regression on a CLI's non-interactive path, and the first crush bug this week that matters for automation.
+
+### Net narrative change since 17:08Z
+
+1. **The codex gpt-5.5 cluster has now reframed itself** — #19409 names *catalog mismatch* as the underlying mechanism behind the compaction failures (#19386, #19390, #19400, #19401). The fix surface is no longer the compactor; it is the catalog the compactor consults.
+2. **codex has two "admin-disable does not propagate to UI" bugs in 24 hours** (#19384, #19411). The permissions refactor train (#19391–#19395) should close both as a side effect, but only if it lands before either point fix.
+3. **The DeepSeek reasoning_content cluster on anomalyco/opencode is now four tickets** (#24188, #24189, #24190, [#24191 unrelated]); #24190 is the hard-failure reproducer (400 on multi-turn-with-tools).
+4. **litellm #26413 is the inverse of the opencode DeepSeek bug**: opencode drops `reasoning_content` when it should pass it; litellm emits it when it should suppress it. The reasoning-shape contract is broken in both directions on the same day across two projects. Seeds synthesis #23.
+5. **codex #19409 and litellm #26444 are both catalog-drift bugs against new-model rollouts** on the same afternoon — codex's catalog says gpt-5.5 supports 400k context (it does not, in practice), litellm's catalog says Claude Opus 4.7 supports `temperature` (it does not). Cross-repo "model-capability catalog drift" is now a same-day, two-repo pattern. Seeds synthesis #24.
+6. **opentui crashes are heterogeneous** — #24187 (closed) and #24191 (open) are different root causes inside the same component.
+7. **crush #2705 is the first crush bug this week that breaks an automation path** (`crush run` not writing to stdout). Worth watching whether it gets the same triage speed as the interactive bugs.
+8. **codex #19283 (named-pipe PID check) merged in-window** — the IPC-side analog of #19401's loop-never-terminates pattern is now closed-loop on the codex side.
+
+Next refresh after the next dispatcher tick.
