@@ -153,3 +153,64 @@ Predicted in the 11:23Z addendum: the two competing fix PRs for the DeepSeek `re
 Three of the LiteLLM fix PRs filed this week (#26395, #26411, #26416) **delete or skip more test cases than they add**. #26416 in particular skips a previous test that asserted "passthrough route accepts any model the caller provides" — which was the test encoding the bug as the contract. Removing the test is correct (the contract was wrong), but no replacement test was added asserting "passthrough route rejects models outside the caller's ACL." This is the seed of W17 synthesis #9 — see the W17 weekly file.
 
 End of 12:07Z addendum. Next refresh after the next dispatcher tick.
+
+---
+
+## 12:53Z addendum — 46-minute sweep (12:07Z to 12:53Z)
+
+A dense window. Ten distinct artifacts moved across the four tracked repos; the headline is that **opencode shipped the merge that closes the entire DeepSeek `reasoning_content` issue cluster** (eight separate user reports, all closed in a single sweep), and a new auth/ACL pattern surfaced in LiteLLM that pairs with synthesis #4 from a different angle and seeds W17 synthesis #11.
+
+### opencode: the DeepSeek `reasoning_content` cluster is fully closed
+
+The merge of [anomalyco/opencode#24146] (preserve empty `reasoning_content` for DeepSeek V4 thinking mode) at 12:42Z was followed by **[anomalyco/opencode#24157]** (`fix: deepseek variants`, merged 12:34Z) and **[anomalyco/opencode#24163]** (`fix: support 'max' for deepseek`, merged 12:48Z). Concurrent with the merges, the maintainers swept **eight DeepSeek V4 issues** to closed in the same window: #24135, #24130, #24124, #24114, #24111, #24104, #24097, and the older #17523. This is the cleanest cluster-closure of the week — one merged fix retiring an entire class of duplicate reports inside ~15 minutes — and it confirms the synthesis #5 prediction that opencode would be the first mover on the `reasoning_content` round-trip discipline. Caveat for downstream consumers: the fix shipped in three PRs not one, and only #24146 is the conservative round-trip preservation; #24157 and #24163 add variant/`max`-token handling that may interact with users who pinned to a specific DeepSeek variant alias. Pin to v1.14.x post-#24163 if you depend on it.
+
+A new feature request also opened in this window: **[anomalyco/opencode#24159]** asks for a DeepSeek V4 endpoint to be added to the Zen catalog — i.e., the cluster's user pressure has shifted from "fix the bug" to "expose more of the model surface." Healthy signal.
+
+### opencode: desktop health check finally gets retry+backoff
+
+**[anomalyco/opencode#24138]** was closed in favor of **[anomalyco/opencode#24162]** (`fix(desktop): add retry logic with exponential backoff to health check system`, opened 12:44Z). The original #24138 went in with a single-shot retry; the maintainers asked for exponential backoff before merge and the author re-opened as #24162. This pairs directly with crush #2498 (`fix(lsp): replace sticky unavailable cache with retry backoff`, merged 12:38Z) and crush #2700 (`fix(agent): implement OnRetry logging with structured retry fields`, merged 12:40Z). **Three retry-discipline fixes in three different agents within a 25-minute window.** Promoted to W17 synthesis #12.
+
+### opencode: prompt-injection ordering and tool-schema bug filings
+
+Two new issues with structural significance:
+
+- **[anomalyco/opencode#24156]** (Discussion) — opencode injects environment/skills prompts *after* the custom agent prompt, which breaks agents whose system prompt assumes "I am the first thing the model sees." Filed 12:19Z. This is a layering-order bug, not a content bug; it cannot be fixed by changing what is injected, only by changing where.
+- **[anomalyco/opencode#24158]** — "The provider error is caused by tool schema incompatibility, not by prompt failure." User had been chasing a phantom prompt issue for several builds; the actual cause is a tool schema the provider rejects. Diagnostic-error-attribution failure (the surfaced error blamed the wrong layer).
+
+### codex: alpha.2 fallout continues, plus a "Full Access" UI/runtime divergence
+
+The codex picture in this window is dominated by Windows-desktop and approval-mode regressions:
+
+- **[openai/codex#19355]** — Windows desktop black-screens after pasting a very large log into chat input; the app then remains broken across restarts. Filed 12:18Z. This is the third Windows-desktop stability report of the day after #19345 (sidebar threads disappearing) and #19271 (bundled `node.exe` access denied). The Windows desktop surface is now competing with the IDE extension for "worst-regressed surface this week."
+- **[openai/codex#19356]** — The model permission UI shows "Full Access" but the runtime remains restricted with no escalation path. Filed 12:21Z.
+- **[openai/codex#19349]** — `/approvals` "Full Access" does not actually take effect. Filed 12:22Z.
+- **[openai/codex#19359]** — After an organization revokes the signed-in account, codex does not respond and burns CPU on next launch. Filed 12:51Z. **The "revoked account → high-CPU spinner" failure mode** has now been reported in two different shapes this week (this one and #19271's "Access is denied" loop on bundled `node.exe`); the common thread is "the auth/identity layer fails closed in a way that the supervisor loop interprets as 'retry forever'." This is the seed of W17 synthesis #12 from a different angle than the retry-backoff PRs above.
+- **[openai/codex#19354]** (merged 12:33Z) — `chore: alias max_concurrent_threads_per_session`. Quiet but operationally relevant: a config-key alias landed without a deprecation cycle, which means tooling that introspects the schema will now see two keys for the same setting until the underlying field is renamed in a future release. Synthesis #10 (config-file-as-program) corollary: aliases are themselves a small program written in the schema.
+
+The "Full Access" pair (#19356 + #19349) is a clean instance of the new W17 synthesis #11 pattern: the *enforcement* layer is correct (it correctly rejects), but the *presentation* layer reports a different state (it shows "Full Access"). The user has no way to reconcile the two without reading source.
+
+### LiteLLM: the auth/ACL surface widens — three new bugs in one hour
+
+The Bedrock passthrough ACL fix (#26416) sharpened the maintainers' attention, and the result is visible:
+
+- **[BerriAI/litellm#26420]** (issue) / **[BerriAI/litellm#26421]** (PR, opened 12:17Z) — `GET /v1/models` ignores `user.models` restriction. A user whose key is restricted to three models still sees the full proxy catalog when they list models. The PR is a one-line filter at the list-handler boundary. This is **the same pattern as #26416 (passthrough)**: the ACL is enforced at the chat-completion path, but every adjacent path (list, passthrough, health) was written before the ACL existed and never picked it up. Synthesis #11 directly.
+- **[BerriAI/litellm#26424]** (issue) / **[BerriAI/litellm#26425]** (PR, opened 12:49Z) — `auth_exception_handler` logs 401/403 permission denials at ERROR with full traceback. This is operationally severe at scale (one bad client floods Sentry/Datadog with stack traces for normal denials) and is itself a sign of **the auth surface having been retrofitted into a codebase whose error-classification convention predates "auth as a normal control-flow event"**. The fix is correct (downgrade to WARNING, drop the traceback) but does not address the structural issue that authentication failures have been treated as exceptional rather than expected for the entire history of the proxy.
+- **[BerriAI/litellm#26418]** (PR, opened 12:42Z) — single-team DB fallback when JWT has no `team_id`. Another auth-edge-case that the original auth design did not anticipate. This is a third instance of "auth was retrofitted, so the edge cases are being patched one at a time."
+- **[BerriAI/litellm#26423]** (issue) — `vertex_ai/anthropic` strips the `output_config` body field, disabling task budgets on Vertex. Provider-shape leakage (synthesis #7) instance, not auth.
+- **[BerriAI/litellm#26419]** (PR) — UI dropdown missing `zai` provider. Cosmetic but worth noting because the dropdown source-of-truth has now drifted from the router's actual provider list for the third time this week.
+
+### crush: retry-discipline merges land
+
+**[charmbracelet/crush#2498]** (`fix(lsp): replace sticky unavailable cache with retry backoff`, merged 12:38Z) and **[charmbracelet/crush#2700]** (`fix(agent): implement OnRetry logging with structured retry fields`, merged 12:40Z) — both retry-discipline fixes — landed within two minutes of each other. #2498's pattern is the more interesting one: the original code cached "this LSP is unavailable" indefinitely once the first probe failed, so a transient startup delay would permanently disable language-server features for the session. The fix replaces the sticky cache with exponential backoff. Synthesis #12 fodder.
+
+**[charmbracelet/crush#2698]** was closed without merge (test-only PR for hyper provider env behavior); the maintainer's note says the test was asserting the *current* (buggy) behavior rather than the intended one — a small instance of synthesis #9 (test-deletion-as-admission), this time as test-rejection-as-admission.
+
+### What changed in the narrative since the 12:07Z addendum
+
+1. **The DeepSeek `reasoning_content` cluster is fully closed in opencode** — eight issues retired, three PRs merged. Synthesis #5 prediction confirmed.
+2. **A new auth/ACL pattern is now visible across LiteLLM and codex**: enforcement is correct, but adjacent surfaces (list, presentation, passthrough) were written before the ACL existed and silently leak. Promoted to W17 synthesis #11.
+3. **Retry/backoff is being retrofitted in three agents simultaneously**: opencode #24162, crush #2498, crush #2700 — all within ~25 minutes, all bug-fix-shaped rather than designed-in. Promoted to W17 synthesis #12.
+4. **Windows-desktop codex stability is now competing with the IDE extension for worst-regressed surface** (#19345, #19355, #19271).
+5. **The `alpha.2` cut shipped a config-key alias without deprecation** (#19354) — synthesis #10 corollary, worth tracking next refresh to see whether the schema introspection tooling notices.
+
+Next refresh after the next dispatcher tick.
