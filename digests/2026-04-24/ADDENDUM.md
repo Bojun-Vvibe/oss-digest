@@ -1019,3 +1019,72 @@ Short 18-minute sweep. Two W17 catch-up windows that were named in the prior tic
 7. **A default-flag flip arrives on codex** (#19459: `unavailable_dummy_tools` opt-in → opt-out). Synthesis #30 reactivates on the codex side after #19449 (legacy read-only access modes) opened the same theme in the prior tick.
 
 Two new W17 syntheses in `_weekly/` for this tick: **#39 (PR-body-declared cross-PR dependency without machine-readable enforcement)** anchored on litellm #26458 ↔ #26456 ↔ #26361 plus the codex permissions train and the codex thread-store harness/migration ordering, and **#40 (dual-tool-surface-for-overlapping-capability with routing rule outside the registry)** anchored on anomalyco/opencode #23794 (`terminal` ↔ `bash`), codex #19459 (`unavailable_dummy_tools` default-on), litellm #26122 (ollama tool_call forwarding gap), codex #19207 (Codex Apps tool-call ID propagation), and codex #19098 (skill-path aliasing under metadata-budget pressure).
+
+---
+
+# Daily addendum — 2026-04-24 (refresh @ 23:33Z)
+
+**Window since last addendum:** 2026-04-24T22:50Z → 2026-04-24T23:33Z (≈43m)
+
+A dense 43-minute window. **codex** moved 12 PRs (2 merged, 1 closed-unmerged, 9 refreshed/new), **litellm** moved 10 (3 merged, 7 refreshed/new), **anomalyco/opencode** moved 10 (1 merged-refresh, 1 closed, 8 refreshed/new). **ollama** and **charmbracelet/crush** were silent. Two structural events worth pulling forward into W17 syntheses #41 and #42 (filed alongside this addendum).
+
+## codex: a stacked PR closes *after* its parent merges, plus a 9261-line deletion PR
+
+The headline event is **[openai/codex#19234]** (MERGED 23:27Z, *"Refactor log DB into LogWriter interface"*, +271/-21) shipping the `LogWriter` boundary that **[openai/codex#19455]** (CLOSED unmerged 23:27Z, *"Add gRPC feedback log sink"*) was explicitly stacked on per its body: *"This is stacked on #19234. That PR makes app-server log capture expose a small `LogWriter` boundary..."*. Both events landed in the **same minute** (23:27Z). The parent merged; the stacked child closed unmerged. This is unusual: typically when a stack-base merges, the stacked PR rebases onto main and proceeds. Here the child closed instead — likely a scope-rejection of the gRPC remote-sink design rather than the abstraction itself. This is a clean exhibit of **stack-parent-merges-but-stack-child-rejected**: the abstraction the parent justified ("makes the boundary so the child can plug in") was accepted, but the child that motivated the abstraction was not. W17 synthesis #41 anchors here.
+
+Also notable in window:
+
+- **[openai/codex#19453]** — MERGED 23:18Z. *"Serialize legacy Windows PowerShell sandbox tests."* +13/-0. A 13-line test-only PR landed mid-feature-train (between #19234 and the open #19449/#19442 permission-system PRs). Pure infra/flake-fix. Synthesis #42 anchor (test-only-PR-mid-feature-train, see below).
+- **[openai/codex#19410]** — refreshed 23:13Z. *"Remove js_repl feature."* +77/-9261. **Net deletion of 9184 lines**. This is the largest single-PR deletion W17 has seen. The js_repl experiment shipped earlier this cycle and is now being torn out. Pairs with #19449 (legacy read-only access modes removal) and #19410 itself: codex is in a deletion pulse this week.
+- **[openai/codex#19461]** — OPENED 23:15Z. *"fix: Bedrock GPT-5.4 reasoning levels."* Day-of fix for Bedrock provider reasoning-level handling. Pairs with the open #19442 (*"feat: apply provider capability disables through config layers"*, refreshed 23:14Z) — provider-capability layer is being actively reshaped on the codex side, mirror of litellm #26456 (capability flags) that W17 synthesis #38 anchored on.
+- **[openai/codex#19462]** — OPENED 23:19Z. *"sdk/python: use standalone codex-app-server runtime."* SDK now points at a standalone runtime instead of the bundled one. First-of-week split-runtime move on the SDK side.
+- **[openai/codex#19184]** — refreshed 23:30Z. *"fix: handle deferred network proxy denials."* +576/-69. Sandbox/proxy denial path. Synthesis #22 (privilege-by-exclusion) sibling.
+- **[openai/codex#19160]** — refreshed 23:25Z. *"Make apply_patch streaming parser stateful."* The streaming-parser correctness fix; refreshed in window without merge.
+
+The two **previously-flagged active-train PRs** (#19449 permissions, #19280 thread-store migration, #19442 capability disables) all refreshed in window without merging — synthesis #36 and #38 are both still active going into the next tick.
+
+## litellm: three merges (one a 4-day-old vertex passthrough fix), a budget-bypass fix appears
+
+Three merges in window:
+
+- **[BerriAI/litellm#26146]** — MERGED 23:07Z. *"fix(vertex passthrough): log :embedContent and :batchEmbedContents responses."* **Created 2026-04-21 03:06Z, merged 4 days later (≈92h).** Vertex passthrough was silently failing to log embedding responses — the spend/usage tracking surface was missing those calls entirely. Long catch-up PR for a known-blind-spot category.
+- **[BerriAI/litellm#26438]** — MERGED 23:07Z. *"fix(jwt-auth): apply team TPM/RPM + attribution for admins using x-litellm-team-id."* JWT-auth team-attribution fix for admins acting on behalf of teams. Pairs with the still-open **[BerriAI/litellm#26399]** (Bedrock passthrough access-control bypass, flagged earlier today) — the auth-attribution surface is being actively repaired on multiple PRs in parallel.
+- **[BerriAI/litellm#26457]** — MERGED 23:10Z. *"[Infra] Declare proprietary license in litellm-enterprise metadata."* Adds `license = "LicenseRef-Proprietary"` to `enterprise/pyproject.toml`. **Mirrors the earlier #26369** (which did the same for `litellm-proxy-extras` with MIT). Cross-package metadata-hygiene sweep — both halves now PEP-639 compliant. Synthesis #41 sibling exhibit (paired-PR-across-sibling-packages).
+
+New/refreshed open PRs:
+
+- **[BerriAI/litellm#26459]** — OPENED 22:17Z (refreshed 23:32Z). *"[Fix] Reseed enforcement read path from DB on counter miss."* **Budget-bypass bug**: cache for spend amounts goes stale between pods in multi-pod deployments, users intermittently exceed budgets. The body explicitly says "users exceeding budgets intermittently" — same severity class as #26399 (Bedrock passthrough access-control bypass) but a different mechanism (cache-coherence vs route-bypass). Two open budget/auth bypass bugs in 24h.
+- **[BerriAI/litellm#26460]** — OPENED 23:28Z. *"feat(proxy): Add cleanup job for expired LiteLLM dashboard session keys."* Dashboard session-key TTL cleanup; new feature.
+- **[BerriAI/litellm#26455]** — refreshed 23:26Z. *"feat: per-model team member budgets."* Granular per-(team-member, model) budget caps. Same surface as #26459 (budget enforcement) — the budget subsystem is under simultaneous feature-add (#26455) and bug-fix (#26459) pressure.
+- **[BerriAI/litellm#26390]** — refreshed 23:28Z. *"[Fix] Guardrail param handling in list and submission endpoints."*
+- **[BerriAI/litellm#26360]** — refreshed 23:09Z. *"feat(guardrails): LLM-as-a-Judge guardrail."* Major guardrails feature still open.
+- **[BerriAI/litellm#26310]** — refreshed 23:23Z. *"fix(cost_calculator.py): fix AttributeError in _get_usage_object for streaming responses."* Cost-calculator streaming-response NPE.
+- **[BerriAI/litellm#25808]** — refreshed 23:26Z. Invitation-email UI toggle (now refreshing across multiple consecutive ticks without merge).
+
+Notable: **the GPT-5.5 capability-flag PR #26456 did NOT refresh in this window** (last touch 22:36Z). Catch-up window for #26456 is now **≈122 minutes** (dispatch #26449 MERGED 21:10Z) — synthesis #38 catch-up timer continues.
+
+## anomalyco/opencode: a same-day reasoning-model fix, a Chinese "merge upstream" PR closed, and a refresh-storm on long-tail PRs
+
+- **[anomalyco/opencode#24218]** — OPENED 22:12Z (refreshed 23:31Z). *"fix(provider): auto-enable interleaved for reasoning models."* One-line fix in `provider.ts`: when a model has `reasoning: true` and `interleaved` isn't set, default to `{ field: "reasoning_content" }` instead of `false`. The body says: *"This caused reasoning_content in providerOptions to be silently dropped during message replay."* **This is the same `reasoning_content` round-trip bug class** that hit litellm (#26395), opencode (#24135), and crush (#2696) yesterday. Now there's a same-day fix on the opencode side. Synthesis on the cross-repo `reasoning_content` round-trip continues to be live.
+- **[anomalyco/opencode#24225]** — CLOSED unmerged 23:22Z. Title: *"合并上游"* (Chinese: "merge upstream"). PR body is the unfilled template. Closed without merge — drive-by sync attempt rejected. Notable for the **non-English-title-on-an-English-default-branch** signal; the PR template's *"If you do not follow this template your PR will be automatically rejected"* line was enforced.
+- **[anomalyco/opencode#24210]** — refreshed 22:51Z (created 21:21Z). *"feat(opencode): add /context command."* New `/context` slash command for the TUI.
+- **[anomalyco/opencode#24223]** — refreshed 23:07Z. *"docs: sync env vars with source code."* Docs-vs-code drift fix.
+- **[anomalyco/opencode#23955]** — MERGED earlier 04-23, refreshed 23:25Z (post-merge activity, likely backport/cherry-pick discussion). Project `icon_url_override` field.
+- **Refresh storm on long-tail open PRs:** **[anomalyco/opencode#20602]** (shell-as-config, refreshed 23:32Z), **[anomalyco/opencode#18767]** (mobile touch optimization, refreshed 23:32Z), **[anomalyco/opencode#15412]** (parent-agent-context in hook inputs, refreshed 23:19Z), **[anomalyco/opencode#13854]** (TUI streaming markdown stop-on-complete, refreshed 23:32Z), **[anomalyco/opencode#6130]** (TUI configurable XML/HTML syntax tokens, refreshed 23:23Z). **Five PRs with ages from #6130 (oldest, ~18000 PR-numbers ago) to #20602 all refreshed in the same 13-minute window** — bot-driven stale-PR-touch sweep, not human review activity. Useful signal: **opencode's stale-PR refresh cadence is now producing visible PR-tracker noise that obscures the human-edited surface**.
+
+## ollama, charmbracelet/crush
+
+Both silent in window. ollama: no PR activity since 22:50Z. crush: no PR activity since 22:50Z (last cut `v0.62.1` at 20:28Z 2026-04-24).
+
+## What changed in the narrative since 22:50Z
+
+1. **Stacked-PR-rejected-after-parent-merged** is now a named codex pattern (#19234 parent merged 23:27Z; #19455 stacked child closed unmerged 23:27Z, same minute). Promoted to W17 synthesis **#41**.
+2. **A 13-line test-only PR (#19453) merged into the codex feature train mid-stride** while three feature PRs (#19449, #19442, #19280) refreshed without merge in the same window. Promoted to W17 synthesis **#42** (test-only-PR-mid-feature-train).
+3. **codex deletion pulse**: #19410 (-9261 lines, js_repl removal) is the W17 record-deletion PR; pairs with #19449 (legacy read-only modes removal). Two large deletion PRs in flight.
+4. **litellm shipped its 4-day-old vertex passthrough embedding-log fix** (#26146): a known-blind-spot category for spend tracking is now closed. Long catch-up window matches the synthesis-#38 catch-up-window pattern (PR sat 92h before merge).
+5. **Two open litellm budget-/auth-bypass bugs in 24h**: #26399 (Bedrock passthrough access-control bypass, opened earlier) and #26459 (multi-pod cache stale → budget bypass, opened 22:17Z). Both still open at 23:33Z. Severity-cluster on the access-control surface.
+6. **opencode reasoning-content round-trip class now has a same-day fix on the opencode side** (#24218), confirming yesterday's cross-repo synthesis is converging.
+7. **opencode's bot-driven stale-PR refresh cadence is now visibly noisy** (5 PRs refreshed in a 13-minute window with no human-review markers). PR-tracker signal-to-noise on opencode degrading.
+
+Two new W17 syntheses filed in `_weekly/` for this tick: **#41 (stacked-PR-rejected-after-parent-merged: when the abstraction lands but the stacked consumer doesn't)** anchored on codex #19234 ↔ #19455, with sibling exhibits in litellm #26457 ↔ #26369 (paired sibling-package metadata fixes), and **#42 (test-only PR merged mid-feature-train as a flake-firewall)** anchored on codex #19453 (Windows PowerShell test serialization) merging while #19449/#19442/#19280 refresh without merge, with sibling exhibits across litellm #26310 (cost-calculator streaming NPE fix queued behind #26455 budget feature) and opencode #24218 (one-line reasoning-content fix queued alongside #24210 /context feature).
+
