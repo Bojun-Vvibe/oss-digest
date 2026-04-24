@@ -2,7 +2,7 @@
 
 > Charm's terminal AI coding agent; design-forward TUI patterns worth tracking.
 
-**Window:** 2026-04-23T23:59:59.000Z → 2026-04-24T23:59:59.000Z  
+**Window:** 2026-04-23T02:58:07.638Z → 2026-04-24T02:58:07.638Z  
 **Default branch:** `main`  
 **Source:** [github.com/charmbracelet/crush](https://github.com/charmbracelet/crush)
 
@@ -25,22 +25,41 @@
 
 ## Merged PRs
 
-_None in window._
+- [#2688](https://github.com/charmbracelet/crush/pull/2688) **fix: remove minimax api key validate** — _by @flynn-eye, merged 2026-04-23T13:00:50Z_
 
 
 ## Open PRs (new or updated)
 
+- [#2598](https://github.com/charmbracelet/crush/pull/2598) _(draft)_ **feat: PreToolUse hook** — _by @meowgorithm, updated 2026-04-24T01:50:52Z_
+- [#2694](https://github.com/charmbracelet/crush/pull/2694) **fix(skills): deduplicate skills discovered via symlinked directories** — _by @octo-patch, updated 2026-04-24T01:49:59Z_
+- [#2693](https://github.com/charmbracelet/crush/pull/2693) **fix(mcp): expand environment variables in stdio MCP server args** — _by @octo-patch, updated 2026-04-24T01:46:57Z_
 - [#2692](https://github.com/charmbracelet/crush/pull/2692) **chore(styles): overhaul style definitions** — _by @meowgorithm, updated 2026-04-24T01:07:01Z_
+- [#2691](https://github.com/charmbracelet/crush/pull/2691) **fix(db): cap SQLite pool to one writer to prevent NOTADB corruption** — _by @SAY-5, updated 2026-04-23T18:39:10Z_
+- [#2690](https://github.com/charmbracelet/crush/pull/2690) **fix(db): prevent SQLITE_NOTADB corruption under concurrent sub-agents** — _by @taoeffect, updated 2026-04-23T17:59:17Z_
+- [#2449](https://github.com/charmbracelet/crush/pull/2449) **fix: Auto-detect Ollama and available models on startup** — _by @whatnick, updated 2026-04-23T12:15:42Z_
+- [#2686](https://github.com/charmbracelet/crush/pull/2686) **feat: support Moonshot and Moonshot China API keys in config** — _by @ne275, updated 2026-04-23T09:29:55Z_
 
 
 ## Notable Issues
 
-_None in window._
+- [#2682](https://github.com/charmbracelet/crush/issues/2682) **Prevent SQLite corruption (`SQLITE_NOTADB`/code 26) under concurrent sub-agents** — _by @taoeffect_
+- [#2689](https://github.com/charmbracelet/crush/issues/2689) **GitHub [scrubbed]: GPT-4.1 does not work (needs to use Responses API)** _[provider: openai chatgpt, provider: github [scrubbed]]_ — _by @victornoel_
+- [#2677](https://github.com/charmbracelet/crush/issues/2677) **Custom System Prompt** — _by @BlackScorp_
+- [#2676](https://github.com/charmbracelet/crush/issues/2676) **LM Studio somehow connects only to localhost:1234** — _by @BlackScorp_
+- [#2683](https://github.com/charmbracelet/crush/issues/2683) **Sidebar lists the same skill twice when project and user skill directories resolve to the same files (symlink)** — _by @maxispossible_
+- [#2670](https://github.com/charmbracelet/crush/issues/2670) **Relax golang dependency?** — _by @dbeecham_ _(closed 2026-04-23T13:38:04Z)_
+- [#2684](https://github.com/charmbracelet/crush/issues/2684) **Env vars do not expand with MCP args** _[area: mcp]_ — _by @Jelloeater_
+- [#1282](https://github.com/charmbracelet/crush/issues/1282) **Support edit diff manually** _[area: diff]_ — _by @zhaob1n_ _(closed 2026-04-23T04:20:44Z)_
+- [#1262](https://github.com/charmbracelet/crush/issues/1262) **Copying text doesn't handle backticks well** — _by @taoeffect_ _(closed 2026-04-23T04:20:44Z)_
+- [#493](https://github.com/charmbracelet/crush/issues/493) **Support For OpenRouter Sorting** _[provider: openrouter, Migrated]_ — _by @kesile_ _(closed 2026-04-23T04:20:44Z)_
 
 
 ## Commits on `main`
 
-_None in window._
+- [`31025a1`](https://github.com/charmbracelet/crush/commit/31025a1addb9124ceadcc80f346a9e834fcf34a4) chore: auto-update files — _@charmcli_
+- [`cce8edf`](https://github.com/charmbracelet/crush/commit/cce8edf9a216337cca46c6457f9ab208c48babd1) fix: remove minimax api key validate (#2688) — _@flynn-eye_
+- [`b8eccf9`](https://github.com/charmbracelet/crush/commit/b8eccf941a94ead4b92f10a583dc63ca12a6224e) chore(legal): @flynn-eye has signed the CLA — _@charmcli_
+- [`59927d5`](https://github.com/charmbracelet/crush/commit/59927d5248117468e7c9d72146f18117965d58aa) chore(legal): @ne275 has signed the CLA — _@charmcli_
 
 
 ---

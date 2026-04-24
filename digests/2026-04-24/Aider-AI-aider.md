@@ -2,7 +2,7 @@
 
 > Pioneer terminal pair-programmer; slow but high-signal when it moves.
 
-**Window:** 2026-04-23T23:59:59.000Z → 2026-04-24T23:59:59.000Z  
+**Window:** 2026-04-23T02:58:07.638Z → 2026-04-24T02:58:07.638Z  
 **Default branch:** `main`  
 **Source:** [github.com/Aider-AI/aider](https://github.com/Aider-AI/aider)
 
@@ -30,7 +30,14 @@ _None in window._
 
 ## Commits on `main`
 
-_None in window._
+- [`0189cf4`](https://github.com/Aider-AI/aider/commit/0189cf4f0009aa58fd24a3b8c834819c8230fa77) copy — _@paul-gauthier_
+- [`65cb4d3`](https://github.com/Aider-AI/aider/commit/65cb4d3568e28439b2eb1c069d1cb27aeb469237) style: Format thinking_tokens model check with multiline condition — _@paul-gauthier_
+- [`93dfacc`](https://github.com/Aider-AI/aider/commit/93dfacc85e3a35254295e9b58b9803d5be639c34) feat: add Claude Opus 4.7 model settings for Bedrock/Vertex/OpenRouter — _@paul-gauthier_
+- [`39023f9`](https://github.com/Aider-AI/aider/commit/39023f9bc021690e9505bcb8fcb022efcc5bfe0a) fix: Disable temperature for opus-4 models and gate thinking_tokens — _@paul-gauthier_
+- [`79c45c3`](https://github.com/Aider-AI/aider/commit/79c45c3cd6d84ecb0d163a853136cf7e6b3f4584) fix: disable deprecated temperature for Claude 4 models — _@paul-gauthier_
+- [`b9d8774`](https://github.com/Aider-AI/aider/commit/b9d877488c9d8c6e60631473e218989a9f401162) feat: Map opus and sonnet aliases to latest Claude models — _@paul-gauthier_
+- [`9ce34d1`](https://github.com/Aider-AI/aider/commit/9ce34d179cf2015abef4bfb186c1cbdf53b98f7c) style: simplify model name conditional in models.py — _@paul-gauthier_
+- [`f939d0a`](https://github.com/Aider-AI/aider/commit/f939d0ac94df54c02e598cbf134d91d63335cdc8) feat: add Claude Sonnet 4.6 and Opus 4.7 model support — _@paul-gauthier_
 
 
 ---
