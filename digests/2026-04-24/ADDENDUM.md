@@ -280,3 +280,48 @@ Three older opencode issues also re-surfaced with new comments in this window:
 6. **An aggregate-quality complaint** (opencode #24166) has appeared. First of its shape this week; track to see whether it remains a one-off or becomes a perception trend.
 
 Next refresh after the next dispatcher tick.
+
+---
+
+## 14:46Z addendum — 17-minute sweep (14:29Z to 14:46Z)
+
+A short window but unusually structured: the LiteLLM repo filed **four "merge main" PRs in a 14-minute span** ([BerriAI/litellm#26430, #26431, #26432, #26433], all opened between 14:29Z and 14:42Z, all merged within 11 seconds of opening), and a fresh DeepSeek thinking-mode report on opencode ([anomalyco/opencode#24175], filed 14:41Z, **closed within 5 minutes** as a duplicate of the cluster retired earlier today) confirms the cluster-closure from the 12:53Z addendum. Two structural notes that promote into this week's synthesis #15 and #16 below.
+
+### LiteLLM: a four-PR "merge main" pulse
+
+The four `merge main` PRs (#26430 / #26431 / #26432 / #26433) are not noise. They are LiteLLM's `litellm_internal_staging` branch repeatedly absorbing `main` in micro-batches, each round merged in under 12 seconds — i.e., **the staging branch is being kept synchronized with main on a sub-minute cadence by automation rather than by a human merge discipline**. Combined with the earlier-day nightly cadence break (the 6-hour pulse the W17 weekly flagged is now broken back to daily), this is a sign that the LiteLLM release-engineering surface is being actively reshaped this week. A proxy whose staging branch needs four sync rounds inside 14 minutes is not absorbing upstream changes cleanly; either the merge-base is far behind, or there is a pre-merge hook that is rewriting commits on the way in. Either case is structural. See W17 synthesis #15 below for the cross-repo angle on what "merge-main-as-PR" tells us about proxy hygiene.
+
+### opencode: DeepSeek cluster confirmed retired
+
+[anomalyco/opencode#24175] ("Bug: thinking mode not working with DeepSeek v4 model"), filed 14:41Z, was closed at 14:46Z by a maintainer pointing the reporter at the 12:42Z merge of #24146 and asking them to update to `1.14.23+`. Five-minute triage-and-close turnaround, with no debate. This is the second consecutive report after #24146 merged that landed on a stale build and was retired without code changes — strong signal that the cluster is genuinely fixed and that the remaining noise is people on the prior nightly. If a third stale-build report lands today, the maintainers may want to bump the version-mismatch warning surface in the TUI; absent that, treat the cluster as fully resolved.
+
+### opencode: interleaved-field fallback PR merged
+
+[anomalyco/opencode#24172] (`fix: use existingModel as fallback for interleaved field`) was opened 14:26Z and merged at 14:41Z — 15-minute turnaround. The interleaved field is the opencode-side flag that tells the provider transformer "this model interleaves reasoning and content tokens"; before this fix, the field defaulted to `false` when the model registry lookup missed (e.g., for newly-added models the agent has not yet seen), which silently disabled interleaved rendering for any model not in the static catalog. The fix falls back to the `existingModel` value when the registry lookup misses, so reasoning-bearing models keep working through registry drift. Cross-references synthesis #14: this is the *fix* shape for one specific instance of registry drift, and notably it is a defensive fallback (use the prior known-good value) rather than an architectural fix (make the registry authoritative).
+
+### opencode: background subagent and compaction churn
+
+- [anomalyco/opencode#24174] (`feat(core): add background subagent support`) opened 14:39Z. Adds the ability to spawn subagents that continue running after the parent turn completes. Notable structural risk: the subagent dispatch boundary is already under-specified across the ecosystem (see the 14:00Z addendum's note on opencode #16491 and crush #2598's PreToolUse hook scope debate). Adding a *background* lifecycle on top of a dispatch boundary that already has known correctness gaps will surface those gaps faster.
+- [anomalyco/opencode#24127] (`fix: enable compaction prune by default`) was *closed without merge* at 14:44Z after sitting open since 08:41Z. The closing comment notes that pruning compacted history by default broke session-replay for users who had paused mid-session and resumed days later. Same boundary as #24170 (preserve `tool_calls` on replay): the replay path is sensitive to anything that drops history fields, and a "default-on prune" setting silently violates that contract. Synthesis #14 corollary: defaults are spec, and changing a default is a contract change.
+
+### codex: Windows-desktop and approvals issues continue to mount
+
+- [openai/codex#19381] — "Codex v26.422 on Windows: project chat history disappeared and RAM climbs above 10 GB." Filed 14:39Z. **Fourth Windows-desktop report of the day**, and this one combines the state-loss pattern (history disappears) with a memory leak (RAM climbs above 10GB). Pairs with #19345, #19355, #19271. The Windows desktop has now logged four distinct stability-affecting reports in 24h and is competitive with the VS Code extension as the day's worst-regressed surface.
+- [openai/codex#19379] — "Trusted access enabled but Codex still shows high-risk cyber slowdown banner." Filed 14:29Z. Direct instance of synthesis #11 (presentation/enforcement divergence): the trusted-access toggle is on, but the warning banner still renders. The user has no way to tell whether the runtime saw their toggle.
+- [openai/codex#19256] — "/permissions changes do not propagate to the active session in `codex-cli 0.124.0`." Re-surfaced 14:43Z with a new repro confirming the bug in `0.125.0-alpha.2`. The user changes permissions via `/permissions`; the CLI accepts the change and writes it to disk; the active session continues to enforce the *prior* permissions until restart. This is the seed for W17 synthesis #16 below.
+- [openai/codex#19196] — "'Full Access' permissions broken — network calls are still sandboxed." Updated 14:33Z. Pairs with #19349 and #19256. **Three permission-mutation issues against the same codex build, all with the same shape**: the mutation is accepted, no error is shown, and the live session keeps enforcing the old policy.
+- [openai/codex#19185] — "config.toml context window settings are not respected." Updated 14:38Z. Same shape from a different angle: the user writes a config setting, the schema validates it, the runtime ignores it.
+
+### crush: image-pruning PR re-surfaces
+
+[charmbracelet/crush#2613] (`fix(agent): prune excess images from history to prevent session deadlock`) — comment activity 14:36Z. The PR has been open since 13 April; the comment is a maintainer asking for a configurable threshold rather than a hard-coded one. Same boundary as opencode's #24127 closure: pruning history to prevent a downstream failure must be opt-in or it silently breaks replay. Two repos this week have hit the same boundary.
+
+### Net narrative change since 14:00Z
+
+1. **The DeepSeek cluster is staying closed** — second stale-build report in a row triaged-and-closed in 5 minutes.
+2. **LiteLLM staging branch is being sync-merged to main on a sub-minute cadence** — four `merge main` PRs in 14 minutes. New synthesis #15.
+3. **codex permission-mutation propagation is broken across `/permissions`, `config.toml`, and `/approvals`** — three issues, same agent, same shape. New synthesis #16.
+4. **Windows-desktop codex now has four distinct stability reports in 24h**; matches the VS Code extension as the worst-regressed surface of the day.
+5. **opencode's `compaction prune` default-on PR was closed** because changing a default broke session-replay — synthesis #14 corollary about defaults-as-spec.
+
+Next refresh after the next dispatcher tick.
