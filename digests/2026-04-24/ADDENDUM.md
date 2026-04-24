@@ -563,3 +563,58 @@ The previous addendum had two DeepSeek tickets (#24188 reasoning_content drop, #
 8. **codex #19283 (named-pipe PID check) merged in-window** — the IPC-side analog of #19401's loop-never-terminates pattern is now closed-loop on the codex side.
 
 Next refresh after the next dispatcher tick.
+
+---
+
+# Daily addendum — 2026-04-24 (refresh @ 18:35Z)
+
+**Window since last addendum:** 2026-04-24T17:55Z → 2026-04-24T18:35Z (≈40m)
+
+Three structural moves in this window. First, **codex 0.125.0 GA shipped at 18:00Z** — the same version line whose alpha.1 was AMFI-killed and whose alpha.3 went pre-release at 12:20Z. The GA tag landed without a separate fix-PR cluster in this window, which means the alpha-cycle bugs (#19350 alpha build fix, the npm-prompt guard #19389) are now load-bearing for the GA cohort. Second, **the codex permissions refactor train (#19391–#19395) is still all OPEN ~3 hours after filing**, and a *sixth* PR — #19414 ("permissions: make legacy profile conversion cwd-free") — has now joined the train; the train is growing while none of its members merge. Third, two new "the runtime cannot start because a feature flag the binary does not recognize is set" issues land on codex (#19415 Windows MSIX blank splash, #19220 macOS startup failure, both naming `workspace_dependencies`); pair this with the bwrap-loopback ENOPERM bug (#19412 closed → #19413 reopened) and the Linux sandbox path now has its own startup-gate failure mode in the same window.
+
+### codex: 0.125.0 GA + permissions train widens to six + two startup-gate failures
+
+- [openai/codex] **release 0.125.0 GA** at 18:00:38Z. The same version line as the AMFI-killed alpha.1 (closed-loop via #19350) and alpha.3 (12:20Z). GA shipped without a visible fix-cluster in this window, so the alpha-cycle assumptions are now production assumptions.
+- [openai/codex#19414] (18:15Z) — *"permissions: make legacy profile conversion cwd-free."* Sixth member of the permissions train (#19391–#19395, +#19414). The train is *growing* while none of its members merge — same anti-pattern flagged in synthesis #20 (patch-pr-graveyard) but in real time on a feature train, not a backport queue.
+- [openai/codex#19416] (18:25Z) — *"Fix: use function apply_patch tool for Bedrock model."* Bedrock-routed sessions were calling the wrong tool variant for `apply_patch`. Same shape as the Zen-routing #24186 bug from the previous window (anomalyco/opencode): the *router* picks one thing, the *call site* picks another, and the model gets a malformed tool invocation. Cross-repo router-vs-callsite drift, again.
+- [openai/codex#19407] **MERGED** 18:26Z. The bundled OpenAI Docs skill update for gpt-5.5 — third of three independent gpt-5.5 catalogs (synthesis #24) — landed. The runtime catalog (#19409) and desktop picker catalog (#19404) are still open.
+- [openai/codex#19415] (18:16Z, issue) — *"Windows desktop app (MSIX 26.422.2437.0) stuck on blank splash — renderer infinite remount loop on workspace_dependencies feature flag."* Renderer enters an infinite remount loop because a feature flag (`workspace_dependencies`) is enabled but the renderer code path does not recognize it. Hard startup gate.
+- [openai/codex#19220] (18:12Z, issue, refreshed) — *"Codex macOS startup failure: unsupported feature enablement `workspace_dependencies`."* Same flag, different OS, same failure mode (binary refuses to start because a flag is set that this binary version does not know how to handle). Two-OS reproduction of the same startup gate.
+- [openai/codex#19413] (18:09Z, issue) — *"bwrap: loopback: Failed RTM_NEWADDR: Operation not permitted."* The Linux sandbox can no longer bring up the loopback inside the user namespace; #19412 (closed at 18:08Z) appears to be a duplicate-and-replace. The Linux launch path now has its own startup-gate bug in the same window the Windows and macOS paths are also failing to start.
+- [openai/codex#19417] (18:35Z, issue) — *"Showing 'You're out of Codex messages' either I have credits."* Credit/quota presentation says zero when the backing balance is positive — same shape as last week's snapshot-vs-live-state cluster (synthesis #19) and same family as the silent Zen-downgrade in #24186.
+- [openai/codex#19198] (18:25Z, issue, refreshed) — *"Remote SSH connection falsely reports No `codex` found in PATH when `codex` is installed at a custom path."* The remote-SSH launcher resolves `codex` against the *interactive-shell* `PATH`, not the *non-interactive* `PATH` that SSH actually uses. Classic non-interactive-path-is-second-class regression — feeds synthesis #25 below.
+- [openai/codex#19010] (17:56Z, issue, refreshed) — *"Latest codex extension fails to resume after connections lost."* The extension's resume path assumes the previous connection's state was checkpointed; on reconnect after a drop it does not find the checkpoint and silently fails to resume. Pairs with the codex thread-store migration PRs (#19280, #18900) — the migration is presumably *what would fix this* but has not landed.
+
+### anomalyco/opencode: a piped-stdin TUI break + a presentation-state reset
+
+- [anomalyco/opencode#24195] (18:20Z, issue) — *"Bug: Piping stdin into TUI breaks rendering (reproduced)."* Reproduced regression: piping anything into the opencode TUI corrupts rendering. Sibling of crush #2705 (`crush run` not writing to stdout) — both projects' non-interactive / pipe paths are broken on the same day. Anchor exhibit for synthesis #25.
+- [anomalyco/opencode#24197] (18:33Z, issue) — *"OpenCode Desktop 1.14.22 ignores `project.icon_url_override` after webview refresh."* User-set override is honored on initial load, then lost after a webview refresh — the refresh path re-resolves the icon from defaults rather than the persisted override. Same shape as synthesis #16 (accepted-but-unpropagated mutations): the mutation was accepted, presented, then silently reverted at a refresh boundary.
+- [anomalyco/opencode#24196] (18:30Z, PR) — *"feat(web,console): improve Polish translations for homepage and console."* Translation update; no failure-class signal.
+- [anomalyco/opencode#23255] (18:27Z, PR, refreshed) — *"fix(build): add prettier to devDependencies."* Build hygiene; flagged because it is the *kind* of "should have been there from day one" devDep gap that catalog-drift bugs (synthesis #24) hide behind.
+- [anomalyco/opencode#12822] (18:29Z, PR, refreshed) — *"fix(env): proxy directly to process.env instead of snapshotting."* The env snapshot was taken at startup; mutations to `process.env` after that did not propagate. Direct sibling of synthesis #19 (snapshot-vs-live-state) on the env-vars surface — and another exhibit for the non-interactive surface synthesis below (scripts that mutate env *before* invoking sub-processes lose the mutation).
+- [anomalyco/opencode#24188] (18:03Z, refreshed) — DeepSeek `reasoning_content` round-trip bug; updated with additional repro context but no new closure.
+
+### litellm: post-call-guardrails-on-pass-through + an OpenRouter add-model failure
+
+- [BerriAI/litellm#26262] (18:28Z, PR refreshed) — *"fix(proxy): invoke post-call guardrails on pass-through endpoint responses."* Pass-through endpoints were skipping post-call guardrails entirely; the fix wires guardrails into the pass-through response path. *The bug existed because pass-through was implemented as a separate code path that did not go through the standard response-processing pipeline* — direct sibling of synthesis #22 (privilege-by-exclusion): the pass-through path was excluded from the security pipeline by virtue of being a different file.
+- [BerriAI/litellm#26360] (18:33Z, PR) — *"feat(guardrails): LLM-as-a-Judge guardrail."* New guardrail class. Independent feature.
+- [BerriAI/litellm#26199] (18:03Z, issue refreshed) — *"Not able to add openrouter model as endpoint."* Adding an OpenRouter-namespaced model from the admin UI fails outright; the model add-form does not accept the OpenRouter id format.
+- [BerriAI/litellm#24795] (18:10Z, issue refreshed) — *"OpenRouter model selected from Admin UI list fails Test Connect with 'is not a valid model ID'."* Companion to #26199: the admin UI *does* surface OpenRouter models in its picker, but selecting one and clicking Test Connect produces an "is not a valid model ID" error. Two OpenRouter-against-Admin-UI bugs in the same window — the OpenRouter integration path through the admin UI is broken at both the add and the test surfaces.
+
+### crush: a serious one — concurrent-write SQLite corruption
+
+- [charmbracelet/crush#2690] (18:09Z, PR) — *"fix(db): prevent SQLITE_NOTADB corruption under concurrent sub-agents."* When multiple sub-agents write to the same SQLite session DB concurrently, the file gets corrupted to the point that the SQLite header is unreadable (`SQLITE_NOTADB`). Open PR fixes by adding write serialization. **This is the anchor for synthesis #26 below** — agent-session state stores assuming single-writer when the project's own sub-agent surface is multi-writer.
+- [charmbracelet/crush#2705] (18:06Z, issue refreshed) — `crush run` not writing to stdout; second-day signal that the non-interactive surface is unowned. Cross-repo sibling of opencode #24195.
+
+### Net narrative change since 17:55Z
+
+1. **codex 0.125.0 GA shipped during this window** without a visible fix-cluster — the alpha-cycle bugs are now production bugs.
+2. **The permissions refactor train is now six PRs** (#19391–#19395 + #19414) and *zero have merged*. Merge-conflict surface area is growing per minute the train sits.
+3. **Three OS startup-gate failures on codex in the same window** — Windows MSIX blank splash on `workspace_dependencies` (#19415), macOS unsupported-feature-flag (#19220), Linux bwrap loopback (#19413). Three different operating systems, three different gates, same window — the launch surface is the most-failing surface today.
+4. **Cross-repo router-vs-callsite drift** continues: codex Bedrock #19416 picks the wrong `apply_patch` variant, mirroring the Zen-routing silent-downgrade #24186.
+5. **Two non-interactive / piped-IO regressions on the same day across two repos** — opencode #24195 (stdin into TUI breaks rendering) and crush #2705 (`crush run` no stdout). Plus codex #19198 (SSH non-interactive `PATH` resolution) and opencode #12822 (env snapshot vs live `process.env`). Seeds **synthesis #25 (non-interactive surfaces are second-class)**.
+6. **crush #2690 (SQLITE_NOTADB under concurrent sub-agents) is a concurrent-write-corruption-in-agent-session-store bug** — same architectural family as the codex thread-store migration PRs (#19280, #18900) and the litellm pass-through-skipping-pipeline #26262. Seeds **synthesis #26 (concurrent-write contracts assumed single-writer)**.
+7. **OpenRouter through the litellm admin UI is broken at add (#26199) and at test (#24795)** — same vendor, two surfaces, same day.
+8. **codex GPT-5.5 docs-skill catalog (#19407) merged** — one of three catalogs from synthesis #24 closed; the runtime catalog and desktop picker catalog are still open.
+
+Next refresh after the next dispatcher tick.
