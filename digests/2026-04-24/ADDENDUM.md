@@ -325,3 +325,50 @@ The four `merge main` PRs (#26430 / #26431 / #26432 / #26433) are not noise. The
 5. **opencode's `compaction prune` default-on PR was closed** because changing a default broke session-replay — synthesis #14 corollary about defaults-as-spec.
 
 Next refresh after the next dispatcher tick.
+
+## 15:28Z addendum — 42-minute sweep (14:46Z to 15:28Z)
+
+A high-density window: codex took **six new issues** (#19381, #19382, #19383, #19384, #19385, #19386) in 42 minutes, the litellm staging branch absorbed two more `merge main` rounds (#26433, #26437), one large litellm feature PR landed (#25346), and a fresh CVE-driven dependency bump showed up (#26435). Two of the codex issues — #19384 and #19386 — surface a new product-shape concern: **default behavior of a marketed-as-flagship configuration silently underperforms a non-flagship sibling**. That is the seed for synthesis #17 below. The dependency-bump and the WebSocket-fallback regression seed synthesis #18.
+
+### codex: six issues in 42 minutes, two of them structural
+
+- [openai/codex#19381] — "v26.422 on Windows: project chat history disappeared and RAM climbs above 10 GB." Updated 15:12Z with a second reporter confirming. **Fifth Windows-desktop report of the day.** Pairs with #19345, #19355, #19271, #19330.
+- [openai/codex#19382] — "OpenAI-curated plugin manifests are repeatedly validated during normal turn/subagent setup." Filed 14:47Z. Cites #17638 as having already fixed one curated-marketplace loading path; this is a *second* path with the same shape that the original fix did not cover. Synthesis #14 corollary (registry drift): the warning string is unique enough that the reporter found the prior fix, but the live runtime is hitting a different code path that re-loads the catalog. **A landed fix that does not generalize is worse than no fix**, because the next reporter assumes the issue is resolved and doesn't file.
+- [openai/codex#19383] — "Allow Codex hooks to run silently without rendering completed hook entries." Filed 14:52Z. Hook lifecycle entries are rendered for every successful no-output hook invocation, cluttering the conversation. The user's workaround is to disable hooks entirely, which removes the safety guardrails. **A default that forces users to choose between safety and signal-to-noise is a default that will be turned off.**
+- [openai/codex#19384] — "full access permissions lower than auto-review." Filed 14:56Z. The user reports that `auto-review` mode with escalation works for system commands that `Full Access` mode silently fails on. This is the **inverse of the synthesis #11 / #16 cluster**: there, the user toggled to a more-permissive mode and the runtime stayed restricted; here, the user toggled to the *most* permissive mode and the runtime is *more* restricted than the second-most permissive mode. Same shape, opposite direction. Seeds synthesis #17.
+- [openai/codex#19385] — "Support additionalContext in PreToolUse hooks or clarify Claude-style hook parity." Filed 15:26Z. The user expected codex's PreToolUse hooks to behave like the parallel ecosystem's; they don't, and the divergence is undocumented. Schema-without-version-rev pattern (synthesis #14 family).
+- [openai/codex#19386] — "GPT-5.5 Codex session hits unrecoverable compaction failure around ~220k tokens despite advertised 400k context." Filed 15:26Z. The user reports that the model marketed as the recommended Codex model (with a 400k advertised window) does not support the `/responses/compact` native compaction path, so every long-running session becomes non-recoverable around 220k. The advertised default and the actual default diverge by ~45%. Pairs with #19009 (compact fails in CLI and the editor extension) and #19329 ("Automatic Compact Recurring Error"). Strong instance of synthesis #17.
+
+### litellm: another `merge main` pulse plus a CVE bump and a large feature merge
+
+- [BerriAI/litellm#26433] — "merge main." Opened 14:42Z, merged 14:43Z (9-second turnaround). Sixth `merge main` PR of the day from the same author.
+- [BerriAI/litellm#26437] — "merge main." Opened 15:23Z, merged 15:23Z (9-second turnaround). Seventh `merge main` PR. The cadence has *not* slowed since the previous addendum named it; if anything the pace has stabilized at roughly one round every 30 minutes.
+- [BerriAI/litellm#26435] — "fix: bump python-dotenv to 1.2.2 to fix CVE-2026-28684." Opened 15:19Z. A real security PR, filed by an external contributor, against the same release surface that just absorbed seven `merge main` rounds. The signal-to-noise ratio of the litellm PR queue this afternoon is unusually low, which makes it easier for a CVE bump like this to get lost in the wash.
+- [BerriAI/litellm#26434] — "Fix/shared health check polling." Opened 15:01Z. Polling consolidation — multiple consumers of a health-check signal each polled independently; the PR consolidates them. Same shape as the in-process router cache problem named in synthesis #16: independent consumers each hold their own copy of state.
+- [BerriAI/litellm#25346] — "feat(responses): add `use_chat_completions_api` flag for openai/ models with custom api_base." **Merged 15:25Z** after 16 days open. Adds a per-model boolean that *forces* the `/responses` → `/chat/completions` bridge even for providers with native Responses API support. The motivation is real (llama.cpp, vLLM, and other OpenAI-compatible servers don't speak Responses), but the surface is now: **the same provider name (`openai/`) can mean two different protocols depending on a flag**. Synthesis #17 territory: a feature flag that becomes load-bearing for a *protocol* selection.
+- [BerriAI/litellm#26436] — "Bug: `/v1/messages/count_tokens` returns incorrect token count — `tools` field ignored on Bedrock provider." Opened 15:20Z. Token-count drift between providers; relevant to anyone using the proxy as a unified counter for cross-provider routing decisions.
+
+### codex: long-tail issues re-surfacing on `0.124.0`
+
+- [openai/codex#15568] (Windows: thread closes when PowerShell integrated terminal exits) — re-confirmed at 15:25Z by a fresh reporter on `0.124.0`. **Open since March 23.** This is now a one-month-old Windows-desktop bug that has survived three minor-version releases.
+- [openai/codex#8648] ("Codex replies to earlier messages instead of latest one in conversations") — re-confirmed at 15:15Z, originally filed 2026-01-01. **Open since January 1.** A four-month-old correctness regression in the most basic conversational invariant — the reply targets the most recent message — has continued to receive periodic confirming reports.
+- [openai/codex#17478] (`Enable hooks on Windows`) was *closed* at 15:26Z. Hooks are now enabled on Windows; pairs with #19383's request for hooks to render silently. The platform now has the surface; the next phase is making it usable.
+
+### codex: merged PR
+
+[openai/codex#18392] — "Fix hang on turn/interrupt." **Merged 14:47Z** after a week open. Fixes a hang where pressing Ctrl-C on certain turn states would leave the CLI in a half-interrupted state requiring a hard kill. A real fix to a real bug, but worth noting that the same surface (the interrupt/turn boundary) has shipped at least three fixes in the last two weeks; **the interrupt path is stable in the same way that the permission path is stable** — it is repeatedly almost correct.
+
+### crush: image-pruning PR continues to argue with itself
+
+[charmbracelet/crush#2613] — comment at 15:21Z. The maintainer has now proposed a `[agent].image_history_limit` config knob with a default of `3`. The reporter pushed back: a default of `3` will silently discard the fourth image without telling the user, which reproduces the original session-deadlock from the *opposite* direction (now you don't deadlock, but you also don't see your image). This is now the second day this PR has been on the same thread. Seeds synthesis #17 (defaults as load-bearing): the *value* of the default is not separable from the user's expectations; pick `3` and image-heavy users break, pick `30` and the deadlock returns.
+
+### Net narrative change since 14:46Z
+
+1. **codex absorbed six new issues in 42 minutes**, two of which (#19384 inverted-permission, #19386 advertised-vs-actual context) are structural rather than tactical.
+2. **The litellm `merge main` cadence has stabilized at ~one per 30 minutes** rather than slowing — the staging-branch sync is now sustained, not bursty.
+3. **A real security PR (litellm #26435, CVE-2026-28684) landed in the middle of the `merge main` flood**, raising the question of whether the queue's signal-to-noise is making real fixes harder to triage.
+4. **litellm #25346 merged with 16 days of open age**, adding a per-model flag that toggles the *protocol* used for that model. A flag that changes a protocol is not the same shape as a flag that changes a parameter.
+5. **Long-tail codex bugs re-confirmed**: #15568 (one month old, Windows), #8648 (four months old, reply-target). Neither has had a fix attempt in a week.
+6. **codex hooks just landed on Windows (#17478)** and immediately got a UX request (#19383) to make them quieter. The platform pattern is consistent: hook capability lands, then the quality-of-life polish takes another release cycle.
+
+Next refresh after the next dispatcher tick.
