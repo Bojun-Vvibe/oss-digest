@@ -20,7 +20,7 @@ _None in window._
 
 ## Open PRs (new or updated)
 
-_None in window._
+- [#14111](https://github.com/OpenHands/OpenHands/pull/14111) _(draft)_ **chore: delete unused Python code identified by vulture analysis** — _by @tofarr, updated 2026-04-24T01:27:47Z_
 
 
 ## Notable Issues

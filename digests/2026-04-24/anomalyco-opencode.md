@@ -15,17 +15,37 @@ _None in window._
 
 ## Merged PRs
 
-_None in window._
+- [#22098](https://github.com/anomalyco/opencode/pull/22098) **feat: add interactive burst to the TUI logo** — _by @kitlangton, merged 2026-04-13T23:36:28Z_
 
 
 ## Open PRs (new or updated)
 
-_None in window._
+- [#24079](https://github.com/anomalyco/opencode/pull/24079) **fix(app): add experimental flag to disable vcs diff auto-fetch** — _by @jeremyakers, updated 2026-04-24T01:32:15Z_
+- [#4917](https://github.com/anomalyco/opencode/pull/4917) **feat: tool description for the Bash tool now advises model as to what the actual shell in use is (resolves #4866)** — _by @ariane-emory, updated 2026-04-24T01:23:46Z_
+- [#18767](https://github.com/anomalyco/opencode/pull/18767) **feat(app): Mobile Touch Optimization** — _by @noahbentusi, updated 2026-04-24T01:16:23Z_
+- [#13854](https://github.com/anomalyco/opencode/pull/13854) **fix(tui): stop streaming markdown/code after message completes** — _by @mocksoul, updated 2026-04-24T01:16:23Z_
+- [#23269](https://github.com/anomalyco/opencode/pull/23269) **docs: Add contexty plugin to ecosystem documentation** — _by @obtuse-triangle, updated 2026-04-24T01:12:49Z_
+- [#24076](https://github.com/anomalyco/opencode/pull/24076) **fix: handle Bun stream connection errors with automatic retry** — _by @Ryo40, updated 2026-04-24T01:12:24Z_
+- [#16108](https://github.com/anomalyco/opencode/pull/16108) **feat: support .local.md variants for instruction files** — _by @clansty, updated 2026-04-24T00:36:45Z_
+- [#23783](https://github.com/anomalyco/opencode/pull/23783) **fix(tui): allow navigation into grandchild sessions from subagent view** — _by @areyouok, updated 2026-04-24T00:30:05Z_
+- [#23785](https://github.com/anomalyco/opencode/pull/23785) **feat(tui): add subagent status indicator in prompt footer** — _by @areyouok, updated 2026-04-24T00:27:36Z_
+
+
+## Closed PRs (not merged)
+
+- [#24055](https://github.com/anomalyco/opencode/pull/24055) **fix(opencode): allow gpt-5.5 in Codex OAuth model list** — _by @mattyatea, closed 2026-04-23T21:09:06Z_
+- [#24068](https://github.com/anomalyco/opencode/pull/24068) **fix(snapshot): avoid E2BIG during batched revert checkout** — _by @jeevan6996, closed 2026-04-24T00:36:19Z_
 
 
 ## Notable Issues
 
-_None in window._
+- [#24078](https://github.com/anomalyco/opencode/issues/24078) **Regression: Windows desktop 1.14.19 significantly slower than previous version (same model/workflow)** _[bug, windows, perf, web]_ — _by @csliuchi_
+- [#24077](https://github.com/anomalyco/opencode/issues/24077) **opencode (default mode) closes entire terminal window on Linux / i3wm** _[bug, core]_ — _by @brenoassp_
+- [#24075](https://github.com/anomalyco/opencode/issues/24075) **bun crash on opencode first start** _[bug, core]_ — _by @cctyl_
+- [#24074](https://github.com/anomalyco/opencode/issues/24074) **qwen 3.6 plus,Unable to cancel token billing** _[bug, core]_ — _by @renyiwei-xinyi_
+- [#24073](https://github.com/anomalyco/opencode/issues/24073) **Desktop: project color not saved after edit** _[bug, windows, web]_ — _by @MikeSoton_
+- [#23903](https://github.com/anomalyco/opencode/issues/23903) **Web UI: Failed to send prompt. Unable to retrieve session.** _[bug, web]_ — _by @jeremyakers_
+- [#24061](https://github.com/anomalyco/opencode/issues/24061) **OpenCode ACP Registry agent not working in Zed** _[bug, windows, acp]_ — _by @DanielUgoAli_
 
 
 ## Commits on `dev`

@@ -10,7 +10,17 @@
 
 ## Releases
 
-_None in window._
+- **[nightly](https://github.com/charmbracelet/crush/releases/tag/nightly)** _(prerelease)_ —  _by @github-actions[bot] at 2026-04-24T01:03:13Z_
+  > ---
+  > 
+  > <details>
+  > <summary>Verifying the artifacts</summary>
+  > 
+  > First, download the [`checksums.txt` file](https://github.com/charmbracelet/crush/releases/download//checksums.txt) and the [`checksums.txt.sigstore.json` file](https://github.com/charmbracelet/crush/releases/download//checksums.txt.sigstore.json) files, for example, with `wget`:
+  > 
+  > ```bash
+  > wget 'https://github.com/charmbracelet/crush/releases/download//checksums.txt'
+  > wget 'https://github.com/charmbracelet/crush/releases/download//checksum…
 
 
 ## Merged PRs
@@ -20,7 +30,7 @@ _None in window._
 
 ## Open PRs (new or updated)
 
-_None in window._
+- [#2692](https://github.com/charmbracelet/crush/pull/2692) **chore(styles): overhaul style definitions** — _by @meowgorithm, updated 2026-04-24T01:07:01Z_
 
 
 ## Notable Issues

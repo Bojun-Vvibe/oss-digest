@@ -20,7 +20,12 @@ _None in window._
 
 ## Open PRs (new or updated)
 
-_None in window._
+- [#10382](https://github.com/cline/cline/pull/10382) _(draft)_ **fix(hooks): Use shell escapes on JSON literals in hooks templates** — _by @dominiccooney, updated 2026-04-24T00:16:59Z_
+
+
+## Closed PRs (not merged)
+
+- [#10346](https://github.com/cline/cline/pull/10346) **[Aikido] Fix critical issue in protobufjs via minor version upgrade from 7.5.2 to 7.5.5 in standalone** — _by @aikido-autofix[bot], closed 2026-04-24T01:04:21Z_
 
 
 ## Notable Issues
