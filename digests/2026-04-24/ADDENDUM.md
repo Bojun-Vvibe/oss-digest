@@ -446,3 +446,66 @@ Only [charmbracelet/crush#2704] ("allow not truncating long command lines") in t
 8. **crush is quiet**; only one minor-UX issue filed.
 
 Next refresh after the next dispatcher tick.
+
+---
+
+# Daily addendum — 2026-04-24 (refresh @ 17:08Z)
+
+**Window since last addendum:** 2026-04-24T16:09Z → 2026-04-24T17:08Z (≈59m)
+
+This refresh covers the hour after the 16:09Z snapshot. Two clusters dominate: a six-issue codex burst against `gpt-5.5` and the new auto-compaction path (#19386 → #19405), and a litellm afternoon run that adds a third auth-scope PR to the day's growing privilege-bypass cluster.
+
+### codex: gpt-5.5 + auto-compaction is now a six-issue cluster in one hour
+
+The 16:09Z snapshot already had #19386 ("GPT-5.5 Codex session hits unrecoverable compaction failure around ~220k tokens despite advertised 400k context") and #19390 ("compact error"). Five more arrived in this window:
+
+- [openai/codex#19400] (16:40Z) — "Remote compaction fails when using `gpt-5.5` because `/responses/compact` does not appear to support the model." Names the exact failure mode that #19386 only describes operationally: the `/responses/compact` endpoint does not accept `gpt-5.5` as a target model, so the *remote* compaction path silently falls back (or fails) when the session model is `gpt-5.5`.
+- [openai/codex#19401] (16:52Z) — "Auto context compaction keeps running indefinitely." The fallback path *does* engage but never terminates — the auto-compactor enters a loop, presumably because the convergence check itself depends on a token count that the failing path never updates. Direct sibling of #19400.
+- [openai/codex#19397] (16:20Z) — "Long Codex threads fail to hydrate after reload when compacted replacement_history records are large (UI shows empty, logs show missing handler)." The *result* of #19400/#19401: even when compaction "succeeds" enough to write a replacement_history record, that record is now large enough to fail to hydrate on reload. The UI shows empty; the logs name a missing handler. So the compaction failure mode now spans (a) the endpoint not supporting the model, (b) the local fallback looping, and (c) the resulting record being unloadable.
+- [openai/codex#19405] (17:08Z) — "Track exec JSON compaction-events fix in commit 942131e8c00d5648deebadd353a38c54a9b85286." A tracking issue opened against an already-landed commit, asking to confirm that the exec-JSON compaction event format change is reflected in downstream consumers. The cluster is now generating its own *meta-issue* for tracking related fixes.
+- [openai/codex#19404] (17:08Z) — "Desktop app model picker does not show gpt-5.5 even when backend reports it available." A *presentation* bug for the same model that #19386/#19400/#19401 are crashing on at the *runtime* layer. The desktop app has the inverse problem: the backend says the model is available, the picker hides it. So the same model is simultaneously (a) crashing where it is exposed and (b) hidden where it would work.
+- [openai/codex#19402] (17:08Z) — "chrome-devtools in Codex only exposes press_key, so typing text sucks." Adjacent capability-surface bug: the chrome-devtools tool surface in Codex exposes only `press_key`, no `type_text`. Not part of the gpt-5.5 cluster but it is the third "tool-surface advertised vs delivered" mismatch of the day.
+
+In aggregate this is six issues in 59 minutes, all touching the same model rollout, all describing the same shape: *a capability is announced (400k context, model availability, exec event format, tool surface) and the runtime delivers something narrower than the announcement.* This is the seed for synthesis #21 below.
+
+- [openai/codex#19377] — "feat: separate session_id and thread_id in Responses requests." Updated 16:24Z. Structural fix: the Responses API has been conflating session and thread identity, which is exactly the seam #19397 hydration failure runs through. Pairs with the #18900 thread-store migration noted at 16:09Z; both are moves away from "session is implicitly the thread" toward an explicit two-identity model. If this lands before #19400/#19401 are fixed, the compaction failures become much more diagnosable (because the trace can name *which* identity owned the failed record).
+- [openai/codex#19350] — "fix alpha build." **Merged 16:36Z.** The fix for the AMFI-killed `0.125.0-alpha.1` from the morning. Closes the loop on yesterday's npm-update-prompt guard (#19389): the broken alpha is no longer broken, but the prompt-guard PR is still warranted because the *next* broken alpha will reproduce the issue.
+- [openai/codex#19283] — "check PID of named pipe consumer." Updated 17:04Z. Long-running infrastructure PR getting fresh review. Adds a PID check on the named-pipe consumer side so that a stale pipe (consumer died, pipe survives) does not silently swallow writes. Same shape as #19401 (loop never terminates because the convergence signal is broken) at the IPC layer.
+- New issues: [openai/codex#19398] ("Lane/Agent rules", 16:17Z), [openai/codex#19399] ("Subagent-specific TOML config no longer works on Codex Windows; named agents spawn with default config", 16:42Z) — Windows + subagent + config-not-applied, a three-way regression, related to the permissions refactor train. [#19403] ("False positive cyber-safety flag during passive product research on public webhosting documentation", 17:07Z) — safety-classifier false positive on documentation.
+
+### litellm: a third auth-scope PR plus a real Redis-blocking fix
+
+- [BerriAI/litellm#26442] (17:08Z) — "feat: restrict org admins from creating keys, teams, models via UI settings." **The third auth-scope PR of the day** (after #26438 and #26418). Currently org admins can create keys, teams, and models from the UI without any restriction — the UI does not enforce the same scope checks as the API. The fix introduces UI-level guards. Read together with #26438 (proxy_admin bypassing team TPM/RPM) and #26418 (single-team DB fallback when JWT has no team_id), the day now has three independent privilege-scope PRs against the same proxy. Seeds synthesis #22.
+- [BerriAI/litellm#26441] (17:04Z) — "fix(redis): cache GCP IAM token to prevent async event loop blocking." The Redis client was fetching a fresh GCP IAM token on every operation, blocking the asyncio event loop on the synchronous metadata-server call. The fix caches the token. Real perf bug with a real fix; the surface is GCP-Redis-specific but the failure mode (sync call inside async path) is the third "blocking-call-in-async" bug this week.
+- [BerriAI/litellm#26438] — updated 17:06Z, retitled to "fix(jwt-auth): apply team TPM/RPM + attribution for admins using x-litellm-team-id." The retitle clarifies that the fix also adds *attribution* (the audit log will now name the team being acted on, not just the admin acting). Strictly broader than the morning version.
+- [BerriAI/litellm#26418] (16:19Z) — "fix(proxy): single-team DB fallback when JWT has no team_id." When a JWT arrives without a `team_id` claim, the proxy currently throws; the PR makes it fall back to a single-team lookup if exactly one team is in scope. This is the *opposite* shape of #26438 — there the admin could act *across* teams unchecked, here the user could not act *on any* team without an explicit claim. Both are JWT-scope bugs at adjacent corners of the same matrix.
+- [BerriAI/litellm#26434] (16:30Z) — "Fix/shared health check polling." Retitled (was an opaque commit-message title earlier today). The polling-consolidation PR for shared health checks; sibling of #26202 (token-verification query opt) named at 16:09Z.
+- [BerriAI/litellm#26439] (16:12Z) — the five-PR-graveyard Vertex `output_config` PR, no movement in-window beyond the open. Still the cleanest patch-PR-graveyard exhibit of the week.
+- [BerriAI/litellm#26391] — "feat(pricing): gemini-embedding-2 GA cost map, blog, and test." **Merged 16:28Z.** Pricing/cost-map update for a newly-GA embedding model. Not a structural change, but worth flagging because cost-map drift is the silent failure mode that bills users wrong long before any test catches it.
+
+### opencode (anomalyco fork): DeepSeek surface, share-bug closed, [5th ticket] for log files
+
+- [anomalyco/opencode#24188] (16:56Z) — "[DeepSeek] The `reasoning_content` in the thinking mode must be passed back to the API." The DeepSeek API requires that `reasoning_content` from a previous turn be echoed back on the next turn for thinking-mode continuity; opencode currently drops it, breaking multi-turn reasoning. **Same shape as the W17 reasoning_content cluster from earlier in the week** (synthesis #1) but for a different vendor — the cluster is generalizing from one provider to multiple.
+- [anomalyco/opencode#24189] (17:03Z) — "DeepSeek cache usage is not reported in opencode stats (v1.14.24)." Filed seven minutes after #24188 by (likely) the same user. Cache-usage telemetry for DeepSeek is missing from the stats surface; users cannot tell whether their DeepSeek cache is actually saving cost. Pairs with #24188 as a two-issue burst against the DeepSeek surface.
+- [anomalyco/opencode#24186] (16:28Z) — "[BUG] backend Zen models downgraded without notification." A backend silently downgrades Zen-routed models (presumably to a cheaper variant) and the runtime does not notify the user. **Same family as litellm-#26442's UI/API scope mismatch**: the system makes a privileged change, the user-visible surface does not name it.
+- [anomalyco/opencode#24182] (16:16Z) — "[CRITICAL] OpenCode continues to not create its stated storage log files of messages and tool use. [5th Ticket]". The "[5th Ticket]" annotation is the user telling the maintainers this has been filed four times before. Patch-PR graveyard's mirror image: the issue-PR graveyard, where the *report* is the thing that keeps duplicating because the underlying behavior never changed.
+- [anomalyco/opencode#24187] — closed 16:45Z. "opentui: fatal: null is not an object (evaluating 'all.filter')." Closed quickly; the theme-detection-OpenTUI re-land (#23846 from the previous addendum) is presumably the underlying fix.
+- [anomalyco/opencode#24173] — closed 16:47Z. The `M0.data.share` undefined-evaluation crash from `share` command, closed without a linked PR — typically means dedup against an existing fix.
+- [anomalyco/opencode#24063] — **merged 16:12Z**: "fix: account for additional openai retry case." Adds a retry case for an OpenAI 5xx pattern not previously covered. Direct sibling of the W17 "retry-as-afterthought" synthesis (#12) — *another* retry-coverage gap closed by adding *another* case to a list. The retry policy continues to grow by enumeration.
+
+### crush: still quiet
+
+Only [charmbracelet/crush#2704] from the previous window updated (16:32Z, "allow not truncating long command lines"); no new in-hour activity. Crush continues to be the low-volume member of the four-repo set this week.
+
+### Net narrative change since 16:09Z
+
+1. **The codex gpt-5.5 + compaction cluster is now six issues in one hour** (#19386, #19390, #19397, #19400, #19401, #19405) — and #19404 adds a desktop-picker presentation bug for the same model. The runtime crashes where the model is exposed and the UI hides it where it would work. Seed for synthesis #21 below.
+2. **litellm now has three independent privilege-scope PRs in one day** (#26418, #26438, #26442). All against the same proxy auth surface, all naming a different corner of the JWT/admin/UI scope matrix. Seed for synthesis #22 below.
+3. **The DeepSeek `reasoning_content` bug (anomalyco/opencode#24188) generalizes the W17 reasoning_content cluster** from one vendor to multiple. The "echo back the thinking-mode field on the next turn" contract is now visibly cross-vendor.
+4. **anomalyco/opencode#24182 is filed as the 5th ticket** for the same storage-log-files behavior. Issue-PR graveyards (issues that keep being re-filed because the behavior never changed) are the mirror of the patch-PR graveyards in synthesis #20.
+5. **anomalyco/opencode#24063 closed another retry-coverage gap by adding another enumeration entry** — the W17 retry-as-afterthought pattern continues to play out in real time.
+6. **codex #19350 merged the alpha build fix** (`fix alpha build`); the AMFI-killed `0.125.0-alpha.1` is closed-loop. The npm-prompt guard #19389 remains warranted for the *next* broken alpha.
+7. **litellm #26441 caught a sync-in-async Redis bug** (GCP IAM token fetch blocking the event loop) — the third blocking-call-in-async bug the week has surfaced.
+8. **The codex permissions refactor train (#19391–#19395) is still all OPEN** an hour after filing; no merges in dependency order yet.
+
+Next refresh after the next dispatcher tick.
