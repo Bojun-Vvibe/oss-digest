@@ -116,3 +116,40 @@ No new PRs or issues filed against `charmbracelet/crush` between 11:05Z and 11:2
 5. **No new release for crush, opencode, or LiteLLM in this window** — only Codex moved.
 
 Next refresh expected after the next dispatcher tick.
+
+---
+
+## 12:07Z addendum — ~30min cross-repo sweep (11:35Z to 12:05Z)
+
+Tighter window, narrower set of motion. Five things actually moved; two of them sharpen earlier predictions and one introduces a new bug shape worth flagging.
+
+### Codex `0.125.0-alpha.2` post-cut shake-out
+
+The `0.125.0-alpha.2` cut (announced 11:30Z, see prior block) has now collected its first three downstream issues, all filed within 22 minutes of the tag landing on the release feed:
+
+- **[openai/codex#9421]** — IDE-side regression: the panel re-mounts on every tool call instead of streaming into the existing pane, breaking the conversation scrollback. Reporter bisected to the alpha.2 cut. This is the third IDE-shaped regression of W17 and reinforces synthesis #6 — the IDE/VS Code extension surface is genuinely the regression hotspot of the week, and alpha.2 did not break the streak.
+- **[openai/codex#9420]** — Approval-mode prompt now fires twice for the first tool call of a session. Filed by an external user, reproduced by a maintainer in-thread within 9 minutes. Not a security issue (the second prompt is the real one, the first is a stale render), but a clear sign the alpha.2 cut shipped without an integration pass against the IDE harness.
+- **[openai/codex#9419]** — Streaming output drops the first `reasoning_content` fragment when `--show-reasoning` is set. Connects directly to the synthesis #5 cluster: the `reasoning_content` round-trip is failing in yet another agent, this time on the render side rather than the wire side. The provider sends the field; the CLI strips the first chunk because the renderer's "is this the start of a reasoning block" detector keys on a marker that the provider stopped emitting after a recent upstream change.
+
+The pattern across all three: **alpha.2 was cut on the green of the unit-test suite, but the IDE-integration suite either does not exist or did not run in CI for this cut.** A 4h25m alpha.1 to alpha.2 turnaround is healthy in isolation; combined with three regressions in the first 22 minutes, it suggests the cut cadence is faster than the integration coverage can support.
+
+### opencode merge-discipline call has landed
+
+Predicted in the 11:23Z addendum: the two competing fix PRs for the DeepSeek `reasoning_content` drop (#24146, #24150) would force a maintainer call within hours. Result, 11:48Z:
+
+- **[anomalyco/opencode#24146]** was merged; **[anomalyco/opencode#24150]** was closed with a note pointing to #24146 and thanking the second author. The accepted fix is the more conservative one — it preserves `reasoning_content` end-to-end without introducing a new flag — which matches the prediction in synthesis #5 that the field would be promoted to first-class rather than gated behind a `passthrough_reasoning_content` toggle.
+- A follow-up issue, **[anomalyco/opencode#24153]**, was filed 11:54Z asking why the fix did not also cover the `reasoning_signature` companion field. This is exactly the boundary-symmetry failure flagged in synthesis #7: the fix landed on one side of the field pair and missed the other. Expect a #24154-shaped follow-up PR within the next dispatcher tick.
+
+### LiteLLM #26416 review has begun, ACL surface is wider than the PR
+
+**[BerriAI/litellm#26416]** (Bedrock passthrough ACL fix) picked up its first review comment 11:51Z. The reviewer's note is the interesting part: they point out that the ACL check is duplicated inline in the passthrough handler rather than extracted into the shared `RouterAuth` helper, and that **two other passthrough routes (Anthropic and Vertex) have the same gap**. The fix-author has acknowledged and is iterating; the PR will likely grow to cover all three before merge. This sharpens the synthesis #4 prediction: privilege-escalation seams in passthrough routes are not a one-bug story but a route-class story, and the architectural fix the reporter declined to make in the first cut is now being requested by the maintainers.
+
+### crush MCP stdio arg-expansion: PR drafted
+
+**[charmbracelet/crush#2701]** — `feat(mcp): expand env vars in args, not just command`. Filed 11:42Z, addresses synthesis #2 directly. The fix is a 14-line patch to the `expandEnv` call site that the original implementation forgot to apply to the `args` array. Tests added. The patch is small enough to merge same-day; the more interesting question (raised in the PR description by the author) is whether the same expansion should apply to the `env` values in the MCP config, which currently are passed through verbatim. This is a synthesis-#2 corollary worth tracking — the bug class is "expansion is applied inconsistently across sibling fields of the same config block," and `env` values are the next likely instance.
+
+### New: a fresh test-deletion signal in the LiteLLM fix PRs
+
+Three of the LiteLLM fix PRs filed this week (#26395, #26411, #26416) **delete or skip more test cases than they add**. #26416 in particular skips a previous test that asserted "passthrough route accepts any model the caller provides" — which was the test encoding the bug as the contract. Removing the test is correct (the contract was wrong), but no replacement test was added asserting "passthrough route rejects models outside the caller's ACL." This is the seed of W17 synthesis #9 — see the W17 weekly file.
+
+End of 12:07Z addendum. Next refresh after the next dispatcher tick.
