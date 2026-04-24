@@ -2,7 +2,7 @@
 
 > VS Code-native autonomous coding agent; another adjacent ecosystem signal.
 
-**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
+**Window:** 2026-04-23T08:37:51.049Z → 2026-04-24T08:37:51.049Z  
 **Default branch:** `main`  
 **Source:** [github.com/cline/cline](https://github.com/cline/cline)
 
@@ -31,8 +31,6 @@ _None in window._
 - [#10350](https://github.com/cline/cline/pull/10350) **docs: add SDK documentation** — _by @saoudrizwan, updated 2026-04-23T22:49:59Z_
 - [#9792](https://github.com/cline/cline/pull/9792) **feat(providers): add gpt-5.4, gpt-5.4-pro, gpt-5.3-codex to openai-native** — _by @ClineXDiego, updated 2026-04-23T21:09:13Z_
 - [#10377](https://github.com/cline/cline/pull/10377) **fix: expose Plan/Act mode as an accessible radio group** — _by @toby-bridges, updated 2026-04-23T17:48:44Z_
-- [#10319](https://github.com/cline/cline/pull/10319) **fix: Model metadata fails to update when change model (#10248)** — _by @water-in-stone, updated 2026-04-23T07:51:42Z_
-- [#10369](https://github.com/cline/cline/pull/10369) **fix(ollama): strip data URI prefix from images for Ollama API compati…** — _by @alkul93123, updated 2026-04-23T07:29:25Z_
 
 
 ## Closed PRs (not merged)
@@ -44,6 +42,7 @@ _None in window._
 
 ## Notable Issues
 
+- [#10388](https://github.com/cline/cline/issues/10388) **Raw XML `<response>` / `</response>` tags displayed in chat around terminal output** _[VS Code]_ — _by @xroynard_
 - [#9448](https://github.com/cline/cline/issues/9448) **[Cline CLI 2.0] Vertex AI Provider auth flow doesn't expose all required fields** _[stale, CLI]_ — _by @maxpaulus43_
 - [#9478](https://github.com/cline/cline/issues/9478) **Sambanova provider has outdated models list** _[stale, VS Code]_ — _by @hanw-dev_
 - [#10379](https://github.com/cline/cline/issues/10379) **[Windows Specific] Cline: Resume task button is shown when user closes and reopens completed task when hooks are enabled** _[QA, VS Code, JetBrains, Bug]_ — _by @RajatNagoria_
@@ -56,10 +55,6 @@ _None in window._
 - [#10371](https://github.com/cline/cline/issues/10371) **{"message":"Codex API error: Invalid 'input[67].id': 'v_3oaa-GI4TUz7IP--TI0A8'. Expected an ID that begins with 'rs'.","modelId":"gpt-5.3-codex","providerId":"openai-codex"}** _[VS Code]_ — _by @FoSGamers_
 - [#8273](https://github.com/cline/cline/issues/8273) **Cline sometimes deletes whole .git folder** _[P2, Investigation Needed, Needs User Input, VS Code, Bot Responded]_ — _by @ZizheRuan_
 - [#7753](https://github.com/cline/cline/issues/7753) **Cline Core fails to start on Android Studio Otter (2025.2.1) – “Healthcheck timed out”** _[JetBrains, Bot Responded]_ — _by @amanjha7096_ _(closed 2026-04-23T10:25:21Z)_
-- [#10208](https://github.com/cline/cline/issues/10208) **Stuck thinking for ever.** _[VS Code]_ — _by @Susanoo1337_
-- [#10370](https://github.com/cline/cline/issues/10370) **Cline removes "data:" on lines that contain "metadata:" on YAML files** _[VS Code]_ — _by @mperlinesfortes_
-- [#9522](https://github.com/cline/cline/issues/9522) **OpenRouter Provider gives me a Error 401** _[CLI]_ — _by @HEIN390_ _(closed 2026-02-26T22:15:10Z)_
-- [#10368](https://github.com/cline/cline/issues/10368) **Bug: Ollama vision models fail to process images due to incorrect Base64 format** _[VS Code]_ — _by @alkul93123_
 
 
 ## Commits on `main`

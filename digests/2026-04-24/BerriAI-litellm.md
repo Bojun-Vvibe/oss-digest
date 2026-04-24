@@ -2,7 +2,7 @@
 
 > LLM gateway / proxy that powers most of our local agent stack.
 
-**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
+**Window:** 2026-04-23T08:37:51.049Z → 2026-04-24T08:37:51.049Z  
 **Default branch:** `litellm_internal_staging`  
 **Source:** [github.com/BerriAI/litellm](https://github.com/BerriAI/litellm)
 
@@ -71,13 +71,16 @@
 - [#26342](https://github.com/BerriAI/litellm/pull/26342) **[Infra] Add standalone create-release-branch workflow** — _by @yuneng-berri, merged 2026-04-23T21:14:01Z_
 - [#26345](https://github.com/BerriAI/litellm/pull/26345) **feat: add gpt-5.5 to model cost map** — _by @mateo-berri, merged 2026-04-23T21:05:23Z_
 - [#26336](https://github.com/BerriAI/litellm/pull/26336) **[IInfra] Merge dev branch** — _by @yuneng-berri, merged 2026-04-23T19:02:48Z_
-- [#23971](https://github.com/BerriAI/litellm/pull/23971) **fix(bedrock): preserve output_config.effort for Claude 4.6 on Invoke API** — _by @KevinZhao, merged 2026-04-23T18:41:03Z_
 
 
 ## Open PRs (new or updated)
 
-- [#26394](https://github.com/BerriAI/litellm/pull/26394) **docs(guardrails): add during_call mode to Model Armor guardrail docs** — _by @wadhah101, updated 2026-04-24T06:51:07Z_
-- [#26393](https://github.com/BerriAI/litellm/pull/26393) **feat: bedrock guardrail input roles filter** — _by @orolega, updated 2026-04-24T06:36:35Z_
+- [#26245](https://github.com/BerriAI/litellm/pull/26245) **fix(proxy): skip redundant tiktoken recount when provider supplies reasoning_tokens** — _by @dschulmeist, updated 2026-04-24T08:29:03Z_
+- [#26397](https://github.com/BerriAI/litellm/pull/26397) **fix(proxy): add verbose_logger to LITELLM_LOG=INFO branch** — _by @Anai-Guo, updated 2026-04-24T07:36:52Z_
+- [#25369](https://github.com/BerriAI/litellm/pull/25369) **fix(tool_choice): respect GPT-5 and Azure AI models without explicit capability flag** — _by @Hybirdss, updated 2026-04-24T07:28:49Z_
+- [#26385](https://github.com/BerriAI/litellm/pull/26385) **fix: remove duplicate MAX_SIZE_PER_ITEM_IN_MEMORY_CACHE_IN_KB definition** — _by @Jah-yee, updated 2026-04-24T07:27:49Z_
+- [#26393](https://github.com/BerriAI/litellm/pull/26393) **feat: bedrock guardrail input roles filter** — _by @orolega, updated 2026-04-24T07:20:48Z_
+- [#26394](https://github.com/BerriAI/litellm/pull/26394) **docs(guardrails): add during_call mode to Model Armor guardrail docs** — _by @wadhah101, updated 2026-04-24T06:54:20Z_
 - [#26391](https://github.com/BerriAI/litellm/pull/26391) **feat(pricing): gemini-embedding-2 GA cost map, blog, and test** — _by @Sameerlite, updated 2026-04-24T06:30:21Z_
 - [#26390](https://github.com/BerriAI/litellm/pull/26390) **[Fix] Guardrail param handling in list and submission endpoints** — _by @yuneng-berri, updated 2026-04-24T06:16:31Z_
 - [#26388](https://github.com/BerriAI/litellm/pull/26388) **fix: bedrock guardrail sse streaming exception** — _by @orolega, updated 2026-04-24T05:58:24Z_
@@ -87,7 +90,6 @@
 - [#26362](https://github.com/BerriAI/litellm/pull/26362) **[Fix] Tests - Proxy: Isolate master_key/prisma_client module globals between tests** — _by @yuneng-berri, updated 2026-04-24T05:11:26Z_
 - [#26383](https://github.com/BerriAI/litellm/pull/26383) **fix: prevent Azure output_config leakage** — _by @kime541200, updated 2026-04-24T04:58:20Z_
 - [#26386](https://github.com/BerriAI/litellm/pull/26386) **litellm oss branch** — _by @krrish-berri-2, updated 2026-04-24T05:03:26Z_
-- [#26385](https://github.com/BerriAI/litellm/pull/26385) **fix: remove duplicate MAX_SIZE_PER_ITEM_IN_MEMORY_CACHE_IN_KB definition** — _by @Jah-yee, updated 2026-04-24T04:56:42Z_
 - [#23586](https://github.com/BerriAI/litellm/pull/23586) **fix: convert datetime to ISO string for PostgreSQL timestamp compatibility** — _by @Jah-yee, updated 2026-04-24T04:47:07Z_
 - [#25202](https://github.com/BerriAI/litellm/pull/25202) **fix(bedrock): trigger websearch_interception agentic loop for /chat/completions** — _by @nishchay-veer, updated 2026-04-24T04:23:21Z_
 - [#26382](https://github.com/BerriAI/litellm/pull/26382) **Move 'Store Prompts in Spend Logs' toggle to Admin Settings** — _by @ryan-crabbe-berri, updated 2026-04-24T04:06:44Z_
@@ -130,10 +132,8 @@
 - [#25520](https://github.com/BerriAI/litellm/pull/25520) **fix(together_ai): support reasoning_effort for gpt-oss models** — _by @jeanibarz, updated 2026-04-23T19:33:52Z_
 - [#25454](https://github.com/BerriAI/litellm/pull/25454) **fix(router): use correct metadata key in run_async_fallback for Responses API** — _by @jeanibarz, updated 2026-04-23T19:32:14Z_
 - [#26344](https://github.com/BerriAI/litellm/pull/26344) **fix(azure_ai): map max_completion_tokens to max_tokens for Model Inference endpoint** — _by @jeanibarz, updated 2026-04-23T19:23:26Z_
-- [#25923](https://github.com/BerriAI/litellm/pull/25923) **feat(chatgpt, github_[redacted-product]): OAuth sign-in + token refresh in proxy UI** — _by @jmcook, updated 2026-04-23T19:07:38Z_
+- [#25923](https://github.com/BerriAI/litellm/pull/25923) **feat(chatgpt, github_<REDACTED>): OAuth sign-in + token refresh in proxy UI** — _by @jmcook, updated 2026-04-23T19:07:38Z_
 - [#26278](https://github.com/BerriAI/litellm/pull/26278) **[Fix] Extend request body param controls to cover cloud provider identity fields** — _by @yuneng-berri, updated 2026-04-23T19:02:50Z_
-- [#26340](https://github.com/BerriAI/litellm/pull/26340) **fix(key_management): enforce upperbound_key_generate_params on /key/regenerate** — _by @michelligabriele, updated 2026-04-23T18:57:09Z_
-- [#25353](https://github.com/BerriAI/litellm/pull/25353) **Add LTX Video API support** — _by @matt-greathouse, updated 2026-04-23T18:26:22Z_
 
 
 ## Closed PRs (not merged)
@@ -162,6 +162,12 @@
 
 ## Notable Issues
 
+- [#26399](https://github.com/BerriAI/litellm/issues/26399) **[Bug]: Bedrock passthrough routes bypass key.models / user.models access control** _[llm translation, claude code]_ — _by @netblack_
+- [#26398](https://github.com/BerriAI/litellm/issues/26398) **[Bug]: API Error: "400 String should have at most 64 characters" when calling MCP Tool** _[bug, proxy, claude code]_ — _by @ron-zhong_
+- [#24212](https://github.com/BerriAI/litellm/issues/24212) **[Bug]: gpt-realtime-1.5 ( OpenAI)** _[bug, proxy, llm translation]_ — _by @superpoussin22_
+- [#22747](https://github.com/BerriAI/litellm/issues/22747) **azure_api_type: responses uses aiohttp transport which has ~60s socket idle timeout, ignoring timeout parameter -GPT-5-PRO** _[llm translation]_ — _by @harshadchha_
+- [#26232](https://github.com/BerriAI/litellm/issues/26232) **[Bug]: support gpt-image-2** _[bug, proxy, llm translation]_ — _by @superpoussin22_
+- [#16923](https://github.com/BerriAI/litellm/issues/16923) **[Bug]: False alert raised** _[bug, stale]_ — _by @javiergarciapleo_ _(closed 2026-04-14T00:12:45Z)_
 - [#26396](https://github.com/BerriAI/litellm/issues/26396) **[Bug]: verbose_logger level not set when LITELLM_LOG=INFO, causing INFO logs to be suppressed** _[bug]_ — _by @yuansheng-wzw_
 - [#26395](https://github.com/BerriAI/litellm/issues/26395) **[Bug]: DeepSeek V4 Pro (deepseek-v4-pro) fails in multi-turn conversations - reasoning_content stripped from assistant messages** _[llm translation]_ — _by @anjun_
 - [#26392](https://github.com/BerriAI/litellm/issues/26392) **[Feature]:  Add experimental_guardrail_input_roles to BedrockGuardrail to filter messages by role before INPUT validation** _[enhancement, proxy, llm translation]_ — _by @orolega_
@@ -170,7 +176,6 @@
 - [#25191](https://github.com/BerriAI/litellm/issues/25191) **[Bug]: websearch_interception agentic loop not triggered for Bedrock via /chat/completions** _[bug]_ — _by @dtometzki_
 - [#26378](https://github.com/BerriAI/litellm/issues/26378) **[Bug]: Team member rpm limit is not enforced** _[bug, proxy]_ — _by @LeeTeng2001_
 - [#19174](https://github.com/BerriAI/litellm/issues/19174) **[Bug]: Embedding busted on 1.80.11** _[bug, proxy]_ — _by @frenzybiscuit_ _(closed 2026-01-30T11:31:58Z)_
-- [#22747](https://github.com/BerriAI/litellm/issues/22747) **azure_api_type: responses uses aiohttp transport which has ~60s socket idle timeout, ignoring timeout parameter -GPT-5-PRO** _[llm translation]_ — _by @harshadchha_
 - [#22821](https://github.com/BerriAI/litellm/issues/22821) **[Bug] Presidio guardrail: end-to-end PII masking broken with Anthropic native API** _[llm translation, claude code]_ — _by @firestaerter3_
 - [#6247](https://github.com/BerriAI/litellm/issues/6247) **[Bug]: Problems with output parsing in presidio guardrail** _[bug, stale]_ — _by @taimans-git_ _(closed 2025-06-04T00:02:05Z)_
 - [#26376](https://github.com/BerriAI/litellm/issues/26376) **[Bug]: langfuse_otel callback drops OTEL spans under asyncio.gather() concurrency** — _by @shuttlesworthNEO_
@@ -181,7 +186,7 @@
 - [#13961](https://github.com/BerriAI/litellm/issues/13961) **[Bug]: send_invite_email setting is ignored during user creation** _[bug, stale]_ — _by @JonasDev1_ _(closed 2026-04-24T00:13:59Z)_
 - [#14067](https://github.com/BerriAI/litellm/issues/14067) **Issue with model function calling** _[llm translation, stale]_ — _by @AimoreRRD_
 - [#19001](https://github.com/BerriAI/litellm/issues/19001) **[Bug]: /v1/rag/query endpoint throws 'Router is not JSON serializable' error** _[llm translation, stale]_ — _by @jctux_
-- [#19014](https://github.com/BerriAI/litellm/issues/19014) **[redacted-vendor] Foundry Project Endpoint** _[stale]_ — _by @gfish213-tech_
+- [#19014](https://github.com/BerriAI/litellm/issues/19014) **<REDACTED-vendor> Foundry Project Endpoint** _[stale]_ — _by @gfish213-tech_
 - [#19194](https://github.com/BerriAI/litellm/issues/19194) **[Bug] Data Protection Issue: Endpoint /user/daily/activity** _[bug, proxy, stale]_ — _by @chandra-potula_ _(closed 2026-04-24T00:13:36Z)_
 - [#19499](https://github.com/BerriAI/litellm/issues/19499) **[Bug]: Prompt Injection Detection Issues** _[bug, proxy]_ — _by @ianmuge_
 - [#19626](https://github.com/BerriAI/litellm/issues/19626) **[Bug]: Missing wget in Docker container results in LiteLLM container healthcheck to fail** _[bug, stale]_ — _by @roxlukas_

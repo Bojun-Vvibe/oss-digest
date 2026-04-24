@@ -2,7 +2,7 @@
 
 > Charm's terminal AI coding agent; design-forward TUI patterns worth tracking.
 
-**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
+**Window:** 2026-04-23T08:37:51.049Z → 2026-04-24T08:37:51.049Z  
 **Default branch:** `main`  
 **Source:** [github.com/charmbracelet/crush](https://github.com/charmbracelet/crush)
 
@@ -40,10 +40,17 @@
 - [#2686](https://github.com/charmbracelet/crush/pull/2686) **feat: support Moonshot and Moonshot China API keys in config** — _by @ne275, updated 2026-04-23T09:29:55Z_
 
 
+## Closed PRs (not merged)
+
+- [#2160](https://github.com/charmbracelet/crush/pull/2160) **fix: clear animation frame cache on new session to prevent unbounded growth** — _by @AnyCPU, closed 2026-04-24T08:12:19Z_
+
+
 ## Notable Issues
 
+- [#2678](https://github.com/charmbracelet/crush/issues/2678) **Github <REDACTED> Claude Opus 4.7: exceeded token limit.** _[provider: anthropic claude, provider: github <REDACTED>]_ — _by @jzandbergen_ _(closed 2026-04-24T08:26:59Z)_
+- [#2697](https://github.com/charmbracelet/crush/issues/2697) **Blackbox.ai provider request** _[provider: xai grok]_ — _by @calamity10110_
 - [#2696](https://github.com/charmbracelet/crush/issues/2696) **[Bug] 400 Bad Request with deepseek-v4-pro on tool calls: missing reasoning_content** _[area: tools]_ — _by @Slade66_
-- [#2689](https://github.com/charmbracelet/crush/issues/2689) **GitHub [redacted-product]: GPT-4.1 does not work (needs to use Responses API)** _[provider: openai chatgpt, provider: github [redacted-product]]_ — _by @victornoel_
+- [#2689](https://github.com/charmbracelet/crush/issues/2689) **GitHub <REDACTED>: GPT-4.1 does not work (needs to use Responses API)** _[provider: openai chatgpt, provider: github <REDACTED>]_ — _by @victornoel_
 - [#2670](https://github.com/charmbracelet/crush/issues/2670) **Relax golang dependency?** — _by @dbeecham_ _(closed 2026-04-23T13:38:04Z)_
 - [#2682](https://github.com/charmbracelet/crush/issues/2682) **Prevent SQLite corruption (`SQLITE_NOTADB`/code 26) under concurrent sub-agents** — _by @taoeffect_
 - [#2677](https://github.com/charmbracelet/crush/issues/2677) **Custom System Prompt** — _by @BlackScorp_

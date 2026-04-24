@@ -2,7 +2,7 @@
 
 > Reference MCP server implementations; canonical examples for the protocol.
 
-**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
+**Window:** 2026-04-23T08:37:51.049Z → 2026-04-24T08:37:51.049Z  
 **Default branch:** `main`  
 **Source:** [github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)
 
@@ -36,8 +36,11 @@ _None in window._
 - [#4022](https://github.com/modelcontextprotocol/servers/pull/4022) **docs(readme): remove outdated GitLab server reference** — _by @Will-hxw, updated 2026-04-23T18:48:34Z_
 - [#3948](https://github.com/modelcontextprotocol/servers/pull/3948) **fix(filesystem): tolerate Windows realpath ENOENT** — _by @krot4u, updated 2026-04-23T15:48:05Z_
 - [#4027](https://github.com/modelcontextprotocol/servers/pull/4027) **Add REG-Vault (retro-gaming metadata + MCP)** — _by @rtissera, updated 2026-04-23T09:50:21Z_
-- [#4025](https://github.com/modelcontextprotocol/servers/pull/4025) **feat(filesystem): add head/tail support to read_multiple_files** — _by @factspark23-hash, updated 2026-04-23T06:54:34Z_
-- [#4024](https://github.com/modelcontextprotocol/servers/pull/4024) **feat(filesystem): add compare_files tool for file diff comparison** — _by @factspark23-hash, updated 2026-04-23T06:54:14Z_
+
+
+## Closed PRs (not merged)
+
+- [#3595](https://github.com/modelcontextprotocol/servers/pull/3595) **fix(filesystem): handle paths containing tilde (~) without crashing** — _by @VoidChecksum, closed 2026-04-24T07:01:14Z_
 
 
 ## Notable Issues
@@ -46,7 +49,6 @@ _None in window._
 - [#4032](https://github.com/modelcontextprotocol/servers/issues/4032) **Submission: HumanizerMCP - AI Text Humanization** — _by @zhaohongyuziranerran_
 - [#4031](https://github.com/modelcontextprotocol/servers/issues/4031) **"Invalid prompt: your prompt was flagged as potentially violating our usage policy" after GPT-5.5 uses Sequential Thinking** — _by @metalbladex4_
 - [#4029](https://github.com/modelcontextprotocol/servers/issues/4029) **filesystem: read_media_file returns invalid 'blob' content type, violating MCP spec** — _by @blackwell-systems_
-- [#4026](https://github.com/modelcontextprotocol/servers/issues/4026) **Filesystem MCP writes hang when launched via `npx -y`; reliability improves with pinned global install** _[bug]_ — _by @pmabray_
 
 
 ## Commits on `main`

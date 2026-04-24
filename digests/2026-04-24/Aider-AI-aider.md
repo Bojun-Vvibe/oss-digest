@@ -2,7 +2,7 @@
 
 > Pioneer terminal pair-programmer; slow but high-signal when it moves.
 
-**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
+**Window:** 2026-04-23T08:37:51.049Z → 2026-04-24T08:37:51.049Z  
 **Default branch:** `main`  
 **Source:** [github.com/Aider-AI/aider](https://github.com/Aider-AI/aider)
 
@@ -21,6 +21,13 @@ _None in window._
 ## Open PRs (new or updated)
 
 _None in window._
+
+
+## Closed PRs (not merged)
+
+- [#4924](https://github.com/Aider-AI/aider/pull/4924) **fix: catch NoSuchPathError in get_git_root()** — _by @VoidChecksum, closed 2026-04-24T07:05:42Z_
+- [#4896](https://github.com/Aider-AI/aider/pull/4896) **fix: emoji input crash from lone UTF-16 surrogates on Windows** — _by @VoidChecksum, closed 2026-04-24T07:05:41Z_
+- [#4895](https://github.com/Aider-AI/aider/pull/4895) **fix: UnicodeEncodeError when redirecting repo map output on Windows** — _by @VoidChecksum, closed 2026-04-24T07:05:40Z_
 
 
 ## Notable Issues

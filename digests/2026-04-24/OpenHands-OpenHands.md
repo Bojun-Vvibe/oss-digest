@@ -2,7 +2,7 @@
 
 > Autonomous software engineering agent; bellwether for agentic dev tooling.
 
-**Window:** 2026-04-23T06:54:06.640Z → 2026-04-24T06:54:06.640Z  
+**Window:** 2026-04-23T08:37:51.049Z → 2026-04-24T08:37:51.049Z  
 **Default branch:** `main`  
 **Source:** [github.com/OpenHands/OpenHands](https://github.com/OpenHands/OpenHands)
 
@@ -28,6 +28,9 @@ _None in window._
 
 ## Open PRs (new or updated)
 
+- [#14114](https://github.com/OpenHands/OpenHands/pull/14114) **fix(runtime): shrink BashSession tmux pane from 1000x1000 to 256x50** — _by @he-yufeng, updated 2026-04-24T07:38:59Z_
+- [#14077](https://github.com/OpenHands/OpenHands/pull/14077) **Make archived conversations read-only without loading states** — _by @malhotra5, updated 2026-04-24T07:10:59Z_
+- [#14113](https://github.com/OpenHands/OpenHands/pull/14113) **fix(enterprise): register GitlabV1CallbackProcessor at startup** — _by @he-yufeng, updated 2026-04-24T07:01:26Z_
 - [#14029](https://github.com/OpenHands/OpenHands/pull/14029) **fix(llm): skip Gemini full endpoint URL as base_url to prevent doubled path 404** — _by @StatPan, updated 2026-04-24T06:25:54Z_
 - [#14111](https://github.com/OpenHands/OpenHands/pull/14111) **chore: delete unused Python code identified by vulture analysis** — _by @tofarr, updated 2026-04-24T05:17:11Z_
 - [#14112](https://github.com/OpenHands/OpenHands/pull/14112) **fix: preserve LLM and MCP settings in migration 108** — _by @neubig, updated 2026-04-24T03:06:21Z_
@@ -55,7 +58,6 @@ _None in window._
 - [#14087](https://github.com/OpenHands/OpenHands/pull/14087) _(draft)_ **[KAN-4] Add Usage Dashboard to OpenHands** — _by @jpelletier1, updated 2026-04-23T13:02:36Z_
 - [#14021](https://github.com/OpenHands/OpenHands/pull/14021) **fix(integrations): deduplicate merged repositories by full_name** — _by @ChiragArora31, updated 2026-04-23T12:11:54Z_
 - [#13193](https://github.com/OpenHands/OpenHands/pull/13193) **feat+fix(app-server): add auto_pause_existing flag and fix sandbox eviction order (#13126)** — _by @daniel-laroz, updated 2026-04-23T08:51:37Z_
-- [#13917](https://github.com/OpenHands/OpenHands/pull/13917) **Fix backend base URL normalization + settings stability** — _by @noyahazzan-art, updated 2026-04-23T07:56:09Z_
 
 
 ## Closed PRs (not merged)
