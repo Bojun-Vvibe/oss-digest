@@ -2,7 +2,7 @@
 
 > Reference MCP server implementations; canonical examples for the protocol.
 
-**Window:** 2026-04-23T02:58:07.638Z → 2026-04-24T02:58:07.638Z  
+**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z  
 **Default branch:** `main`  
 **Source:** [github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)
 
@@ -39,13 +39,12 @@ _None in window._
 - [#4023](https://github.com/modelcontextprotocol/servers/pull/4023) **feat(filesystem): add maxDepth parameter to directory_tree** — _by @factspark23-hash, updated 2026-04-23T06:54:03Z_
 - [#4021](https://github.com/modelcontextprotocol/servers/pull/4021) **fix(everything): add description to get-resource-reference resourceType** — _by @Will-hxw, updated 2026-04-23T04:42:04Z_
 - [#4017](https://github.com/modelcontextprotocol/servers/pull/4017) **fix(filesystem): add optional depth parameter to list_directory** — _by @Will-hxw, updated 2026-04-23T04:40:42Z_
-- [#4020](https://github.com/modelcontextprotocol/servers/pull/4020) **fix(release): include lockfile changes in has_changes()** — _by @Will-hxw, updated 2026-04-23T04:03:02Z_
-- [#4019](https://github.com/modelcontextprotocol/servers/pull/4019) **Add M2MCent to community tools** — _by @Evozim, updated 2026-04-23T03:25:36Z_
-- [#4018](https://github.com/modelcontextprotocol/servers/pull/4018) **Pr change** — _by @nikolayb, updated 2026-04-23T03:09:15Z_
 
 
 ## Notable Issues
 
+- [#4033](https://github.com/modelcontextprotocol/servers/issues/4033) **Submission: FinMCP - Financial Intelligence MCP Server** — _by @zhaohongyuziranerran_
+- [#4032](https://github.com/modelcontextprotocol/servers/issues/4032) **Submission: HumanizerMCP - AI Text Humanization** — _by @zhaohongyuziranerran_
 - [#4031](https://github.com/modelcontextprotocol/servers/issues/4031) **"Invalid prompt: your prompt was flagged as potentially violating our usage policy" after GPT-5.5 uses Sequential Thinking** — _by @metalbladex4_
 - [#4029](https://github.com/modelcontextprotocol/servers/issues/4029) **filesystem: read_media_file returns invalid 'blob' content type, violating MCP spec** — _by @blackwell-systems_
 - [#4026](https://github.com/modelcontextprotocol/servers/issues/4026) **Filesystem MCP writes hang when launched via `npx -y`; reliability improves with pinned global install** _[bug]_ — _by @pmabray_

@@ -2,7 +2,7 @@
 
 > Autonomous software engineering agent; bellwether for agentic dev tooling.
 
-**Window:** 2026-04-23T02:58:07.638Z → 2026-04-24T02:58:07.638Z  
+**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z  
 **Default branch:** `main`  
 **Source:** [github.com/OpenHands/OpenHands](https://github.com/OpenHands/OpenHands)
 
@@ -28,8 +28,8 @@ _None in window._
 
 ## Open PRs (new or updated)
 
+- [#14112](https://github.com/OpenHands/OpenHands/pull/14112) **fix: preserve LLM and MCP settings in migration 108** — _by @neubig, updated 2026-04-24T03:06:21Z_
 - [#14097](https://github.com/OpenHands/OpenHands/pull/14097) **APP-1325: show GitLab/Slack sections without GitHub App configured** — _by @aivong-openhands, updated 2026-04-24T02:54:08Z_
-- [#14112](https://github.com/OpenHands/OpenHands/pull/14112) **fix: preserve LLM and MCP settings in migration 108** — _by @neubig, updated 2026-04-24T02:53:41Z_
 - [#14110](https://github.com/OpenHands/OpenHands/pull/14110) **APP-1325: register GitlabV1CallbackProcessor for deserialization** — _by @aivong-openhands, updated 2026-04-24T02:50:14Z_
 - [#14111](https://github.com/OpenHands/OpenHands/pull/14111) **chore: delete unused Python code identified by vulture analysis** — _by @tofarr, updated 2026-04-24T02:22:33Z_
 - [#13978](https://github.com/OpenHands/OpenHands/pull/13978) **Refactor verification settings to use schema rendering** — _by @neubig, updated 2026-04-24T01:48:03Z_
@@ -56,7 +56,6 @@ _None in window._
 - [#13193](https://github.com/OpenHands/OpenHands/pull/13193) **feat+fix(app-server): add auto_pause_existing flag and fix sandbox eviction order (#13126)** — _by @daniel-laroz, updated 2026-04-23T08:51:37Z_
 - [#13917](https://github.com/OpenHands/OpenHands/pull/13917) **Fix backend base URL normalization + settings stability** — _by @noyahazzan-art, updated 2026-04-23T07:56:09Z_
 - [#14086](https://github.com/OpenHands/OpenHands/pull/14086) **fix: don't persist Gemini model-specific endpoint as base_url** — _by @he-yufeng, updated 2026-04-23T05:49:25Z_
-- [#14071](https://github.com/OpenHands/OpenHands/pull/14071) **chore(deps): bump lxml from 6.0.2 to 6.1.0** — _by @dependabot[bot], updated 2026-04-23T03:58:54Z_
 
 
 ## Closed PRs (not merged)

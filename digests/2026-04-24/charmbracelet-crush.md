@@ -2,7 +2,7 @@
 
 > Charm's terminal AI coding agent; design-forward TUI patterns worth tracking.
 
-**Window:** 2026-04-23T02:58:07.638Z → 2026-04-24T02:58:07.638Z  
+**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z  
 **Default branch:** `main`  
 **Source:** [github.com/charmbracelet/crush](https://github.com/charmbracelet/crush)
 
@@ -42,16 +42,13 @@
 
 ## Notable Issues
 
+- [#2670](https://github.com/charmbracelet/crush/issues/2670) **Relax golang dependency?** — _by @dbeecham_ _(closed 2026-04-23T13:38:04Z)_
 - [#2682](https://github.com/charmbracelet/crush/issues/2682) **Prevent SQLite corruption (`SQLITE_NOTADB`/code 26) under concurrent sub-agents** — _by @taoeffect_
-- [#2689](https://github.com/charmbracelet/crush/issues/2689) **GitHub [scrubbed]: GPT-4.1 does not work (needs to use Responses API)** _[provider: openai chatgpt, provider: github [scrubbed]]_ — _by @victornoel_
+- [#2689](https://github.com/charmbracelet/crush/issues/2689) **GitHub [redacted-product]: GPT-4.1 does not work (needs to use Responses API)** _[provider: openai chatgpt, provider: github [redacted]]_ — _by @victornoel_
 - [#2677](https://github.com/charmbracelet/crush/issues/2677) **Custom System Prompt** — _by @BlackScorp_
 - [#2676](https://github.com/charmbracelet/crush/issues/2676) **LM Studio somehow connects only to localhost:1234** — _by @BlackScorp_
 - [#2683](https://github.com/charmbracelet/crush/issues/2683) **Sidebar lists the same skill twice when project and user skill directories resolve to the same files (symlink)** — _by @maxispossible_
-- [#2670](https://github.com/charmbracelet/crush/issues/2670) **Relax golang dependency?** — _by @dbeecham_ _(closed 2026-04-23T13:38:04Z)_
 - [#2684](https://github.com/charmbracelet/crush/issues/2684) **Env vars do not expand with MCP args** _[area: mcp]_ — _by @Jelloeater_
-- [#1282](https://github.com/charmbracelet/crush/issues/1282) **Support edit diff manually** _[area: diff]_ — _by @zhaob1n_ _(closed 2026-04-23T04:20:44Z)_
-- [#1262](https://github.com/charmbracelet/crush/issues/1262) **Copying text doesn't handle backticks well** — _by @taoeffect_ _(closed 2026-04-23T04:20:44Z)_
-- [#493](https://github.com/charmbracelet/crush/issues/493) **Support For OpenRouter Sorting** _[provider: openrouter, Migrated]_ — _by @kesile_ _(closed 2026-04-23T04:20:44Z)_
 
 
 ## Commits on `main`

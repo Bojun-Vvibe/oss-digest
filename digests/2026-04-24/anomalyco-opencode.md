@@ -2,7 +2,7 @@
 
 > Terminal-native AI coding agent we use daily; high-velocity OSS.
 
-**Window:** 2026-04-23T02:58:07.638Z → 2026-04-24T02:58:07.638Z  
+**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z  
 **Default branch:** `dev`  
 **Source:** [github.com/anomalyco/opencode](https://github.com/anomalyco/opencode)
 
@@ -36,7 +36,7 @@
 - [#23460](https://github.com/anomalyco/opencode/pull/23460) **fix: patch arborist to get around bun bug** — _by @rekram1-node, merged 2026-04-20T05:49:46Z_
 - [#23770](https://github.com/anomalyco/opencode/pull/23770) **feat(truncate): allow configuring tool output truncation limits** — _by @1rgs, merged 2026-04-23T21:43:33Z_
 - [#24062](https://github.com/anomalyco/opencode/pull/24062) **feat(httpapi): bridge workspace read endpoints** — _by @kitlangton, merged 2026-04-23T21:32:02Z_
-- [#24057](https://github.com/anomalyco/opencode/pull/24057) **chore: update [scrubbed] readme to symlink to an agents md to prevent dumbass agents from touching these files** — _by @rekram1-node, merged 2026-04-23T21:08:47Z_
+- [#24057](https://github.com/anomalyco/opencode/pull/24057) **chore: update [redacted] readme to symlink to an agents md to prevent dumbass agents from touching these files** — _by @rekram1-node, merged 2026-04-23T21:08:47Z_
 - [#24056](https://github.com/anomalyco/opencode/pull/24056) **refactor(control-plane): migrate workspace DTO schemas** — _by @kitlangton, merged 2026-04-23T20:48:57Z_
 - [#24054](https://github.com/anomalyco/opencode/pull/24054) **docs: update effect schema migration tracker** — _by @kitlangton, merged 2026-04-23T20:23:46Z_
 - [#24034](https://github.com/anomalyco/opencode/pull/24034) **feat(tui): support builtin protocol for handling context from editors** — _by @jlongster, merged 2026-04-23T20:19:19Z_
@@ -56,16 +56,19 @@
 
 ## Open PRs (new or updated)
 
+- [#23822](https://github.com/anomalyco/opencode/pull/23822) **ci: add platform-specific bun install flags** — _by @Brendonovich, updated 2026-04-24T04:36:30Z_
+- [#23381](https://github.com/anomalyco/opencode/pull/23381) **fix(plugin): opencode run waits for plugins to finish before stopping process** — _by @0byte-coding, updated 2026-04-24T04:31:59Z_
+- [#21801](https://github.com/anomalyco/opencode/pull/21801) **fix(acp): forward subagent session events to ACP client** — _by @jasonmj, updated 2026-04-24T03:38:07Z_
+- [#18767](https://github.com/anomalyco/opencode/pull/18767) **feat(app): Mobile Touch Optimization** — _by @noahbentusi, updated 2026-04-24T03:35:25Z_
+- [#13854](https://github.com/anomalyco/opencode/pull/13854) **fix(tui): stop streaming markdown/code after message completes** — _by @mocksoul, updated 2026-04-24T03:35:24Z_
+- [#19077](https://github.com/anomalyco/opencode/pull/19077) **fix(write): enforce explicit file mode despite umask** — _by @SeashoreShi, updated 2026-04-24T03:32:56Z_
 - [#23365](https://github.com/anomalyco/opencode/pull/23365) **fix: scope nested child-session navigation correctly** — _by @doer-ee, updated 2026-04-24T02:57:24Z_
 - [#6093](https://github.com/anomalyco/opencode/pull/6093) **feat: add persistent sidebar overlay toggle in command palette (resolves #6086)** — _by @ariane-emory, updated 2026-04-24T02:37:37Z_
 - [#24079](https://github.com/anomalyco/opencode/pull/24079) **fix(app): MEMORY / OOM crash - add experimental flag to disable vcs diff auto-fetch** — _by @jeremyakers, updated 2026-04-24T02:03:26Z_
 - [#11710](https://github.com/anomalyco/opencode/pull/11710) **feat: Add the ability to include cleared prompts in the history, toggled by a KV-persisted command palette item (resolves #11489)** — _by @ariane-emory, updated 2026-04-24T01:55:14Z_
 - [#12633](https://github.com/anomalyco/opencode/pull/12633) **feat(tui): add auto-accept mode for permission requests** — _by @thdxr, updated 2026-04-24T01:44:28Z_
 - [#4917](https://github.com/anomalyco/opencode/pull/4917) **feat: tool description for the Bash tool now advises model as to what the actual shell in use is (resolves #4866)** — _by @ariane-emory, updated 2026-04-24T01:23:46Z_
-- [#18767](https://github.com/anomalyco/opencode/pull/18767) **feat(app): Mobile Touch Optimization** — _by @noahbentusi, updated 2026-04-24T01:16:23Z_
-- [#13854](https://github.com/anomalyco/opencode/pull/13854) **fix(tui): stop streaming markdown/code after message completes** — _by @mocksoul, updated 2026-04-24T01:16:23Z_
 - [#23269](https://github.com/anomalyco/opencode/pull/23269) **docs: Add contexty plugin to ecosystem documentation** — _by @obtuse-triangle, updated 2026-04-24T01:12:49Z_
-- [#24076](https://github.com/anomalyco/opencode/pull/24076) **fix: handle Bun stream connection errors with automatic retry** — _by @Ryo40, updated 2026-04-24T01:12:24Z_
 - [#16108](https://github.com/anomalyco/opencode/pull/16108) **feat: support .local.md variants for instruction files** — _by @clansty, updated 2026-04-24T00:36:45Z_
 - [#23783](https://github.com/anomalyco/opencode/pull/23783) **fix(tui): allow navigation into grandchild sessions from subagent view** — _by @areyouok, updated 2026-04-24T00:30:05Z_
 - [#23785](https://github.com/anomalyco/opencode/pull/23785) **feat(tui): add subagent status indicator in prompt footer** — _by @areyouok, updated 2026-04-24T00:27:36Z_
@@ -112,14 +115,11 @@
 - [#24008](https://github.com/anomalyco/opencode/pull/24008) **fix: preserve newlines in ACP command argument parsing** — _by @feisuzhu, updated 2026-04-23T15:24:43Z_
 - [#13224](https://github.com/anomalyco/opencode/pull/13224) **feat(docs): add copy page markdown action to docs title** — _by @kdcokenny, updated 2026-04-23T15:16:01Z_
 - [#24004](https://github.com/anomalyco/opencode/pull/24004) **feat(plan): enhance validation and user prompts in PlanExitTool** — _by @Alexandre200-lab, updated 2026-04-23T14:53:03Z_
-- [#20491](https://github.com/anomalyco/opencode/pull/20491) **feat(opencode): add Kiro provider** — _by @NachoFLizaur, updated 2026-04-23T14:44:10Z_
-- [#23381](https://github.com/anomalyco/opencode/pull/23381) **fix(plugin): opencode run waits for plugins to finish before stopping process** — _by @0byte-coding, updated 2026-04-23T14:42:49Z_
-- [#21344](https://github.com/anomalyco/opencode/pull/21344) **feat: /lsps commands** — _by @poelzi, updated 2026-04-23T14:19:53Z_
-- [#23902](https://github.com/anomalyco/opencode/pull/23902) **feat(tui): add opencode -c to session exit message for convenience** — _by @WattsInABox, updated 2026-04-23T13:56:02Z_
 
 
 ## Closed PRs (not merged)
 
+- [#24076](https://github.com/anomalyco/opencode/pull/24076) **fix: handle Bun stream connection errors with automatic retry** — _by @Ryo40, closed 2026-04-24T04:32:45Z_
 - [#24070](https://github.com/anomalyco/opencode/pull/24070) **fix(provider): allow remote local-network hosts when proxy env vars are set** — _by @jeevan6996, closed 2026-04-24T01:36:14Z_
 - [#24055](https://github.com/anomalyco/opencode/pull/24055) **fix(opencode): allow gpt-5.5 in Codex OAuth model list** — _by @mattyatea, closed 2026-04-23T21:09:06Z_
 - [#24068](https://github.com/anomalyco/opencode/pull/24068) **fix(snapshot): avoid E2BIG during batched revert checkout** — _by @jeevan6996, closed 2026-04-24T00:36:19Z_
@@ -143,21 +143,71 @@
 
 ## Notable Issues
 
-- [#24085](https://github.com/anomalyco/opencode/issues/24085) **opencode  There is a problem with the page layout.** _[bug, needs:compliance]_ — _by @Wangjunling1_ _(closed 2026-04-24T02:55:18Z)_
-- [#23636](https://github.com/anomalyco/opencode/issues/23636) **fix: PowerShell output encoding for non-ASCII characters on Windows** _[bug, windows, core]_ — _by @l1i1_
-- [#24084](https://github.com/anomalyco/opencode/issues/24084) **[FEATURE]: Support OAuth 2.0 client_credentials for configured providers** _[core]_ — _by @benjaminwestern_
+- [#24095](https://github.com/anomalyco/opencode/issues/24095) **[Bug] mimo-v2.5 model calls non-existent 'websearch' tool (name incompatibility)** _[core]_ — _by @Electricitysheep_
 - [#24083](https://github.com/anomalyco/opencode/issues/24083) **The `reasoning_content` in the thinking mode must be passed back to the API.** _[bug, core, needs:compliance]_ — _by @passwa11_
-- [#24082](https://github.com/anomalyco/opencode/issues/24082) **running opencode /serve on windows opencode can't find skills in /** _[bug, windows, core]_ — _by @DanielRomi_
+- [#14539](https://github.com/anomalyco/opencode/issues/14539) **Tool usages in [redacted-product] sometimes consumes premium request** _[bug, windows, web]_ — _by @aklajnert_ _(closed 2026-04-24T04:19:01Z)_
+- [#24039](https://github.com/anomalyco/opencode/issues/24039) **[FEATURE]: Add GPT-5.5 support for OpenAI provider** _[core]_ — _by @behavio1_ _(closed 2026-04-23T20:26:49Z)_
+- [#4489](https://github.com/anomalyco/opencode/issues/4489) **[FEATURE]: Ephemeral one‑off sessions for opencode run (happy to implement)** _[discussion]_ — _by @kamilchm_
+- [#24094](https://github.com/anomalyco/opencode/issues/24094) **explicit TOOL_CALL** _[bug, zen]_ — _by @mortalYoung_
+- [#21420](https://github.com/anomalyco/opencode/issues/21420) **Claude/Anthropic 500/502/503/504 server errors are not retried** _[core]_ — _by @rich-jojo_ _(closed 2026-04-24T04:04:17Z)_
+- [#24093](https://github.com/anomalyco/opencode/issues/24093) **[FEATURE]: Support DeepSeek-V4 models** _[discussion, core]_ — _by @GoodCoder666_
+- [#24071](https://github.com/anomalyco/opencode/issues/24071) **GPT 5.5 stopping mid-message** _[bug, core]_ — _by @benkoppe_ _(closed 2026-04-24T01:36:12Z)_
+- [#24092](https://github.com/anomalyco/opencode/issues/24092) **Adapting to the New DeepSeek Model** _[core]_ — _by @renshengbushexie_
+- [#24091](https://github.com/anomalyco/opencode/issues/24091) **opencode desktop会话重命名不生效** _[bug, web]_ — _by @liufei4552_
+- [#17279](https://github.com/anomalyco/opencode/issues/17279) **Renaming one project also renames the other in OpenCode Desktop V1.2.25** _[bug, web]_ — _by @Msg-Lbo_
+- [#14740](https://github.com/anomalyco/opencode/issues/14740) **[FEATURE]: Plugin hooks for real-time stream observation and abort control** _[core]_ — _by @marcusquinn_ _(closed 2026-04-24T03:04:40Z)_
+- [#8820](https://github.com/anomalyco/opencode/issues/8820) **"Other" provider option not showing up** _[bug, opentui]_ — _by @anand2312_ _(closed 2026-03-26T03:05:50Z)_
+- [#24088](https://github.com/anomalyco/opencode/issues/24088) **Qwen 3.6 keep failed with 500 by using with OpenCode GO** _[bug, windows, core]_ — _by @PhoenixNest_
+- [#24090](https://github.com/anomalyco/opencode/issues/24090) **Assistant messages in history replay are missing `tool_calls` field, breaking OpenAI-compatible providers** _[bug, core]_ — _by @supernovae_
+- [#24089](https://github.com/anomalyco/opencode/issues/24089) **Model output (Markdown text) cannot be rendered.** _[bug, windows]_ — _by @Tide-Breeze_
 - [#23887](https://github.com/anomalyco/opencode/issues/23887) **[Bug]: OpenCode Go + Kimi K2.6/K2.5 returns 'Provider returned error' on CLI 1.14.20** _[core]_ — _by @byungsker_
+- [#23636](https://github.com/anomalyco/opencode/issues/23636) **fix: PowerShell output encoding for non-ASCII characters on Windows** _[bug, windows, core]_ — _by @l1i1_
+- [#24087](https://github.com/anomalyco/opencode/issues/24087) **text content blocks must be non-empty when using Claude models and tools** _[bug, core]_ — _by @yexiaoxue2000-rgb_
+- [#13343](https://github.com/anomalyco/opencode/issues/13343) **[FEATURE]: GitHub / Git Worktree & Branch Picker — open branch/worktree from Desktop/Web UI** _[discussion, web]_ — _by @bensheed_ _(closed 2026-04-24T03:04:24Z)_
+- [#2944](https://github.com/anomalyco/opencode/issues/2944) **Getting "AI_APICallError: Invalid API parameter, please check the documentation." in opencode with zAI glm 4.6** — _by @moinulmoin_ _(closed 2026-04-24T03:04:39Z)_
+- [#14728](https://github.com/anomalyco/opencode/issues/14728) **[FEATURE]: inconsistent pluralization** _[discussion, core]_ — _by @maxstevens-nl_ _(closed 2026-04-24T03:04:38Z)_
+- [#4632](https://github.com/anomalyco/opencode/issues/4632) **Gemini 3 pro preview issues** _[bug, model-problem]_ — _by @tiberiuichim_ _(closed 2026-04-24T03:04:37Z)_
+- [#14724](https://github.com/anomalyco/opencode/issues/14724) **Opencode Crash because Bun issue.** _[bug, windows, core]_ — _by @Mattymb7080_ _(closed 2026-04-24T03:04:36Z)_
+- [#7439](https://github.com/anomalyco/opencode/issues/7439) **AIHubMix provider: streaming completes output but errors near end with ZodError (invalid_union: reason/part/delta)** _[bug, windows]_ — _by @qiyuanhuakai_ _(closed 2026-04-24T03:04:35Z)_
+- [#14692](https://github.com/anomalyco/opencode/issues/14692) **`/connect` bypasses plugin auth prompts (can open the wrong OAuth flow)** _[bug, core]_ — _by @garysassano_ _(closed 2026-04-24T03:04:34Z)_
+- [#11782](https://github.com/anomalyco/opencode/issues/11782) **[Question/Issue] Excessive request count consumption with Chutes provider during tool use** — _by @jk-chae_ _(closed 2026-04-24T03:04:33Z)_
+- [#14697](https://github.com/anomalyco/opencode/issues/14697) **[FEATURE]: Native OpenTelemetry (OTLP) export for OpenCode sessions/tools/events** _[core]_ — _by @cruzanstx_ _(closed 2026-04-24T03:04:32Z)_
+- [#14526](https://github.com/anomalyco/opencode/issues/14526) **Last update desktop app viewer crashes, [redacted-vendor] edge webview 2** _[bug, windows, perf, web]_ — _by @Melionka_ _(closed 2026-04-24T03:04:31Z)_
+- [#13843](https://github.com/anomalyco/opencode/issues/13843) **[FEATURE]:Opencode Deskptop Workspace icons preferences** _[discussion, web]_ — _by @antonio-ivanovski_ _(closed 2026-04-24T03:04:30Z)_
+- [#12113](https://github.com/anomalyco/opencode/issues/12113) **Azure models fail due to reasoning_effort being sent even with --variant none** _[bug]_ — _by @bkocis_ _(closed 2026-04-24T03:04:29Z)_
+- [#14708](https://github.com/anomalyco/opencode/issues/14708) **[FEATURE]: VSCode-style search in web command palette (file + chat content)** _[web]_ — _by @wufei-png_ _(closed 2026-04-24T03:04:28Z)_
+- [#14704](https://github.com/anomalyco/opencode/issues/14704) **Desktop Dev not running on my machine** _[bug, web]_ — _by @OpeOginni_ _(closed 2026-04-24T03:04:27Z)_
+- [#14702](https://github.com/anomalyco/opencode/issues/14702) **[FEATURE]: JSON output for opencode stats CLI command** _[discussion, core]_ — _by @ccmetz_ _(closed 2026-04-24T03:04:26Z)_
+- [#14698](https://github.com/anomalyco/opencode/issues/14698) **[FEATURE]:LISP family syntax highlighting support** _[discussion, core]_ — _by @riatzukiza_ _(closed 2026-04-24T03:04:25Z)_
+- [#14689](https://github.com/anomalyco/opencode/issues/14689) **Webfetch size limit** _[bug, core]_ — _by @tqcq_ _(closed 2026-04-24T03:04:23Z)_
+- [#14688](https://github.com/anomalyco/opencode/issues/14688) **bug: typecheck CI fails on all PRs due to missing SDK v2 dist types** _[bug, core]_ — _by @AJIredale_ _(closed 2026-04-24T03:04:22Z)_
+- [#13993](https://github.com/anomalyco/opencode/issues/13993) **[FEATURE]: VSCode Language Model Chat Provider for Opencode Zen Models** _[discussion, zen, extension]_ — _by @dehanjl_ _(closed 2026-04-24T03:04:21Z)_
+- [#14546](https://github.com/anomalyco/opencode/issues/14546) **OpenCode sometimes loses the history of open projects and sessions between restarts** _[bug, core]_ — _by @nukeop_ _(closed 2026-04-24T03:04:20Z)_
+- [#14676](https://github.com/anomalyco/opencode/issues/14676) **Recurring issue with opencode hanging but immediately restarting after ESC/ESC interruption** _[bug]_ — _by @doberkofler_ _(closed 2026-04-24T03:04:19Z)_
+- [#14673](https://github.com/anomalyco/opencode/issues/14673) **[FEATURE]:Pasted images use data: URL instead of file path, breaking MCP tools for non-vision models** _[discussion, core]_ — _by @zhengwh_ _(closed 2026-04-24T03:04:18Z)_
+- [#14671](https://github.com/anomalyco/opencode/issues/14671) **[FEATURE]:Prevent workflows from running in fork repositories** _[discussion, core]_ — _by @niushuai1991_ _(closed 2026-04-24T03:04:17Z)_
+- [#9536](https://github.com/anomalyco/opencode/issues/9536) **Triggers build mode after switching to plan mode** _[bug, windows]_ — _by @ishechuan_ _(closed 2026-04-24T03:04:16Z)_
+- [#3212](https://github.com/anomalyco/opencode/issues/3212) **Agent runs "sudo" and freezes UI when analyzing system configs (e.g. Apache)** — _by @RaphGod_ _(closed 2026-04-24T03:04:15Z)_
+- [#14661](https://github.com/anomalyco/opencode/issues/14661) **Windows 11: Unicode / UTF-8 rendering broken across all terminals** _[bug, windows]_ — _by @bymcs_ _(closed 2026-04-24T03:04:14Z)_
+- [#14657](https://github.com/anomalyco/opencode/issues/14657) **[FEATURE]: Multi-window/tabs for desktop** _[web, core]_ — _by @merlinkraemer_ _(closed 2026-04-24T03:04:13Z)_
+- [#14654](https://github.com/anomalyco/opencode/issues/14654) **[FEATURE]: Add Catalan language translation to the apps** _[discussion, docs]_ — _by @jordimas_ _(closed 2026-04-24T03:04:12Z)_
+- [#1341](https://github.com/anomalyco/opencode/issues/1341) **How to setup opencode github action with [redacted] provider?** _[help-wanted]_ — _by @blntrsz_ _(closed 2026-04-24T03:04:11Z)_
+- [#14648](https://github.com/anomalyco/opencode/issues/14648) **Worktree bootstrap failures leak orphaned directories causing disk fillup** _[bug, core]_ — _by @alexhraber_ _(closed 2026-04-24T03:04:10Z)_
+- [#14645](https://github.com/anomalyco/opencode/issues/14645) **set_line and replace_lines strip leading "- " from text (diff marker auto-strip too aggressive)** _[windows, core]_ — _by @fantomc0der_ _(closed 2026-04-24T03:04:09Z)_
+- [#14642](https://github.com/anomalyco/opencode/issues/14642) **Cache control injection uses wrong detection for Anthropic SDK models** _[core]_ — _by @llc1123_ _(closed 2026-04-24T03:04:07Z)_
+- [#14560](https://github.com/anomalyco/opencode/issues/14560) **Desktop App: UI renders massively duplicated content when streaming responses with code blocks** _[web]_ — _by @praxstack_ _(closed 2026-04-24T03:04:07Z)_
+- [#14425](https://github.com/anomalyco/opencode/issues/14425) **cannot start 2 & more opencode terminal on win wsl1** _[bug, windows, core]_ — _by @HustCoderHu_ _(closed 2026-04-24T03:04:05Z)_
+- [#24086](https://github.com/anomalyco/opencode/issues/24086) **Tab key not toggling between plan and code mode** _[bug, opentui]_ — _by @AdrianBinDC_
+- [#24082](https://github.com/anomalyco/opencode/issues/24082) **running opencode /serve on windows opencode can't find skills in /** _[bug, windows, core]_ — _by @DanielRomi_
+- [#24085](https://github.com/anomalyco/opencode/issues/24085) **opencode  There is a problem with the page layout.** _[bug, needs:compliance]_ — _by @Wangjunling1_ _(closed 2026-04-24T02:55:18Z)_
+- [#24084](https://github.com/anomalyco/opencode/issues/24084) **[FEATURE]: Support OAuth 2.0 client_credentials for configured providers** _[core]_ — _by @benjaminwestern_
 - [#16685](https://github.com/anomalyco/opencode/issues/16685) **[Bug] "Provider returned error" consistently occurs with Kimi K2.5 via OpenCode Go on Windows** _[bug, windows, web]_ — _by @ChrisWenChen_
 - [#24081](https://github.com/anomalyco/opencode/issues/24081) **Can't run 1.14.21 & 1.14.22 in WSL1: cannot execute binary file: Exec format error** _[bug, windows, core]_ — _by @lengran_
 - [#24080](https://github.com/anomalyco/opencode/issues/24080) **Windows CJK characters garbled in bash tool output** _[windows, core]_ — _by @fkyah3_ _(closed 2026-04-24T02:23:15Z)_
 - [#23924](https://github.com/anomalyco/opencode/issues/23924) **The superpowers plugin was installed, but an error was reported** _[bug, windows]_ — _by @firebat1314_ _(closed 2026-04-24T02:16:42Z)_
-- [#24039](https://github.com/anomalyco/opencode/issues/24039) **[FEATURE]: Add GPT-5.5 support for OpenAI provider** _[core]_ — _by @behavio1_ _(closed 2026-04-23T20:26:49Z)_
 - [#24046](https://github.com/anomalyco/opencode/issues/24046) **TUI mouse reporting conflicts with native terminal copy/paste in iTerm2** — _by @fat0_
 - [#22683](https://github.com/anomalyco/opencode/issues/22683) **1.4.6 constantly crashing** _[bug, opentui, perf]_ — _by @jeremyakers_
 - [#24049](https://github.com/anomalyco/opencode/issues/24049) **`/vcs/diff` can OOM in desktop-layout web UI on umbrella workspaces with many nested git repos** _[bug, perf, core]_ — _by @jeremyakers_
-- [#24071](https://github.com/anomalyco/opencode/issues/24071) **GPT 5.5 stopping mid-message** _[bug, core]_ — _by @benkoppe_ _(closed 2026-04-24T01:36:12Z)_
 - [#24078](https://github.com/anomalyco/opencode/issues/24078) **Regression: Windows desktop 1.14.19 significantly slower than previous version (same model/workflow)** _[bug, windows, perf, web]_ — _by @csliuchi_
 - [#24077](https://github.com/anomalyco/opencode/issues/24077) **opencode (default mode) closes entire terminal window on Linux / i3wm** _[bug, core]_ — _by @brenoassp_
 - [#24075](https://github.com/anomalyco/opencode/issues/24075) **bun crash on opencode first start** _[bug, core]_ — _by @cctyl_
@@ -168,32 +218,6 @@
 - [#24072](https://github.com/anomalyco/opencode/issues/24072) **[FEATURE]: Add the provider https://devin.ai/** _[discussion, core]_ — _by @void0x14_
 - [#19515](https://github.com/anomalyco/opencode/issues/19515) **[FEATURE]: workspace folders — explicit multi-directory support** _[core]_ — _by @msangals_
 - [#23719](https://github.com/anomalyco/opencode/issues/23719) **Nix flake broken since 1.4.11** _[bug, nix]_ — _by @anthrofract_
-- [#23449](https://github.com/anomalyco/opencode/issues/23449) **[FEATURE]: Agent should use integrated terminal (PTY) instead of spawning new shell processes** _[core, acp]_ — _by @herjarsa_
-- [#24069](https://github.com/anomalyco/opencode/issues/24069) **Norton Antivirus flags OpenCode Go / Node and breaks VS Code extension** _[bug, windows]_ — _by @paujim_ _(closed 2026-04-23T22:31:39Z)_
-- [#22852](https://github.com/anomalyco/opencode/issues/22852) **OpenCode does not persist thinking blocks for Claude Opus 4.7** _[bug, core]_ — _by @renbou_ _(closed 2026-04-16T22:35:01Z)_
-- [#14539](https://github.com/anomalyco/opencode/issues/14539) **Tool usages in [scrubbed] sometimes consumes premium request** _[bug, windows, web]_ — _by @aklajnert_
-- [#24067](https://github.com/anomalyco/opencode/issues/24067) **feat(stock-terminal): replace TUI with a dedicated web app — charts, newsfeeds, and AI analyst** _[core, needs:compliance]_ — _by @Will-D-AER_ _(closed 2026-04-23T22:00:10Z)_
-- [#20452](https://github.com/anomalyco/opencode/issues/20452) **Java LSP (jdtls) not working in version 1.3.13 (regression)** _[bug, windows, core]_ — _by @swpuchenxinde_
-- [#22565](https://github.com/anomalyco/opencode/issues/22565) **[FEATURE]: Configurable tool output truncation limits** _[core]_ — _by @lingeasy_ _(closed 2026-04-23T21:43:34Z)_
-- [#24060](https://github.com/anomalyco/opencode/issues/24060) **test(opencode): prompt.test.ts flaky since #23710 — 3s timeout vs. SIGTERM→exit race** _[core]_ — _by @tesdal_
-- [#22623](https://github.com/anomalyco/opencode/issues/22623) **Azure GPT-5 model: "max_tokens" parameter not supported, need "max_completion_tokens" instead** _[bug]_ — _by @hueifeng_
-- [#24035](https://github.com/anomalyco/opencode/issues/24035) **The project should be sync between web and GUI or TUI.** _[bug, windows, web]_ — _by @cropse_
-- [#24065](https://github.com/anomalyco/opencode/issues/24065) **[QUESTION]: Is mutating `cfg` in the `config` hook an officially supported pattern for registering agents, commands, and MCP servers from plugins?** _[core, docs]_ — _by @krnkl_
-- [#24064](https://github.com/anomalyco/opencode/issues/24064) **A small bug when using LMstudio as model provider** _[bug, core]_ — _by @shrey160_ _(closed 2026-04-23T21:18:15Z)_
-- [#24044](https://github.com/anomalyco/opencode/issues/24044) **Nvidia Nim support diasappeared** _[bug, core]_ — _by @justinbal96-collab_ _(closed 2026-04-23T21:18:16Z)_
-- [#2784](https://github.com/anomalyco/opencode/issues/2784) **Add Provider : agentrouter.org** — _by @ariefly_ _(closed 2026-03-25T03:45:17Z)_
-- [#20317](https://github.com/anomalyco/opencode/issues/20317) **fix: GitHub [scrubbed] Claude models have wrong context limits and missing thinking variants** _[core]_ — _by @MoonFuji_ _(closed 2026-04-23T21:13:45Z)_
-- [#18969](https://github.com/anomalyco/opencode/issues/18969) **[FEATURE]: add tui.footer.items plugin hook for persistent status display** _[core]_ — _by @andrewdunndev_
-- [#8785](https://github.com/anomalyco/opencode/issues/8785) **Bun has crashed** _[bug]_ — _by @sunnywuco_
-- [#6309](https://github.com/anomalyco/opencode/issues/6309) **Connecting sessions/interactions with commits or be included when extracting a transcription** — _by @asabla_ _(closed 2026-04-23T21:06:38Z)_
-- [#15907](https://github.com/anomalyco/opencode/issues/15907) **Clipboard copy not working over SSH + tmux in Ghostty** _[bug, core]_ — _by @Ayoola_
-- [#14808](https://github.com/anomalyco/opencode/issues/14808) **Plugin event listener for "session.created" not firing** _[bug, core]_ — _by @M4NZEN_
-- [#10229](https://github.com/anomalyco/opencode/issues/10229) **LmStudio API KEY ?** _[bug]_ — _by @erdalbektas_ _(closed 2026-01-23T17:52:53Z)_
-- [#16612](https://github.com/anomalyco/opencode/issues/16612) **Sometimes replies to the previous turn (stale context): keeps repeating an earlier command/answer instead of responding to the latest input** _[bug, core]_ — _by @leo512zy_
-- [#24036](https://github.com/anomalyco/opencode/issues/24036) **[FEATURE]: GPT 5.5 support** _[discussion, core]_ — _by @bu4ak_ _(closed 2026-04-23T20:21:42Z)_
-- [#22233](https://github.com/anomalyco/opencode/issues/22233) **[FEATURE]: Improve subagent runtime visibility in chat UI** _[core]_ — _by @a1418507570_
-- [#23907](https://github.com/anomalyco/opencode/issues/23907) **model executed .cmd script despite shell permission being set to `Ask`** _[bug, windows, core]_ — _by @BoringBoredom_
-- [#23028](https://github.com/anomalyco/opencode/issues/23028) **[FEATURE]: Show subagent model in session tree / subagent view** _[discussion, core]_ — _by @christian-taillon_
 
 
 ## Commits on `dev`
@@ -202,7 +226,7 @@
 - [`f8c6ddd`](https://github.com/anomalyco/opencode/commit/f8c6ddd4cb08aab493fcaab69d44c5085083152e) feat(truncate): allow configuring tool output truncation limits (#23770) — _@1rgs_
 - [`e50a688`](https://github.com/anomalyco/opencode/commit/e50a688ca309ba4c992fd8e47b5b75a11aef025e) feat(httpapi): bridge workspace read endpoints (#24062) — _@kitlangton_
 - [`334ab47`](https://github.com/anomalyco/opencode/commit/334ab4707c809172e77619ae7d6b22c5577c7238) fix: account for additional openai retry case (#24063) — _@rekram1-node_
-- [`8732194`](https://github.com/anomalyco/opencode/commit/87321942fee25786448f02284ebeaee1caf4e86c) chore: update [scrubbed] readme to symlink to an agents md to prevent dumbass agents from touching these files (#24057) — _@rekram1-node_
+- [`8732194`](https://github.com/anomalyco/opencode/commit/87321942fee25786448f02284ebeaee1caf4e86c) chore: update [redacted] readme to symlink to an agents md to prevent dumbass agents from touching these files (#24057) — _@rekram1-node_
 - [`a771859`](https://github.com/anomalyco/opencode/commit/a771859362ab61983671ca9a82ec1ccfa34fc689) chore: generate — _@opencode-agent[bot]_
 - [`31d01d4`](https://github.com/anomalyco/opencode/commit/31d01d404afd4f82628b3f388d5c73debf250ffd) refactor(control-plane): migrate workspace DTO schemas (#24056) — _@kitlangton_
 - [`814e83f`](https://github.com/anomalyco/opencode/commit/814e83ffecfddeb60cc88bba03b0c00629eecf5e) docs: update effect schema migration tracker (#24054) — _@kitlangton_
@@ -232,27 +256,6 @@
 - [`a419f1c`](https://github.com/anomalyco/opencode/commit/a419f1c50f4efaf2119991eee1d9bc2eef78cb8f) zen: hy3 preview — _@fwang_
 - [`871789c`](https://github.com/anomalyco/opencode/commit/871789ce64f179d5efa3031afbce3789e27e99b5) sync release versions for v1.14.21 — _@opencode_
 - [`df27baa`](https://github.com/anomalyco/opencode/commit/df27baa00d0de032a7213b043d3b04f939362baa) refactor: remove redundant pending check from working memo (#23929) — _@Brendonovich_
-- [`9730008`](https://github.com/anomalyco/opencode/commit/97300085437899af8af6c2bbf6ebc6bdab110174) tweak: codex model logic (#23925) — _@rekram1-node_
-- [`ac26394`](https://github.com/anomalyco/opencode/commit/ac26394fcb280592a8ecddf903a3a7116c841f39) fix(beta): PR resolvers/smoke check should typecheck all pacakges (#23913) — _@Hona_
-- [`6387b35`](https://github.com/anomalyco/opencode/commit/6387b35a2d5b36fc1ac4dd3270fa2da66cca8111) log session sdk errors (#23652) — _@Hona_
-- [`1cd4c92`](https://github.com/anomalyco/opencode/commit/1cd4c92242ea75460100a0d69855a90938e07832) chore: generate — _@opencode-agent[bot]_
-- [`e383df4`](https://github.com/anomalyco/opencode/commit/e383df4b17eecd6e6718e43c17438aa2eb818ee9) feat: support pull diagnostics in the LSP client (C#, Kotlin, etc) (#23771) — _@Hona_
-- [`58db41b`](https://github.com/anomalyco/opencode/commit/58db41b4b9fac2bfcf1f935cc114b3e4a069eade) chore: update nix bun version (#23881) — _@gigamonster256_
-- [`5d133f2`](https://github.com/anomalyco/opencode/commit/5d133f2785aada81d65b14e3f86f14063900596c) chore: generate — _@opencode-agent[bot]_
-- [`e9b1d3b`](https://github.com/anomalyco/opencode/commit/e9b1d3b940d6369a1c9bd492daf168c933cdfdab) docs: add MiMo V2.5 to Go pages (#23876) — _@MrMushrooooom_
-- [`3a082a0`](https://github.com/anomalyco/opencode/commit/3a082a0efd5eaa5296c929241bfe565d460c277b) fix(project): use git common dir for bare repo project cache (#19054) — _@StevenTCramer_
-- [`504fd1b`](https://github.com/anomalyco/opencode/commit/504fd1b373d0b35f39ee40b07fdb6957454de6b1) chore: generate — _@opencode-agent[bot]_
-- [`574b2c2`](https://github.com/anomalyco/opencode/commit/574b2c21708baf872faa358152c1fa705437aa6c) fix(session): improve session compaction (#23870) — _@nexxeln_
-- [`fa8b7bc`](https://github.com/anomalyco/opencode/commit/fa8b7bc4d269ac29310b410b30a9875b33023e66) chore: generate — _@opencode-agent[bot]_
-- [`6196b81`](https://github.com/anomalyco/opencode/commit/6196b81e0afb33cdcfb4b44e82f18e857d6c4dc5) fix(tui): fail fast on invalid session startup (#23837) — _@nexxeln_
-- [`d884ab7`](https://github.com/anomalyco/opencode/commit/d884ab73d5516d301a740b2bdea174f6b485d6dc) fix: consolidate project avatar source logic (#23819) — _@Brendonovich_
-- [`71d196d`](https://github.com/anomalyco/opencode/commit/71d196d3cd06d0efef7a319f43955c7cefc36e09) chore: generate — _@opencode-agent[bot]_
-- [`20756e0`](https://github.com/anomalyco/opencode/commit/20756e0ee45885db5614dab1867f16cea70ca1ec) test: fix cross-spawn stderr race on Windows CI (#23808) — _@Hona_
-- [`894e638`](https://github.com/anomalyco/opencode/commit/894e63891483cb0d79f7ca28410dcdfa604d35bf) chore: generate — _@opencode-agent[bot]_
-- [`8113a43`](https://github.com/anomalyco/opencode/commit/8113a4360e789fb25ac16d5619e732f3152ad3df) fix: preserve BOM in text tool round-trips (#23797) — _@Hona_
-- [`c819804`](https://github.com/anomalyco/opencode/commit/c819804638a923c932c3bdd94bd9eadaa4207410) chore: update nix node_modules hashes — _@opencode-agent[bot]_
-- [`06066db`](https://github.com/anomalyco/opencode/commit/06066dbb7bd05a99526f7b6a5eaa499d1cf47f78) fix(app): improve icon override handling in project edit dialog (#23768) — _@Brendonovich_
-- [`69b8ea0`](https://github.com/anomalyco/opencode/commit/69b8ea0d66ce9a57e4692278853fb67cc163a67b) chore: bump Bun to 1.3.13 (#23791) — _@Hona_
 
 
 ---

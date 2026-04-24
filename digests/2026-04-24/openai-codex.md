@@ -2,7 +2,7 @@
 
 > OpenAI's terminal coding agent; a direct point of comparison for opencode.
 
-**Window:** 2026-04-23T02:58:07.638Z → 2026-04-24T02:58:07.638Z  
+**Window:** 2026-04-23T04:39:30.304Z → 2026-04-24T04:39:30.304Z  
 **Default branch:** `main`  
 **Source:** [github.com/openai/codex](https://github.com/openai/codex)
 
@@ -23,6 +23,8 @@
 
 ## Merged PRs
 
+- [#18950](https://github.com/openai/codex/pull/18950) **feat: let model providers own model discovery** — _by @celia-oai, merged 2026-04-24T04:28:25Z_
+- [#19095](https://github.com/openai/codex/pull/19095) **feat: Use short SHA versions for curated plugin cache entries** — _by @xl-openai, merged 2026-04-24T04:15:04Z_
 - [#18879](https://github.com/openai/codex/pull/18879) **[rollout_trace] Trace sessions and multi-agent edges** — _by @cassirer-openai, merged 2026-04-24T02:29:46Z_
 - [#18897](https://github.com/openai/codex/pull/18897) **Add sticky environment API and thread state** — _by @starr-openai, merged 2026-04-24T01:57:13Z_
 - [#18880](https://github.com/openai/codex/pull/18880) **[rollout_trace] Add debug trace reduction command** — _by @cassirer-openai, merged 2026-04-24T01:56:49Z_
@@ -55,26 +57,32 @@
 - [#19014](https://github.com/openai/codex/pull/19014) **Add excludeTurns parameter to thread/resume and thread/fork** — _by @ddr-oai, merged 2026-04-23T17:07:59Z_
 - [#18892](https://github.com/openai/codex/pull/18892) **Add remote thread config loader protos** — _by @rasmusrygaard, merged 2026-04-23T17:06:06Z_
 - [#19127](https://github.com/openai/codex/pull/19127) **feat: drop spawned-agent context instructions** — _by @jif-oai, merged 2026-04-23T16:54:46Z_
-- [#18710](https://github.com/openai/codex/pull/18710) **[codex] Fix plugin marketplace help usage** — _by @xli-oai, merged 2026-04-23T16:48:37Z_
-- [#18284](https://github.com/openai/codex/pull/18284) **tui: sync session permission profiles** — _by @bolinfest, merged 2026-04-23T16:47:54Z_
 
 
 ## Open PRs (new or updated)
 
-- [#19054](https://github.com/openai/codex/pull/19054) _(draft)_ **feat: add background agent task auth** — _by @adrian-openai, updated 2026-04-24T02:58:06Z_
-- [#19051](https://github.com/openai/codex/pull/19051) _(draft)_ **feat: use thread agent task auth for inference** — _by @adrian-openai, updated 2026-04-24T02:58:06Z_
-- [#19049](https://github.com/openai/codex/pull/19049) _(draft)_ **feat: opt ChatGPT auth into agent task state** — _by @adrian-openai, updated 2026-04-24T02:57:59Z_
-- [#19047](https://github.com/openai/codex/pull/19047) _(draft)_ **feat: add agent identity primitives and opt-in flag** — _by @adrian-openai, updated 2026-04-24T02:57:48Z_
-- [#18900](https://github.com/openai/codex/pull/18900) **Migrate fork and resume reads to thread store** — _by @wiltzius-openai, updated 2026-04-24T02:47:59Z_
+- [#19054](https://github.com/openai/codex/pull/19054) _(draft)_ **feat: add hidden background agent auth** — _by @adrian-openai, updated 2026-04-24T04:38:30Z_
+- [#19051](https://github.com/openai/codex/pull/19051) _(draft)_ **feat: scope thread agent auth by provider** — _by @adrian-openai, updated 2026-04-24T04:38:30Z_
+- [#19049](https://github.com/openai/codex/pull/19049) _(draft)_ **feat: opt ChatGPT auth into agent identity** — _by @adrian-openai, updated 2026-04-24T04:37:57Z_
+- [#19280](https://github.com/openai/codex/pull/19280) **[codex] Migrate thread turns list to thread store** — _by @wiltzius-openai, updated 2026-04-24T04:35:45Z_
+- [#18917](https://github.com/openai/codex/pull/18917) **[codex] Support remote plugin install writes** — _by @xli-oai, updated 2026-04-24T04:29:24Z_
+- [#17088](https://github.com/openai/codex/pull/17088) **[codex-analytics] ingest server requests and responses** — _by @rhan-oai, updated 2026-04-24T04:28:19Z_
+- [#18431](https://github.com/openai/codex/pull/18431) **app-server: add macOS device key provider** — _by @euroelessar, updated 2026-04-24T04:16:58Z_
+- [#19098](https://github.com/openai/codex/pull/19098) **feat: Compress skill paths with root aliases** — _by @xl-openai, updated 2026-04-24T04:16:07Z_
+- [#19206](https://github.com/openai/codex/pull/19206) **app-server: persist device key bindings in sqlite** — _by @euroelessar, updated 2026-04-24T04:14:50Z_
+- [#18446](https://github.com/openai/codex/pull/18446) **Reserve missing preserved paths in Linux sandbox policy** — _by @evawong-oai, updated 2026-04-24T04:06:29Z_
+- [#19266](https://github.com/openai/codex/pull/19266) **[codex] add non-local thread store regression harness** — _by @wiltzius-openai, updated 2026-04-24T04:03:34Z_
+- [#19231](https://github.com/openai/codex/pull/19231) **permissions: make profiles represent enforcement** — _by @bolinfest, updated 2026-04-24T03:59:37Z_
+- [#19160](https://github.com/openai/codex/pull/19160) _(draft)_ **Make apply_patch streaming parser stateful** — _by @akshaynathan, updated 2026-04-24T03:50:16Z_
+- [#18900](https://github.com/openai/codex/pull/18900) **Migrate fork and resume reads to thread store** — _by @wiltzius-openai, updated 2026-04-24T03:46:27Z_
+- [#19211](https://github.com/openai/codex/pull/19211) _(draft)_ **[codex] Fix Windows process management edge cases** — _by @iceweasel-oai, updated 2026-04-24T03:33:11Z_
+- [#19047](https://github.com/openai/codex/pull/19047) _(draft)_ **feat: add external task refs and opt-in flag** — _by @adrian-openai, updated 2026-04-24T02:59:12Z_
 - [#19261](https://github.com/openai/codex/pull/19261) **Resolve relative agent role config paths from layers** — _by @etraut-openai, updated 2026-04-24T02:43:31Z_
-- [#18950](https://github.com/openai/codex/pull/18950) **feat: let model providers own model discovery** — _by @celia-oai, updated 2026-04-24T02:12:20Z_
 - [#18899](https://github.com/openai/codex/pull/18899) _(draft)_ **Wire selected environments into tools** — _by @starr-openai, updated 2026-04-24T01:57:16Z_
 - [#18898](https://github.com/openai/codex/pull/18898) _(draft)_ **Load named environments from config** — _by @starr-openai, updated 2026-04-24T01:57:15Z_
 - [#19247](https://github.com/openai/codex/pull/19247) **chore: apply truncation policy to unified_exec** — _by @sayan-oai, updated 2026-04-24T01:15:52Z_
 - [#19244](https://github.com/openai/codex/pull/19244) _(draft)_ **Update unix socket transport to use WebSocket upgrade** — _by @willwang-openai, updated 2026-04-24T00:35:37Z_
-- [#19231](https://github.com/openai/codex/pull/19231) **permissions: make profiles represent enforcement** — _by @bolinfest, updated 2026-04-24T00:34:33Z_
 - [#19218](https://github.com/openai/codex/pull/19218) **cli: add macOS seatbelt debug flags for Mach services and Apple events** — _by @conrad-oai, updated 2026-04-24T00:32:21Z_
-- [#19095](https://github.com/openai/codex/pull/19095) **feat: Use short SHA versions for curated plugin cache entries** — _by @xl-openai, updated 2026-04-24T00:27:20Z_
 - [#18735](https://github.com/openai/codex/pull/18735) **Update models.json** — _by @github-actions[bot], updated 2026-04-24T00:26:21Z_
 - [#19240](https://github.com/openai/codex/pull/19240) _(draft)_ **fix: allow AgentIdentity through Apps MCP gates** — _by @efrazer-oai, updated 2026-04-24T00:21:38Z_
 - [#18904](https://github.com/openai/codex/pull/18904) **feat: load AgentIdentity from JWT login/env** — _by @efrazer-oai, updated 2026-04-24T00:14:05Z_
@@ -86,23 +94,17 @@
 - [#18907](https://github.com/openai/codex/pull/18907) **respect workspace option for disabling plugins** — _by @zamoshchin-openai, updated 2026-04-23T23:49:52Z_
 - [#19229](https://github.com/openai/codex/pull/19229) _(draft)_ **Add agent graph store interface** — _by @rasmusrygaard, updated 2026-04-23T23:49:05Z_
 - [#19232](https://github.com/openai/codex/pull/19232) **ci: reuse Bazel CI startup for target-discovery queries** — _by @bolinfest, updated 2026-04-23T23:43:27Z_
-- [#18431](https://github.com/openai/codex/pull/18431) **app-server: add macOS device key provider** — _by @euroelessar, updated 2026-04-23T23:20:17Z_
-- [#19160](https://github.com/openai/codex/pull/19160) _(draft)_ **Make apply_patch streaming parser stateful** — _by @akshaynathan, updated 2026-04-23T23:11:15Z_
 - [#19224](https://github.com/openai/codex/pull/19224) **Bump phase-two default model to gpt-5.5** — _by @kliu128, updated 2026-04-23T22:59:31Z_
-- [#19206](https://github.com/openai/codex/pull/19206) **app-server: persist device key bindings in sqlite** — _by @euroelessar, updated 2026-04-23T22:57:15Z_
 - [#19216](https://github.com/openai/codex/pull/19216) **Allow any granular approval requirement** — _by @abhinav-oai, updated 2026-04-23T22:42:29Z_
 - [#19193](https://github.com/openai/codex/pull/19193) **Support Codex Apps auth elicitations** — _by @mzeng-openai, updated 2026-04-23T22:18:28Z_
-- [#19211](https://github.com/openai/codex/pull/19211) _(draft)_ **[codex] Fix Windows process management edge cases** — _by @iceweasel-oai, updated 2026-04-23T22:17:58Z_
 - [#18594](https://github.com/openai/codex/pull/18594) **feat(tui): add keymap slash command** — _by @fcoury-oai, updated 2026-04-23T22:08:02Z_
 - [#18593](https://github.com/openai/codex/pull/18593) **feat(tui): add configurable keymap support** — _by @fcoury-oai, updated 2026-04-23T22:08:02Z_
 - [#19114](https://github.com/openai/codex/pull/19114) _(draft)_ **Support ChatGPT Library file tools** — _by @lt-oai, updated 2026-04-23T22:00:22Z_
-- [#17088](https://github.com/openai/codex/pull/17088) **[codex-analytics] ingest server requests and responses** — _by @rhan-oai, updated 2026-04-23T21:52:07Z_
 - [#18077](https://github.com/openai/codex/pull/18077) **Add goal TUI UX (5 / 5)** — _by @etraut-openai, updated 2026-04-23T21:49:19Z_
 - [#18595](https://github.com/openai/codex/pull/18595) _(draft)_ **feat(tui): add vim composer mode** — _by @fcoury-oai, updated 2026-04-23T21:47:14Z_
 - [#19170](https://github.com/openai/codex/pull/19170) **Skip disabled rows in selection menu numbering and default focus** — _by @canvrno-oai, updated 2026-04-23T21:46:32Z_
 - [#18704](https://github.com/openai/codex/pull/18704) **/plugins: add marketplace install flow** — _by @canvrno-oai, updated 2026-04-23T21:46:29Z_
 - [#18372](https://github.com/openai/codex/pull/18372) **Show action required in terminal title** — _by @canvrno-oai, updated 2026-04-23T21:46:25Z_
-- [#18446](https://github.com/openai/codex/pull/18446) **Reserve missing preserved paths in Linux sandbox policy** — _by @evawong-oai, updated 2026-04-23T21:40:20Z_
 - [#19028](https://github.com/openai/codex/pull/19028) **[codex] Add usage-limit banner analytics plumbing** — _by @jchu-oai, updated 2026-04-23T21:23:11Z_
 - [#19209](https://github.com/openai/codex/pull/19209) **[codex] Emit usage-limit prompt analytics from TUI** — _by @jchu-oai, updated 2026-04-23T21:23:10Z_
 - [#19207](https://github.com/openai/codex/pull/19207) **[codex] Forward Codex Apps tool call IDs to backend metadata** — _by @rreichel3-oai, updated 2026-04-23T21:15:55Z_
@@ -121,8 +123,6 @@
 - [#19169](https://github.com/openai/codex/pull/19169) **Stabilize plugin MCP tool listing test** — _by @starr-openai, updated 2026-04-23T18:14:21Z_
 - [#17245](https://github.com/openai/codex/pull/17245) **feat(tui): configurable keymaps and Vim mode** — _by @fcoury-oai, updated 2026-04-23T18:14:09Z_
 - [#17679](https://github.com/openai/codex/pull/17679) **[plugins] Wait for explicit plugin app tools on first turn** — _by @ssetty-oai, updated 2026-04-23T17:52:43Z_
-- [#19124](https://github.com/openai/codex/pull/19124) **Make MultiAgentV2 interruption markers assistant-authored** — _by @jif-oai, updated 2026-04-23T16:38:55Z_
-- [#18996](https://github.com/openai/codex/pull/18996) **Publish Python SDK with Codex-pinned versioning** — _by @sdcoffey, updated 2026-04-23T16:20:25Z_
 
 
 ## Closed PRs (not merged)
@@ -135,24 +135,54 @@
 
 ## Notable Issues
 
+- [#19196](https://github.com/openai/codex/issues/19196) **'Full Access' permissions broken -- network calls are still sandboxed** _[bug, sandbox]_ — _by @agjones_
+- [#10366](https://github.com/openai/codex/issues/10366) **Cannot run build** _[bug, agent]_ — _by @ybwbqg9379_
+- [#19208](https://github.com/openai/codex/issues/19208) **1m context window gone after Gpt 5.5 Release.** _[bug, context, app, config]_ — _by @Zakisb_ _(closed 2026-04-23T21:39:37Z)_
+- [#19279](https://github.com/openai/codex/issues/19279) **Experimental feature check disabling app startup** _[bug, app, app-server]_ — _by @jeet-genlift_ _(closed 2026-04-24T04:20:38Z)_
+- [#19256](https://github.com/openai/codex/issues/19256) **`/permissions` changes do not propagate to the active session in `codex-cli 0.124.0`** _[bug, sandbox, regression, session]_ — _by @wypong_
+- [#19278](https://github.com/openai/codex/issues/19278) **/side, /fork, backtrack in very long sessions are linearly-in-jsonl slow** _[bug, CLI, session]_ — _by @qdbp_ _(closed 2026-04-24T04:12:23Z)_
+- [#19276](https://github.com/openai/codex/issues/19276) **Codex App: In app browser to support sign in and authentication flows** _[enhancement, auth, app]_ — _by @toptechie156_
+- [#19277](https://github.com/openai/codex/issues/19277) **execution error: Io(Custom { kind: Other, error: "windows sandbox: spawn setup refresh" })** _[bug, windows-os, sandbox, CLI]_ — _by @SunnyDesignor_
+- [#19187](https://github.com/openai/codex/issues/19187) **Windows Codex app: Browser Use external navigation fails because nodeRepl.fetch cannot start codex app-server** _[bug, windows-os, app, app-server]_ — _by @ElScelt_
+- [#19272](https://github.com/openai/codex/issues/19272) **Flagged for Cyber, while already completed TAC** _[bug, CLI, safety-check]_ — _by @redthing1_ _(closed 2026-04-24T04:00:40Z)_
+- [#19274](https://github.com/openai/codex/issues/19274) **Codex Desktop macOS: Plugins page layout renders incorrectly and cards are clipped/cut off** _[bug, app, skills]_ — _by @ganjiuwanshi_
+- [#19204](https://github.com/openai/codex/issues/19204) **Flagged while already being verified** _[bug, CLI, safety-check]_ — _by @Acurisu_
+- [#19275](https://github.com/openai/codex/issues/19275) **Config schema exposes unsupported MCP `bearer_token` field** _[bug, mcp, CLI, config]_ — _by @chanwooyang1_
+- [#19273](https://github.com/openai/codex/issues/19273) **chatgpt.newChat always opens the primary sidebar even when Codex has been moved to the secondary sidebar in Cursor** _[bug, extension]_ — _by @tylr2017_
+- [#19223](https://github.com/openai/codex/issues/19223) **Codex Desktop will not boot up on Mac OS Arm** _[bug, app, app-server]_ — _by @cghiurea_
+- [#19264](https://github.com/openai/codex/issues/19264) **macOS Codex 26.422.21637: OAuth/ChatGPT auth triggers AppRoutes re-mount loop (regression of #12754)** _[bug, auth, app]_ — _by @jiamo_
+- [#18456](https://github.com/openai/codex/issues/18456) **Windows desktop app regression after in-app upgrade: settings/language break, slash commands stop working, Fast Mode missing** _[bug, windows-os, app]_ — _by @weianauto_
+- [#19220](https://github.com/openai/codex/issues/19220) **Codex macOS startup failure: unsupported feature enablement `workspace_dependencies`** _[bug, app, app-server]_ — _by @SnowfallHD_
+- [#19215](https://github.com/openai/codex/issues/19215) **Limit hit very early in GPT 5.5** _[bug, rate-limits]_ — _by @SirTyson_
+- [#19203](https://github.com/openai/codex/issues/19203) **remote connection displays gpt5.5 as custom model** _[bug, app, app-server]_ — _by @winoros_
+- [#13267](https://github.com/openai/codex/issues/13267) **Feature request: option to export the entire session** _[enhancement, TUI]_ — _by @abanoub-ashraf_
+- [#17241](https://github.com/openai/codex/issues/17241) **Export chat session in the Codex Desktop App as a markdown file** _[enhancement, app]_ — _by @anth0nycodes_
+- [#18842](https://github.com/openai/codex/issues/18842) **Codex VS Code extension fails to enable realtime_conversation; new chats cannot switch model and Output is flooded with worker warnings** _[bug, extension, app-server]_ — _by @ranaguir_
+- [#10450](https://github.com/openai/codex/issues/10450) **Remote Development in Codex Desktop App** _[enhancement, app]_ — _by @pocca2048_
+- [#19271](https://github.com/openai/codex/issues/19271) **Windows Codex app: bundled node.exe fails with Access is denied, breaking Node REPL and Browser Use plugin** _[bug, windows-os, app, skills]_ — _by @debnathaniruddha89-design_
+- [#19270](https://github.com/openai/codex/issues/19270) **Browser Use blocks external and custom-host URLs with "cannot determine if ... is allowed" on macOS app** _[bug, app, skills]_ — _by @jianzhangg_
+- [#18175](https://github.com/openai/codex/issues/18175) **Subagent UI "Open" button not working** _[bug, extension, subagent]_ — _by @justinTM_
+- [#19267](https://github.com/openai/codex/issues/19267) **[VS Code Remote Linux] duplicate same-title history entries, blank thread after reopen, and archived thread corruption** _[bug, extension, session]_ — _by @okjugu_
+- [#19269](https://github.com/openai/codex/issues/19269) **Codex ran out of room in the model's context window. Start a new thread or clear earlier history before retrying** _[bug, CLI, context]_ — _by @AhmedAlNeaimy_
+- [#19268](https://github.com/openai/codex/issues/19268) **Support per-skill disable for plugin-contributed skills** _[enhancement, CLI, skills, config]_ — _by @qiankunli_
+- [#16933](https://github.com/openai/codex/issues/16933) **Codex CLI renders hook additionalContext as visible developer message** _[bug, CLI, hooks]_ — _by @FasterPHP_
+- [#18755](https://github.com/openai/codex/issues/18755) **macOS packaging error: SkyComputerUseClient built for macOS 15.0 crashes on macOS 14.x** _[bug, app, skills]_ — _by @ianfoo_
+- [#19265](https://github.com/openai/codex/issues/19265) **Codex Desktop background exec intermittently deletes ~/.codex/skills/.system** _[bug, exec, app, skills]_ — _by @markmdev_
+- [#19260](https://github.com/openai/codex/issues/19260) **Feature request: add setting to control command/tool output folding** _[enhancement, app]_ — _by @Hutai_
+- [#19185](https://github.com/openai/codex/issues/19185) **config.toml context window settings are not respected** _[bug, context, config]_ — _by @kkellyoffical_
 - [#19263](https://github.com/openai/codex/issues/19263) **Desktop app model selector briefly shows Custom when opening conversations** _[bug, app, session]_ — _by @GGBondBlueWhale_
 - [#19262](https://github.com/openai/codex/issues/19262) **Codex CLI 0.124.0 misreports `gh auth status` as invalid inside Codex session** _[bug, tool-calls]_ — _by @skshim-reco_
-- [#19223](https://github.com/openai/codex/issues/19223) **Codex Desktop will not boot up on Mac OS Arm** _[bug, app, app-server]_ — _by @cghiurea_
 - [#9062](https://github.com/openai/codex/issues/9062) **Windows sandbox: command execution fails with `CreateProcessWithLogonW failed: 5`** _[bug, windows-os, sandbox]_ — _by @tagorr_
-- [#19256](https://github.com/openai/codex/issues/19256) **`/permissions` changes do not propagate to the active session in `codex-cli 0.124.0`** _[bug, sandbox, regression, session]_ — _by @wypong_
-- [#19260](https://github.com/openai/codex/issues/19260) **Feature request: add setting to control command/tool output folding** _[enhancement, app]_ — _by @Hutai_
 - [#19023](https://github.com/openai/codex/issues/19023) **Document MCP env_vars for secret-manager session tokens like BW_SESSION** _[documentation, mcp]_ — _by @verickwayne_
 - [#19259](https://github.com/openai/codex/issues/19259) **macOS: stray horizontal white overlay appears above Settings in the sideba** _[bug, app]_ — _by @ZHOUKAILIAN_
 - [#18993](https://github.com/openai/codex/issues/18993) **Unable to open past conversation history in VS Code extension** _[bug, extension, session]_ — _by @iamhenryhuang_
-- [#16933](https://github.com/openai/codex/issues/16933) **Codex CLI renders hook additionalContext as visible developer message** _[bug, CLI, hooks]_ — _by @FasterPHP_
 - [#19255](https://github.com/openai/codex/issues/19255) **Auto compact error** _[bug, context, connectivity]_ — _by @rcj1337_
-- [#19148](https://github.com/openai/codex/issues/19148) **babysit-pr watcher ignores [scrubbed] PR reviews from [scrubbed]-pull-request-reviewer** _[bug, skills]_ — _by @clairernovotny_ _(closed 2026-04-24T02:29:59Z)_
+- [#19148](https://github.com/openai/codex/issues/19148) **babysit-pr watcher ignores [redacted-product] PR reviews from [redacted]-pull-request-reviewer** _[bug, skills]_ — _by @clairernovotny_ _(closed 2026-04-24T02:29:59Z)_
 - [#19181](https://github.com/openai/codex/issues/19181) **Newst VS Code extension just makes codex flash and blink** _[bug, windows-os, extension, regression]_ — _by @visnetwork_
 - [#19186](https://github.com/openai/codex/issues/19186) **`/subagents` should prioritize user-defined agent names over forced runtime nicknames** _[enhancement, subagent]_ — _by @zinc1018_
 - [#13993](https://github.com/openai/codex/issues/13993) **Support standalone Windows installer (`codex-setup.exe`)** _[enhancement, windows-os, app, User Request, Feature]_ — _by @programming-with-ia_
 - [#19258](https://github.com/openai/codex/issues/19258) **Windows desktop app crashes on launch with code=3221225477** _[bug, windows-os, sandbox, app]_ — _by @baobaoxiaojingyu-a11y_
 - [#18123](https://github.com/openai/codex/issues/18123) **Codex crash when using "/resume" command** _[bug, windows-os, TUI, session]_ — _by @aviy009_ _(closed 2026-04-24T02:22:48Z)_
-- [#19187](https://github.com/openai/codex/issues/19187) **Windows Codex app: Browser Use external navigation fails because nodeRepl.fetch cannot start codex app-server** _[bug, windows-os, app, app-server]_ — _by @ElScelt_
 - [#19257](https://github.com/openai/codex/issues/19257) **`[agents.*].config_file` with relative path fails to deserialize: "AbsolutePathBuf deserialized without a base path in agents"** _[bug, app, config]_ — _by @tackcrypto1031_
 - [#19242](https://github.com/openai/codex/issues/19242) **Credits were successfully added and visible (~2300 total), then later disappeared completely, dropping to 0 without any corresponding usage records after April 8, 2026.** _[bug, codex-web, rate-limits]_ — _by @MajuriTK_
 - [#19254](https://github.com/openai/codex/issues/19254) **Adb install failed** _[bug, CLI, tool-calls]_ — _by @HongYuATM_ _(closed 2026-04-24T02:00:48Z)_
@@ -167,43 +197,19 @@
 - [#18692](https://github.com/openai/codex/issues/18692) **GPT-5.4 Fast mode often feels no faster than Standard, but still consumes credits at 2x** _[bug, rate-limits]_ — _by @GGBondBlueWhale_
 - [#13555](https://github.com/openai/codex/issues/13555) **Bug: codex fails with "Missing optional dependency @openai/codex-linux-x64" on Ubuntu x86_64** _[bug, CLI, regression]_ — _by @tsugumi-sys_
 - [#19250](https://github.com/openai/codex/issues/19250) **Split Diff doesnt work when being in "Large diff detected - showing one file at a time" mode** _[bug, code-review, app]_ — _by @henningpokriefke_
-- [#10450](https://github.com/openai/codex/issues/10450) **Remote Development in Codex Desktop App** _[enhancement, app]_ — _by @pocca2048_
 - [#16535](https://github.com/openai/codex/issues/16535) **【BUG】Slash commands completely not working in Codex Desktop App (no UI + no parsing)** _[bug, app, regression]_ — _by @Destiny-9527_ _(closed 2026-04-15T05:59:58Z)_
 - [#19249](https://github.com/openai/codex/issues/19249) **Codex Desktop regression: slash/local skill chip submission hangs, errors, and duplicates messages on Windows after GPT-5.5 update** _[bug, app, regression, skills]_ — _by @didi-rare_
 - [#17390](https://github.com/openai/codex/issues/17390) **Unable to use after update** _[bug, windows-os, CLI, regression]_ — _by @DHJComical_ _(closed 2026-04-16T23:19:04Z)_
 - [#19248](https://github.com/openai/codex/issues/19248) **Add groups** _[enhancement, app, session]_ — _by @patchthecode_ _(closed 2026-04-24T01:00:49Z)_
 - [#19245](https://github.com/openai/codex/issues/19245) **False positive security-risk flag during local yt-dlp GUI refactor using my own cookies.txt** _[bug, safety-check]_ — _by @tagorr_ _(closed 2026-04-24T00:48:59Z)_
-- [#19204](https://github.com/openai/codex/issues/19204) **Flagged while already being verified** _[bug, CLI, safety-check]_ — _by @Acurisu_
 - [#17367](https://github.com/openai/codex/issues/17367) **Linux sandbox cannot execute codex itself** _[bug, sandbox, CLI]_ — _by @howardjohn_
 - [#19241](https://github.com/openai/codex/issues/19241) **GPT-5.5 Fast mode feels like Standard speed while using increased plan usage** _[bug, rate-limits]_ — _by @GGBondBlueWhale_
-- [#19239](https://github.com/openai/codex/issues/19239) **Codex desktop UI does not update language despite localeOverride=zh-CN and --lang=zh-CN** _[bug, app]_ — _by @SeanSeanSo_
-- [#19238](https://github.com/openai/codex/issues/19238) **Windows Desktop: switching sandbox from read-only to workspace-write crashes UI after world-writable ACL scan** _[bug, windows-os, sandbox, app]_ — _by @hOpEtRaIn_
-- [#18966](https://github.com/openai/codex/issues/18966) **Markdown diff code block does not color deleted lines in Codex Desktop dark theme** _[bug, app]_ — _by @ahnbu_
-- [#18341](https://github.com/openai/codex/issues/18341) **Mac app shows persistent blurred/translucent overlay below composer on Intel Mac (macOS 15.0.1, 0.122.0-alpha.1)** _[bug, app]_ — _by @vulcanhelix_
-- [#11735](https://github.com/openai/codex/issues/11735) **Stream disconnected before completion** _[bug, connectivity]_ — _by @rtanglestudio_
-- [#16669](https://github.com/openai/codex/issues/16669) **Allow adjustable chat content width in Codex App** _[enhancement, windows-os, app]_ — _by @ming-git-001_
-- [#19237](https://github.com/openai/codex/issues/19237) **Codex desktop on macOS shows blurred white overlay at certain window widths** _[bug, app]_ — _by @stonezzz_
-- [#16996](https://github.com/openai/codex/issues/16996) **Subagent spawn policy conflicts with repo-level workflow instructions** _[bug, subagent]_ — _by @Alek2077_
-- [#19235](https://github.com/openai/codex/issues/19235) **New CLI bwrap sandbox fails before shell: RTM_NEWADDR loopback Operation not   permitted** _[bug, sandbox]_ — _by @aiconvergence-collab_
-- [#19205](https://github.com/openai/codex/issues/19205) **Undo functionality should never depend on Git repository presence** _[bug, enhancement, extension]_ — _by @Jean-Heng-Huang_
-- [#19196](https://github.com/openai/codex/issues/19196) **'Full Access' permissions broken -- network calls are still sandboxed** _[bug, sandbox]_ — _by @agjones_
-- [#19230](https://github.com/openai/codex/issues/19230) **Revert #19053: Fast service tier should not be the default** _[enhancement, config]_ — _by @nwparker_ _(closed 2026-04-23T23:57:11Z)_
-- [#18645](https://github.com/openai/codex/issues/18645) **Image paste fails in some Codex CLI sessions (Ctrl+V and Right-click Paste both fail)** _[bug, windows-os, TUI]_ — _by @wenshirong_ _(closed 2026-04-23T23:52:03Z)_
-- [#18884](https://github.com/openai/codex/issues/18884) **Feature request: Claude-style /recap, plus /btw alias for /side** _[enhancement, TUI]_ — _by @yizhoupan3-debug_
-- [#19228](https://github.com/openai/codex/issues/19228) **使用--add-dir添加目录后，并没有真是增加该目录的写权限** _[bug, sandbox, CLI]_ — _by @nealwei2008_ _(closed 2026-04-23T23:27:26Z)_
-- [#19213](https://github.com/openai/codex/issues/19213) **Clicking GPT-5.5 in non-project Codex Desktop chats has no effect** _[bug, codex-web]_ — _by @GGBondBlueWhale_
-- [#19227](https://github.com/openai/codex/issues/19227) **selecting gpt 5.5 shows error "model metadata not found"** _[bug, CLI]_ — _by @pdeva_
-- [#16231](https://github.com/openai/codex/issues/16231) **High CPU usage on macOS after updating Codex in VS Code extension to 26.325.31654** _[bug, extension, regression]_ — _by @Filly-MinghaoLUO_
-- [#19220](https://github.com/openai/codex/issues/19220) **Codex macOS startup failure: unsupported feature enablement `workspace_dependencies`** _[bug, app, app-server]_ — _by @SnowfallHD_
-- [#19226](https://github.com/openai/codex/issues/19226) **CLI/TUI: add a keyboard shortcut to cycle permission presets in-session** _[enhancement, TUI]_ — _by @KashifCodeMaster_
-- [#11023](https://github.com/openai/codex/issues/11023) **Codex App is amazing. Please release for Linux.** _[enhancement, app]_ — _by @Suhaibinator_
-- [#19222](https://github.com/openai/codex/issues/19222) **gpt-5.1 was dropped but is still the only 5.x model available on Azure GCC High** _[bug, azure]_ — _by @FaustinCarter_
-- [#19199](https://github.com/openai/codex/issues/19199) **codex-cli 0.124.0 fails to start when hook config is present and codex_hooks is enabled** _[bug, regression, hooks, config]_ — _by @elmakus_ _(closed 2026-04-23T23:01:29Z)_
-- [#19190](https://github.com/openai/codex/issues/19190) **fatal: Unable to create '.git/index.lock': Permission denied, has full permissions** _[bug, windows-os, sandbox]_ — _by @doublemover_
 
 
 ## Commits on `main`
 
+- [`e8d8080`](https://github.com/openai/codex/commit/e8d80808182311d62e9ae91a9a03ddbc09a4b742) feat: let model providers own model discovery (#18950) — _@celia-oai_
+- [`53be451`](https://github.com/openai/codex/commit/53be45167395b35ed967e2157fec074886785b38) feat: Use short SHA versions for curated plugin cache entries (#19095) — _@xl-openai_
 - [`a9c111d`](https://github.com/openai/codex/commit/a9c111da544c976d591343db5493a7da283b72e5) [rollout_trace] Trace sessions and multi-agent edges (#18879) — _@cassirer-openai_
 - [`49fb259`](https://github.com/openai/codex/commit/49fb25997f3c09c25684c2a729cb933939a7f830) Add sticky environment API and thread state (#18897) — _@starr-openai_
 - [`e3c8720`](https://github.com/openai/codex/commit/e3c8720a99114154929dbab950fac9fb1e1e0558) [rollout_trace] Add debug trace reduction command (#18880) — _@cassirer-openai_
@@ -254,9 +260,6 @@
 - [`9d824cf`](https://github.com/openai/codex/commit/9d824cf4b4ff4f2d9e83162ab32d91b6ae08e0b4) app-server: accept command permission profiles (#18283) — _@bolinfest_
 - [`bbff4ee`](https://github.com/openai/codex/commit/bbff4ee61a75917bd3d34ba88974cb5101c6ce27) Add safety check notification and error handling (#19055) — _@etraut-openai_
 - [`0217099`](https://github.com/openai/codex/commit/02170996e63aed49dfd95835be8c417a511df869) Default Fast service tier for eligible ChatGPT plans (#19053) — _@shijie-oai_
-- [`082fc4f`](https://github.com/openai/codex/commit/082fc4f632800f6aa5b0b3badcfbe3aa300f24a7) protocol: report session permission profiles (#18282) — _@bolinfest_
-- [`2b2de3f`](https://github.com/openai/codex/commit/2b2de3f38bcfbd2b20d2ecab650be5aed91608e3) codex: support hooks in config.toml and requirements.toml (#18893) — _@eternal-openai_
-- [`9955eac`](https://github.com/openai/codex/commit/9955eacd22e2ddf3e2096e2baa7609c6c93b2f6a) tui: fix approvals popup disabled shortcut test (#19072) — _@bolinfest_
 
 
 ---
