@@ -675,3 +675,52 @@ The **permissions refactor train** picked up new activity at 18:55Z: PRs **#1939
 7. **ollama joins the model-metadata-catalog cluster** via #15795 / closed #15779. Refresh synthesis #24 to add ollama on next pass.
 
 Next refresh after the next dispatcher tick.
+
+---
+
+## Refresh 18:55Z → 19:10Z
+
+> _LLM-generated addendum. Real PR/issue numbers; click through before quoting._
+
+### codex: the permissions train rebases *again* and grows a cwd-free PR; a schema-defaults PR appears
+
+The 6-PR permissions train (#19391–#19395, #19414) re-stamped its `updatedAt` to 19:09Z — that is **the third rebase today** (17:55Z, 18:55Z, 19:09Z). Still zero merges. In this same window a new sibling PR appeared:
+
+- **[openai/codex#19414]** (19:09Z, OPEN PR, by bolinfest) — *"permissions: make legacy profile conversion cwd-free."* The legacy → profile policy converter currently reads `cwd` from the surrounding process to resolve relative paths in policy expressions; this PR makes the converter take cwd as an explicit argument instead. **The change is small but the implication is large**: it admits that the conversion has been *implicitly cwd-coupled* — the same legacy policy file produced different profiles depending on which directory the converter ran in. Anchor exhibit for synthesis #30 below (default-flag-flip-as-breaking-change: removing a coupling that callers may have come to depend on).
+- **[openai/codex#19424]** (19:06Z, OPEN PR, by neil-oai, +88/-64) — *"Strip sandbox access defaults from app-server JSON schema."* Removes object-shaped defaults (`access`, `readOnlyAccess`) from the exported JSON Schema while *keeping* serde defaults at runtime and keeping scalar defaults like `networkAccess: false`. The PR body is explicit: *"codegen-hostile object defaults"* — i.e. downstream code generators were materializing the default object as if it were the *contract*, then when runtime changed, generated clients drifted. **Same pattern as the catalog-drift cluster from synthesis #24, but on the schema-export surface.** Second anchor for synthesis #30.
+- **[openai/codex#19425]** (19:08Z, issue) — *"Custom stdio MCP server discovered by `/mcp` but tools not exposed to Desktop threads."* The server starts, `tools/list` returns the expected 7 tools (`project_map`, `read_files`, `code_search`, etc.), Desktop UI lists the server as enabled — and `tool_search` returns 0 callable tools. **Three independent success signals (server up, tools enumerated, UI shows enabled) all return green; the only failing signal is the one that matters (tools actually invokable from a thread).** This is exactly the synthesis #27 shape, *but on a different surface* — and the user's bug report is in essence "your error model gave me no way to discover what was actually wrong." Anchor for synthesis #29 below.
+- **[openai/codex#19420]** (19:02Z, issue, refreshed) — same `codex-auto-review` model_not_found error from earlier, with new evidence: the error surfaces as a *model* error (`The requested model 'codex-auto-review' does not exist`), but the actual cause is that the **guardian-subagent reviewer is wired to a tool name, not a model name**, and the API rejects it as a model. The error message is technically correct and operationally useless. Synthesis #29 exhibit.
+- **[openai/codex#19409]** (19:09Z, issue, refreshed) — the GPT-5.5 context catalog mismatch issue grew a long evidence dump: `codex debug models` reports `context_window: 400000`, the runtime `models_cache.json` reports `272000`, the live session events report `model_context_window: 258400` (= 272000 × 95%), and the user-visible failure is the generic `Codex ran out of room in the model's context window. Start a new thread or clear earlier history before retrying.` **Four catalog surfaces, three different numbers, one error message that names none of them.** Synthesis #29 exhibit; also a refresh of synthesis #24 (model-capability-catalog-drift) — the drift now reproduces inside a single host across local cache, debug command, and active session.
+- **[openai/codex#19160]** (19:08Z, OPEN PR, +521 lines) — *"Make apply_patch streaming parser stateful."* Routes normal apply_patch parsing through the same parser in strict finalization mode and **removes the public `parse_patch_streaming` / `ParseMode::Streaming` API**. A behind-the-scenes consolidation, but it is also a removal of a public surface that (per the PR body) was leaking streaming progress ownership into callers. Default-removal exhibit for synthesis #30.
+- **[openai/codex#19013]** (19:00Z, OPEN PR, +591 lines, refreshed) — *"Allow plugin-declared first-party connectors."* The current connector filter blocks every `connector_openai_*` id by blanket policy; this PR adds `plugin_declared_connector_ids` so plugin-bundled 1p connectors are allow-listed. Notable: the *blanket-block* was the implicit default, and the fix is to introduce an explicit allow-list — same shape as litellm #26442's "previously implicit, now explicit" UI scoping (synthesis #28). **Refresh synthesis #28** to add #19013 next pass.
+
+### crush: no fresh PR activity in this 15-minute window
+
+Crush stayed quiet 18:55Z → 19:10Z. The two-fix patch-graveyard formation around #2690/#2691 from the previous addendum window still has no maintainer triage on either PR.
+
+### litellm: a global routing-flag PR merged + four guardrail/MCP fixes still open
+
+- **[BerriAI/litellm#25359]** (19:06Z, **MERGED**, by Sameerlite) — *"feat(openai): add `route_all_chat_openai_to_responses` global flag."* Adds `litellm.route_all_chat_openai_to_responses` (env: `LITELLM_ROUTE_ALL_CHAT_OPENAI_TO_RESPONSES`); when set, *all* `/chat/completions` calls to OpenAI are silently routed through the Responses API bridge. **Default is `False`, so this looks like a feature flag — but the PR body explicitly frames it as making "the Responses API the recommended path for OpenAI models without requiring users to prefix models with `responses/`."** Once the recommended path migrates, the next breaking change is flipping that default to `True` — and *every* user who reads `/chat/completions` traces will see them as Responses-API traces. Anchor exhibit for synthesis #30 below. The same PR also slips in a fix to `responses/litellm_completion_transformation/transformation.py` to *preserve the full `reasoning` dict (including the `summary` key) instead of extracting only `effort`* — a quiet bug-fix on the reasoning-shape contract surface (synthesis #23) that landed as an unannounced rider in a feature PR. Worth flagging on the next #23 refresh.
+- **[BerriAI/litellm#26390]** (18:39Z OPEN PR, refreshed) — *"[Fix] Guardrail param handling in list and submission endpoints."*
+- **[BerriAI/litellm#26360]** (18:39Z, OPEN PR, refreshed) — *"feat(guardrails): LLM-as-a-Judge guardrail."* Worth tracking against the synthesis #28 cluster — guardrails are a privileged actor class.
+- **[BerriAI/litellm#26274]** (18:52Z, OPEN PR, refreshed) — *"fix(mcp): harden OAuth authorize/token endpoints (BYOK + discoverable)."* Same shape as anomalyco/opencode #24179 (synthesis #28): an MCP-side OAuth surface that previously trusted `BYOK` callers implicitly.
+- **[BerriAI/litellm#26262]** (18:28Z, OPEN PR, refreshed) — *"fix(proxy): invoke post-call guardrails on pass-through endpoint responses (#20270)."* Pass-through endpoints were skipping post-call guardrails — direct exhibit for synthesis #22 (privilege-by-exclusion); the fix has been pending since the issue was filed as #20270.
+
+### opencode (anomalyco fork): a TUI workspace-routing fix
+
+- **[anomalyco/opencode#23844]** (19:09Z, OPEN PR, +6 lines) — *"fix(tui): route question replies through current workspace."* Tiny fix: passes the current TUI workspace when answering or rejecting `QuestionPrompt` requests. Without this, `question.reply` POSTs were going to the *default* workspace instead of the active one — a question asked in workspace B could be silently answered against workspace A, with no error surfaced. **Synthesis #29 exhibit** (the failure was technically silent — no exception, just wrong-target routing) and **synthesis #30 exhibit** (the *default* workspace was load-bearing for a routing decision that should always have been explicit).
+
+### ollama: no fresh PR activity in this 15-minute window
+
+Ollama stayed quiet 18:55Z → 19:10Z. The #15795 / closed-#15779 catalog-PR pair from the previous window has no further movement.
+
+### Net narrative change since 18:55Z
+
+1. **The codex permissions train rebased a third time** (now at 19:09Z) without landing, and **grew a 7th sibling** (#19414, "cwd-free legacy conversion") — the train is now actively *removing implicit defaults* from its own conversion path, in addition to introducing profile-backed scoping. Train length and rebase frequency are now both release-risk signals.
+2. **A new "schema-defaults are codegen-hostile" admission landed in #19424** — the team is explicitly removing object-shaped defaults from the exported JSON Schema because downstream code generators materialized them as the contract. Same family as catalog-drift, but on a *new surface*: schema export.
+3. **#19425 (MCP discovered-but-not-exposed) is a fresh exhibit of synthesis #27** on a fourth surface (Desktop tool registration), bringing the surface count to: install (#19419), updater (#19421), desktop-server (#19423), tool registration (#19425), tool-name resolution (#19420), context catalog (#19409), opencode workspace routing (anomalyco/opencode #23844). **Seven surfaces, one shape.**
+4. **litellm #25359 merged** introduces a global flag that quietly redefines the OpenAI default routing path while flipping the user-visible API surface. Anchor for new synthesis #30.
+5. **#19013 (plugin-declared 1p connectors) belongs in synthesis #28** — connectors were under blanket-block by default, and the fix is the same "previously implicit, now explicit" admission. Refresh #28 to add it on the next pass.
+6. **anomalyco/opencode #23844** confirms that the *current TUI workspace* is load-bearing default state for question routing — a 6-line fix with synthesis #30 implications well beyond its diff size.
+
+Two new cross-repo syntheses below: **#29 (error-message-vs-actionable-error)** and **#30 (default-flag-flip-as-breaking-change)**. Next refresh after the next dispatcher tick.
