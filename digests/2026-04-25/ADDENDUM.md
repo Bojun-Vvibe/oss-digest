@@ -347,3 +347,56 @@ Silent in window. No PR creation, refresh, merge, or close events.
 6. **litellm #26485 (`FuturMix`, OpenAI-compatible provider integration) opened** — second new-author provider-catalog open of the day after Kcstring #26331 (gpt-image-2 prices). Once-per-50-minute cadence on provider-catalog opens this tick.
 7. **codex `turn`-surface co-occupation continues** — mchen-oai #19473 (turn metadata) refreshed alongside pakrym-oai #19497 (turn handlers); two distinct authors on the same shape across two consecutive ticks.
 8. **Reviewer absorption capacity is surface-dependent, not author-dependent** — yuneng-berri merged the URL-traversal hardening (#26467) within a window where the ACL-hardening cohort (synthesis #51, 5 authors) cleared zero PRs. The bottleneck is the surface (ACL changes need broader review), not the authors.
+
+---
+
+## Addendum 8 — Window 04:42Z → 05:21Z
+
+### codex (openai/codex)
+
+- **[openai/codex#19506]** — OPENED 05:07:32Z by `Aismit`. *"[codex] Refresh AGENTS.md on cwd changes."* New surface (AGENTS.md auto-refresh) and **first appearance of `Aismit` in the corpus**. The PR targets agent-runtime context invalidation on directory change — adjacent to but distinct from the synthesis #53 pakrym handler-stack and the lt-oai #19458 file-hooks PR. 2.5-minute open-to-update interval suggests CI kickoff already in flight.
+- **[openai/codex#19498]** — refreshed 05:10:50Z by `pakrym-oai`. *"Streamline review and feedback handlers."* **First post-burst refresh** observed on the 9-PR `Streamline X handlers` sub-cluster after the 04:15:01–02Z second burst (Addendum 6). The refresh is on a **single PR (#19498), not the full sub-cluster** — confirming Addendum 7's parsimony judgement: there is no fixed periodic CI cron on the sub-cluster; updates are per-PR triggered (likely by individual review comments or per-PR CI re-runs). **Synthesis #57 falsified for the second time in two ticks** — the lockstep update pattern was a transient open-time artifact, not a recurring cadence.
+- **[openai/codex#19459]** — refreshed 04:55:54Z by `mzeng-openai`. *"Enable unavailable dummy tools by default."* Continued iteration on the tools-shape PR; second refresh in two ticks (Addendum 7 noted the 04:33Z refresh). **mzeng-oai is iterating in ~22-minute intervals** on the dummy-tools PR — consistent with response-to-review cycle, not bot-cadence.
+- **No new merges in window.** The codex side is dominated by single-author iteration (pakrym, mzeng) plus one new-author open (Aismit).
+
+### litellm (BerriAI/litellm)
+
+- **[BerriAI/litellm#26486]** — OPENED 04:43:33Z by `stuxf`. *"chore(auth): admin-only gate on key_type, allowed_passthrough_routes, and key/regenerate grant fields."* **Sixth PR in the synthesis #51 multi-author auth/ACL hardening surge** (yuneng-berri #26464 MERGED, ishaan-berri #26471/#26465/#26462, milan-berri #26460, stuxf #26463/#26484, now stuxf #26486). **stuxf is now a 3-PR author in the surge** (#26463 MCP-route gating + #26484 master-key alias substitution + #26486 admin-only gate on key/regenerate grant fields). Same surface family — auth-side privilege boundary tightening — across a 4h24m window from #26463 (00:19Z) to #26486 (04:43Z). **The surge is now visibly authored as a coordinated multi-PR sequence by a single contributor**, not a multi-author cohort response. **Synthesis #51's "5 distinct authors" framing now needs revision**: stuxf's three PRs are sequential micro-PRs on the same conceptual change (admin-gating sensitive fields), suggesting a deliberate scope-split rather than independent cohort response. Anchor for synthesis #61 below.
+- **[BerriAI/litellm#26470]** — refreshed 05:10:03Z by `yuneng-berri`. *"[Fix] Prevent atexit flush hangs and guard proxy_server_request header lookup."* Still OPEN since 01:43Z. **Third yuneng-berri PR in the active queue this tick** (#26464 MERGED, #26467 MERGED, #26470 still open). After two same-author merges, the third PR has crossed 3h27m without merging — divergence from the synthesis #50 cascade-follow-up shape. The two prior merges were on `/team/*` (ACL metadata) and pass-through URL hardening (path-construction); #26470 is on **process-lifecycle plumbing** (atexit handler) plus **request header lookup guarding**. The cascade is now **surface-bounded**, not author-bounded: yuneng-berri's hot-author advantage does not transfer across surface families. Confirms Addendum 7's "reviewer absorption is surface-dependent" finding from a different angle.
+- **[BerriAI/litellm#26471]** — `ishaan-berri` *"feat(teams): per-model team member budgets"* (synthesis #52 third refile node) still OPEN at 03:32Z last refresh; 5h25m past third-refile open. No fourth refile observed across the four ticks since synthesis #52 was authored. The triple-refile chain has stabilized at the third node — no further close-and-refile churn.
+
+### opencode (anomalyco/opencode)
+
+- **[anomalyco/opencode#24253]** — **OPENED 04:47:27Z by `rekram1-node`, MERGED 04:47:39Z by `rekram1-node`. 12-SECOND open-to-merge.** *"ci: adjust auto close issue script to use not planned instead of completed."* This is the **fastest open-to-merge in the W17 corpus by an order of magnitude** (next-fastest was opencode #24230 at ~13 minutes; codex #19472 at 18 minutes). Single-line CI script tweak; same author as the #24252 12-minute self-close from Addendum 7. **Same author within 18 minutes: a 12-minute open-and-self-close (no merge) followed by a 12-second open-and-merge.** Both are CI-adjacent, both on small surfaces; the failure mode and success mode share an author, a tick, and a class of change. Anchor for synthesis #62 below.
+- **[anomalyco/opencode#24215]** — **MERGED 05:14:54Z by `kitlangton`.** *"Fix shell cwd after login startup."* Opened 2026-04-24T21:45:07Z; **7h29m to merge.** Sibling to #24214 (`simonklee` *"test: stabilize prompt shell cwd test"*, CLOSED 21:51Z 04-24, 7-minute self-close) — both on the **shell cwd surface**, opened within 9 minutes of each other on 04-24, with the test-stabilization PR self-closing in 7 minutes and the underlying-fix PR taking 7h29m to merge. **Second flaky-test bimodality exhibit in two ticks** (synthesis #60 anchored opencode #24252 vs codex #19454; this is opencode #24214 vs opencode #24215). The bimodality is now an **intra-repo phenomenon**, not just inter-repo as #60 framed it.
+- **[anomalyco/opencode#24219]** — CLOSED 05:16:50Z by `kitlangton`. *"docs(effect): add generated http route inventory."* Opened 2026-04-24T22:15:13Z; ~7h close-without-merge by the same author. Sibling to #24213 (also kitlangton, *"refactor(ripgrep): migrate result schemas to effect"*, MERGED 21:42Z 04-24) — the effect-migration train has one merge (#24213) and one self-close (#24219) on adjacent surfaces by the same author, 7 hours apart.
+- **[anomalyco/opencode#24250]** — refreshed 04:52:49Z by `knefenk`. *"fix(provider): complete DeepSeek reasoning_content round-trip for multi-turn conversations."* Synthesis #58 second-node iterating; second refresh observed in 41 minutes. Active iteration, no merge yet. #58's 7-day merge prediction remains live.
+
+### ollama (ollama/ollama)
+
+- **[ollama/ollama#15805]** — OPENED 02:12:58Z by `B-A-M-N`. *"Add `ollama launch qwen` support for Qwen Code CLI."* Earlier than this addendum's nominal window but **ollama has been silent in Addendums 5/6/7** — first ollama activity since the cohort silence began. Adjacent to hoyyeva's `launch:` series (#15795 *"launch: add codex model metadata catalog"*, OPEN; #15779 same title, CLOSED). **The `ollama launch <X>` surface now has 3 PRs in 2 days from 2 distinct authors** (hoyyeva: #15779 closed → #15795 open refile; B-A-M-N: #15805 open). Different model-CLI integrations (codex vs qwen), same launcher subsystem.
+
+### crush (charmbracelet/crush)
+
+- Silent in window. Last activity was #2706 at 01:13Z (`taigrr` *"Update tooling notes to give agent some better git and github instructions"*) — outside this addendum's window.
+
+### continue (continuedev/continue)
+
+- Silent in window. The interesting cross-repo signal is **[continuedev/continue#12220]** (`FuturMix` *"feat: add FuturMix as a model provider"*, OPENED 2026-04-24T15:32Z) and **[BerriAI/litellm#26485]** (`FuturMix` *"feat: add FuturMix as named OpenAI-compatible provider"*, OPENED 2026-04-25T04:24Z): **same author, same provider integration, two different agent/proxy projects, ~13 hours apart.** The continue PR opened first; the litellm PR followed. Cross-project provider-integration broadcast pattern.
+
+### Aider-AI / OpenHands
+
+- Silent in window. OpenHands has produced no PRs in the 24-hour search window — the longest cohort silence among the 8 watched repos.
+
+---
+
+### What changed in window 04:42Z → 05:21Z (Addendum 8)
+
+1. **opencode #24253 merged in 12 seconds by `rekram1-node`** — fastest open-to-merge in the W17 corpus by an order of magnitude. Same author had a 12-minute self-close (#24252) 18 minutes earlier; both CI-adjacent, both on small surfaces. **Failure mode and success mode share an author and a tick.** Anchor for synthesis #62 below (*same-author CI-surface micro-PR doublet: self-close-fast then merge-faster*).
+2. **litellm #26486 (`stuxf` admin-only gate on key/regenerate grant fields) — `stuxf`'s third PR in the synthesis #51 surge over a 4h24m window.** The "5 distinct authors" framing for #51 is empirically misleading — three of the surge PRs are sequential micro-PRs by a single contributor (stuxf: #26463 MCP gating → #26484 master-key alias → #26486 admin-only gate). Anchor for synthesis #61 below (*single-author multi-PR scope-split inside an apparently multi-author surge cohort*).
+3. **opencode #24215 (kitlangton, shell cwd fix) MERGED 7h29m after open** — sibling PR #24214 (simonklee, *test stabilize prompt shell cwd*) had self-closed in 7 minutes on 04-24. **Second flaky-test bimodality exhibit in two ticks**, this time intra-repo (synthesis #60 was inter-repo). The bimodality generalizes across the repo boundary.
+4. **Synthesis #57 falsified again** — pakrym-oai #19498's solo refresh at 05:10:50Z (without the rest of the 9-PR sub-cluster) confirms updates are per-PR review-driven, not bot-cron-driven.
+5. **yuneng-berri's third PR (#26470, atexit/header-lookup) did not follow the synthesis #50 cascade-follow-up shape** — 3h27m open, no merge. Hot-author cascade speed is **surface-bounded**, not author-bounded: extends but reframes synthesis #50's prediction.
+6. **Cross-project provider broadcast** — `FuturMix` opened the same provider integration in continuedev/continue (#12220) and BerriAI/litellm (#26485) ~13 hours apart. Provider-author broadcast across two distinct project surfaces in one calendar day.
+7. **ollama launcher subsystem**: 3 PRs in 2 days from 2 authors on `ollama launch <X>` integration commands — new sub-surface emerging in the ollama corpus.
+8. **codex #19506 (`Aismit`, AGENTS.md cwd refresh) opens new agent-context-invalidation surface** with a first-appearance author. Adjacent to but disjoint from the existing pakrym/lt-oai/mzeng iteration cluster.
