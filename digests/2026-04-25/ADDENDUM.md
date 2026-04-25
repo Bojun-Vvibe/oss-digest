@@ -541,3 +541,53 @@ Silent in window. crush last activity 01:13Z (#2706 taigrr); aider last activity
 5. **First cline activity to surface in W17 corpus** (#10403 `abliteration-ai`, vendor-self-onboarding provider PR). Cline was effectively silent in earlier W17 addendums; the appearance of a vendor-self-authored provider PR is the first cline data point this week. Vendor-self-onboarding (PR author = provider org) is a shape distinct from third-party-author provider PRs (e.g. opencode #14468 by `balcsida` for the LiteLLM proxy provider — `balcsida` is not the LiteLLM org).
 6. **No merges in window across all 9 tracked repos.** Second consecutive zero-merge window (Addendum 9 also had zero merges; Addendum 10 had multiple merges). Reviewer-absorption capacity remains at zero in this 34-minute slice while open volume remains elevated (3 new opens: #19526, #10403, plus opencode #24263 open-and-close in window).
 7. **`yuneng-berri` cascade has paused for 1h04m** (no activity since #26496 at 06:41Z). The synthesis #63/#64 hot-author multi-surface fanout has its first prolonged dormant interval in the calendar day; whether this is the **end of the cascade** (sustainable single-day burst) or a **mid-cascade pause** (with more PRs to come) is the watch question for Addendum 12.
+
+## Addendum 12 — Window 07:45Z → 08:25Z
+
+### codex (openai/codex)
+
+- **[openai/codex#19392]** — refreshed 08:22:14Z by `bolinfest`. *"permissions: derive compatibility policies from profiles."* Still OPEN.
+- **[openai/codex#19391]** — refreshed 07:59:03Z by `bolinfest`. *"permissions: make runtime config profile-backed."* Still OPEN. Both PRs were opened together at 16:02:5x on 2026-04-24 (~16 hours ago) and refreshed within ~23 minutes of each other in this window. **Same-author 2-PR sequence on adjacent permissions surfaces, refreshed in lockstep**, by the same author who landed the legacy-mode removal #19449 in Addendum 1 (00:17Z this calendar day). The permissions slice (#19391–#19395 originally cited in synthesis #44) is being co-iterated by `bolinfest` ~16h after first opened; #19392's title (*"derive compatibility policies from profiles"*) explicitly depends on #19391's deliverable (*"make runtime config profile-backed"*) — a **declared inter-PR ordering** in the maintainer-class (extends synthesis #67's declared-cohort framing from contributor `aibrahim-oai` to maintainer `bolinfest`).
+
+### litellm (BerriAI/litellm)
+
+- **[BerriAI/litellm#26497]** — refreshed 08:21:05Z by `HeMuling`. *"fix(chatgpt): preserve text and parallel_tool_calls in responses."* Still OPEN; first refresh since open (07:03:52Z, Addendum 10). 1h17m gap to first iteration — slow-iteration shape.
+- **[BerriAI/litellm#26189]** — refreshed 08:13:36Z by `iamujjwalsinha`. *"fix(xai): register grok-imagine-image for image generation."* PR opened 2026-04-21T20:08Z; **~3.5-day-old PR** refreshed in window. xAI surface.
+- **[BerriAI/litellm#26052]** — refreshed 08:10:43Z by `geraint0923` (`Mark`). *"fix(xai): correctly resolve the canonical names and alias for xai models."* PR opened 2026-04-19T05:20Z; **~6-day-old PR** refreshed in window. xAI surface.
+- **[BerriAI/litellm#25896]** — refreshed 08:14:02Z by `Vallabh-1504`. *"feat(vertex_ai): Add xAI Grok models support as Vertex AI partner models."* PR opened 2026-04-16T19:48Z; **~8.6-day-old PR** refreshed in window. Vertex AI × xAI cross-surface integration.
+- **Three xAI/Grok-surface litellm PRs from three distinct authors refreshed within an 11-minute span** (#26189 iamujjwalsinha 08:13:36Z, #25896 Vallabh-1504 08:14:02Z, #26052 geraint0923 08:10:43Z). Two are direct xAI provider fixes (alias resolution + grok-imagine model registration), one is a partner-model integration. **Multi-author multi-PR convergence on the xAI/Grok provider surface in litellm**, all on long-tail PRs (3.5–8.6 days old). Anchor for **synthesis #69** below.
+
+### opencode (anomalyco/opencode)
+
+- **[anomalyco/opencode#24250]** — refreshed 08:14:07Z by `knefenk`. *"fix(provider): complete DeepSeek reasoning_content round-trip for multi-turn conversations."* Opened 04:11:17Z (~4 hours ago, Addendum 9 era). Still OPEN. Same DeepSeek-reasoning surface as #24146 (MERGED prior tick) and the cross-repo signal traced in synthesis #58 (single-turn-merge-exposes-multi-turn-gap).
+- **[anomalyco/opencode#18767]** — refreshed 07:54:14Z by `noahbentusi`. *"feat(app): Mobile Touch Optimization."* PR opened 2026-03-23T11:05Z; **~33-day-old PR** refreshed in window. Long-tail feature PR.
+- **[anomalyco/opencode#13854]** — refreshed 07:54:15Z by `mocksoul` (`Vadim Fint`). *"fix(tui): stop streaming markdown/code after message completes."* PR opened 2026-02-16T14:43Z; **~68-day-old PR** refreshed in window — **the oldest opencode PR refresh observed in this calendar day**, exceeding the #14468 64-day datapoint that anchored synthesis #68. Long-tail feature PR.
+- **Two long-tail opencode PRs refreshed within 1 second of each other** (#18767 07:54:14Z, #13854 07:54:15Z, both feature PRs >30 days old, two distinct authors). The timing is suspicious-tight: this is more consistent with a **bot-driven mass-refresh sweep** than two independent author actions.
+
+### ollama (ollama/ollama)
+
+- **[ollama/ollama#15808]** — OPENED 08:16:22Z by `famasoon` (`Ryota Sakai`). *"fix: improve error handling for model loading in Scheduler."* Scheduler-surface error-handling PR; first new ollama open since #15805 (B-A-M-N qwen launcher, 02:12Z, ~6 hours ago). Breaks the ~6h ollama-silence noted across Addendums 9/10/11.
+- **[ollama/ollama#15726]** — refreshed 08:07:02Z by `UniquePratham`. *"fix: resolve OpenClaw gateway launch timeout on Windows by enforcing …"* PR opened 2026-04-21T05:32Z; **~4-day-old PR** refreshed in window. Windows-Scheduler interaction surface — adjacent to but disjoint from #15808's Scheduler error-handling. **Two ollama Scheduler-surface PRs active in the same window** (one new open, one long-tail refresh) by two distinct authors.
+
+### cline (cline/cline)
+
+- **[cline/cline#10403]** — refreshed 07:47:37Z by `abliteration-ai`. *"feat: add Abliteration.ai provider."* Vendor-self-onboarding provider PR opened 07:25:36Z (Addendum 11). 22m to first iteration. Still OPEN.
+
+### crush / continue / OpenHands / aider
+
+- **crush**: silent in window. Last activity #2706 at 01:13Z (taigrr) — now ~7h09m of silence.
+- **continue**: silent in window. The cross-project `FuturMix` provider broadcast (continue #12220 + litellm #26485) noted in Addendums 8–11 still has **no third leg**; ~7h continuous dormancy on both legs. The "abandoned dual-PR coordination" framing from Addendum 11 hardens.
+- **OpenHands** (`OpenHands/OpenHands` — note org name from Addendum 10): silent in window. Last activity #14130 (dependabot pypdf bump) at 07:03:54Z.
+- **aider**: silent in window.
+
+---
+
+### What changed in window 07:45Z → 08:25Z (Addendum 12)
+
+1. **Multi-author convergence on the xAI/Grok provider surface in litellm** (#26189 iamujjwalsinha, #26052 geraint0923, #25896 Vallabh-1504 — three distinct authors, three long-tail PRs 3.5–8.6 days old, all refreshed within an 11-minute span at 08:10–08:14Z). This is the **first observed multi-author single-day refresh convergence on a single provider-family surface in litellm** in this corpus. The pattern is **provider-surface-driven long-tail synchronization**, structurally distinct from the same-day surge cohorts (synthesis #51) and same-author scope-splits (synthesis #61). **Anchor for synthesis #69** below.
+2. **Maintainer-class declared inter-PR ordering on codex permissions surface** (`bolinfest` #19391 → #19392, refreshed in lockstep at 07:59Z and 08:22Z, second PR title explicitly depends on first's deliverable). Extends synthesis #67's declared-vs-inferred framing from contributor `aibrahim-oai` (single repo, 1h14m intra-tick) to maintainer `bolinfest` (single repo, ~16h cross-tick). The declared-cohort pattern is **not author-class-bounded** — it appears in both contributor and maintainer cohorts.
+3. **Cross-repo long-tail PR refresh wave in this window**: opencode #13854 (~68d), opencode #18767 (~33d), opencode #14468 (64d, refreshed prior tick), opencode #16525 (48d, refreshed prior tick), litellm #25896 (~8.6d), litellm #26052 (~6d), litellm #26189 (~3.5d), ollama #15726 (~4d). **Eight long-tail PRs refreshed across three repos in a ~75-minute span**. The synthesis #68 tri-modal framing for opencode now has cross-repo company: **multi-week long-tail PR refresh activity is not opencode-specific** — it is concurrent in litellm and ollama too. Anchor for **synthesis #70** below.
+4. **Two opencode long-tail refreshes within 1 second of each other** (#18767 and #13854 at 07:54:14–07:54:15Z, two distinct authors). Suspicious-tight timing implies a single bot-driven mass-refresh action rather than two independent author keystrokes. If confirmed, this **would call into question the human-attribution of long-tail-PR refresh signals** that synthesis #68 / #70 rest on. Watch question for next tick: do refreshes cluster at second-precision across authors, or are they spread out?
+5. **Zero merges in window across all 9 tracked repos.** Third consecutive zero-merge window (Addendums 10 had merges; 11 + 12 have none — actually Addendum 11 had zero, so this is **second consecutive zero-merge window**). Reviewer-absorption capacity remains at zero while long-tail-refresh volume is elevated.
+6. **`yuneng-berri` cascade dormancy now ~1h44m** (last activity #26496 at 06:41Z; nothing in window). The synthesis #63/#64 hot-author cascade is exhibiting its longest pause yet in the calendar day. The Addendum 11 watch question (end-of-cascade vs mid-cascade pause) remains open; the longer the dormancy, the more "end-of-cascade" becomes the parsimonious read.
+7. **ollama broke its ~6h silence** with #15808 (`famasoon`, Scheduler error-handling), and the older Scheduler-Windows PR #15726 (`UniquePratham`) refreshed within 9 minutes — **two-author ollama Scheduler-surface convergence** within the same 9-minute slice. ollama Scheduler is the active surface this window.
