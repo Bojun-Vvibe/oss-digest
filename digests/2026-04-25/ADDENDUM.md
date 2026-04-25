@@ -633,3 +633,49 @@ Silent in window. crush last activity 01:13Z (#2706 taigrr); aider last activity
 5. **Zero merges in window across all 9 tracked repos.** **Third consecutive zero-merge window** (Addendums 11, 12, 13). Reviewer-absorption capacity has now been at zero for ~91 continuous minutes while open-velocity is rising (3 new opens in window 08:16Z–08:40Z across codex+ollama). The **open-vs-merge gap is widening** in real time.
 6. **Cross-repo author overlap check (negative)**: of all authors active in window (`mzeng-openai`, `aibrahim-oai`, `knefenk`, `stationeros`, `abliteration-ai`), zero appear in more than one tracked repo this tick. Synthesis #63's hot-author multi-surface fanout pattern is **absent** in this window. The cross-repo coupling observed in synthesis #70 (long-tail refresh wave) was **timing-only, not author-overlap** — confirmed again here.
 7. **`yuneng-berri` cascade now ~2h01m dormant**. Crossing the 2-hour threshold makes "end-of-cascade" the strongly-preferred read over "mid-cascade pause" — synthesis #63/#64 cascade has effectively terminated.
+
+---
+
+## Addendum 14 — Window 08:42Z → 09:06Z
+
+### codex (openai/codex)
+
+- Silent in window. The MCP/policy/permissions surface convergence anchored in **synthesis #72** (#19392 `bolinfest`, #19524 `aibrahim-oai`, #19537 `mzeng-openai`) has had **zero follow-up activity** in the ~40m since the 08:25:29Z cluster. Per synthesis #72's prediction ("the next codex MCP/policy/permissions PR opened by either `mzeng-openai` or `bolinfest` will see a contributor-class follow-up within 30 minutes") — the 30-minute prediction window has now elapsed without a follow-up. **Synthesis #72 prediction #2 is on track to falsify** if no codex MCP-surface activity appears by ~10:00Z.
+
+### litellm (BerriAI/litellm)
+
+- Silent in window. `yuneng-berri` cascade dormancy now ~2h25m (last activity #26496 at 06:41Z). The "end-of-cascade" reading from Addendum 13 is now structurally confirmed at the >2h threshold. The xAI/Grok refresh cluster (#26189, #26052, #25896) anchored in **synthesis #69** has had no fourth refresh — the 11-minute convergence at 08:10–08:14Z stands as a closed event.
+
+### opencode (anomalyco/opencode)
+
+- **[anomalyco/opencode#24271]** — OPENED 08:44:54Z, refreshed 09:01:59Z by `wangzexi` (`Zexi`), head SHA `831bf6b2ac88`. *"Set active server before navigation and use replace navigation to avoid extra history entries."* Server/navigation-surface fix. **First open in window**, ~17m from open to first push (rapid self-iteration cadence consistent with synthesis #71 vendor-self template, but here on a non-vendor PR by an individual contributor).
+- **[anomalyco/opencode#24272]** — OPENED 08:54:17Z, refreshed 09:00:50Z by `kyuna0312`, head SHA `d4aa1133f1a5`. *"docs: add Mongolian README documentation."* i18n docs PR. ~6.5m from open to first push.
+- **[anomalyco/opencode#24273]** — OPENED 08:57:08Z by `JasonZhaoWW` (`Jason`), head SHA `ee1c397e7be0`. *"docs: correct compaction prune default."* Docs-only correction PR. Still at HEAD-of-open (no refresh).
+- **Three opencode opens by three distinct authors within a ~12-minute slice** (08:44:54Z → 08:57:08Z), all of which are non-feature surfaces (docs ×2, navigation fix ×1). **Two of three are docs-class PRs** (#24272 i18n, #24273 docs correction). This is the **first observed docs-cluster convergence in opencode in this corpus**: prior multi-author opencode convergences (synthesis #66 self-close, #68 merge-velocity tri-modal) were on feature/provider surfaces. Anchor for **synthesis #73**.
+- **[anomalyco/opencode#24250]** — no activity in window. Last refreshed 08:25:21Z (Addendum 13). DeepSeek reasoning-shape PR by `knefenk` is now at ~41m dormancy after its previous ~4h14m self-iteration cadence.
+
+### ollama (ollama/ollama)
+
+- **[ollama/ollama#15809]** — refreshed 08:42:56Z by `stationeros` (`Rohit Kumar`), head SHA `e8de8d9e290e`. *"create: prune imported blobs and startup invalid leftovers."* First push since the 08:40:02Z open — **~2m54s from open to first iteration**. Sub-3-minute self-iteration on the create/prune surface. The ollama Scheduler-adjacent surface remains the velocity-leading repo in calendar terms (#15808 famasoon at 08:16Z, #15809 stationeros at 08:40Z + 08:42Z, three states across two PRs in 26 minutes).
+- **[ollama/ollama#15808]** — no activity in window. Last refreshed 08:16:22Z (~50m dormant). The two-author Scheduler-surface convergence noted in Addendum 12 is **not extending** — #15808 has stalled while #15809 is iterating.
+
+### cline / crush / continue / OpenHands / aider / sst-opencode
+
+- **cline/cline#10403** (`abliteration-ai` vendor-self-onboarding) — no activity in window. Last refresh 08:30:15Z. The sub-30m self-iteration cadence anchored in **synthesis #71** (07:25Z open → 07:47Z → 08:30Z, ~22m and ~43m intervals) has now stretched to **~36m+ since the most recent push** — consistent with median, but the cadence is decelerating from the early 22m delta.
+- **crush**: silent. Dormancy now ~7h53m (last #2706 at 01:13Z).
+- **continue**: silent. The cross-project `FuturMix` provider broadcast (continue #12220 + litellm #26485) dormancy now ~7h30m on both legs. Synthesis-tracked "abandoned dual-PR coordination" reading hardens further.
+- **OpenHands**: silent. Last activity #14130 (dependabot pypdf) at 07:03:54Z (~2h dormant).
+- **aider / sst-opencode**: no events.
+
+---
+
+### What changed in window 08:42Z → 09:06Z (Addendum 14)
+
+1. **opencode three-author docs-class convergence** (#24271 wangzexi navigation 08:44:54Z, #24272 kyuna0312 i18n-docs 08:54:17Z, #24273 JasonZhaoWW docs-correction 08:57:08Z). Three distinct authors, three new opens, ~12m window, **two of three on docs surface**. Structurally distinct from prior opencode multi-author signals (#66, #68 — both on feature/provider surfaces). Anchor for **synthesis #73**.
+2. **Cross-repo open-cadence shift**: opencode is now the only repo with new opens in window (3 opens). codex, litellm, ollama, cline, crush, continue, OpenHands all silent on opens. The open-velocity baton has handed from ollama (Addendum 13: 2 new opens) to opencode (Addendum 14: 3 new opens). **The three-windows trace ollama → ollama → opencode is the first observed open-velocity-leadership rotation** across consecutive 20–25m ticks today — anchor for **synthesis #74**.
+3. **First merge-window in 4 consecutive ticks**: still **zero merges** across all 9 tracked repos in window. **Fourth consecutive zero-merge window** (Addendums 11, 12, 13, 14 — total ~115 continuous minutes of zero merge-absorption while opens have continued accumulating). The open-vs-merge gap in the last ~2h is **5 new opens, 0 merges** across tracked repos.
+4. **Synthesis #72 prediction #2 status**: the predicted "contributor-class follow-up within 30 minutes" of the codex MCP-surface convergence has not materialized. 30-minute deadline elapsed at ~08:55Z. Marking as **soft-falsified** pending a wider 24h check; the strong "internal coordination work-stream" reading is now weakened.
+5. **Synthesis #71 cadence-deceleration check**: cline #10403 self-iteration deltas were 22m → 43m → now ~36m+ (no new push in window). Cadence is **decelerating** from the early sub-30m median noted in synthesis #71. If next push exceeds 60m delta, the "sub-hourly" framing of synthesis #71 will need revision.
+6. **`yuneng-berri` cascade crosses 2h25m dormancy threshold**. Synthesis #63/#64 hot-author cascade is now structurally terminated by any reasonable definition (>2h continuous silence after a previously sub-hourly cadence).
+7. **Cross-repo author-overlap check (negative again)**: of the four authors active in window (`wangzexi`, `kyuna0312`, `JasonZhaoWW`, `stationeros`), zero appear in more than one tracked repo this tick — also zero overlap with the prior window's active set (`mzeng-openai`, `aibrahim-oai`, `knefenk`, `abliteration-ai`). **Two consecutive ticks with full author-set turnover** — reinforces the synthesis #70 finding that cross-repo coupling is timing-only, not author-overlap.
+8. **Docs-PR surge as a possible new signal class**: two docs-only opencode PRs in 3 minutes (#24272 i18n, #24273 prune-default correction) is itself unusual — opencode docs PRs typically appear at sub-daily cadence. Possible drivers: (a) downstream of the v1.14.24 release (2026-04-24T15:53Z), users surfacing doc gaps; (b) coincidence. Watch for further docs-class opens in next tick.
