@@ -213,3 +213,56 @@ Silent in window. No PR creation, refresh, merge, or close events.
 5. **The synthesis #45 same-author scope-split duplicate (litellm #26455 vs #26471) is now stable across 4 ticks ≈ 3.5 hours** — the predicted same-author self-resolution has not occurred. #45's prediction is being weakened by elapsed time alone.
 6. **opencode #24238 CLOSED without merge** — the #24223→#24238 chain (synthesis #52's #43 comparator) is now either abandoned or pending double-jump. Direct empirical test of #52's reachability prediction; resolution within 6 hours.
 7. **bolinfest permissions slice refreshed at 03:13:30–35Z, pakrym-oai handler stack opened 03:09:21Z → 03:11:10Z, ishaan-berri #26471 refreshed 03:26:47Z** — three independent author-clusters all active in a 17-minute window on `app-server`-shaped surfaces (handler refactor, permission profiles, team budget API). Cross-repo author-cluster overlap candidate for synthesis #54.
+
+---
+
+## Addendum 5 — Window 03:28Z → 04:02Z
+
+### codex (openai/codex)
+
+- **[openai/codex#18073]** — **MERGED 03:51:49Z by `etraut-openai`. *"Add goal persistence foundation (1 / 5)."*** Foundation node of the long-running **etraut-openai goal vertical-slice** opened 2026-04-16 04:45–46Z.
+- **[openai/codex#18074]** — **MERGED 03:53:51Z by `etraut-openai`. *"Add goal app-server API (2 / 5)."*** Second node, ~2 minutes after #18073.
+- **[openai/codex#18075]** — **MERGED 03:54:51Z by `etraut-openai`. *"Add goal model tools (3 / 5)."*** Third node, ~1 minute after #18074.
+- **[openai/codex#18076]** — refreshed 03:58:33Z by `etraut-openai`. *"Add goal core runtime (4 / 5)."* Still OPEN.
+- **[openai/codex#18077]** — refreshed 04:00:27Z by `etraut-openai`. *"Add goal TUI UX (5 / 5)."* Still OPEN.
+- **3-of-5 vertical-slice merged in a 3-minute cascade (03:51:49Z → 03:54:51Z), with 4/5 and 5/5 left open and refreshed within 6 minutes of the last merge.** This is the **opposite** of the #44 / bolinfest permissions-slice pathology (#44: all 5 refresh atomically with zero merges across 3+ ticks). Same vertical-slice shape, opposite progression: **partial-merge cascade with tail held back**. Compare #44 (all-or-nothing stalled) to this (1→2→3 merged, 4 and 5 held). Anchor for synthesis #55: vertical-slice-prefix-merge-with-tail-held.
+- **[openai/codex#19391–#19395]** — refreshed 03:55:49–54Z by `bolinfest`. **Fourth consecutive tick** with atomic refresh and zero merges. The synthesis #44 stall is now a 4-tick (~4-hour) record on this slice, while etraut-openai's parallel goal slice on the same `app-server` surface partially merged in the same minute. Direct counter-pair: two vertical slices, same surface, opposite outcomes inside a 5-minute window.
+- **[openai/codex#19484, #19487, #19490–#19498]** — all 11 pakrym-oai handler-stack PRs touched 04:00:13–14Z (single-second update fanout, likely CI re-run). The 9-PR sub-cluster's update timestamps converge to a single second across 9 PRs — **the simultaneous-author-stack-burst (synthesis #53) now has a CI-update-burst signature** distinct from the open-burst signature seen in Addendum 4.
+- **[openai/codex#19473]** — refreshed 03:47:45Z by `mchen-oai`. *"Add turn start timestamp to turn metadata."* Turn-metadata adjacent to the pakrym-oai turn-handler PRs (#19497 turn/realtime, #19492 thread start) but by a different author — independent author touching the same `turn` surface during a stack-burst.
+
+### litellm (BerriAI/litellm)
+
+- **[BerriAI/litellm#26484]** — OPENED 03:45:14Z by `stuxf`. *"chore(auth): substitute alias for master key on UserAPIKeyAuth."* Auth-surface PR; further extends the synthesis #51 multi-author auth/ACL hardening surge (now: netblack ACL trio + yuneng-berri trio + shivamrawat1 guardrail + ryan-crabbe-berri /key/generate gate + **stuxf master-key alias**).
+- **[BerriAI/litellm#26463]** — refreshed 03:53:09Z by `stuxf`. *"fix(mcp): tighten public-route detection and OAuth2 fallback gating."* MCP auth fix; same author as freshly-opened #26484. **stuxf has 2 concurrent auth/ACL PRs in this tick** — same-author-auth-pair pattern, mirroring netblack's trio shape.
+- **[BerriAI/litellm#26471]** — refreshed 03:32:36Z by `ishaan-berri`. *"feat(teams): per-model team member budgets."* Synthesis #52 third-node still OPEN, now ≥4 ticks ≈ 4 hours past the synthesis publication.
+- **[BerriAI/litellm#26442]** — refreshed 03:47:30Z by `ryan-crabbe-berri`. *"feat: UI setting to disable /key/generate for org admins."* `/key/*` ACL surface; remains in the synthesis #51 cluster.
+- **[BerriAI/litellm#26331]** — refreshed 03:35:28Z by `Kcstring`. *"feat(openai): add gpt-image-2 to model prices."* Model-catalog PR; cross-repo with Aider-AI/aider's pricing-table cadence (TL;DR #5 day-zero model support invisible plumbing).
+- **[BerriAI/litellm#26103]** — refreshed 03:39:29Z by `Vigilans`. *"fix(responses): emit per-summary thinking blocks and deduplicate message_start."* Reasoning-shape contract surface (synthesis #23 territory); 5-day-old PR refreshed without merge — patch-PR-graveyard (#20) candidate aging in.
+- **[BerriAI/litellm#26001]** — refreshed 04:01:46Z by `ryan-crabbe-berri`. *"fix(ui): stop injecting $0 cost on model edit."* 7-day-old UI fix refreshed; same author as freshly-active #26442 — post-own-refresh-same-author-adjacent-surface inversion (synthesis #50 inverse).
+
+### opencode (anomalyco/opencode)
+
+- **[anomalyco/opencode#24246]** — refreshed 03:40:02Z by `xthreehao`. PATH-propagation fix carried over from Addendum 4, still OPEN.
+- **[anomalyco/opencode#18767]** — refreshed 03:29:01Z by `noahbentusi`. *"feat(app): Mobile Touch Optimization."* **33-day-old PR** back to refresh; another synthesis #20 patch-graveyard instance.
+- **[anomalyco/opencode#13854]** — refreshed 03:29:01Z by `mocksoul`. *"fix(tui): stop streaming markdown/code after message completes."* **68-day-old PR** refreshed at the *exact same second* as #18767 — two long-aged PRs refresh in lockstep, suggesting bot-driven or rebase-train activity rather than human refresh.
+- **[anomalyco/opencode#13224]** — refreshed 03:47:07Z by `kdcokenny`. *"feat(docs): add copy page markdown action to docs title."* **74-day-old PR** refreshed. Three patch-graveyard PRs (33d, 68d, 74d) refreshed in one window — synthesis #20 cohort behavior continues from Addendum 4.
+
+### OpenHands (OpenHands/OpenHands)
+
+- **[OpenHands/OpenHands#14127]** — refreshed 03:43:39Z by `Lumen-Founder`. *"Reduce GitHub resolver comment noise by editing acknowledgement comment."* Bot-noise reduction PR; first OpenHands activity in tick after several silent windows.
+
+### ollama / crush / Aider-AI / mcp-servers / cline
+
+Silent in window. No PR creation, refresh, merge, or close events.
+
+---
+
+### What changed in window 03:28Z → 04:02Z (Addendum 5)
+
+1. **codex etraut-openai 5-PR `goal` vertical-slice partially merged in a 3-minute cascade** (#18073 → #18074 → #18075 MERGED 03:51:49Z → 03:54:51Z), with #18076 (4/5) and #18077 (5/5) refreshed but held open. This is the **mirror image** of synthesis #44's pathology (bolinfest permissions slice: 5/5 refresh atomically, 0/5 merge). Same shape (numbered N/M vertical-slice stack), opposite outcome (prefix-merge with tail held). Strong candidate for **synthesis #55: vertical-slice-prefix-merge-with-tail-held**.
+2. **The synthesis #44 stall record extended to 4 consecutive ticks** as bolinfest #19391–#19395 refreshed atomically again at 03:55:49–54Z. Direct counter-pair to event 1 above: two vertical slices on the same `app-server` surface, opposite progression, in the same 5-minute window.
+3. **The pakrym-oai handler-stack (synthesis #53) now exhibits a CI-update-burst signature** — all 11 PRs updatedAt converged on a single second 04:00:13–14Z, distinct from the open-burst signature in Addendum 4. The simultaneous-author-stack-burst pattern has **two phases**: open-burst (creation cluster) and update-burst (CI-driven refresh cluster).
+4. **litellm stuxf opened a same-author auth/ACL pair** (#26463 refreshed + #26484 freshly opened) within 9 minutes — extends synthesis #51's multi-author surge into a new author cohort. The #51 surge is now 5 distinct authors (netblack, yuneng-berri, shivamrawat1, ryan-crabbe-berri, stuxf) on the auth/ACL surface inside one week.
+5. **opencode patch-graveyard wave** — 3 PRs aged 33, 68, 74 days all refreshed in this window; #18767 and #13854 refreshed at the **same second** (03:29:01Z), a bot/rebase-train signal rather than independent human refresh. Anchor for **synthesis #56: lockstep-refresh-of-aged-PRs-as-bot-rebase-train-signal**.
+6. **The synthesis #45 same-author duplicate (litellm #26455 vs #26471) is now stable across 5 ticks ≈ 4.5 hours.** No self-resolution. The prediction's confidence is now demonstrably wrong on this exhibit.
+7. **litellm #26103 reasoning-shape PR (5 days old, Vigilans) refreshed without merge** — synthesis #23 + #20 overlap territory; the reasoning-shape-contract bug class continues to accumulate aging unmerged PRs while opencode #24146 (the agent-side fix anchored in Addendum 3) merged 14 days after open.
