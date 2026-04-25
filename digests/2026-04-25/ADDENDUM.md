@@ -159,3 +159,57 @@ Silent in window. No PR creation, refresh, merge, or close events.
 5. **opencode old-PR refresh wave**: PRs aged 15, 26, 33, 36, and **68** days all refreshed without merging — five distinct synthesis #20 instances in one tick on one repo.
 6. **ollama acquired a Qwen Code CLI launcher PR** (#15805) — pairs cross-repo with litellm/opencode adding model-specific routing/launcher surfaces.
 7. **litellm #26218 MERGED `/v1/memory` CRUD** — net-new REST surface in the cohort; likely future synthesis #49 gravity-well candidate.
+
+---
+
+## Addendum 4 — Window 02:31Z → 03:28Z
+
+### codex (openai/codex)
+
+- **[openai/codex#19498]** — OPENED 03:09:21Z by `pakrym-oai`. *"Streamline review and feedback handlers."*
+- **[openai/codex#19497]** — OPENED 03:11:10Z by `pakrym-oai`. *"Streamline turn and realtime handlers."*
+- **[openai/codex#19496]** — OPENED 03:11:05Z by `pakrym-oai`. *"Streamline MCP handlers."*
+- **[openai/codex#19495]** — OPENED 03:09:21Z by `pakrym-oai`. *"Streamline thread resume and fork handlers."*
+- **[openai/codex#19494]** — OPENED 03:10:58Z by `pakrym-oai`. *"Streamline thread read handlers."*
+- **[openai/codex#19493]** — OPENED 03:10:53Z by `pakrym-oai`. *"Streamline thread mutation handlers."*
+- **[openai/codex#19492]** — OPENED 03:10:49Z by `pakrym-oai`. *"Streamline thread start handler."*
+- **[openai/codex#19491]** — OPENED 03:10:45Z by `pakrym-oai`. *"Streamline account and command handlers."*
+- **[openai/codex#19490]** — OPENED 03:10:41Z by `pakrym-oai`. *"Streamline plugin, apps, and skills handlers."*
+- **[openai/codex#19487]** — OPENED 02:38:58Z by `pakrym-oai`. *"[codex] Move config loading into codex-config."*
+- **[openai/codex#19484]** — OPENED 03:10:35Z by `pakrym-oai`. *"Lift app-server JSON-RPC error handling to request boundary."*
+- **The pakrym-oai Streamline-* handler stack: 11 PRs by one author opened in a 32-minute window (02:38Z → 03:11Z), 9 of them within a 35-second cluster (03:09:21Z → 03:11:10Z).** All target the `app-server` handler surface. Title shape `Streamline X handlers` repeated across 9 of 11 PRs. By volume and per-author concentration this exceeds the bolinfest permissions slice (#19391-#19395, 5 PRs) and the prior #44 vertical-slice exhibit. Anchor candidate for a new synthesis on **simultaneous-author-stack-burst** rather than the slower vertical-slice cadence in #44.
+- **[openai/codex#19391–#19395]** — refreshed 03:13:30–35Z by `bolinfest`. Permissions slice refreshed a *third* time atomically with no intermediate merges. The synthesis #44 vertical-slice waiting-indefinitely failure mode is now confirmed across three consecutive ticks.
+
+### litellm (BerriAI/litellm)
+
+- **[BerriAI/litellm#26474]** — OPENED 03:13:27Z by `shivamrawat1`. *"fix(bedrock guardrail): dedupe post-call log entry when only post_call is configured."* **Refile of #26472 by the same author.**
+- **[BerriAI/litellm#26472]** — CLOSED 02:46:17Z by `shivamrawat1`. *"fix(bedrock): avoid duplicate post-call guardrail logs on streaming."* Original opened in Addendum 3 window; closed 15 minutes after that addendum's window boundary; refiled at #26474 with **27-minute gap** and **rescoped title** (`bedrock` → `bedrock guardrail`, `streaming` dropped, `dedupe post-call log entry when only post_call is configured` added). Clean single-jump #43 close-and-refile with title evolution — the shape #52 named as the *non*-occurrence (#52's anomaly was byte-identical title across the chain). Synthesis #43 now has its first cohort exhibit with explicit scope-narrowing in the title text.
+- **[BerriAI/litellm#26471]** — refreshed 03:26:47Z by `ishaan-berri`. *"feat(teams): per-model team member budgets."* Still OPEN. The third node of the synthesis #52 chain has now survived ≥90 minutes past the synthesis publication.
+- **[BerriAI/litellm#26455]** — refreshed 03:01:32Z by `ishaan-berri`. *"feat: per-model team member budgets."* Still OPEN. The synthesis #45 same-author scope-split duplicate (`feat:` vs `feat(teams):`) is now **demonstrably stable across 3 hours and 4 ticks** — the predicted self-resolution has not occurred. Synthesis #45's prediction (same-author flavor self-resolves) is being weakened by elapsed time alone.
+- **[BerriAI/litellm#26442]** — refreshed 02:49:41Z by `ryan-crabbe-berri`. *"feat: UI setting to disable /key/generate for org admins."* `/key/*` ACL surface; pairs with the `netblack` ACL trio (#26416 / #26421 / #26425) anchored in synthesis #51.
+- **[BerriAI/litellm#26439]** — refreshed 02:42:09Z by `dkindlund`. *"fix(adapters,vertex): pass output_config through to backends that accept it."* PR title declares `closes #23380, supersedes #23475/#23396/#23706/#22727` — **5-PR supersession chain on the same `output_config` plumbing problem**. Synthesis #20 (patch-PR-graveyard) and synthesis #43 (close-and-refile) overlay: 4 prior PRs were closed without merge over the chain's lifetime. Candidate exhibit for a *long-chain* generalization of #43.
+
+### opencode (anomalyco/opencode)
+
+- **[anomalyco/opencode#24246]** — OPENED 03:27:38Z by `xthreehao`. *"fix: preserve nix/direnv PATH in login shell for ! commands."* Shell-environment fix; PATH-propagation surface adjacent to `Hona`'s #20039 shell-tool refactor (still open, refreshed prior tick).
+- **[anomalyco/opencode#24244]** — OPENED 02:59:57Z by `rekram1-node`. *"fix: config ordering issue."* Config-precedence fix; same author as the long-open #21947 *"wip: node shim signals"* (refreshed 02:38:06Z this tick — 24-day-old wip PR back to refresh).
+- **[anomalyco/opencode#24241]** — refreshed 03:24:39Z by `Ethan0x0000`. *"fix(tui): clean zero-width agent display labels."* Carried over from Addendum 3, still OPEN.
+- **[anomalyco/opencode#24238]** — **CLOSED 03:05:13Z by `v1truv1us`. *"docs: sync env vars with source code."*** This was the refile-of-#24223 named in synthesis #52 as a #43 single-jump exhibit. **#24238 has now itself been closed without merge or refile-yet — turning the #24223→#24238 chain into either (a) an abandoned #43 instance, or (b) the opening of a #52-shape if a #24238-refile lands in the next 6 hours.** Direct test of synthesis #52's "double-jump may be rare but reachable from any #43 instance" prediction.
+- **[anomalyco/opencode#23255]** — MERGED 02:47:06Z by `b0o`. *"fix(build): add prettier to devDependencies."* Build-hygiene PR; merged.
+- **[anomalyco/opencode#21947]** — refreshed 02:38:06Z by `rekram1-node`. *"wip: node shim signals."* 24-day-old wip back to refresh; same author as freshly-opened #24244 — synthesis #50 (post-own-merge-cascade-same-author-adjacent-surface-followup) candidate inverse: post-own-refresh-same-author-new-surface-fanout.
+
+### ollama / crush / OpenHands / Aider-AI / mcp-servers
+
+Silent in window. No PR creation, refresh, merge, or close events.
+
+---
+
+### What changed in window 02:31Z → 03:28Z (Addendum 4)
+
+1. **codex saw an 11-PR same-author burst from `pakrym-oai`** (#19484 / #19487 / #19490–#19498) on the `app-server` handler surface, with 9 PRs opened within a 35-second cluster (03:09:21Z → 03:10:35Z). Title shape `Streamline X handlers` repeated 9 times. This is a **simultaneous-author-stack-burst**, distinct from the slower vertical-slice cadence (#44 / bolinfest permissions slice, where refreshes are spaced minutes apart). Strong candidate for synthesis #53.
+2. **litellm #26472 → #26474 single-jump #43 with explicit title rescoping** (`bedrock` → `bedrock guardrail`; `streaming` dropped; `dedupe post-call log entry when only post_call is configured` added). The synthesis #52 contrast-case (byte-identical title) now has its byte-*divergent* counterpart in the same week — a corpus exhibit of #43 actually narrowing scope in the title text rather than just in the diff.
+3. **litellm #26439 declares a 5-PR supersession chain in its title** (`supersedes #23475/#23396/#23706/#22727`) — long-chain generalization of #43, four prior closes without merge on the same `output_config` plumbing problem.
+4. **The synthesis #44 vertical-slice (#19391–#19395) refreshed atomically a third consecutive tick** with no intermediate merges. Waiting-indefinitely failure mode now confirmed across 3 ticks ≈ 3+ hours.
+5. **The synthesis #45 same-author scope-split duplicate (litellm #26455 vs #26471) is now stable across 4 ticks ≈ 3.5 hours** — the predicted same-author self-resolution has not occurred. #45's prediction is being weakened by elapsed time alone.
+6. **opencode #24238 CLOSED without merge** — the #24223→#24238 chain (synthesis #52's #43 comparator) is now either abandoned or pending double-jump. Direct empirical test of #52's reachability prediction; resolution within 6 hours.
+7. **bolinfest permissions slice refreshed at 03:13:30–35Z, pakrym-oai handler stack opened 03:09:21Z → 03:11:10Z, ishaan-berri #26471 refreshed 03:26:47Z** — three independent author-clusters all active in a 17-minute window on `app-server`-shaped surfaces (handler refactor, permission profiles, team budget API). Cross-repo author-cluster overlap candidate for synthesis #54.
