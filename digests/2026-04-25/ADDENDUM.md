@@ -266,3 +266,37 @@ Silent in window. No PR creation, refresh, merge, or close events.
 5. **opencode patch-graveyard wave** — 3 PRs aged 33, 68, 74 days all refreshed in this window; #18767 and #13854 refreshed at the **same second** (03:29:01Z), a bot/rebase-train signal rather than independent human refresh. Anchor for **synthesis #56: lockstep-refresh-of-aged-PRs-as-bot-rebase-train-signal**.
 6. **The synthesis #45 same-author duplicate (litellm #26455 vs #26471) is now stable across 5 ticks ≈ 4.5 hours.** No self-resolution. The prediction's confidence is now demonstrably wrong on this exhibit.
 7. **litellm #26103 reasoning-shape PR (5 days old, Vigilans) refreshed without merge** — synthesis #23 + #20 overlap territory; the reasoning-shape-contract bug class continues to accumulate aging unmerged PRs while opencode #24146 (the agent-side fix anchored in Addendum 3) merged 14 days after open.
+
+---
+
+## Addendum 6 — Window 04:02Z → 04:15Z
+
+### codex (openai/codex)
+
+- **[openai/codex#19490–#19498]** — all 9 PRs of the `pakrym-oai` `Streamline X handlers` sub-cluster touched again at **04:15:01–02Z** (`updatedAt` spans 2 distinct seconds across 9 PRs). This is the **second CI-update-burst** in 15 minutes against the synthesis #53 stack — first burst was 04:00:13–14Z (Addendum 5), second burst is 04:15:01–02Z. **15-minute periodicity** between the two bursts is consistent with a CI workflow on a 15-minute cron or with the default GitHub Actions retry/poll cadence on a long-running check matrix. The stack's CI-update signature is now empirically periodic, not single-shot — escalating the synthesis #53 update-phase observation into a quasi-deterministic external-actor cadence. Anchor for synthesis #57 below.
+- **[openai/codex#19487]** — refreshed 04:03:39Z by `pakrym-oai`. *"[codex] Move config loading into codex-config."* Outside the 9-PR `Streamline` sub-cluster but within the broader 11-PR same-author burst; refreshed 12 minutes earlier than the sub-cluster, indicating it is on a different CI matrix path.
+- No new opens, no merges, no closes in window. The window is dominated by metadata churn, not author work.
+
+### litellm (BerriAI/litellm)
+
+- **[BerriAI/litellm#26484]** — refreshed 04:14:11Z by `stuxf`. *"chore(auth): substitute alias for master key on UserAPIKeyAuth."* Auth-surface PR carried over from Addendum 5; still OPEN. The synthesis #51 multi-author auth/ACL hardening surge (now 5 distinct authors) still has no merges in this window — only the trigger PR #26464 (yuneng-berri team-metadata, MERGED 00:57Z) has landed; the subsequent 4-author cascade is entirely unmerged 3+ hours later. The surge is therefore now **predominantly stalled at the review boundary**, not at the author boundary — an inversion of the normal hardening-train shape where reviewers absorb same-week-same-surface PRs in batch.
+- **[BerriAI/litellm#26471]** — third node of the synthesis #52 triple-refile chain (*"feat(teams): per-model team member budgets"*) still OPEN. Now ≥4.5 ticks past synthesis publication. The third-refile prediction (overlapping double-jump shape) continues to hold; no fourth refile observed yet.
+
+### opencode (anomalyco/opencode)
+
+- **[anomalyco/opencode#24251]** — OPENED 04:12:43Z by `atlantis-mk`. *"feat: add project run configs to the web app."* New web-app run-config surface; first appearance of `atlantis-mk` in this corpus.
+- **[anomalyco/opencode#24250]** — OPENED 04:11:17Z by `knefenk`. *"fix(provider): complete DeepSeek reasoning_content round-trip for multi-turn conversations."* **Direct continuation of the synthesis #23 reasoning-shape-contract bug class**: opencode #24146 (single-turn DeepSeek reasoning_content fix) MERGED 02:26:19Z this morning (Addendum 3); 1h45m later a *different* author (`knefenk`, not `heimoshuiyu`) opens a follow-up extending the same fix to **multi-turn** conversations. The single-turn merge revealed (or did not patch) the multi-turn case, and a different author is now closing the gap. **Two-author serial fix on the same provider+field across the single-turn → multi-turn boundary, ~2 hours apart.** Anchor for synthesis #58 below.
+
+### ollama / crush / OpenHands / Aider-AI / mcp-servers / cline
+
+Silent in window. No PR creation, refresh, merge, or close events.
+
+---
+
+### What changed in window 04:02Z → 04:15Z (Addendum 6)
+
+1. **codex `pakrym-oai` `Streamline X handlers` 9-PR sub-cluster experienced a second CI-update-burst at 04:15:01–02Z**, exactly 15 minutes after the first (04:00:13–14Z; Addendum 5). The synthesis #53 update-phase has acquired a periodic signature consistent with a 15-minute external CI cadence. Anchor for synthesis #57 (*periodic-CI-burst-as-stack-burst-update-signature*).
+2. **opencode #24250 (`knefenk`, multi-turn DeepSeek reasoning_content) opened 1h45m after #24146 (`heimoshuiyu`, single-turn) merged.** Two-author serial-fix on the same provider+field across the single-turn → multi-turn boundary. Anchor for synthesis #58 (*single-turn-merge-exposes-multi-turn-gap-handed-to-different-author*). This is a **new shape distinct from synthesis #20** (patch-graveyard): the original PR did merge; the second author's PR is the *consequence* of that merge revealing scope incompleteness, not an aging stale follow-up.
+3. **opencode #24251 (`atlantis-mk`, project run configs in web app)** opens a new web-app surface; first appearance of this author. Unconnected to the active reasoning-shape thread.
+4. **litellm `/team/*` and auth/ACL surges still entirely stalled** at the review boundary (synthesis #49 + #51): 5 PRs on `/team/*`, 5 distinct authors on auth/ACL, 0 merges in the 13-minute window. The surges have crossed from "active wave of opens" to "queue-deep stall".
+5. **No silence-breakers** from ollama, crush, OpenHands, Aider, mcp-servers, cline in window — the cohort is contracting, not expanding, in this micro-window. Cross-repo activity is concentrated entirely in codex + litellm + opencode again, matching the Addendum 1 pattern.
