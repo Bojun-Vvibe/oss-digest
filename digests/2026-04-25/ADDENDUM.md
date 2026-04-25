@@ -591,3 +591,45 @@ Silent in window. crush last activity 01:13Z (#2706 taigrr); aider last activity
 5. **Zero merges in window across all 9 tracked repos.** Third consecutive zero-merge window (Addendums 10 had merges; 11 + 12 have none — actually Addendum 11 had zero, so this is **second consecutive zero-merge window**). Reviewer-absorption capacity remains at zero while long-tail-refresh volume is elevated.
 6. **`yuneng-berri` cascade dormancy now ~1h44m** (last activity #26496 at 06:41Z; nothing in window). The synthesis #63/#64 hot-author cascade is exhibiting its longest pause yet in the calendar day. The Addendum 11 watch question (end-of-cascade vs mid-cascade pause) remains open; the longer the dormancy, the more "end-of-cascade" becomes the parsimonious read.
 7. **ollama broke its ~6h silence** with #15808 (`famasoon`, Scheduler error-handling), and the older Scheduler-Windows PR #15726 (`UniquePratham`) refreshed within 9 minutes — **two-author ollama Scheduler-surface convergence** within the same 9-minute slice. ollama Scheduler is the active surface this window.
+
+---
+
+## Addendum 13 — Window 08:25Z → 08:42Z
+
+### codex (openai/codex)
+
+- **[openai/codex#19537]** — OPENED 08:25:26Z by `mzeng-openai` (`Matthew Zeng`), head SHA `fd8c33a5d66888324a0656ede3a440c3274c430d`. *"Add plugin MCP policy persistence."* New maintainer-class open on the codex MCP/plugin policy surface — adjacent to the `bolinfest` permissions-surface ordering pair (#19391/#19392) tracked in Addendum 12. **Two distinct OAI maintainers active on overlapping policy/permissions surfaces within a ~3-minute slice** (`bolinfest` last refresh 08:22Z, `mzeng-openai` open at 08:25Z).
+- **[openai/codex#19524]** — refreshed 08:25:29Z by `aibrahim-oai` (`Ahmed Ibrahim`), head SHA `0bd757f52c477c6df1eaed853a3af0378d48c837`. *"[codex] Prune unused codex-mcp API and duplicate helpers."* MCP-surface cleanup PR. **Three codex MCP/policy-surface PRs active in the same 4-minute slice** (#19524 cleanup, #19537 policy persistence, #19392 permissions-followup): single-surface convergence by three distinct authors.
+
+### litellm (BerriAI/litellm)
+
+- Silent in window. The xAI/Grok cluster (#26189, #26052, #25896) anchored in synthesis #69 has no fourth refresh; `yuneng-berri` cascade dormancy now extends to ~2h01m (last activity #26496 at 06:41Z). The "end-of-cascade" reading from Addendum 12 strengthens.
+
+### opencode (anomalyco/opencode)
+
+- **[anomalyco/opencode#24250]** — refreshed 08:25:21Z by `knefenk` (`knef`), head SHA `eba2109877ec951716adaa859edc6baf3ca1bb7c`. *"fix(provider): complete DeepSeek reasoning_content round-trip for multi-turn conversations."* Same-day-opened PR (created 04:11:17Z, ~4h14m old at refresh) — **not** long-tail. DeepSeek provider reasoning-shape surface, structurally adjacent to synthesis #23 (reasoning-shape contract bidirectional). Author iteration cadence: open → push within ~4h.
+- sst/opencode: silent in window.
+
+### ollama (ollama/ollama)
+
+- **[ollama/ollama#15809]** — OPENED 08:40:02Z by `stationeros` (`Rohit Kumar`), head SHA `e8de8d9e290ec24eeed17492f5640d5a68405ce2`. *"create: prune imported blobs and startup invalid leftovers."* Second new ollama open in ~24 minutes (#15808 at 08:16Z, #15809 at 08:40Z) — both touching create/Scheduler-adjacent surfaces, two distinct authors. **The 6h ollama-silence noted in Addendums 9–11 has fully broken**: ollama is now the most active surface in the past ~25 minutes.
+
+### cline (cline/cline)
+
+- **[cline/cline#10403]** — refreshed 08:30:15Z by `abliteration-ai`. *"feat: add Abliteration.ai provider."* Third refresh of the vendor-self-onboarding PR within ~65 minutes (07:25:36Z open → 07:47:37Z first iter → 08:30:15Z second iter). Sub-hourly self-iteration cadence on a vendor-onboarding PR — anchor for synthesis #71.
+
+### crush / continue / OpenHands / aider / sst-opencode
+
+- All silent in window. crush dormancy ~7h27m (last #2706 at 01:13Z). continue + litellm cross-project `FuturMix` coordination (#12220 / #26485) still has zero third leg, dormancy now ~7h+. OpenHands silent since #14130 at 07:03:54Z (~1h38m).
+
+---
+
+### What changed in window 08:25Z → 08:42Z (Addendum 13)
+
+1. **Codex MCP/policy-surface three-author micro-convergence** (#19524 `aibrahim-oai` cleanup at 08:25:29Z, #19537 `mzeng-openai` policy-persistence at 08:25:26Z, #19392 `bolinfest` permissions-followup last refreshed 08:22Z in Addendum 12). Three distinct authors, three PRs, single MCP/policy/permissions surface family, all touched within a ~4-minute slice. **Two of the three are maintainer-class** (`mzeng-openai`, `bolinfest`) — distinguishing this from synthesis #49 (multi-author multi-shape PR cluster, contributor-mixed) and synthesis #67 (declared inter-PR ordering, single-author). This is **multi-author single-surface convergence at maintainer cadence** — anchor for synthesis #72.
+2. **ollama new-open velocity inverted in 24 minutes**: from 6h-silent (Addendums 9–11) to two new opens by two distinct authors on adjacent surfaces (#15808 famasoon Scheduler error-handling, #15809 stationeros create-blob-prune). This is the fastest open-cadence acceleration observed on any tracked repo today. **ollama is now the velocity-leading repo** for the past ~25 minutes, displacing litellm (which has been silent ~2h).
+3. **cline vendor-self-onboarding PR sub-hourly self-iteration**: #10403 (abliteration-ai) opened 07:25:36Z, refreshed 07:47:37Z (Addendum 11) and 08:30:15Z (this window). Three states in ~65 minutes by a single vendor-self account on its own onboarding PR. Cadence is **sub-30-minute median** between iterations on a self-promotional PR with zero maintainer interaction so far. Anchor for synthesis #71 (vendor-self-onboarding self-iteration cadence as distinct signal class).
+4. **opencode same-day-opened PR refresh** (#24250 knefenk DeepSeek reasoning round-trip, ~4h14m from open to first push). This is the **only opencode activity in window that is NOT long-tail** — breaking the long-tail-dominance pattern of Addendums 11+12 (which anchored synthesis #70). Suggests the long-tail refresh wave may have ended; same-day-iteration cadence is reasserting on opencode.
+5. **Zero merges in window across all 9 tracked repos.** **Third consecutive zero-merge window** (Addendums 11, 12, 13). Reviewer-absorption capacity has now been at zero for ~91 continuous minutes while open-velocity is rising (3 new opens in window 08:16Z–08:40Z across codex+ollama). The **open-vs-merge gap is widening** in real time.
+6. **Cross-repo author overlap check (negative)**: of all authors active in window (`mzeng-openai`, `aibrahim-oai`, `knefenk`, `stationeros`, `abliteration-ai`), zero appear in more than one tracked repo this tick. Synthesis #63's hot-author multi-surface fanout pattern is **absent** in this window. The cross-repo coupling observed in synthesis #70 (long-tail refresh wave) was **timing-only, not author-overlap** — confirmed again here.
+7. **`yuneng-berri` cascade now ~2h01m dormant**. Crossing the 2-hour threshold makes "end-of-cascade" the strongly-preferred read over "mid-cascade pause" — synthesis #63/#64 cascade has effectively terminated.
