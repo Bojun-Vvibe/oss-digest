@@ -1,0 +1,45 @@
+# W17 synthesis #50 — Post-own-merge cascade: same author opens an adjacent-surface PR within minutes of their own PR merging, treating their merge as the trigger
+
+**Window observed:** 2026-04-25 00:11Z → 01:33Z (addendum 1 + addendum 2 combined).
+
+**Anchoring PRs (≥5 across ≥2 repos):**
+
+- **[BerriAI/litellm#26464]** — *"[Fix] Harden team metadata handling in /team/new and /team/update"* (`yuneng-berri`, MERGED 00:57:15Z). The trigger event for the litellm cascade.
+- **[BerriAI/litellm#26467]** — *"[Fix] Harden pass-through target URL construction"* (`yuneng-berri`, OPENED 01:10:09Z). Same author, same `[Fix] Harden X` verb, different surface (pass-through routing vs team metadata), opened **12 minutes 54 seconds after own merge**.
+- **[anomalyco/opencode#24230]** — *"fix: validate beta before pushing"* (`Hona`, MERGED 00:32:42Z). The trigger event for the opencode cascade.
+- **[anomalyco/opencode#24236]** — *"chore: group beta PR logs"* (`Hona`, OPENED 00:41:57Z, MERGED 00:42:33Z). Same author, same `beta` surface (release-plumbing), opened **9 minutes 15 seconds after own merge**, merged 36 seconds after open.
+- **[anomalyco/opencode#24228]** — *"Add Roslyn support for Razor and C# scripts"* (`Hona`, MERGED 00:25:58Z, prior tick). Earlier `Hona` merge in the same window; with #24230 (00:32Z) and #24236 (00:42Z) this forms a **three-merge sequence by one author across ~17 minutes**, each follow-up landing on an adjacent surface.
+- **[openai/codex#19449]** — *"permissions: remove legacy read-only access modes"* (`bolinfest`, MERGED 00:17:06Z, addendum 1 anchor). Cross-repo comparator: a `bolinfest` merge that did **not** trigger a same-author follow-up in the window — the negative evidence.
+- **[openai/codex#19472]** — *"ci: pin codex-action v1.7"* (`viyatb-oai`, MERGED 00:44:05Z). Cross-repo comparator: a `viyatb-oai` merge whose only same-author predecessor (#19467, Guardian-elicitation reimpl) is **still open**, so the cascade direction is reversed (open → merge, not merge → open) — confirming #50 is specifically the **merge → next-open** direction.
+
+**Pattern.** A single author lands a PR (the **trigger merge**), and within ~15 minutes opens a new PR — by the same author, on an **adjacent surface**, often using a **shared verb or noun in the title** (`Harden X` / `Harden Y`; `validate beta` / `group beta PR logs`). The trigger merge is the proximate cause: the author appears to have built confidence or new context from their own merge that immediately surfaces a related concern. The cascading PR is **not a fix-up** of the merged PR (it touches a different surface), and **not a stacked PR** (no dependency declared), but it is **causally downstream** of the merge in author-attention terms.
+
+**Three signature features distinguish a #50 cascade from generic same-author-busy-day activity:**
+
+1. **The trigger PR has merged.** Unmerged predecessors do not produce the cascade (codex #19467 is open; #19472 by the same author merged independently with no follow-up open).
+2. **The cascade PR opens within ~15 minutes of the merge.** Beyond ~30 minutes, the causal link to the specific merge weakens; the next PR could be unrelated.
+3. **The cascade PR shares vocabulary or surface vocabulary with the merged PR.** `yuneng-berri`'s `[Fix] Harden X` verb appears in both. `Hona`'s `beta` noun appears in both. This is the strongest discriminator — vocabulary repetition implies the author is **still in the same mental neighborhood** when they open the next PR.
+
+**Why this is distinct from synthesis #47 (same-author rapid-fire PR doublet on adjacent surfaces, sub-minute spacing).** #47 requires **both PRs to be open** at the time of observation, with no merge in between, and spacing typically under 1 minute (e.g., `willsarg` opened opencode #24232 and #24233 8 seconds apart). #50 requires a **merge between** the two PRs and spacing of several minutes — the merge is the trigger, not coincident timing. The two patterns are causal inverses:
+
+- **#47:** author drafts both PRs in one sitting and pushes them sequentially (the spacing is editor latency, not deliberation).
+- **#50:** author pushes PR A, waits for it to merge (CI run + review), then opens PR B *because* of what happened during A's lifetime.
+
+The discriminator at observation time is the **merge timestamp of the first PR relative to the open timestamp of the second** — if the first merged before the second opened, it is #50; if both are open at the time of the second's creation, it is #47.
+
+**Why this is distinct from synthesis #44 (vertical-slice PR stack refreshed in lockstep).** #44 requires the PRs to be **planned together** and to refresh in lockstep — the timeline shows them moving as a block. #50 is **emergent**: PR B did not exist when PR A was opened; the author had not planned PR B. The signature in `Hona`'s case is that #24236 (group beta PR logs) is a `chore:` PR — chore PRs are typically reactive housekeeping, not pre-planned slices.
+
+**Why this is distinct from synthesis #41 (stacked-PR-rejected-after-parent-merged).** #41 requires the parent and child to have a declared dependency (the child stacks on the parent). #50 has **no declared dependency** — the cascade PR is opened against `main`, not against the trigger PR's branch. The relationship is causal-in-author-attention, not causal-in-git-graph.
+
+**Why this matters.**
+
+1. **Reviewers cannot see the cascade in PR metadata.** The cascade PR's body does not say "after merging #26464 I noticed pass-through URL construction has the same hardening gap." A reviewer arriving at litellm #26467 cold sees a `[Fix] Harden X` PR with no context for why this surface, why now. The author's reasoning chain — *"I just hardened team metadata writes; pass-through URL construction has the same defensive gap"* — is implicit. If the reviewer agrees with the original hardening (#26464 already merged), they should agree with #26467 by the same logic; but they have to reconstruct that logic without help.
+2. **Cascades concentrate review burden on a small author set.** `Hona` produced 3 merges in 17 minutes (#24228, #24230, #24236) on opencode. `yuneng-berri` produced 1 merge + 1 open in 13 minutes (#26464, #26467) on litellm. In both cases the cascading author is a maintainer or maintainer-adjacent contributor (high merge velocity), so the reviews proceed quickly — but the author's own merge tempo becomes the rate-limiting step for the cascade. New contributors are not visible in any #50 cascade in this window.
+3. **Cascades reveal latent change clusters.** `yuneng-berri` opening #26467 minutes after #26464 merges is evidence that **`yuneng-berri` was already aware of pass-through URL construction as a related defensive gap before #26464 even merged**, but chose to ship the team-metadata hardening first. The cascade is the visible tail of an invisible larger plan in a single author's head. If the maintainer team had a way to surface "what other PRs is this author about to open?", #26467 would have been visible the moment #26464 was opened.
+4. **`Hona` cascade is a release-plumbing cluster.** All three `Hona` merges (#24228 Roslyn, #24230 validate beta, #24236 group beta PR logs) touch the release/beta pipeline directly or indirectly. The cascade reveals that the beta-validation surface has multiple independent issues that one maintainer is sweeping in sequence — a **cleanup burst**, not a planned roadmap. Cleanup bursts are healthy but invisible without aggregation.
+
+**Counter-pattern.** A coordinated cascade would have the trigger PR's body include a "follow-up PRs to expect" section, or the cascade PR's body would link the trigger and explain the causal chain. Observed cascades have neither.
+
+**Lookback hooks.** Builds on #47 (rapid-fire doublet — explicitly *not* what this is, by virtue of the merge between PRs), #44 (lockstep slice stack — explicitly *not* what this is, by virtue of being emergent), #41 (stacked-rejected — explicitly *not* what this is, by virtue of no git-level dependency), #46 (planned PR train — explicitly *not* what this is, by virtue of being unplanned), and #43 (close-and-refile — distinct because the trigger PR merges rather than closing). #50 occupies the gap left by #44/#46/#47: same-author multi-PR sequences where the **first one merging is the causal trigger for the next one's existence**, not for the next one's content.
+
+**Predictive shape.** Cascades by `yuneng-berri` and `Hona` in this window predict that within the next 1–3 ticks, each author will land **at least one more PR** on the same surface (pass-through routing, beta plumbing) — the cascade is not done at #26467 / #24236; the author's mental neighborhood persists past one follow-up. A counter-prediction is that `bolinfest`'s merge of codex #19449 (legacy permissions removal, 00:17Z) does **not** produce a same-author cascade in the next 3 ticks, because no shared-vocabulary `permissions:` follow-up has appeared from `bolinfest` in the 76 minutes since the merge — the cascade window has effectively closed for that author.
