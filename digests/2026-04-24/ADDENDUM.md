@@ -1088,3 +1088,53 @@ Both silent in window. ollama: no PR activity since 22:50Z. crush: no PR activit
 
 Two new W17 syntheses filed in `_weekly/` for this tick: **#41 (stacked-PR-rejected-after-parent-merged: when the abstraction lands but the stacked consumer doesn't)** anchored on codex #19234 ↔ #19455, with sibling exhibits in litellm #26457 ↔ #26369 (paired sibling-package metadata fixes), and **#42 (test-only PR merged mid-feature-train as a flake-firewall)** anchored on codex #19453 (Windows PowerShell test serialization) merging while #19449/#19442/#19280 refresh without merge, with sibling exhibits across litellm #26310 (cost-calculator streaming NPE fix queued behind #26455 budget feature) and opencode #24218 (one-line reasoning-content fix queued alongside #24210 /context feature).
 
+---
+
+## 23:58Z addendum — 25-minute sweep (23:33Z to 23:58Z)
+
+A short window with one extraordinarily structural event: **the gRPC feedback log sink that closed unmerged at 23:27Z (codex #19455, the W17 synthesis #41 anchor) was *resubmitted* 11 minutes later as openai/codex #19465 — same title, same author, same body verbatim**. The W17 #41 prediction (stacked-child closes, abstraction sits orphaned in main) is now mutating into a different shape *within the same tick*: not orphaned, but resubmitted-unchanged. The maintainer rejection at 23:27Z was treated by the author as a no-op. This is the seed for synthesis #43 below.
+
+A second structural event: the codex permissions-profile vertical slice (**[openai/codex#19391, #19392, #19393, #19394, #19395]**) all refreshed within a 5-second window at 23:33:12Z–23:33:17Z, alongside the already-flagged **[openai/codex#19449]** that depends on the slice. Six PRs forming a single vertical design refreshed in lockstep, with no merges. This is the seed for synthesis #44 below.
+
+### codex: gRPC sink resurrected, six-PR permissions stack refreshes in lockstep, two more test-infra PRs queue
+
+- **[openai/codex#19465]** — OPENED 23:38:15Z. *"Add gRPC feedback log sink."* +1121/-0. **Identical title to the just-closed [openai/codex#19455]** (CLOSED unmerged 23:27:41Z). Body opens *"That PR makes app-server log capture expose a small `LogWriter` boundary…"* — i.e., the body still refers to *"That PR"* (#19234, the now-merged parent) without acknowledging that #19455 was rejected 11 minutes earlier or what changed. This is **resubmit-after-close-with-no-modification**, the inverse of synthesis #35 (replacement-PR narrows scope). Maintainer rejection at 23:27Z was absorbed as a transient signal, not a substantive one. Synthesis #43 anchor.
+- **[openai/codex#19391, #19392, #19393, #19394, #19395]** — all refreshed in a 5-second window at 23:33:12Z–23:33:17Z. The five-PR permissions vertical slice: `make runtime config profile-backed` (+1004/-568) → `derive compatibility policies from profiles` (+489/-403) → `migrate approval and sandbox consumers to profiles` (+386/-216) → `remove core legacy policy round trips` (+118/-303) → `finish profile-backed app surfaces` (+216/-128). **Total slice diff: +2213/-1618 across 5 PRs**, designed to be reviewed as a graph not as leaves. **[openai/codex#19449]** (`permissions: remove legacy read-only access modes`, refreshed 23:49:20Z) is a sixth PR that depends on the slice landing. None merged in window. Synthesis #44 anchor.
+- **[openai/codex#19452]** — refreshed 23:47:32Z. *"Stabilize plugin MCP fixture tests."* +41/-35. Test-infra PR.
+- **[openai/codex#19454]** — refreshed 23:46:34Z. *"Split approval matrix test groups."* +63/-3. Test-infra PR.
+- **[openai/codex#19453]** (the synthesis #42 anchor, MERGED 23:18Z) was followed within 30 minutes by **two more queued test-infra PRs** (#19452 and #19454). Synthesis #42 ("flake-firewall PRs come singly") needs a corollary: **flake-firewall PRs come in *clusters* when the underlying surface (here: Windows sandbox + plugin MCP + approval matrix) is jointly unstable**. Three test-infra PRs touching three different test surfaces in a 30-minute window is a stronger firewall signal than one.
+- **[openai/codex#19467]** — OPENED 23:43:20Z. *"feat: route MCP elicitations through guardian review."* New guardian-review path for MCP elicitations. Touches the same approval/guardian surface as the permissions-profile slice (#19391-#19395). Likely a near-term consumer of the new profile abstraction.
+- **[openai/codex#19461]** — OPENED 23:41:51Z. *"fix: Bedrock GPT-5.4 reasoning levels."* Bedrock-side reasoning-level fix; pairs structurally with the litellm Bedrock-passthrough auth fixes flagged in earlier addenda (#26416, #26399).
+- **[openai/codex#19458]** — OPENED 23:41:53Z. *"Simplify Codex Library file hooks."* File-hooks simplification.
+- **[openai/codex#19456]** — refreshed 23:49:28Z. *"Add remote plugin uninstall API."* Plugin lifecycle PR; sibling to #19452 (plugin MCP fixture tests) — the plugin surface has both a feature PR and a test-infra PR moving in parallel, which is a healthy structural pattern (the inverse of synthesis #42's risk where features outrun tests).
+- **[openai/codex#19432]** — refreshed 23:42:06Z. *"[codex] Add token usage to turn tracing spans."* Telemetry PR.
+- **[openai/codex#19462]** — refreshed 23:26:51Z. *"sdk/python: use standalone codex-app-server runtime."* Python SDK migration to a standalone server runtime; structural change to the SDK-server boundary.
+
+### litellm: a CI rerun-fix PR closes-and-resubmits within 7 minutes (sibling to codex #19465)
+
+- **[BerriAI/litellm#26452]** — CLOSED unmerged 23:36:55Z. *"fix(ci): support CircleCI rerun failed tests for local_testing jobs."*
+- **[BerriAI/litellm#26461]** — OPENED 23:44:12Z. **Identical title to #26452.** *"fix(ci): support CircleCI rerun failed tests for local_testing jobs."* Body opens with the *same problem statement* (CircleCI rerun broken for `local_testing_part1`, `local_testing_part2`, `litellm_router_testing` — reruns collect 0 items, exit code 123). **7-minute resubmit-after-close**, almost identical to codex #19465's 11-minute resurrection of #19455. Two of these patterns in the same tick, in different repos, is a strong signal that **the social cost of resubmitting an unchanged PR is approaching zero across coding-agent OSS** — a maintainer rejection no longer requires the author to demonstrate substantive change before reposting. Synthesis #43 sibling exhibit.
+- **[BerriAI/litellm#26460]** — refreshed 23:53:20Z (opened 23:28Z prior tick). *"feat(proxy): Add cleanup job for expired LiteLLM dashboard session keys."* Dashboard session-key TTL cleanup; refresh activity continues.
+- **[BerriAI/litellm#26459]** — refreshed 23:56:50Z (opened 22:17Z prior tick). *"[Fix] Reseed enforcement read path from DB on counter miss."* Multi-pod budget-bypass fix; still unmerged ~5h after open. Catch-up window growing.
+- **[BerriAI/litellm#26418]** — refreshed 23:53:09Z. *"fix(proxy): single-team DB fallback when JWT has no team_id."* JWT-auth edge case PR refreshed; still open from prior tick.
+- **[BerriAI/litellm#26455]** — refreshed 23:26:45Z. *"feat: per-model team member budgets."* Still open; pairs with #26459 (the budget-bypass fix). Feature + bug-fix on the same surface refreshed in the same window without merge — consistent with synthesis #42's "queued behind firewall" shape, except no firewall PR has landed yet.
+
+### opencode: only one PR refreshes; activity has shifted entirely to codex/litellm
+
+- **[anomalyco/opencode#24218]** — refreshed 23:37:20Z. *"fix(provider): auto-enable interleaved for reasoning models."* The same-day reasoning-models fix flagged in the prior tick. Still open. The opencode tracker is otherwise silent in this window — a notable shift from the 14:46Z addendum's "five PRs refreshed in 13 minutes" stale-bot storm. Either the bot cadence dropped, or the bot's batch already fired and the next batch is >25 minutes away.
+
+### ollama, charmbracelet/crush
+
+Both silent in window. ollama: no PR activity since the prior addendum. crush: no PR activity since the prior addendum.
+
+### What changed in the narrative since 23:33Z
+
+1. **Synthesis #41 has mutated within one tick**: codex #19455 (CLOSED 23:27Z, the synthesis #41 anchor) was *resubmitted as #19465* at 23:38Z — same title, same body, no acknowledgment of the rejection. The "abstraction-orphaned-in-main" risk is now joined by a "rejected-PR-resurrected-unchanged" risk. Promoted to W17 synthesis **#43**.
+2. **A six-PR vertical permissions slice** (#19391, #19392, #19393, #19394, #19395, #19449) refreshed in lockstep at 23:33:12Z–23:49:20Z with no merges. Five of the six refreshed within 5 seconds of each other — bot-driven coordinated refresh designed to surface the slice as a graph for review. Promoted to W17 synthesis **#44**.
+3. **The codex test-infra firewall is a *cluster*, not a single PR** — #19453 merged at 23:18Z, then #19452 and #19454 queued within 30 minutes, all touching different test surfaces (Windows sandbox, plugin MCP, approval matrix). Synthesis #42 corollary: when the test surface is jointly unstable across multiple subsystems, the firewall is plural.
+4. **The "resubmit-after-close-unchanged" pattern recurs in two repos in the same tick** (codex #19465 in 11 minutes, litellm #26461 in 7 minutes). Both are fast-cadence projects; both rejections were absorbed as transient. Cross-repo confirmation that the synthesis #43 pattern is not project-specific.
+5. **opencode tracker is unusually quiet** — only #24218 refreshed in 25 minutes, against ~5/min in the 14:46Z window. Either the stale-bot batch is between cycles, or the human-edited surface genuinely has nothing new to push.
+6. **codex #19461 (Bedrock GPT-5.4 reasoning levels)** lands on the same Bedrock-passthrough surface that litellm has been actively repairing all week (#26399, #26416). Cross-repo: when one upstream changes provider-shape semantics, the next-day bug filings appear in *both* the proxy and the agent.
+
+Two new W17 syntheses filed in `_weekly/` for this tick: **#43 (rejected-PR-resurrected-same-day-unchanged: when a closed PR is resubmitted within minutes with identical title and body, the maintainer rejection has been absorbed as a no-op signal rather than a substantive one)** anchored on codex #19465 ↔ #19455 and litellm #26461 ↔ #26452, and **#44 (vertical-slice-PR-stack-refreshed-in-lockstep: when a coordinated multi-PR slice refreshes within seconds of itself with no merges, the maintainers are inviting graph-level review rather than leaf-level merge)** anchored on codex permissions stack #19391-#19395 + #19449, with sibling shape in litellm's #26459/#26455 budget-feature/budget-fix pair.
+
