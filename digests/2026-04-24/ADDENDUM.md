@@ -1138,3 +1138,68 @@ Both silent in window. ollama: no PR activity since the prior addendum. crush: n
 
 Two new W17 syntheses filed in `_weekly/` for this tick: **#43 (rejected-PR-resurrected-same-day-unchanged: when a closed PR is resubmitted within minutes with identical title and body, the maintainer rejection has been absorbed as a no-op signal rather than a substantive one)** anchored on codex #19465 ↔ #19455 and litellm #26461 ↔ #26452, and **#44 (vertical-slice-PR-stack-refreshed-in-lockstep: when a coordinated multi-PR slice refreshes within seconds of itself with no merges, the maintainers are inviting graph-level review rather than leaf-level merge)** anchored on codex permissions stack #19391-#19395 + #19449, with sibling shape in litellm's #26459/#26455 budget-feature/budget-fix pair.
 
+
+# Daily addendum — 2026-04-24 (refresh @ 00:11Z next day)
+
+**Window:** 2026-04-24T23:33Z → 2026-04-25T00:11Z (≈38 min, crosses UTC midnight)
+
+This refresh closes out the 2026-04-24 daily window. Activity continued past midnight UTC on the codex/litellm/opencode trackers; charmbracelet/crush and ollama/ollama remained quiet (no new PR activity since the prior tick).
+
+## codex: Guardian-elicitation surface gets two independent PRs from different authors in the same hour
+
+- **[openai/codex#19467]** — OPENED 23:43:20Z by `viyatb-oai`. *"feat: route MCP elicitations through guardian review."* Adds Guardian/auto-review path for approval-shaped MCP elicitations; touches codex-mcp, codex-core, codex-app-server-protocol, codex-protocol, codex-analytics. Tested with `cargo test -p codex-mcp elicitation` and `just write-app-server-schema`.
+- **[openai/codex#19431]** — opened earlier in the day at 20:40:44Z by `cd-oai` (Clark DuVall). *"Route opted-in MCP elicitations through Guardian."* Adds a generic elicitation reviewer hook in codex-mcp wired through a Guardian reviewer callback; introduces `_meta` opt-in key `"codex_approval_reviewer": "guardian"`. Tested with `cargo nextest run` + `cargo clippy --tests`.
+- **Same target surface (Guardian-routed MCP elicitations), different authors, different opt-in mechanics, different test discipline, opened ~3h apart with no cross-reference in either body.** Neither PR mentions the other in its description as of 00:11Z. This is the **concurrent-author duplicate-feature** shape — distinct from synthesis #43 (resurrection of an unchanged PR by the same author after rejection). Promoted to W17 synthesis **#45** anchor.
+
+- **[openai/codex#19461]** — MERGED 00:05:22Z (opened 23:41Z, ~24 min lifetime). *"fix: Bedrock GPT-5.4 reasoning levels."* Crosses UTC midnight in-flight. The fastest-merging Bedrock-side fix of the day; pairs with the litellm Bedrock-passthrough surface (#26399, #26416 from prior ticks). The Bedrock GPT-5.4 reasoning-level mismatch is now repaired on the codex side; litellm's parallel fix (#26456 — `gpt-5.5 reasoning_effort capability flags`) is still open.
+
+- **[openai/codex#19436]** — CLOSED unmerged 00:00:02Z. *"chore(ci) Build a release of codex-app-server."* Originally the catch-all CI PR that built the codex-app-server release. **Superseded by [openai/codex#19447]** (MERGED 22:29:38Z, *"ci: publish codex-app-server release artifacts"*) and **[openai/codex#19445]** (MERGED 21:29:45Z, *"ci: stop publishing GNU Linux release artifacts"*). The release-artifact CI definition was reshaped via a 3-PR train in <3h: stop-old (21:29Z) → publish-new (22:29Z) → close-superseded (00:00Z). Promoted to W17 synthesis **#46** anchor (codex side).
+
+- **[openai/codex#19468]** — OPENED 00:10:30Z. *"Fix Bazel cargo_bin runfiles paths."* Bazel-side runfiles repair; lands at the very edge of the window. Pairs structurally with the bazel-clippy verification step that #19431 explicitly runs (`python3 .github/scripts/verify_bazel_clippy_lints.py`) — Bazel coverage in the codex repo is being actively shored up.
+
+- **[openai/codex#19449]** — refreshed 23:49:20Z (continues from prior tick). *"permissions: remove legacy read-only access modes."* The sixth PR riding on the synthesis #44 permissions-profile slice (#19391-#19395) is still open across the midnight boundary.
+
+- **[openai/codex#19458]** — refreshed 00:10:46Z. *"Simplify Codex Library file hooks."* Continues to refresh; no merge.
+- **[openai/codex#19459]** — last touched 22:43:08Z. *"Enable unavailable dummy tools by default."* Open across the boundary; the synthesis #38 (capability-flag-vs-callability-skew) anchor still has not landed.
+- **[openai/codex#19454]** — refreshed 00:02:33Z. *"Split approval matrix test groups."* Test-infra cluster sibling (synthesis #42 corollary) still open.
+- **[openai/codex#19452]** — refreshed 23:47:32Z. *"Stabilize plugin MCP fixture tests."* Same cluster.
+- **[openai/codex#19442]** — refreshed 23:59:57Z. *"feat: apply provider capability disables through config layers."* Direct sibling of #19459 (also a capability-flag PR) — refreshed 1h17m later, still no merge.
+- **[openai/codex#19432]** — refreshed 23:42:06Z. *"Add token usage to turn tracing spans."* Telemetry PR still open.
+
+## litellm: same author opens scope-split duplicate of own open feature PR
+
+- **[BerriAI/litellm#26462]** — OPENED 00:10:45Z by `ishaan-berri`. *"feat(teams): per-model team member budgets."*
+- **[BerriAI/litellm#26455]** — refreshed 23:26:45Z (opened earlier this tick) by `ishaan-berri`. *"feat: per-model team member budgets."*
+- **Same author, same surface, same feature description, opened/refreshed within 44 minutes of each other.** Title delta: `feat(teams):` scope tag added in #26462; otherwise identical wording. This is **same-author scope-split-after-open** — the author opened a second PR for the same feature with a tighter conventional-commit scope rather than rebasing/retitling #26455. Both remain open at window close. The codex case in synthesis #45 is cross-author; this is the same-author flavor of the same anti-pattern.
+
+- **[BerriAI/litellm#26461]** — refreshed 23:44:12Z. *"fix(ci): support CircleCI rerun failed tests for local_testing jobs."* Still open ~27 min after the resubmit-after-close noted in synthesis #43.
+- **[BerriAI/litellm#26460]** — refreshed 00:04:59Z. *"feat(proxy): Add cleanup job for expired LiteLLM dashboard session keys."* Still open.
+- **[BerriAI/litellm#26459]** — refreshed 00:03:18Z. *"[Fix] Reseed enforcement read path from DB on counter miss."* The multi-pod budget-bypass fix has now been open ~6h with no merge despite #26455/#26462 (the budget-feature PRs) actively churning on the same surface.
+- **[BerriAI/litellm#26456]** — last touched 22:36:05Z. *"[Fix] gpt-5.5 reasoning_effort capability flags."* Still open across midnight; pairs with codex #19461 (MERGED) — the agent-side Bedrock reasoning-levels fix landed first; the proxy-side capability-flag fix has not.
+- **[BerriAI/litellm#26457]** — MERGED 23:10:32Z (within prior tick narrative). *"[Infra] Declare proprietary license in litellm-enterprise metadata."* Repo-shape PR.
+- **[BerriAI/litellm#26454]** — MERGED 21:54:35Z. *"[Infra] Remove docs/my-website, point contributors to litellm-docs repo."* Repo-shape PR — splits docs out of the monorepo. Synthesis #46 sibling (litellm side): repo-shape changes are also shipping as small Infra-tagged train PRs, not as one migration.
+
+## opencode: two PRs open at the very edge of the window
+
+- **[anomalyco/opencode#24229]** — OPENED 00:10:06Z. *"fix: lazy session error schema."* Session error schema repair.
+- **[anomalyco/opencode#24228]** — OPENED 00:10:54Z. *"Add Roslyn support for Razor and C# scripts."* New language support via Roslyn; expands the LSP integration surface.
+- **[anomalyco/opencode#24218]** — refreshed 00:08:13Z. *"fix(provider): auto-enable interleaved for reasoning models."* Continues to refresh; not merged. Pairs cross-repo with codex #19461 (Bedrock reasoning-levels MERGED) and litellm #26456 (gpt-5.5 reasoning_effort flags OPEN) — **all three repos are touching reasoning-model behavior in the same 6h window.**
+- **[anomalyco/opencode#24225]** — CLOSED 23:22:13Z. *"合并上游"* (CN: "merge upstream"). Closed without merge; non-substantive contribution.
+- **[anomalyco/opencode#24222]** — refreshed 22:30:00Z. *"fix permission config order."* Open across the boundary; structural sibling to codex permissions slice (#19391-#19395).
+
+## ollama, charmbracelet/crush
+
+Both silent in window. ollama: no PR activity since 22:12Z (#15505 TurboQuant kvcache, last refresh of the day). crush: no PR activity since 18:09Z (#2690 SQLITE_NOTADB concurrent sub-agents, last refresh of the day).
+
+### What changed in the narrative since the prior tick (23:33Z)
+
+1. **Two new W17 syntheses promoted in this tick: #45 and #46.**
+   - **#45 (concurrent-author / scope-split duplicate-feature PR)** — codex #19467 vs #19431 (cross-author Guardian-elicitation reimpl); litellm #26462 vs #26455 (same-author scope-split). The pattern recurs in two repos in the same window with two distinct flavors. Distinct from #43 (same-author resurrection of unchanged closed PR).
+   - **#46 (CI / repo-shape change shipped as a small-PR train)** — codex release-artifact CI reshaped via #19445 → #19447 → #19436 (close superseded) in <3h; litellm splits out docs (#26454) and declares enterprise license (#26457) as separate Infra PRs in the same window.
+2. **Bedrock GPT-5.4 reasoning-levels fix landed first on the agent side** (codex #19461 MERGED 00:05Z, ~24min lifetime). The proxy-side parallel (litellm #26456) is still open. When provider semantics change, the agent side is currently outpacing the proxy side on repair.
+3. **The Guardian/MCP-elicitation surface has two independent PRs by different authors and neither acknowledges the other** — a structural risk: whichever lands first will force the other to rebase against an incompatible opt-in mechanism (`_meta.codex_approval_reviewer="guardian"` vs the new viyatb-oai approval-shape detection).
+4. **opencode is back to merging at midnight** — #24216 MERGED 22:03Z (hono-bridge tests), #24213 MERGED 21:42Z (ripgrep effect schemas), #24212 MERGED 21:39Z (gpt-5.5 oauth compaction), #24211 MERGED 21:36Z (HttpApi migration plan). Four merges in 28 minutes earlier in the window; the silence flagged at 23:33Z was a between-batch gap, not a stop.
+5. **No ollama / crush activity in window.** Two consecutive sub-agent ticks have closed with both repos fully silent. The W17 cross-repo signal is now concentrated in codex+litellm+opencode; ollama and crush have gone quiet for the day.
+
+Two new W17 syntheses filed in `_weekly/` for this tick: **#45 (concurrent-author or same-author scope-split duplicate-feature PR: when two PRs targeting the same surface coexist without cross-reference, the maintainer is forced to mediate which mechanism wins rather than which implementation is better)** anchored on codex #19467 ↔ #19431 and litellm #26462 ↔ #26455, and **#46 (infrastructure or repo-shape change shipped as a train of small one-line PRs rather than a single migration: when build-artifact, license, or docs structure changes ship as a sequence of close+merge events across hours, the cumulative diff is hidden from any single review)** anchored on codex CI reshape #19445 → #19447 → #19436 and litellm Infra #26454 + #26457.
+
