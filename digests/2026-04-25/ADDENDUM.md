@@ -495,3 +495,49 @@ Silent in window. crush last activity 01:13Z (#2706 taigrr); aider last activity
 7. **Two new contributor first-appearances on litellm** (`HeMuling` #26497, `he-yufeng` #26495, `mateo-berri` #26491 — three first-appearances) in one window. litellm contributor-discovery rate remains high.
 8. **Two new contributor first-appearances on opencode** (`terisuke` #24263, `Zireael` #24262). opencode contributor-discovery rate also high.
 9. **No `pakrym-oai` cluster activity in window** — the 9-PR `Streamline X handlers` cluster has now been fully dormant for 2h56m since the 04:15Z second burst, with only solo refreshes earlier (Addendums 8/9). The synthesis #57 falsification stands.
+
+## Addendum 11 — Window 07:11Z → 07:45Z
+
+### codex (openai/codex)
+
+- **[openai/codex#19526]** — OPENED 07:24:31Z by `aibrahim-oai`. *"[codex] Order codex-mcp items by visibility."* Draft. **Second `aibrahim-oai` PR on the codex-mcp surface in <90 minutes** (after #19524 at 07:10:04Z, *"Minimize codex-mcp public surface"*). #19526's body explicitly references "the visibility cleanup in the base PR" — so this is a **declared 2-PR cohort, not an inferred one**, and it's by the same author. Surface-shaping cascade now has a same-author 2-PR sub-cohort independent of the active `pakrym-oai` 9-PR `Streamline X handlers` cluster. Two distinct authors are now producing **explicit multi-PR sequences** on the codex MCP/handler boundary in the same calendar day.
+
+### litellm (BerriAI/litellm)
+
+- **[BerriAI/litellm#26489]** — refreshed 07:25:00Z by `stuxf` (4th tick of iteration; opened 05:30:30Z; vector-stores credential redaction + per-store ACL on update). Still OPEN, no merge. The synthesis #61 single-author scope-split sequence by `stuxf` (4 PRs over ~6h on auth/ACL → vector-stores redaction) **continues to iterate in place rather than merging** — `stuxf`'s slow-iterate vs `yuneng-berri`'s fast-merge bimodality (Addendum 10 framing) extends another window.
+- **No new opens, no new merges in window.** litellm side this tick is dominated by the absence of `yuneng-berri` activity since #26496 at 06:41Z (over 1h04m gap) — the 5-merge calendar-day cascade has paused.
+
+### opencode (anomalyco/opencode)
+
+- **[anomalyco/opencode#24263]** — **CLOSED 07:12:14Z by `terisuke`. Opened 07:01:47Z; 10m27s open-to-close.** *"[codex] Fix team worker model routing."* The PR carried two labels: `needs:title` (no description) and `needs:compliance` ("This means the issue will auto-close after 2 hours."). Closed at 10m27s — well inside the documented 2-hour grace window — by automation acting on the `terisuke` account. **This is structurally distinct from the synthesis #59/#66 self-close pattern**: those are author-driven retraction; this is **label-driven bot-close** with a deterministic timer (and a faster-than-grace early trip in this case). PR body redacted from synthesis (referenced specific vendor/version model strings).
+- **[anomalyco/opencode#24262]** — refreshed 07:17:45Z by `Zireael` (DeepSeek-v4 chat_template_kwargs injection). Still OPEN; comments climbed to 2. Active iteration on the DeepSeek surface continues.
+- **[anomalyco/opencode#16525]** — refreshed 07:41:13Z by `3x3cut0r` (config.d fragment loader). PR opened 2026-03-07; **48-day-old PR** with 7 reactions and 3 comments, refreshed in window. Long-tail PR-iteration signal.
+- **[anomalyco/opencode#14468]** — refreshed 07:15:39Z by `balcsida` (LiteLLM provider with auto model discovery). PR opened 2026-02-20; **64-day-old PR** with 15 comments and 8 reactions. Cross-project provider integration PR. Still OPEN. Two long-tail iteration refreshes in this window for opencode (#16525, #14468) — both are feature PRs that have been resisting merge for >6 weeks.
+
+### cline (cline/cline)
+
+- **[cline/cline#10403]** — OPENED 07:25:36Z by `abliteration-ai`. *"feat: add Abliteration.ai provider."* **First appearance of `abliteration-ai`** in this corpus. Provider-author opens a PR for their own provider — **vendor-self-onboarding shape** (the GitHub user account name matches the provider being added). First cline activity to surface in W17 corpus this week. PR body discloses 1426 unit tests passing, 558 integration tests passing — heavy pre-validation by author. Refreshed 07:30:54Z (5m18s after open) with 3 comments — fast review engagement.
+
+### ollama (ollama/ollama)
+
+- **[ollama/ollama#15530]** — refreshed 07:44:00Z by `dhiltgen` (collaborator). Long-running draft (opened 2026-04-13, 12 days old). *"MLX: add repeatable model porting workflow."* Draft remains, comments climbed to 1, 1 eyes-reaction. First `dhiltgen` (collaborator) refresh on this draft in 24h+. Long-running collaborator-authored draft signal.
+- **[ollama/ollama#15793]** — refreshed 07:13:49Z by `pd95` (MLX 0.31.2 update + AddMM regression test). PR opened 2026-04-24 11:59Z (~19h old). PR body **explicitly discloses use of an external coding agent** to investigate and prepare the PR. This is the **first explicit AI-tooling-attribution footnote** observed in a tracked-repo PR body during W17 (other PRs may use AI tooling but don't attribute). Worth tracking as a **PR-body provenance disclosure pattern**. Vendor name redacted from synthesis.
+
+### OpenHands, aider, crush, continue
+
+- **OpenHands**: silent in window. Last activity #14130 (dependabot pypdf bump) at 07:03:54Z (Addendum 10).
+- **aider**: silent in window.
+- **crush**: silent in window.
+- **continue**: silent in window. The cross-project `FuturMix` provider broadcast (continue #12220 + litellm #26485) noted in Addendums 8/9/10 still has **no third leg** — neither merged nor refreshed in ~6 hours. Slipping toward "abandoned dual-PR coordination" rather than active cross-project coordination.
+
+---
+
+### What changed in window 07:11Z → 07:45Z (Addendum 11)
+
+1. **Label-driven bot-close mechanism observed for the first time in this corpus** (opencode #24263, `terisuke`, 10m27s open-to-close). The `needs:compliance` label carries a documented 2-hour grace + auto-close action; #24263 was bot-closed well inside the grace window (10m, not 2h), suggesting a second trigger or earlier-than-grace policy. **This is structurally distinct from synthesis #59/#66 self-closes** — those are author-driven; this is bot-driven. **Future opencode close events should be classified self-close vs bot-close vs maintainer-close before being counted in synthesis #59/#66 cohorts.** Spot check: prior synthesis #66 closes (`xthreehao` #24246, `atlantis-mk` #24251, `simonklee` #24214, `rekram1-node` #24252) did not carry `needs:compliance`. Synthesis #66 stands; Addendum 11 isolates a fourth distinct close-shape.
+2. **`aibrahim-oai` declares a same-author 2-PR sequence on codex-mcp visibility** (#19524 → #19526, 1h14m apart, second PR text explicitly references first). This is **declared multi-PR cohort behavior** — distinct from the inferred multi-PR cohorts that synthesis #51/#61/#63 documented for `stuxf` and `yuneng-berri`. **Anchor for synthesis #67 below** (*declared vs inferred multi-PR sequences: when authors signpost their cohort vs when the cohort is reader-detected*).
+3. **Two long-tail opencode feature PRs refreshed in the same 26-minute window** (#14468 64 days old by `balcsida`, LiteLLM provider; #16525 48 days old by `3x3cut0r`, config.d fragments). Both are **non-trivial-feature PRs that have resisted merge for >6 weeks**. opencode now exhibits a **tri-modal merge-velocity distribution**: sub-60s self-merge (synthesis #65 / Addendum 8/10), multi-hour-to-day single-PR merges (`kitlangton` #24215 7h29m), and **multi-week long-tail iteration** (#14468, #16525). **Anchor for synthesis #68 below** (*opencode merge-velocity is tri-modal, not bi-modal: the long-tail >6-week feature-PR cohort is a third distinct mode*).
+4. **First explicit AI-tooling-attribution footnote in a tracked-repo PR body** (ollama #15793 by `pd95`). PR body voluntarily discloses external coding-agent use for investigation, test creation, and PR preparation. Worth flagging for cross-repo norm tracking — if more PRs voluntarily disclose AI-tooling use in coming weeks, this becomes a documentable W17→W18 norm shift.
+5. **First cline activity to surface in W17 corpus** (#10403 `abliteration-ai`, vendor-self-onboarding provider PR). Cline was effectively silent in earlier W17 addendums; the appearance of a vendor-self-authored provider PR is the first cline data point this week. Vendor-self-onboarding (PR author = provider org) is a shape distinct from third-party-author provider PRs (e.g. opencode #14468 by `balcsida` for the LiteLLM proxy provider — `balcsida` is not the LiteLLM org).
+6. **No merges in window across all 9 tracked repos.** Second consecutive zero-merge window (Addendum 9 also had zero merges; Addendum 10 had multiple merges). Reviewer-absorption capacity remains at zero in this 34-minute slice while open volume remains elevated (3 new opens: #19526, #10403, plus opencode #24263 open-and-close in window).
+7. **`yuneng-berri` cascade has paused for 1h04m** (no activity since #26496 at 06:41Z). The synthesis #63/#64 hot-author multi-surface fanout has its first prolonged dormant interval in the calendar day; whether this is the **end of the cascade** (sustainable single-day burst) or a **mid-cascade pause** (with more PRs to come) is the watch question for Addendum 12.
