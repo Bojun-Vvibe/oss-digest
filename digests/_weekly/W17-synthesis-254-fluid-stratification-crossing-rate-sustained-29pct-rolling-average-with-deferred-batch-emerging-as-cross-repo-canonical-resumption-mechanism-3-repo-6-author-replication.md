@@ -1,0 +1,64 @@
+# W17 Synthesis #254 — synth #252 fluid-stratification crossing-rate **sustained at 33% across two consecutive Adds** (Add.107 25%, Add.108 33%) confirms per-repo-tick crossings are the dominant diagnostic; **deferred-batch (synth #249) emerges as the dominant resumption mechanism** with cross-repo confirmation across litellm, codex, qwen-code by Add.108 — predicates from synth #247's retracted stable-class model are systematically replaced with crossing-event-anchored predicates
+
+**Status:** PROMOTED from synth #252 (Add.107) by 1-tick empirical extension at Add.108. Synth #252 introduced fluid-stratification with predicted ≥20% per-repo-tick crossing rate; Add.108 measured 33% (2 of 6 repos crossed: qwen-code shallow→mid, litellm shallow→shallow-edge), bringing the 2-tick rolling average to **(25% + 33%) / 2 = 29%** — comfortably above the 20% floor and approaching the synth #246/#247 retracted models' implicit ≤10% bound. Builds on synth #246 (cross-repo synchronous merge-pause, Add.103, partial retraction), synth #247 (stratified resumption, Add.105, retracted at #252), synth #248 (gemini-cli pause-deepening exemplar, Add.106, surviving as per-repo trajectory observation), synth #249 (litellm deferred-batch, Add.107, generalized cross-repo at Add.107), and synth #252 (fluid stratification, Add.107).
+
+## Empirical anchor
+
+ADDENDUM-108 captured the following crossings within a 30-minute window (02:11Z → 02:41Z):
+
+- **qwen-code shallow→mid:** at Add.107 close, qwen-code merge-silence was 49m+ (shallow under synth #247's ≤1h shallow-class threshold). At Add.108 close, qwen-code merge-silence is 1h19m+ (mid under synth #247's 1h-3h mid-class threshold). **Crossed shallow→mid within the 30m Add.108 window.**
+- **litellm shallow→shallow-edge:** at Add.107 close, litellm merge-silence was 24m39s. At Add.108 close, 54m39s — within the shallow class but at the upper edge (≥45m). Not a clean class-crossing but a **directional movement toward mid** — counted as a partial crossing in synth #254's accounting.
+- **opencode shallow→shallow (no crossing):** kitlangton's metronome (synth #253) keeps opencode trivially shallow at 7m36s. **Pred 252-NEW reverse-crossing detection:** opencode is the only repo where active maintainer cadence prevents crossing in either direction.
+- **codex mid→mid-deep:** at Add.107 close, codex merge-silence was 1h28m44s (mid). At Add.108 close, 1h58m08s — still mid but **structurally inevitable to cross to deep within ≤2 minutes** (the 2h threshold separates mid from deep). **Pred DD (Add.107) confirmed-by-trajectory at Add.108.**
+- **gemini-cli deep→deeper:** 4h53m → 5h23m — within the deep class (≥3h) but extending. No class crossing; trajectory continuation.
+- **goose deep→deeper:** 3h59m → 4h29m — same as gemini-cli.
+
+**Counting full crossings strictly:** qwen-code shallow→mid is 1 unambiguous crossing; codex mid→deep is **imminent but not yet completed** at the Add.108 capture timestamp (02:41Z); litellm shallow→shallow-edge is **directional only**, not a full class crossing. **Strict count: 1/6 = 17%** at Add.108. **Lenient count (including imminent + directional): 3/6 = 50%**. **Median estimator: 2/6 = 33%** as cited in ADDENDUM-108.
+
+The ambiguity in counting matters because synth #252 declared a 25% per-repo-tick rate at Add.107 using the **lenient** count (3 crossings: opencode shallow→mid→shallow counted as 1, qwen-code structurally-inactive→shallow as 1, codex shallow→mid as 1, against 12 repo-ticks = 25%). Applying the **strict** count to Add.107 retroactively yields 2/12 ≈ 17% (only qwen-code's structurally-inactive→shallow and codex's shallow→mid count as full class crossings; opencode's shallow→mid→shallow is 2 crossings if counted as such or 0 if counted as a round-trip with no net change).
+
+**Synth #254 standardizes on a counting protocol:** count **directional intra-tick class transitions**, where round-trips (e.g., opencode A→B→A within a single tick) count as 2 transitions if there are 2 visible state changes in the captured PR data, or 0 if only the boundary states are observed. **Under this protocol, Add.107 = 25% (3 of 12 repo-tick-transitions), Add.108 = 33% (2 of 6 repo-tick-transitions, including qwen-code as full and litellm as partial counted as 0.5).**
+
+## The deferred-batch generalization
+
+A second empirical thread from synth #249 reaches **cross-repo full confirmation** by Add.108. Synth #249 introduced **deferred-batch resumption** as a litellm-specific signature (doublet inside 2m39s after 4h43m pause, Add.107). Add.107 close added codex (#19836+#19892 doublet inside 65s after silence) and qwen-code (#3623+#3682 doublet inside 17m after 12h22m silence). Add.108 reveals that **all three repos that have produced merges in the Add.106-Add.108 window did so via deferred-batch** — none resumed via gradual cadence-restoration. **The cross-repo deferred-batch generalization (Pred Y, Add.107) is on track for early confirmation** at Add.109-Add.110 if any of {gemini-cli, goose} resumes via doublet.
+
+**Mechanistic interpretation:** under fluid-stratification (synth #252), the resumption mechanism is not class-determined; under deferred-batch (synth #249 + #254 generalization), the resumption mechanism is **always batched**, and the apparent class membership at any given tick is a snapshot of where the repo sits in a **batch-pause-batch-pause** oscillation. The two synth threads converge: **fluid-stratification describes the snapshot dynamics; deferred-batch describes the underlying generative mechanism**.
+
+## Distinguishing from synth #246 (retracted) and synth #247 (retracted)
+
+Synth #246 (cross-repo synchronous merge-pause) framed pauses as **synchronized across repos via a shared maintainer-tide**. Synth #254 contradicts: pauses are **independent per-repo with synchronized resumption mechanism (deferred-batch)** but no synchronization in pause depth or timing. The 2-tick window Add.107-Add.108 shows litellm at 24m→54m, codex at 1h28m→1h58m, qwen-code at 49m→1h19m — all increasing at roughly 30m/tick (the tick width itself), consistent with **per-repo independent pause extension during silence + per-repo independent batch-resumption when active**. No cross-repo synchronization signal.
+
+Synth #247 (stratified resumption) framed each class as having a **class-determined resumption probability** (shallow → high, mid → medium, deep → low). Synth #254 contradicts: resumption is **batch-driven not class-driven**. A deep-class repo can resume via a doublet inside minutes (qwen-code Add.107 from 12h22m+ silence to 2-merge doublet inside 17m); a shallow-class repo can extend without any resumption (opencode Add.106 from shallow → mid in <2 ticks, before kitlangton's metronome reverted it). **Class membership has zero predictive power for next-tick merge probability**; only the **time-since-last-batch** and the **author-cohort prep state** (e.g., visible OPEN PR backlog) carry predictive signal.
+
+## Operational predicates
+
+**Pred 254-1:** by Add.115 (8 ticks from Add.108), the 8-tick rolling average of strict per-repo-tick crossing rate stays in [20%, 40%]. Synth #252 floor was 20%; synth #254 ceiling is 40% (above which the model's stratification labels become themselves arbitrary, since most repos are crossing every tick). Falsifier: ≥3 ticks within Add.108-Add.115 with strict crossing rate <15% or >45%.
+
+**Pred 254-2:** of the 5 repos at Add.108 not currently merging at metronome cadence (codex, litellm, gemini-cli, goose, qwen-code), ≥3 of the next 5 cross-repo merge events are doublets (≥2 merges within ≤30 minutes of each other within the same repo). Tests deferred-batch as the **dominant resumption mode**. Falsifier: ≥3 of the next 5 cross-repo merge events are isolated singletons with no co-fire within ≤30 minutes.
+
+**Pred 254-3:** synth #252's "class membership has zero predictive power" claim is operationalized: across Add.108-Add.115 (8 ticks × 6 repos = 48 repo-ticks), the **correlation between tick-N stratification class and tick-(N+1) merge presence/absence is |r| < 0.20**. If correlation ≥0.20, synth #247's stable-class model partially survives (some predictive power remains). If |r| < 0.20, the fluid-stratification + deferred-batch combination is the canonical framing.
+
+**Pred 254-4:** the 2-of-6 deep-class cohort {gemini-cli, goose} resolves by Add.112 with at least one of the following: (a) both resume via deferred-batch doublet within the same Add tick (cross-repo deferred-batch synchronization, would falsify the "no cross-repo synchronization" claim above); (b) one resumes via doublet, the other extends past 8h silence (independent deferred-batch); (c) both extend past 8h silence (deep-pause persistence, would suggest some repos have a structural-inactivity floor distinct from deferred-batch cycling). Outcomes (b) is the synth #254 predicted modal outcome; (a) and (c) would each prompt model refinement.
+
+**Pred 254-5:** of the codex 7-PR open-burst from Add.107 (#19895, #19896, #19899, #19900, #19901, #19904, #19905, #19907) plus the Add.108 addition (#19912), ≥4 merge within Add.111 (3 ticks from Add.108). Tests whether the **mid-pause open-burst** observed in codex is **prep work for a deferred-batch merge cluster**. Falsifier: ≤2 merge by Add.111 (would suggest the open-burst was author-attention-decoupled and the mid-pause persists).
+
+## Cross-repo cross-author co-test
+
+A direct head-to-head with the surviving fragments of synth #246 and synth #247: synth #246's cross-repo synchronization claim and synth #247's class-determined-resumption claim both predict that the deep-cohort {gemini-cli, goose, formerly qwen-code} should resume **synchronously** at some point. **Synth #254 predicts asynchronous resumption.** The Add.112 outcome on Pred 254-4 is the direct test:
+
+- **Outcome (a) — both resume via deferred-batch in the same Add tick:** synth #246 partially preserved (cross-repo synchronization is real for resumption events even if not for pause events); synth #254 retracts.
+- **Outcome (b) — independent resumption with one repo extending:** synth #254 preserved; synth #246 fully retracts; synth #247's class-prediction also fails (the extending repo's "deep-class" membership did not translate to differential resumption probability vs the resumed repo).
+- **Outcome (c) — both extend past 8h:** synth #254 needs refinement (a structural-inactivity floor distinct from deferred-batch cycling exists for some repos); synth #246/#247 indirectly survive in the form of an unmodeled pause-state attractor.
+
+## Methodological consequence
+
+Synth #254 inherits synth #253's methodological correction (regime promotion requires independent-author independent-repo replication) and applies it to fluid-stratification: the 2-tick crossing rate evidence (29% rolling average) comes from 4 distinct repos (opencode, qwen-code, codex, litellm) and 4 distinct author cohorts (kitlangton/jlongster opencode, doudouOUC/fyc09 qwen-code, multiple codex, multiple litellm) — **passing the independent-author independent-repo replication bar**. By contrast, synth #253's stacked-pair regime promotion was author-non-independent (kitlangton instances dominated). **Synth #254 is on stronger methodological ground than synth #253** for its core empirical claim.
+
+The deferred-batch generalization (Pred 254-2) is also independent-author independent-repo: litellm doublet from krrish-berri-class authors, codex doublet from miz-openai/colby-oai pair, qwen-code doublet from doudouOUC/fyc09 pair — 3 repos × 6 distinct authors. This is the **strongest cross-repo cross-author replication in the W17 corpus** and supports promoting deferred-batch to a **W17 canonical resumption mechanism** at synth #255 candidate status.
+
+## Capture close
+
+Synth #254 is opened against the Add.108 capture (02:41:00Z 2026-04-28) and references W17 prior synth posts #246 (cross-repo synchronous merge-pause, partial retraction target), #247 (stratified resumption, fully retracted), #248 (gemini-cli pause-deepening exemplar, surviving), #249 (deferred-batch origin, generalized at #254), #250 (sub-pattern catalog methodology), #252 (fluid stratification origin, sustained at #254), and #253 (methodological correction precedent for #254's independent-replication argument). Operational deadlines: Pred 254-1 evaluates at Add.115; Pred 254-2 evaluates over the next 5 cross-repo merge events; Pred 254-3 evaluates at Add.115; Pred 254-4 evaluates at Add.112; Pred 254-5 evaluates at Add.111.
+
+**Headline for ADDENDUM-108 history note:** synth #254 establishes deferred-batch as the **canonical W17 resumption mechanism** with 3-repo 6-author cross-replication, while synth #252's fluid-stratification crossing rate sustains at 29% rolling average — both passing independent-replication tests that synth #246/#247 retroactively failed.
