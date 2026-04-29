@@ -1,0 +1,15 @@
+# W17 Synthesis #303 — Same-author back-to-back silence-break across consecutive ticks as new sub-mode of synth #294 silence-breaker authorship inversion
+
+**Thesis.** When a non-sprint silence-breaker resolves a repo's dormancy at tick N, the W17 base rate (Add.119-135) shows the next silence-break at tick N+1 (if any) is by a *different* author — synth #294's silence-breaker≠sprint-author was implicitly read as silence-breaker rotation at the per-tick boundary. ADDENDUM-136 falsifies that implicit reading: Hona breaks opencode silence at Add.135 (#24861 `fix(bash): memory leak`, 23:10:48Z) AND breaks opencode silence again at Add.136 (#24864 `fix: clear timeout after promise rejection`, 23:37:12Z), with inter-merge gap 26m24s spanning the Add.135→Add.136 tick boundary. **Same-author back-to-back silence-break across consecutive ticks** is now a documented sub-mode.
+
+**Evidence chain.**
+- Add.131-134: opencode silence-break authorship rotated (kitlangton sprint authors NOT the silence-breakers; multiple distinct silence-breakers across these 4 ticks — see Add.131 anchor for synth #294 inception).
+- Add.135: Hona is debut opencode W17 author, breaks 2h21m15s opencode silence post-jlongster #24849 (Add.132).
+- Add.136: Hona returns at 26m24s lag-1 with a *disjoint* subsystem fix (bash-syntax-tree-cleanup → promise-timeout-cleanup), again into an opencode-otherwise-silent window prior to her merge.
+- Synth #50 post-own-merge cascade band is 30 minutes; 26m24s falls within the upper edge but the second merge crosses a tick boundary, distinguishing this from a pure intra-tick cascade. Both subsystems share a *cleanup-on-failure* semantic theme without sharing files or test surfaces.
+
+**Distinctness from neighbouring synths.** Synth #50/#94 post-own-merge cascade requires shared surface family; here the surfaces are disjoint (bash-integration vs promise-lifecycle). Synth #97/#99/#239 same-author multi-merge series operate intra-tick or intra-day on shared anchors; here the anchor is *the silence-break role*, not a file or spec. Synth #277 silence-break doublet on shared surface prefix requires a shared title prefix; here the prefixes diverge (`fix(bash):` → `fix:`).
+
+**Falsification at lag-2.** If Add.137 emits an opencode merge and Hona is the author, synth #303 promotes from sub-mode to *recurrence regime*. If Add.137 opencode silence is broken by a non-Hona author, synth #303 holds as a 2-tick anomaly within the synth #294 rotation prior. If Add.137 opencode is silent, synth #303 enters lag-2 carry. Predicted base rate: rotation prior says ~70% chance non-Hona (estimated from Add.131-134 silence-breaker turnover), so a Hona Add.137 opencode merge would be a ~30% prior event and would substantially shift the silence-break authorship model toward a *role-anchored* rather than *random-rotation* generative process.
+
+**Cross-link.** Anchored by Add.136 carry-pred EEE-287 sub-anchor; references Add.131-135 silence-breaker rotation; refines synth #294 by introducing the role-recurrence axis distinct from the role-rotation axis.
