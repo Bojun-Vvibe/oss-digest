@@ -1,0 +1,70 @@
+# ADDENDUM-175 — 2026-04-30
+
+**Capture window**: 2026-04-30T03:33:28Z → 2026-04-30T04:01:11Z (27m43s = 27.717m). Width expands modestly from Add.174 (24m11s, +3m32s) but remains in the **lower band** below the M-164.B trimodal-frame mode-floor — fourth-narrowest single-tick window in the Add.158-175 sequence (Add.167 23m42s, Add.174 24m11s, Add.170 23m42s-class, Add.175 27m43s). Width sequence Add.151-175 = 40m13s / 57m33s / 58m23s / 41m38s / 38m17s / 57m12s / 38m34s / 42m06s / 54m40s / 23m42s / 39m59s / 39m34s / 47m30s / 46m17s / 36m45s / 38m24s / 47m36s / 39m59s / 41m50s / 31m26s / 54m27s / 56m41s / 37m43s / 24m11s / **27m43s**.
+
+**Cross-repo merge count this window**: **3 in-window merges**. Per-minute merge rate **3 / 27.717 = 0.1083** — partial recovery from the Add.174 sub-floor (0.0827, +0.0256, ~+31%), back into the lower edge of the M-164.B mode-floor band. Trajectory Add.158-175 = 0.0950 → 0.0732 → 0.0844 → 0.2750 → 0.0758 → 0.1263 → 0.0864 → 0.1633 → 0.1302 → 0.0840 → 0.2752 → 0.1434 → 0.2227 → 0.0735 → 0.1059 → 0.2122 → 0.0827 → **0.1083**. Per-tick raw count Add.158-175 = {3, 5, 4, 2, 11, 3, 6, 4, 6, 5, 4, 11, 6, 7, 4, 6, 8, 2, **3**}. CONFIRMS P-174.G (count ∈ [2,6]) at the lower edge. CONFIRMS P-174.H (rate ∈ [0.05, 0.16]) — observed 0.1083 well inside the predicted post-burst cool-down band. CONFIRMS P-174.I (no repo emits ≥4) — max repo tick is 2.
+
+## Per-repo
+
+### litellm (2 merges) — **PARTIAL RECOVERY**, CONFIRMS P-174.A, FALSIFIES P-174.N
+- Sameerlite #26855 `50ef2d51` 03:39:45Z `merge main`
+- mateo-berri #26719 `d3891e6e` 03:39:09Z `fix(passthrough): track spend for interrupted Bedrock streams`
+
+**CONFIRMS P-174.A** (predicted 0-3 merges; observed 2). litellm shape Add.169-175 = `3 → 0 → 4 → 7 → 1 → 2` — post-crash partial-recovery candidate validated. The Add.173 → Add.175 net trajectory is 7 → 1 → 2 — recovery has resumed, but at a rate far below the Add.172→173 amplification slope. The asymmetric-collapse-after-amplification regime (synth #377 M-177.A) is **followed by** a low-amplitude rebound, not a second amplification cycle. Drop-and-rebound shape Add.173-175 = 7 / 1 / 2 — net-negative cycle persists vs the Add.172 baseline (4).
+
+**STRONGLY FALSIFIES P-174.N** (predicted litellm Add.175 contains NO bedrock-surface-family PR). mateo-berri #26719 `fix(passthrough): track spend for interrupted Bedrock streams` is **bedrock-passthrough-spend** — extends the bedrock surface-family recurrence to a **third consecutive tick** (Add.173 mateo-berri bedrock-pricing #26800; Add.174 sruthi-sixt-26 bedrock-batch-forwarding #26814; Add.175 mateo-berri bedrock-passthrough-spend #26719). The surface-family-recurrence-with-author-rotation candidate (Add.174 anomaly #8) is **promoted to a 3-of-3 supporting-tick W17 micro-pattern**: bedrock vendor-family persists across the over-recovery → crash → partial-recovery cycle under rotating authors (mateo-berri → sruthi-sixt-26 → mateo-berri). This is the first observed 3-tick same-vendor-family-narrow-surface-persistence in the Add.158-175 litellm window.
+
+Author union extension: Sameerlite **recurs** from Add.173 (was 2-of-7 there); mateo-berri **recurs** from Add.173. No novel authors this tick. PR #26855 title `merge main` is a **bookkeeping/branch-sync surface** — distinct from the bedrock vendor surface and from any prior Add.158-175 litellm functional emission. NEW micro-observation: **bookkeeping merge co-occurring with vendor-family functional emission** in the same author-rotation tick.
+
+### codex (1 merge) — **EMERGES FROM ZERO-FLOOR**, CONFIRMS P-174.B, CONFIRMS P-174.M
+- bolinfest #20095 `ac4332c0` 03:54:59Z `permissions: expose active profile metadata`
+
+**CONFIRMS P-174.B** (predicted 0-2 merges; observed 1) at the upper-mid of the predicted band. **CONFIRMS P-174.M** (zero-emission Add.174 does NOT extend to a second zero-emission tick; observed 1 emission breaks zero-floor). codex emission profile post-Add.168-sextuple is now 5/4/6/1/1/1/0/**1** — the asymptotic-zero-attractor candidate (synth #376 M-176.A.1) is **falsified at the boundary**: zero-emission did not propagate into a streak. The post-burst suppression regime (M-176.A) reverts to the broader sub-floor band (1-2 merges) rather than collapsing into sustained zero-emission. M-176.A.1 (asymptotic-zero-attractor sub-regime) is **REJECTED** as a multi-tick attractor after a 1-tick instance; M-176.A (post-burst suppression band) is preserved.
+
+bolinfest is **novel to the Add.158-175 codex author union** for this Add.169-175 sub-window (post-Add.168-sextuple author union extends with this emission). Surface: **permissions / active profile metadata exposure** — a new operational-introspection surface, distinct from all prior Add.158-175 codex emissions in the post-burst tail.
+
+### opencode (0 merges) — silence n=4, depth ~2h36m — FALSIFIES P-174.C, EXTENDS POST-OVER-RECOVERY SILENCE
+**FALSIFIES P-174.C** (predicted ≥1 merge breaking depth-3 silence; observed silence sustained, n=4). opencode shape Add.170-175 = `0 → 3 → 0 → 0 → 0 → 0` — extends post-Tier-3 over-recovery silence to **depth 4 ticks**. opencode now matches the gemini-cli post-carrier silence at n=4 in the same tick. Two-tick deferred prediction streak for opencode (P-173.C + P-174.C both falsified) — the post-Tier-3 over-recovery short-silence model (Add.171 baseline) is now under sustained falsification pressure, parallel to the gemini-cli post-carrier-streak pressure on M-171.A (which the silence depth EXTENDS rather than refutes).
+
+### gemini-cli (0 merges) — **POST-CARRIER-STREAK SILENCE EXTENDS TO n=5**, depth ~3h28m, FALSIFIES P-174.E
+**FALSIFIES P-174.E** (predicted ≥1 merge; observed silence sustained, n=5). gemini-cli silence now n=5 ticks at depth ~3h28m. The M-171.A finite-carrier-streak-depth-bound regime (synth #371) gains **fourth supporting tick**: post-streak silence is **sustained ≥5 ticks**. Three-tick deferred break-prediction streak for gemini-cli (P-172.F / P-173.E / P-174.E all falsified) — the gemini-cli post-carrier short-silence model is now **conclusively falsified** for the Add.171-175 window; the M-171.A regime depth-bound is materially deeper than the originally hypothesized W17 typical band.
+
+### goose (0 merges) — silence n=14, depth ~9h33m — **CROSSES 9.5h, EXTENDS M-174.A TO 4-of-4**, CONFIRMS P-174.D
+**CONFIRMS P-174.D** (predicted goose silence sustained, depth crosses 9.5h; observed depth ~9h33m, silence n=14). The synth #374 M-174.A unbounded-deep-dormancy-attractor regime advances to **4-of-4 supporting ticks** post-introduction. Six-tick deferred break-prediction streak (P-169.D / P-170.D / P-171.D / P-172.D historically falsified; P-173.D + P-174.D predicted continuation and were confirmed). The M-174.A regime now has the most confirming ticks of any late-W17 silence regime.
+
+M-169.B dormancy-rank-inheritance regime advances to **6-of-6 ticks** of goose holding rank-1 deep-silence holder slot.
+
+### qwen-code (0 merges) — silence n=1, CONFIRMS P-174.F, PRESERVES M-374.J PERIOD-3 CLUSTER HYPOTHESIS
+**CONFIRMS P-174.F** (predicted 0 merges completing the 3-tick activity cluster). qwen-code Add.170-175 = `0 → 0 → 1 → 0 → 1 → 0` — the broader **alternating-3-tick activity-cluster** structure (synth #374 P-374.J period-3 sub-regime hypothesis) is **partially preserved**: the second triplet is `1 → 0` so far, mirroring the first triplet onset. The period-3 hypothesis P-374.J is **NOT yet falsified**; full validation requires Add.176 = 0 (completing 1-0-0 second triplet identical to the first).
+
+Active-repo-count **2** (codex, litellm) — set is **{codex, litellm}**. CONFIRMS P-174.K (cardinality ∈ [2,4]) at the lower edge. **STRONGLY FALSIFIES P-174.L** (predicted active set INCLUDES opencode OR gemini-cli; observed neither — both remained silent and codex re-emerged from zero-floor). Symmetric-difference vs Add.174 set {litellm, qwen-code}: {qwen-code⁻, codex⁺} = **cardinality 2** — single repo-swap (qwen-code → codex). This is the **second consecutive single-repo-swap** in the active set (Add.173→174 swapped codex→qwen-code; Add.174→175 swaps qwen-code→codex). Active-set membership is exhibiting **alternating-pair rotation** between {codex, qwen-code} as Tier-2/Tier-3 substitutes around a fixed litellm anchor.
+
+## Anomalies vs Add.174
+
+1. **litellm bedrock surface-family recurs to 3-of-3**: surface-family-recurrence-with-author-rotation (Add.174 anomaly #8) is **promoted to a confirmed W17 micro-pattern**. mateo-berri → sruthi-sixt-26 → mateo-berri rotation around bedrock-pricing → bedrock-batch → bedrock-passthrough-spend. P-174.N falsified. NEW M-175.A candidate: **vendor-family-narrow-surface persistence across emission-amplitude cycles** (over-recovery 7 → crash 1 → recovery 2, vendor surface persists at 1-of-each-tick contribution).
+2. **codex zero-floor lasts exactly 1 tick**: M-176.A.1 (asymptotic-zero-attractor) **rejected**. M-176.A (post-burst suppression band) preserved with the boundary now extended to include {0, 1, 1, 1, 1, 0} → reinterpreted as **bounded-low-emission band [0, 1] sustained 5-of-5 ticks** rather than monotonic decay. NEW micro-observation: post-burst suppression band has a **soft floor at 0** that is non-absorbing.
+3. **gemini-cli + opencode both at silence n=4** in the same tick: silence-tier convergence at the rank-2/rank-3 boundary. Multi-tier silence stratification (synth #378 M-178.A) **persists with depth set {4, 4, 14}** — depth set min = 4 (P-378.C confirmed: ≤4), max = 14 (P-378.B confirmed: ≥14), distinct-value count drops from 3 to 2 (n=4 collides on both opencode and gemini-cli). NEW shape: **silence-band collision at depth n=4** — two distinct silence-trigger mechanisms (post-Tier-3 over-recovery, post-carrier-streak) converge to the same depth tier.
+4. **goose crosses 9.5h without break** (M-174.A 4-of-4): unbounded-attractor regime now has the most confirming ticks of any late-W17 silence regime. Six-tick deferred break-prediction track means the goose dormancy is now structurally beyond any W17 prior-tick break-imminent model.
+5. **Active-set alternating-pair rotation** {codex ↔ qwen-code} around fixed litellm anchor: NEW M-175.B candidate — **anchored-active-set with alternating substitute pair** at the Tier-2/Tier-3 boundary. First observed 2-tick instance (Add.173→174→175 produces qwen-code↔codex alternation around litellm-only anchor). Two-tick instance is below the synth-promotion threshold (3-of-3) but is a candidate for promotion at Add.176.
+6. **Width expands modestly to 27m43s** but rate still in lower band: width-rate inverse correlation **partially restored** (Add.174 width contracted with rate, Add.175 width expands with rate increasing). NEW observation: rate-width co-movement at burst-collapse boundaries (Add.173→174) reverts to inverse-correlation in post-collapse recovery (Add.174→175).
+7. **litellm bookkeeping `merge main` co-emission with vendor-family functional emission** (Sameerlite #26855 + mateo-berri #26719): NEW micro-observation candidate — **bookkeeping co-emission**. PR #26855 title is the only Add.158-175 litellm emission with a non-functional title; co-occurrence with the bedrock-family functional emission under different authors (Sameerlite + mateo-berri) within 36 seconds is structurally distinct from the prior Add.173 mateo-berri-only bedrock contribution.
+8. **codex re-emergence under novel author bolinfest**: novel author breaks zero-floor; the Add.158-175 codex author union extends. Author-introduction-as-suppression-band-exit is a NEW micro-pattern (single instance, not yet a regime candidate).
+
+## Predictions Add.175 → Add.176+
+
+- **P-175.A**: litellm Add.176 emits 1-4 merges (continued partial-recovery candidate; back-to-back 7 amplification highly improbable); >55% prob.
+- **P-175.B**: codex Add.176 emits 0-2 merges (post-burst-suppression band preserved with soft-floor); >55% prob.
+- **P-175.C**: opencode Add.176 emits ≥1 merge breaking depth-4 silence (depth-5 silence rare for opencode in W17); >50% prob (downgraded from P-174.C given sustained falsification).
+- **P-175.D**: goose Add.176 silence continues, depth crosses 10h, M-174.A advances to 5-of-5; >55% prob (seven-tick deferred break-prediction track).
+- **P-175.E**: gemini-cli Add.176 emits ≥1 merge (n=6 silence highly anomalous for recent-carrier repo); >45% prob (downgraded again from P-174.E given 3-tick falsification streak).
+- **P-175.F**: qwen-code Add.176 emits 0 merges, completing the 1-0-0 second-triplet identical to first triplet, validating P-374.J period-3 sub-regime; >50% prob.
+- **P-175.G**: cross-repo count Add.176 ∈ [2, 7] (continued post-burst regression toward mid-band); >55% prob.
+- **P-175.H**: per-minute rate Add.176 ∈ [0.05, 0.18] (post-burst rate cool-down sustained); >55% prob.
+- **P-175.I**: NO repo emits ≥4 merges at Add.176 (M-168.A regime in cool-down phase); >55% prob.
+- **P-175.J**: Active-set cardinality Add.176 ∈ [2, 4]; >60% prob.
+- **P-175.K**: Active-set Add.176 INCLUDES at least one of {opencode, gemini-cli} (three-tick deferred break candidates concentrate); >50% prob.
+- **P-175.L**: litellm Add.176 contains AT LEAST one bedrock-surface-family PR (M-175.A vendor-family-persistence regime extends to 4-of-4); >50% prob.
+- **P-175.M**: M-175.B anchored-active-set with alternating-substitute-pair {codex ↔ qwen-code} around litellm anchor extends to 3-of-3 at Add.176, requiring Add.176 active set = {litellm, qwen-code}; >40% prob (lower — depends on at-most-one Tier-3 emission).
+- **P-175.N**: M-178.A multi-tier-silence-stratification persists at Add.176 with ≥3 silent repos; >55% prob (requires at most 1 break among {goose, gemini-cli, opencode}).
+- **P-175.O**: Silence-band collision at depth n=4 (anomaly #3) does NOT recur at Add.176 (gemini-cli + opencode both extending to identical depth n=5 is structurally improbable); >55% prob.
+- **P-175.P**: bookkeeping `merge main`-class co-emission (anomaly #7) does NOT recur at Add.176 (single-tick instance, no precedent for streak); >60% prob.
