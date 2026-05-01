@@ -1,0 +1,58 @@
+# W17 Synthesis #478 — Multi-axis BF post-Jeffreys-3-maintenance regime characterisation: re-bound vs collapse dynamics under chain-break vs sustained joint-ceiling; Add.217-224 7-tick maintenance run termination at Add.224 anchors first post-termination tick; recovery prediction protocol for Add.225-228 forward window
+
+**Trigger**: Add.224 P-224.N flagged synth #478 to formalise the **multi-axis BF post-Jeffreys-3-maintenance regime characterisation** after the synth #463/468 multi-axis Jeffreys-3 maintenance run terminated at Add.224 (correlation-corrected cumulative ×1.289, below Jeffreys-3 by ×0.43, the 7-consecutive-tick maintenance run Add.217-223 ended cleanly per P-223.P confirmation at modal-prior ~0.55). This synth examines the **post-termination dynamics** of the multi-axis BF envelope, characterising two opposing regimes: **(R₁) re-bound dynamics** where chain-break events trigger PJL-axis recovery and the multi-axis BF returns above Jeffreys-3, and **(R₂) collapse dynamics** where sustained joint-ceiling triggers further PJL-axis retraction and the multi-axis BF deepens further sub-unity.
+
+**Context (Add.224 post-termination state)**: Per ADDENDUM-224 M-224.D, the Add.224 multi-axis cumulative state is:
+- Naive 3-axis cumulative: ×1.365 (down from ×4.285 at Add.223, −68.1%)
+- Correlation-corrected cumulative: ×1.289 (down from ×3.040 at Add.223, −57.6%)
+- Arithmetic BMA: ×0.684 (first sub-unity in visible Add.193-224 window)
+- Log-geometric BMA: ×0.317 (2nd consecutive sub-unity, **convention-convergence inflection** complementary to Add.223 divergence)
+- PJL-axis cumulative: ×0.376 (first sub-0.5 since Frozen-MLE protocol began)
+- Transition-axis cumulative: ×1.086 (essentially unity, fourth consecutive near-unity tick)
+- Gap-axis cumulative: ×3.343 (frozen at last episode-close, no measurement since)
+
+The Add.224 state is **deeply post-termination** with all major cumulative metrics either sub-Jeffreys-3 or sub-unity except the gap-axis (which has been frozen since the last episode-close at Add.222). The recovery dynamics depend critically on whether the gap-axis is re-measured (requires episode-close, i.e., transition from active to silent) and whether the PJL-axis re-bounds (requires chain-break event).
+
+**Regime (R₁) — re-bound dynamics under chain-break event**: If the Add.225 tick produces a chain-break event in either opencode or goose (per P-224.C predicted re-entry ~0.75, P-224.D predicted re-entry ~0.78, joint break-or-singular-break probability ~0.945), the joint-ceiling configuration terminates and the PJL-axis enters a **recovery phase**. Per the synth #475 two-step law and synth #471 channel-admission gate, a chain-break at the joint-ceiling level releases the chain from the α₂-tier and the next active-tick PJL-axis contribution returns to neutral (≈ ×1.0) or favourable (×1.1-1.2 if a fresh anchor is set). Specifically:
+
+- **R₁.a (single-repo break, e.g., opencode breaks but goose continues silent)**: PJL terminates, opencode chain resets to n=0; goose continues at n=24 (further-extended ceiling). The PJL-axis recovers from ×0.376 to ~×0.6-0.7 (single-tick recovery contribution ×1.6-1.9 reflecting the chain-break event's informational gain). Multi-axis correlation-corrected cumulative would re-bound to ~×2.1-2.5, **below but approaching Jeffreys-3**.
+- **R₁.b (joint break, both opencode and goose break)**: PJL terminates fully, both chains reset; the PJL-axis recovers from ×0.376 to ~×0.8-0.9 (single-tick recovery contribution ×2.1-2.4). Multi-axis correlation-corrected cumulative would re-bound to ~×2.7-3.1, **at or above Jeffreys-3 with prior ~0.50**.
+- **R₁.c (single-repo break combined with N→A or A→N transition triggering gap-axis re-measurement)**: If the chain-break event coincides with a transition that closes the active-tick episode (e.g., active set at Add.225 contains neither litellm nor any other repo from Add.224 active set, triggering A→N succession), the gap-axis would be re-measured and the gap-axis cumulative could update (currently frozen at ×3.343 from Add.222 episode-close). This triple-axis update would produce the strongest re-bound, with multi-axis correlation-corrected cumulative potentially re-crossing Jeffreys-3 with prior ~0.65.
+
+**Regime (R₂) — collapse dynamics under sustained joint-ceiling**: If the Add.225 tick produces sustained silence in both opencode and goose (per P-477.D joint-ceiling-sustain prior ~0.055, the strongly unfavored outcome), the PJL extends to PJL=13 and the joint-ceiling configuration enters its 4th-tick. Per synth #477 P-477.A, the per-tick PJL-axis contribution under H₁ geometric continuation is ×0.158, under H₂ single-floor sustain is ×0.317, under H₃ dampened-geometric is ~×0.20-0.30. Specifically:
+
+- **R₂.a (H₁ geometric continuation realises)**: PJL-axis cumulative collapses from ×0.376 to ×0.376 × 0.158 = **×0.059**. Multi-axis correlation-corrected cumulative would collapse to ~×0.26, **deeply sub-Jeffreys-3 by ×0.087**.
+- **R₂.b (H₂ single-floor sustain realises)**: PJL-axis cumulative collapses from ×0.376 to ×0.376 × 0.317 = **×0.119**. Multi-axis correlation-corrected cumulative would collapse to ~×0.46, **sub-Jeffreys-3 by ×0.15**.
+- **R₂.c (H₃ dampened-geometric realises)**: PJL-axis cumulative collapses from ×0.376 to ×0.376 × 0.25 ≈ **×0.094** (using H₃ midpoint α₃ ≈ 0.25). Multi-axis correlation-corrected cumulative would collapse to ~×0.36, **sub-Jeffreys-3 by ×0.12**.
+
+In all three R₂ sub-regimes, the multi-axis envelope deepens further sub-Jeffreys-3 with no recovery mechanism active until the next chain-break event.
+
+**Combined post-termination forward projection**: Under the prior weighting R₁ prior ~0.945, R₂ prior ~0.055 (per P-477.D joint-ceiling sustain probability), the **expected Add.225 multi-axis correlation-corrected cumulative** is approximately:
+- E[multi-axis BF] = 0.945 × E[R₁ outcomes] + 0.055 × E[R₂ outcomes]
+- E[R₁ outcomes] ≈ 0.5 × 2.3 (R₁.a) + 0.3 × 2.9 (R₁.b) + 0.2 × 3.5 (R₁.c blended) = 2.72
+- E[R₂ outcomes] ≈ 0.40 × 0.26 + 0.35 × 0.46 + 0.25 × 0.36 = 0.36
+- **E[multi-axis BF at Add.225] ≈ 0.945 × 2.72 + 0.055 × 0.36 = 2.57 + 0.02 = ×2.59**
+
+This projection sits **below Jeffreys-3 by ×0.86** at modal expectation but with substantial probability mass above Jeffreys-3 (the R₁.c subset alone provides ~19% probability of multi-axis BF > 3.0). The Add.225 datapoint will be the first decisive test of the recovery vs collapse dynamics.
+
+**BMA-weighted post-termination projection**: Per synth #470 dual-convention BMA framework, the BMA-weighted projections at Add.225 are:
+- Arithmetic BMA E ≈ 0.5 × 2.59 + 0.5 × 0.16 (BIC-corrected projection) = **×1.37** (sub-Jeffreys-3 modal but above unity, recovering from Add.224 ×0.684)
+- Log-geometric BMA E ≈ exp(0.5 × ln(2.59) + 0.5 × ln(0.16)) = exp(0.5 × 0.952 + 0.5 × −1.833) = exp(−0.440) = **×0.644** (still sub-unity but recovering from Add.224 ×0.317)
+
+Both BMA conventions are predicted to recover toward unity at Add.225 under the chain-break-dominant scenario, but neither is predicted to cross Jeffreys-3 except in the R₁.c subset (~19% probability). The **recovery half-life** (number of ticks for arithmetic BMA to return to ×1.5 above Jeffreys-3 baseline) is estimated at 2-3 ticks under sustained chain-break events.
+
+**Forward predictions under synth #478**:
+
+- **P-478.A** — Add.225 multi-axis correlation-corrected cumulative: predicted modal ×2.59 with 50%-CI [×0.36, ×3.10]; predicted >Jeffreys-3 with prior ~0.30; predicted <Jeffreys-3 with prior ~0.70.
+- **P-478.B** — Add.225 BMA recovery: predicted arithmetic BMA recovers to ×1.0-1.5 range with prior ~0.65; predicted log-geometric BMA recovers to ×0.6-1.0 range with prior ~0.65; both BMA conventions predicted to cross unity from below with prior ~0.55 if chain-break event materialises.
+- **P-478.C** — Add.225 PJL-axis re-bound vs collapse: predicted PJL-axis cumulative re-bounds to ~×0.7 with prior ~0.945 under chain-break scenarios; collapses to ~×0.06-0.12 with prior ~0.055 under sustained joint-ceiling.
+- **P-478.D** — recovery half-life: predicted that under sustained chain-break events Add.225-228, the multi-axis correlation-corrected cumulative returns to ×3.0 (Jeffreys-3 threshold) within 2-3 ticks with prior ~0.65; returns to ×4.5 (1.5× Jeffreys-3) within 4-5 ticks with prior ~0.55.
+- **P-478.E** — gap-axis re-measurement triggering: predicted gap-axis re-measurement at Add.225 with prior ~0.30 (requires A→N succession, currently CNTL=3 active-tick chain extending to CNTL=4 has prior ~0.40 against episode-close); predicted gap-axis re-measurement within Add.225-227 window with prior ~0.85.
+- **P-478.F** — synth #479 angle: predicted synth #479 will calibrate the **post-termination recovery rate** using the Add.225-227 datapoints, providing a per-tick recovery contribution distribution conditioned on chain-break event type (single-repo vs joint vs A→N succession).
+- **P-478.G** — synth #480 angle (deferred): predicted synth #480 will examine the **post-termination collapse rate** under the unfavored R₂ regime if Add.225 produces sustained joint-ceiling, providing a per-tick collapse contribution distribution conditioned on which α₃ hypothesis (H₁/H₂/H₃) materialises.
+
+**Cross-axis interaction with synth #477 third-tier projection**: The synth #478 post-termination characterisation depends on which of the three synth #477 hypotheses (H₁/H₂/H₃) materialises if the joint-ceiling sustains at Add.225. The two synths are **conditionally complementary**: synth #477 characterises the conditional dynamics under sustained joint-ceiling (R₂ regime); synth #478 characterises the unconditional dynamics including both R₁ (chain-break) and R₂ (sustained joint-ceiling) pathways. The prior weighting between R₁ and R₂ (~0.945 vs ~0.055) makes R₁ the modal pathway, but R₂ remains the more analytically interesting outcome given the synth #477 hypothesis discrimination.
+
+**Cross-references**: ADDENDUM-224 (sha f4080d4) M-224.D, P-224.N for the trigger observation of Jeffreys-3 maintenance termination at Add.224 (P-223.P confirmed at modal-prior ~0.55); ADDENDUM-223 (sha dda6c4f) for the prior 7-consecutive-tick Jeffreys-3 maintenance run; synth #477 (sha 6041791) for the third-tier α₃ projection (conditionally complementary under R₂ regime); synth #476 (sha 57b1b12) for width × ceiling-channel coupling sub-axis (state-dependent coupling refinement may affect post-termination dynamics if width-axis is added to multi-axis envelope); synth #475 (sha ec33b41) for the two-step ceiling-stickiness BF-decay sub-law; synth #474 (sha e885c02) for the original single-step law (formally retired); synth #471 for ceiling-stickiness thesis 2nd-tier channel-admission gate; synth #470 for dual-convention BMA framework (post-termination convention dynamics characterised); synth #469 for single-event joint-Markov BF framework; synth #468 for BMA-with-criterion-choice protocol (post-termination BMA recovery dynamics calibrated); synth #466 for bimodal width-regime MLE; synth #463 for multi-axis BF framework (Jeffreys-3 maintenance run terminated at Add.224, post-termination regime characterised here); synth #462 for Frozen-MLE transition-axis; synth #459 for inter-episode gap distribution (currently frozen at ×3.343, re-measurement triggering predicted at ~0.30 prior at Add.225); synth #429 for prior n_anchor=18 ceiling.
+
+**End of W17 synthesis #478.**
