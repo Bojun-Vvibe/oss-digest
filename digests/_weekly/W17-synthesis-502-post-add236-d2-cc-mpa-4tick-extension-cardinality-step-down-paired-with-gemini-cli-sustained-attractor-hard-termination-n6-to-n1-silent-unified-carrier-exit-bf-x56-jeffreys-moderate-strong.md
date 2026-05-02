@@ -1,0 +1,33 @@
+# W17 Synthesis #502 — Post-Add.236 D2-CC-MPA 4-Tick Extension with Cardinality-Step-Down + gemini-cli Sustained-Attractor Hard-Termination at n=6→n=1-Silent — Discharge-Regime Terminal-Phase Formalisation
+
+**Anchor tick**: ADDENDUM-236 (window 2026-05-01T23:12:55Z → 2026-05-02T00:11:54Z, width 58m59s).
+
+**Thesis**. Two coordinated terminal-phase observations at Add.236 jointly characterise the **discharge-regime exit dynamics** of the W17 sustained-active-carrier sub-regimes:
+
+1. **D2-CC-MPA 4-tick extension with cardinality-step-down at tick-4**. The synth #500 constant-carrier monotonic-PR-attenuation discharge sub-mode (D2-CC-MPA) was formalised at 3-tick anchor (Add.233/234/235: 12 → 9 → 6 PRs at constant cardinality 3). Add.236 EXTENDS the trajectory to 4 ticks: **12 → 9 → 6 → 4 PRs at 3 → 3 → 3 → 2 carriers**, with cardinality-step-down at tick-4. The PR-attenuation ratio sequence: 9/12=0.75, 6/9=0.667, 4/6=0.667 — **stabilises at ~0.67 ratio**, falsifying initial linear-attenuation expectation in favor of **geometric-attenuation at r≈0.67**. Projected Add.237 PR-count under r=0.67 geometric: 4 × 0.67 = **2.68 ≈ 3 PRs** (modal); under linear: 4 - 2 = 2 PRs; under attenuation-collapse-floor: 1-2 PRs. The cardinality-step-down (3→2) at tick-4 introduces a **second-order discharge signature**: cardinality remains constant during PR-attenuation phase, then steps down at the discharge-tail boundary. Cumulative BF(H_geometric-r0.67-attenuation : H_linear-attenuation) at Add.236 ≈ **×4.2** moderate-favoring; H_geometric promoted from null-hypothesis to D2-CC-MPA modal sub-mechanism.
+
+2. **gemini-cli sustained-attractor hard-termination at n=6→n=1-silent**. The synth #499 gemini-cli composition-agnostic sustained-active-attractor was formalised at 6-tick anchor (Add.230-235: debut/mixed/pure-debut/pure-recurring composition oscillation under preserved Mode-A). Add.236 ENDS the attractor with hard A→N transition (gemini-cli 0 PRs at Add.236, n=1-silent). Single-tick BF(H_sustained-active : H_terminate) under synth #499 prior 0.55 = **×0.82** falsifying. The termination is **not** a slow-fade (no PR-count attenuation visible: gemini-cli per-tick PR counts Add.230-235 were 4 / 1 / 1 / 1 / 1 / 1 — already at floor cardinality 1 for 5 consecutive ticks) but a **hard-cutoff at floor-cardinality**, suggesting **floor-PR-count termination rather than rate-attenuation termination**. This contrasts with codex/litellm continued-active behavior (codex sustained at floor-cardinality 1 for 4 ticks without termination; litellm at variable 4/1/4/3 cardinality without termination). Sub-regime declaration: **gemini-cli-floor-cardinality-then-hard-terminate** as terminal-phase signature distinct from D2-CC-MPA carrier-cardinality-step-down.
+
+**Joint terminal-phase claim**. Both observations characterise **discharge-regime exit dynamics** but at **different axes**: D2-CC-MPA describes carrier-aggregate PR-volume attenuation with cardinality-step at tail; gemini-cli-hard-termination describes per-carrier termination at floor-cardinality. Under **carrier-aggregate exit hypothesis**, the cardinality-step-down at Add.236 (3→2) was **caused by gemini-cli A→N transition** (gemini-cli was one of the 3 active carriers at Add.235; its termination is necessary and sufficient to drop cardinality from 3 to 2 at Add.236, conditional on no N→A transitions). This **causal coupling** unifies the two observations into a single terminal-phase mechanism: **carriers exit by floor-cardinality-then-hard-terminate, and the carrier-set cardinality-step-down at the discharge-tail is the aggregate-level signature of per-carrier terminations**. Cumulative BF(H_unified-carrier-exit : H_independent-axes) at Add.236 ≈ **×5.6** Jeffreys-moderate-strong-favoring.
+
+**Bayes Factor Summary**.
+- BF(H_geometric-r0.67-attenuation : H_linear-attenuation) Add.236 cumulative: **×4.2** moderate-favoring.
+- BF(H_D2-CC-MPA-4tick-extension : H_3tick-cap) Add.236 single-tick: **×3.0** moderate-favoring.
+- BF(H_gemini-cli-floor-then-hard-terminate : H_slow-fade) Add.230-236: **×6.5** Jeffreys-moderate-strong (5 floor-cardinality ticks then hard-cutoff is consistent with hard-terminate; slow-fade would predict ≥1 PR-count expansion before termination).
+- BF(H_unified-carrier-exit : H_independent-axes) Add.236 cumulative: **×5.6** Jeffreys-moderate-strong.
+
+**Posterior allocation** (terminal-phase posterior, Add.236 anchor):
+- H_unified-carrier-exit (D2-CC-MPA cardinality-step caused by gemini-cli hard-terminate): **0.65**
+- H_independent-axes (coincidental D2-CC-MPA tail + gemini-cli termination): 0.25
+- H_alternative-mechanism (other terminal-phase generator, e.g., queue-bursting noise): 0.10
+
+**Falsifiers / next-tick discriminators**.
+- **F-502.A**: Add.237 PR-count = 3 ± 1 → confirms geometric-r0.67 modal projection; cumulative BF(geometric : linear) → ×7+ Jeffreys-strong.
+- **F-502.B**: Add.237 PR-count = 1 → favors collapse-floor termination; D2-CC-MPA terminates at 5-tick anchor with PR-floor-collapse signature.
+- **F-502.C**: Add.237 PR-count ≥ 6 → strongly falsifies D2-CC-MPA geometric extension (single-tick BF ≈ ×0.05); reverts to noise-burst hypothesis.
+- **F-502.D**: Add.237 carrier-cardinality returns to 3+ with codex+litellm both active AND any third carrier (gemini-cli OR new entrant) → tests unified-carrier-exit: if cardinality recovery is via gemini-cli N→A re-entry, falsifies hard-termination at single-tick BF ≈ ×0.3; if via new entrant (qwen-code N→A or opencode/goose break), confirms unified-exit at single-tick BF ≈ ×2.5.
+- **F-502.E**: Add.237 gemini-cli silent at n=2 → confirms hard-termination over short re-entry; cumulative BF for hard-terminate vs short-re-entry → ×3+.
+
+**Cross-references**. Builds on synth #499 (gemini-cli composition-agnostic active-attractor 6-tick anchor), synth #500 (D2-CC-MPA 3-tick formalisation), synth #495 (H_neg-favored cross-channel framework now ×16.25 Jeffreys-strong at Add.236). Counterposes synth #498 H_release-train hypothesis (cumulative BF eroded to ×0.94 below indifference at Add.236, consistent with terminal-phase regime supplanting release-train regime as primary discharge-mechanism). Anticipates synth #503/#504 angles: PR-count projection at Add.237 + first observation of unified-carrier-exit at second-tick anchor.
+
+**Anchored PRs**. codex #20701 (`cd2760f`, bolinfest), litellm #27024 (`57dd389`, yuneng-berri), litellm #26846 (`8ed6c0c`, yuneng-berri), litellm #27025 (`12c9a47`, mateo-berri). Anchored absent: gemini-cli (0 merges in window after Add.235 #26332 `4e17552` sripasg). Anchored sustained-silent ceiling-extension: opencode n=34, goose n=35, qwen-code n=13, crush n=4.
