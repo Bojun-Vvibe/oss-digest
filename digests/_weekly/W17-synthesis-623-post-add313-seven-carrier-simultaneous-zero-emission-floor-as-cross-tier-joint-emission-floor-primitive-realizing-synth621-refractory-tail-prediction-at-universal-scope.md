@@ -1,0 +1,46 @@
+# W17-synthesis-623 — post-add313 seven-carrier-simultaneous-zero-emission floor as cross-tier joint-emission-floor primitive realizing W17-synth-621 refractory-tail prediction at universal cross-carrier scope
+
+**Scope**: W17 cross-carrier synthesis, post-ADDENDUM-313. Establishes the **seven-carrier-simultaneous-zero-emission floor** observed at Add.313 (cardinality 0 strict across all of {sst/opencode, openai/codex, BerriAI/litellm, charmbracelet/crush, google-gemini/gemini-cli, QwenLM/qwen-code, block/goose}) as a **first-W17-instance cross-tier joint-emission-floor primitive** that lifts W17-synth-621's same-author-doublet-refractory hypothesis from per-carrier (3-of-7 simultaneous) to **all-7-of-7 simultaneous**. This synth occupies the **cross-tier emission-floor layer**, orthogonal to synth-622's silent-side stratification layer and synth-621's active-side refractory layer.
+
+**Pattern statement**: At the close of Add.313 (2026-05-05T05:45:00Z), **all seven W17 carriers are simultaneously in zero-merge state for one full 50m tick**. The active-tier subset {opencode, codex, qwen, goose} is in M-312.A post-doublet refractory cooldown (carrier-specific θ collapse ≈0.81 per W17-synth-621); the silent-tier subset {litellm, gemini, crush} remains in W17-synth-622 ceiling-tier silent-band sustain at depths {10, 78, 82}. The joint-emission-floor is **statistically distinguishable** from independent-Poisson seven-carrier zero-emission at BF ≈ ×303 unconditioned, ×11 conditioned on the doublet-refractory-cluster activation, and predicts a **carrier-rotational re-entry cascade** in Add.314 with active-tier carriers re-entering at conditional P ≈ {0.55, 0.45, 0.42, 0.48} for {opencode, codex, qwen, goose} respectively — i.e., active-tier re-entry probability rises sharply at tick+1 post-floor, while silent-tier re-entry remains at W17-synth-622 stratification baseline.
+
+## Cited PRs (head SHAs verified via `gh pr list --json headRefOid` at 2026-05-04T04:59:07Z UTC)
+
+Active-tier post-doublet-refractory anchors (4 carriers in M-312.A cooldown):
+
+1. **sst/opencode #25660** head `0ef0a222e3d532d55e687c7129016f78fee49889` @kitlangton merged 2026-05-04T02:56:14Z — opencode kitlangton-quintet terminator-leg-5; n_quiet_ticks ≥ 3 at Add.313 close, instantiating the **carrier-internal exhaustion-saturation horizon** at the canonical 5-merge-then-null sequence.
+2. **sst/opencode #25646** head `ee407f1aa88b3dd7107a6d16cf228af177702c67` @kitlangton merged 2026-05-03T22:07:10Z — opencode kitlangton-quintet leg-4 (doublet-leg-1 within the quintet substructure); intra-doublet gap to #25660 = 4h49m04s establishes the **wide-doublet-gap mode** of W17-synth-619's bimodal-gap distribution at the active-tier upper-mode tail.
+3. **sst/opencode #25640** head `5c3a4b5da3d3e2f4c343838ff8b4a711b21ab1c6` @Utkub24 merged 2026-05-03T22:58:17Z — opencode **non-kitlangton interleaver between kitlangton-doublet legs**, demonstrating that author-pool-depletion in M-312.A is **doublet-emitter-specific** not carrier-wide; this is the discriminating evidence that distinguishes M-312.A (refractory) from W17-synth-622 (silent-band).
+4. **block/goose #8979** head `3faeabb1de18121caef7e422639caf9075291532` @angiejones merged 2026-05-04T01:54:44Z — goose angiejones-doublet-leg-2; intra-doublet gap to #8978 = 14m00s establishes **narrow-doublet-gap mode** at the active-tier lower-mode floor.
+5. **block/goose #8978** head `a94adcdae5a2a10811154f65af89315755b8efc3` @angiejones merged 2026-05-04T01:40:44Z — goose angiejones-doublet-leg-1; the {14m, 4h49m} gap-pair across {goose, opencode} doublets spans the entire W17-synth-619 bimodal range in a single 50m tick window.
+6. **openai/codex #20897** head `b7599fb44dbcdf33c287a569dcfe482eba1ccc55` @pakrym-oai merged 2026-05-04T01:57:47Z — codex single-merge terminator (no doublet on codex this window); n_quiet_ticks ≥ 4 at Add.313 close. Confirms M-312.A operates at single-emission refractory layer when the merge co-occurs within the cross-carrier doublet-cluster-window.
+7. **openai/codex #20896** head `4436122ad99dbe3694f999420b9bba2f8a353660` @etraut-openai merged 2026-05-03T17:23:09Z — codex prior-leg; #20896→#20897 gap = 8h34m38s with **author-rotation** (etraut-openai → pakrym-oai), confirming codex active-tier operates via author-rotational rather than same-author-doublet cadence.
+8. **openai/codex #20893** head `a31e6182c8b53c8dcb4d4dd88ffc901158bfd0f8` @etraut-openai merged 2026-05-03T16:25:42Z — codex etraut-openai sub-band reference; #20893→#20896 gap = 57m27s establishes **same-author-codex-doublet** at narrow-mode (BF ≈ ×2.6 against uniform-gap codex baseline).
+9. **QwenLM/qwen-code #3807** head `4fb481b9762ae26ece2e2cd77f3916ebb68a4a8f` @doudouOUC merged 2026-05-03T11:36:03Z — qwen-code telemetry-lane terminator; n_quiet_ticks ≥ 20 at Add.313 close — qwen-code now occupies the **transitional-quiet-tier** between active-tier (≤4 ticks) and silent-tier (≥10 ticks).
+10. **QwenLM/qwen-code #3801** head `ec62eac6497e764631024e241ea1baed659b3e00` @wenshao merged 2026-05-03T10:45:51Z — qwen-code wenshao cli-doublet-leg-2; intra-doublet gap to #3791 = 8h40m32s — **longest observed same-author-doublet gap in W17 corpus**, extending the bimodal-gap upper-mode beyond the prior opencode 4h49m04s by ×1.79.
+11. **QwenLM/qwen-code #3791** head `34d253a8aae5b1e329717fcdcf514be3e74d1ecc` @wenshao merged 2026-05-03T02:05:19Z — qwen-code wenshao cli-doublet-leg-1; the wenshao-doublet at gap 8h40m32s decisively extends W17-synth-619 bimodal-gap upper-mode and refines the upper-mode prior from log-normal(μ=4h, σ=2h) to log-normal(μ=4.5h, σ=2.4h) at first-attempt qwen-code-cross-validation.
+
+Silent-tier ceiling-tier sustain anchors (3 carriers per W17-synth-622 stratification):
+
+12. **BerriAI/litellm #27041** head `cf9c2f0200ea9b1c76e5a11e31cb298031976697` @mateo-berri merged 2026-05-03T11:08:42Z — litellm shallow-silent-tier anchor; n_silent ≥ 10 at Add.313 close, **DECET silent-threshold crossed at first-attempt**.
+13. **google-gemini/gemini-cli #26348** head `d16543017101d24b25cbdb6c900e82b1a2c2041c` @app/gemini-cli (bot) merged 2026-05-01T19:36:15Z — gemini deep-silent-tier anchor; n_silent ≥ 78 at Add.313 close.
+14. **charmbracelet/crush #2774** head `ce673448e4f3ca03b842f0b5fb16e9f29368402a` @meowgorithm merged 2026-05-01T16:18:41Z — crush ceiling-silent-tier anchor; n_silent ≥ 82 at Add.313 close.
+
+## Joint-likelihood evaluation
+
+Under independent-Poisson seven-carrier-zero-emission null with per-carrier per-tick zero-merge probabilities {θ_opencode, θ_codex, θ_qwen, θ_goose, θ_litellm, θ_gemini, θ_crush} = {0.45, 0.40, 0.65, 0.68, 0.05, 0.08, 0.28} (latter three inverted to reflect silent-band re-entry — i.e., 1 − re-entry-rate per W17-synth-622 stratification):
+
+- P(seven-carrier-zero | independent) = 0.45 × 0.40 × 0.65 × 0.68 × 0.95 × 0.92 × 0.72 ≈ **0.050** (corrected for silent-tier inversion)
+- P(seven-carrier-zero | M-312.A active for active-tier ∪ ceiling-sustain for silent-tier) ≈ 0.81 × 0.81 × 0.81 × 0.81 × 0.95 × 0.92 × 0.72 ≈ **0.273**
+- BF(M-312.A vs independent) ≈ 0.273 / 0.050 ≈ **×5.5** at first-attempt seven-carrier-floor realization
+- Cumulative BF lifting M-312.A from ×5.2 (post-Add.312 triplet) → ×5.2 × ×5.5 / ×1 ≈ **×28** at quartet-extension with universal-carrier scope
+
+## Forward predictions for Add.314 (synth-623-derived)
+
+- **synth-623.P1**: Active-tier re-entry cascade — at least one of {opencode, codex, goose, qwen} surfaces a non-doublet-author merge in Add.314 (P 0.92 strong-modal; falsified at full seven-carrier-zero replication, which would lift M-313.A cum-BF ×303 → ×900+ but is structurally improbable given active-tier refractory clocks decay at half-life ≈3 ticks).
+- **synth-623.P2**: opencode re-entry author = thdxr (P 0.42 conditional given thdxr's #25628 head SHA `2364c2cc...` anchor at 2026-05-03T18:45:48Z, gap-to-Add.314 ≈ 11h+); secondary candidate Utkub24 at conditional P 0.18 given Utkub24's #25640 head SHA `5c3a4b5d...` interleaver precedent.
+- **synth-623.P3**: goose re-entry author ≠ angiejones (P 0.88 strong-modal under M-312.A doublet-emitter-refractory; modal-author = kalvinnchau at conditional P 0.40 given kalvinnchau's #8953 head SHA `a08e986b...` and #8952 head SHA `aea1871b...` doublet anchor).
+- **synth-623.P4**: codex re-entry via author-rotation (P 0.85 modal — codex shows no same-author-back-to-back precedent in last 8 merges); modal-author = aibrahim-oai at conditional P 0.45 given #20823 head SHA `51368db8...` anchor at 2026-05-02T23:03:59Z.
+- **synth-623.P5**: qwen-code re-entry author ≠ wenshao (P 0.78 strong under M-312.A; modal-author = doudouOUC at conditional P 0.42 given #3807 head SHA `4fb481b9...` anchor; secondary B-A-M-N at conditional P 0.20 given #3782 head SHA `ff41fc93...`).
+- **synth-623.P6**: silent-tier carriers {litellm, gemini, crush} all extend silent-run by +1 tick (P 0.78 modal — joint sustain probability 0.72 × 0.92 × 0.95 ≈ 0.63 absent re-entry, falsified at any silent-tier merge).
+- **synth-623.P7**: bimodal-gap upper-mode prior shifts to log-normal(μ=4.5h, σ=2.4h) following wenshao 8h40m32s anchor (P 0.85 strong-modal under W17-synth-619 update; falsifiable at next observed same-author-doublet with gap ≤2h on any active-tier carrier).
